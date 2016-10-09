@@ -1,41 +1,84 @@
-
-<!doctype html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
-
-  <title>{% block page_title %}
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
   
-    Soko Mkononi
-  
-    {% endblock %}
-  </title>
-  <meta name="description" content="{% block meta_description %}{% endblock %}">
-  <meta name="author" content="{% block meta_author %}{% endblock %}">
+  <title>{% block page_title %}Soko Mkononi - {{request.endpoint}}{% endblock %}</title>
 
-  <!-- Mobile viewport optimized: h5bp.com/viewport -->
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='libs/font-awesome4/css/font-awesome.min.css') }}">
-  {% assets "css_all" %}
-    <link rel="stylesheet" href="{{ ASSET_URL }}">
-  {% endassets %}
+  <!-- stylesheets -->
+  <link rel="stylesheet" type="text/css" href="/static/css/compiled/theme.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/vendor/animate.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/vendor/brankic.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/vendor/ionicons.min.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/vendor/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/vendor/select2.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/vendor/select2-bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/vendor/datepicker.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/vendor/jquery.minicolors.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/vendor/summernote.css" />
+
+  <!-- javascript -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+  <script src="/static/js/bootstrap/bootstrap.min.js"></script>
+  <script src="/static/js/vendor/select2.min.js"></script>
+  <script src="/static/js/vendor/bootstrap-datepicker.js"></script>
+  <script src="/static/js/vendor/jquery.validate.min.js"></script>
+  <script src="/static/js/vendor/summernote.min.js"></script>
+  <script src="/static/js/vendor/jquery.raty.js"></script>
+  <script src="/static/js/vendor/jquery.cookie.js"></script>
+  <script src="/static/js/vendor/jquery.minicolors.min.js"></script>
+  <script src="/static/js/vendor/jquery.maskedinput.js"></script>
+  <script src="/static/js/theme.js"></script>
+
+   {% if INCLUDE_DATATABLES %}
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+  {% endif %}
 
   {% block css %}{% endblock %}
 
-</head>
-<body class="{% block body_class %}{% endblock %}">
-{% block body %}
-{% with form=form  %}
-{% include "nav.html" %}
-{% endwith %}
+  <style type="text/css">
+    
+    .container-narrow{
+      width:600px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+  </style>
 
-<header>{% block header %}{% endblock %}</header>
-<div class="{% block content_class %}container{% endblock content_class %}">
+  <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+
+<body id="form-product">
+{% block body %}
+{% if current_user and current_user.is_authenticated %}
+{% with form=form  %}
+<div id="wrapper">
+{% include "nav.html" %}
+</div>
+{% endwith %}
+{% endif %}
+
+<div id="content">
+      <div class="menubar">
+                <div class="sidebar-toggler visible-xs">
+                    <i class="ion-navicon"></i>
+                </div>
+                
+        <div class="page-title">
+          {% block page_header %}
+          <a href="/"><i class="fa fa-home"></i> Home</a> 
+          <span style="color:#ccc">&rarr;</span> 
+          <a href=""><i class="fa fa-file-o"></i> {{request.endpoint.replace(".", " ").capitalize()}}</a>{% endblock %}
+        </div>
+      </div>
+
+  <div class="content-wrapper">
 
   <div role="main">
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -54,6 +97,8 @@
     {% endwith %}
 
     {% block content %}{% endblock %}
+    </div>
+
   </div>
 
 </div><!-- end container -->
@@ -63,9 +108,13 @@
 <!-- JavaScript at the bottom for fast page loading -->
 {% assets "js_all" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% if INCLUDE_DATATABLES %}
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+    {% endif %}
 {% endassets %}
 {% block js %}{% endblock %}
-<!-- end scripts -->
+<!-- end scripts -->cc
 {% endblock %}
 </body>
 </html>

@@ -1,7 +1,7 @@
 
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Welcome {{ session.username }}</h1>
-    <h3>This is the members-only page.</h3>
+    <h1>Welcome <b>{{ current_user.username }}</b></h1>
+    <h3>(graphs will go here)</h3>
 {% endblock %}
 
