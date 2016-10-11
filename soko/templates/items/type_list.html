@@ -1,0 +1,39 @@
+{% set INCLUDE_DATATABLES = True %}
+{% extends "layout.html" %}
+{% block content %}
+    <h3>All item types</h3>
+
+    <table class="table table-striped datatable">
+        <thead>
+            <th>#</th>
+            <th>Name</th>
+            <th>Descr</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for i in items %}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.descr}}</td>
+                    <td><a href="{{url_for('item.type_edit',tid=i.id)}}">Edit</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary btn-lg" href="{{url_for('item.type_edit', tid='new')}}"><i class="fa fa-plus"></i> Add new</a>
+{% endblock %}
+
+{% block js %}
+<script>
+$(function() {
+    $('.datatable').dataTable({
+        "sPaginationType": "full_numbers",
+        "iDisplayLength": 20,
+        "aLengthMenu": [[20, 50, 100, -1], [20, 50, 100, "All"]]
+    });
+});
+</script>
+{% endblock %}
+

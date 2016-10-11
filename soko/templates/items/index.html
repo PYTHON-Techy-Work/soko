@@ -1,0 +1,44 @@
+{% set INCLUDE_DATATABLES = True %}
+{% extends "layout.html" %}
+{% block content %}
+    <h3>All items currently for sale</h3>
+
+        <table class="table table-striped datatable">
+        <thead>
+            <th>#</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>User</th>
+            <th>Price</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for i in items %}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.type.name}}</td>
+                    <td>{{i.quantity}}</td>
+                    <td>{{i.user.name}}</td>
+                    <td>{{i.price}}</td>
+                    <td><a href="#">Edit</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+
+{% block js %}
+<script>
+$(function() {
+    $('.datatable').dataTable({
+        "sPaginationType": "full_numbers",
+        "iDisplayLength": 20,
+        "aLengthMenu": [[20, 50, 100, -1], [20, 50, 100, "All"]]
+    });
+});
+</script>
+{% endblock %}
+
+
