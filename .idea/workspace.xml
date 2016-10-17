@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="92ae03c2-6e34-4825-ab80-9dc3e813ec41" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/soko/tracom/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/soko/tracom/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/soko/transporter/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/soko/transporter/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/soko/vendors/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/soko/vendors/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/4a19cf49ca39d0ca12d0eeede1f8c47985b3bbe2/_bootstrap-overrides.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/4a19cf49ca39d0ca12d0eeede1f8c47985b3bbe2/_bootstrap-overrides.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/4f25e7470e383c6c18683fb82a17a050335e8155/_config.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/4f25e7470e383c6c18683fb82a17a050335e8155/_config.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/4f25e7470e383c6c18683fb82a17a050335e8155/_layout.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/4f25e7470e383c6c18683fb82a17a050335e8155/_layout.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/8694951a6926e32b2a543604d41915b342b7d36a/_custom_animations.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/8694951a6926e32b2a543604d41915b342b7d36a/_custom_animations.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_account.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_account.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_billing_form.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_billing_form.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_calendar.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_calendar.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_datatables.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_datatables.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_docs.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_docs.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_email_templates.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_email_templates.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_form.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_form.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_form_product.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_form_product.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_gallery.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_gallery.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_index.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_index.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_invoice.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_invoice.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_latest_activity.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_latest_activity.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_pricing.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_pricing.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_pricing_alt.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_pricing_alt.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_projects.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_projects.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_reports.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_reports.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_reports_alt.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_reports_alt.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_search.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_search.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_sidebar.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_sidebar.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_signin.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_signin.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_signup.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_signup.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_status.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_status.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_steps.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_steps.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_ui.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_ui.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_user_profile.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_user_profile.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_users.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_users.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_wizard.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/93c5abef81e0ea962209c4387f7449bb54811ab3/_wizard.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/ad3dbc8ad8226153be3f634dee8e18f8714b9c90/theme.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/ad3dbc8ad8226153be3f634dee8e18f8714b9c90/theme.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/f0632ccd65fa691aea741c6b048a4689022a673c/_elements.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/f0632ccd65fa691aea741c6b048a4689022a673c/_elements.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/.sass-cache/f0632ccd65fa691aea741c6b048a4689022a673c/_mixins.scssc" afterPath="$PROJECT_DIR$/soko/static/css/.sass-cache/f0632ccd65fa691aea741c6b048a4689022a673c/_mixins.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/fonts/FontAwesome.otf" afterPath="$PROJECT_DIR$/soko/static/fonts/FontAwesome.otf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/soko/static/fonts/glyphicons-halflings-regular.eot" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/soko/static/fonts/glyphicons-halflings-regular.ttf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/soko/static/fonts/glyphicons-halflings-regular.woff" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/avatars/1.jpg" afterPath="$PROJECT_DIR$/soko/static/images/avatars/1.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/avatars/10.jpg" afterPath="$PROJECT_DIR$/soko/static/images/avatars/10.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/avatars/11.jpg" afterPath="$PROJECT_DIR$/soko/static/images/avatars/11.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/avatars/12.jpg" afterPath="$PROJECT_DIR$/soko/static/images/avatars/12.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/avatars/13.jpg" afterPath="$PROJECT_DIR$/soko/static/images/avatars/13.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/avatars/14.jpg" afterPath="$PROJECT_DIR$/soko/static/images/avatars/14.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/avatars/15.jpg" afterPath="$PROJECT_DIR$/soko/static/images/avatars/15.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/avatars/16.jpg" afterPath="$PROJECT_DIR$/soko/static/images/avatars/16.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/avatars/17.jpg" afterPath="$PROJECT_DIR$/soko/static/images/avatars/17.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/avatars/2.jpg" afterPath="$PROJECT_DIR$/soko/static/images/avatars/2.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/avatars/3.jpg" afterPath="$PROJECT_DIR$/soko/static/images/avatars/3.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/avatars/4.jpg" afterPath="$PROJECT_DIR$/soko/static/images/avatars/4.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/avatars/5.jpg" afterPath="$PROJECT_DIR$/soko/static/images/avatars/5.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/avatars/6.jpg" afterPath="$PROJECT_DIR$/soko/static/images/avatars/6.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/avatars/7.jpg" afterPath="$PROJECT_DIR$/soko/static/images/avatars/7.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/avatars/8.jpg" afterPath="$PROJECT_DIR$/soko/static/images/avatars/8.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/avatars/9.jpg" afterPath="$PROJECT_DIR$/soko/static/images/avatars/9.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bg.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bg.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/1.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/1.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/10.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/10.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/11.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/11.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/12.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/12.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/13.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/13.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/14.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/14.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/15.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/15.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/16.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/16.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/17.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/17.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/18.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/18.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/19.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/19.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/2.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/2.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/3.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/3.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/4.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/4.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/5.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/5.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/6.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/6.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/7.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/7.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/8.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/8.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/bgs/9.jpg" afterPath="$PROJECT_DIR$/soko/static/images/bgs/9.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/anchor.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/anchor.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/arrow-down.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/arrow-down.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/arrow-up.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/arrow-up.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/art.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/art.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/barchart.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/barchart.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/bike.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/bike.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/biker.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/biker.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/bikewheel.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/bikewheel.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/blimp.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/blimp.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/bomb.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/bomb.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/booklet.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/booklet.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/bookshelf.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/bookshelf.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/briefcase.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/briefcase.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/browser.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/browser.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/calculator.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/calculator.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/calendar.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/calendar.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/camera.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/camera.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/car.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/car.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/cart.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/cart.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/carwheel.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/carwheel.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/caution.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/caution.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/chat.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/chat.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/check.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/check.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/clipboard.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/clipboard.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/clock.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/clock.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/cloud.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/cloud.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/compass.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/compass.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/compose.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/compose.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/computer.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/computer.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/cone.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/cone.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/contacts.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/contacts.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/creditcard.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/creditcard.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/crossroads.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/crossroads.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/cruise.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/cruise.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/denied.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/denied.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/dev.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/dev.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/die.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/die.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/document.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/document.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/dolly.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/dolly.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/door.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/door.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/download.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/download.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/email.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/email.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/eye.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/eye.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/fashion.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/fashion.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/flag.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/flag.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/flame.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/flame.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/folder.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/folder.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/gas.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/gas.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/gear.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/gear.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/genius.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/genius.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/global.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/global.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/globe.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/globe.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/gps.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/gps.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/hazard.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/hazard.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/heart.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/heart.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/helicopter.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/helicopter.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/hotair.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/hotair.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/hourglass.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/hourglass.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/image.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/image.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/interstate.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/interstate.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/key.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/key.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/lightbulb.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/lightbulb.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/location.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/location.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/locked.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/locked.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/magnifyingglass.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/magnifyingglass.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/mail.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/mail.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/map.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/map.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/merge.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/merge.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/mic.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/mic.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/money.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/money.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/motorcycle.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/motorcycle.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/music.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/music.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/news.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/news.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/parachute.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/parachute.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/pencil.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/pencil.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/phone.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/phone.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/pie-chart.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/pie-chart.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/pin.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/pin.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/pin2.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/pin2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/plane.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/plane.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/present.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/present.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/profle.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/profle.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/quote.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/quote.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/racingflags.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/racingflags.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/rainbow.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/rainbow.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/recycle.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/recycle.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/ribbon.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/ribbon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/roadblock.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/roadblock.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/rocket.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/rocket.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/running.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/running.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/sailboat.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/sailboat.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/schooolbus.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/schooolbus.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/scissors.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/scissors.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/scooter.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/scooter.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/security.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/security.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/settings.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/settings.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/shipwheel.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/shipwheel.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/shoeprints.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/shoeprints.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/shop.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/shop.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/skateboard.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/skateboard.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/smartphone.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/smartphone.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/spaceshuttle.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/spaceshuttle.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/speedometer.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/speedometer.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/stack.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/stack.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/star.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/star.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/steeringwheel.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/steeringwheel.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/stop.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/stop.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/submarine.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/submarine.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/support.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/support.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/takeoff.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/takeoff.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/target.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/target.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/taxi.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/taxi.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/toolbox.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/toolbox.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/tools.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/tools.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/tractor.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/tractor.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/traffic.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/traffic.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/train.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/train.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/travelerbag.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/travelerbag.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/trends.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/trends.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/trophy.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/trophy.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/truck.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/truck.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/ufo.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/ufo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/umbrella.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/umbrella.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/unicycle.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/unicycle.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/unlocked.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/unlocked.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/upload.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/upload.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/video.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/video.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/water.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/water.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/weather.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/weather.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/windsock.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/windsock.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/windy.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/windy.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/x.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/full-color/x.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/anchor.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/anchor.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/arrow-down.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/arrow-down.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/arrow-up.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/arrow-up.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/art.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/art.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/barchart.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/barchart.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/bike.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/bike.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/biker.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/biker.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/bikewheel.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/bikewheel.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/blimp.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/blimp.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/bomb.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/bomb.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/booklet.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/booklet.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/bookshelf.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/bookshelf.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/briefcase.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/briefcase.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/browser.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/browser.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/calculator.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/calculator.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/calendar.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/calendar.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/camera.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/camera.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/car.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/car.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/cart.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/cart.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/carwheel.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/carwheel.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/caution.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/caution.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/chat.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/chat.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/check.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/check.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/clipboard.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/clipboard.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/clock.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/clock.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/cloud.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/cloud.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/compass.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/compass.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/compose.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/compose.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/computer.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/computer.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/cone.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/cone.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/contacts.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/contacts.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/creditcard.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/creditcard.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/crossroads.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/crossroads.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/cruise.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/cruise.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/denied.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/denied.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/dev.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/dev.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/die.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/die.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/document.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/document.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/dolly.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/dolly.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/door.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/door.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/download.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/download.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/email.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/email.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/eye.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/eye.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/fashion.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/fashion.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/flag.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/flag.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/flame.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/flame.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/folder.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/folder.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/gas.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/gas.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/gear.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/gear.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/genius.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/genius.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/global.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/global.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/globe.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/globe.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/gps.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/gps.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/hazard.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/hazard.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/heart.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/heart.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/helicopter.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/helicopter.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/hotair.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/hotair.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/hourglass.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/hourglass.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/image.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/image.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/interstate.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/interstate.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/key.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/key.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/lightbulb.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/lightbulb.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/location.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/location.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/locked.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/locked.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/magnifyingglass.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/magnifyingglass.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/mail.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/mail.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/map.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/map.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/merge.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/merge.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/mic.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/mic.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/money.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/money.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/motorcycle.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/motorcycle.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/music.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/music.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/news.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/news.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/parachute.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/parachute.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/pencil.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/pencil.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/phone.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/phone.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/piechart.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/piechart.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/pin.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/pin.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/pin2.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/pin2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/plane.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/plane.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/present.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/present.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/profle.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/profle.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/quote.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/quote.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/racingflags.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/racingflags.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/rainbow.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/rainbow.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/recycle.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/recycle.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/ribbon.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/ribbon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/roadblock.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/roadblock.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/rocket.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/rocket.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/running.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/running.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/sailboat.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/sailboat.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/schooolbus.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/schooolbus.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/scissors.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/scissors.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/scooter.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/scooter.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/security.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/security.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/settings.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/settings.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/shipwheel.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/shipwheel.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/shoeprints.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/shoeprints.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/shop.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/shop.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/skateboard.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/skateboard.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/smartphone.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/smartphone.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/spaceshuttle.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/spaceshuttle.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/speedometer.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/speedometer.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/stack.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/stack.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/star.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/star.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/steeringwheel.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/steeringwheel.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/stop.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/stop.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/submarine.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/submarine.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/support.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/support.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/takeoff.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/takeoff.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/target.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/target.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/taxi.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/taxi.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/toolbox.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/toolbox.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/tools.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/tools.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/tractor.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/tractor.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/traffic.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/traffic.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/train.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/train.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/travelerbag.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/travelerbag.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/trends.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/trends.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/trophy.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/trophy.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/truck.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/truck.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/ufo.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/ufo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/umbrella.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/umbrella.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/unicycle.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/unicycle.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/unlocked.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/unlocked.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/upload.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/upload.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/video.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/video.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/water.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/water.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/weather.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/weather.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/windsock.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/windsock.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/windy.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/windy.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/x.png" afterPath="$PROJECT_DIR$/soko/static/images/circle-icons/one-color/x.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/credit_card_types.gif" afterPath="$PROJECT_DIR$/soko/static/images/credit_card_types.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/datatables/back_disabled.png" afterPath="$PROJECT_DIR$/soko/static/images/datatables/back_disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/datatables/back_enabled.png" afterPath="$PROJECT_DIR$/soko/static/images/datatables/back_enabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/datatables/back_enabled_hover.png" afterPath="$PROJECT_DIR$/soko/static/images/datatables/back_enabled_hover.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/datatables/forward_disabled.png" afterPath="$PROJECT_DIR$/soko/static/images/datatables/forward_disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/datatables/forward_enabled.png" afterPath="$PROJECT_DIR$/soko/static/images/datatables/forward_enabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/datatables/forward_enabled_hover.png" afterPath="$PROJECT_DIR$/soko/static/images/datatables/forward_enabled_hover.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/datatables/sort_asc.png" afterPath="$PROJECT_DIR$/soko/static/images/datatables/sort_asc.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/datatables/sort_asc_disabled.png" afterPath="$PROJECT_DIR$/soko/static/images/datatables/sort_asc_disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/datatables/sort_both.png" afterPath="$PROJECT_DIR$/soko/static/images/datatables/sort_both.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/datatables/sort_desc.png" afterPath="$PROJECT_DIR$/soko/static/images/datatables/sort_desc.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/datatables/sort_desc_disabled.png" afterPath="$PROJECT_DIR$/soko/static/images/datatables/sort_desc_disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/emails/activation.png" afterPath="$PROJECT_DIR$/soko/static/images/emails/activation.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/emails/invoice.jpg" afterPath="$PROJECT_DIR$/soko/static/images/emails/invoice.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/emails/notification.png" afterPath="$PROJECT_DIR$/soko/static/images/emails/notification.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/emails/welcome.png" afterPath="$PROJECT_DIR$/soko/static/images/emails/welcome.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/popover-arrow.png" afterPath="$PROJECT_DIR$/soko/static/images/popover-arrow.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/product.jpg" afterPath="$PROJECT_DIR$/soko/static/images/product.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/products/1.jpeg" afterPath="$PROJECT_DIR$/soko/static/images/products/1.jpeg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/products/2.png" afterPath="$PROJECT_DIR$/soko/static/images/products/2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/products/3.jpg" afterPath="$PROJECT_DIR$/soko/static/images/products/3.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/products/4.png" afterPath="$PROJECT_DIR$/soko/static/images/products/4.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/products/5.png" afterPath="$PROJECT_DIR$/soko/static/images/products/5.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/products/6.png" afterPath="$PROJECT_DIR$/soko/static/images/products/6.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/products/7.jpg" afterPath="$PROJECT_DIR$/soko/static/images/products/7.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/products/8.png" afterPath="$PROJECT_DIR$/soko/static/images/products/8.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/ribbon.png" afterPath="$PROJECT_DIR$/soko/static/images/ribbon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/shots/1.png" afterPath="$PROJECT_DIR$/soko/static/images/shots/1.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/shots/10.png" afterPath="$PROJECT_DIR$/soko/static/images/shots/10.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/shots/2.png" afterPath="$PROJECT_DIR$/soko/static/images/shots/2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/shots/3.png" afterPath="$PROJECT_DIR$/soko/static/images/shots/3.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/shots/4.png" afterPath="$PROJECT_DIR$/soko/static/images/shots/4.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/shots/5.png" afterPath="$PROJECT_DIR$/soko/static/images/shots/5.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/shots/6.jpg" afterPath="$PROJECT_DIR$/soko/static/images/shots/6.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/shots/7.png" afterPath="$PROJECT_DIR$/soko/static/images/shots/7.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/shots/8.png" afterPath="$PROJECT_DIR$/soko/static/images/shots/8.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/shots/9.png" afterPath="$PROJECT_DIR$/soko/static/images/shots/9.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/visa.png" afterPath="$PROJECT_DIR$/soko/static/images/visa.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LICENSE" afterPath="$PROJECT_DIR$/LICENSE" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Procfile" afterPath="$PROJECT_DIR$/Procfile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.rst" afterPath="$PROJECT_DIR$/README.rst" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoapp.py" afterPath="$PROJECT_DIR$/autoapp.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower.json" afterPath="$PROJECT_DIR$/bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements/dev.txt" afterPath="$PROJECT_DIR$/requirements/dev.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements/prod.txt" afterPath="$PROJECT_DIR$/requirements/prod.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup.cfg" afterPath="$PROJECT_DIR$/setup.cfg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/.bowerrc" afterPath="$PROJECT_DIR$/soko/.bowerrc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/.gitignore" afterPath="$PROJECT_DIR$/soko/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/.isort.cfg" afterPath="$PROJECT_DIR$/soko/.isort.cfg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/.travis.yml" afterPath="$PROJECT_DIR$/soko/.travis.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/__init__.py" afterPath="$PROJECT_DIR$/soko/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/app.py" afterPath="$PROJECT_DIR$/soko/app.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/assets.py" afterPath="$PROJECT_DIR$/soko/assets.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/commands.py" afterPath="$PROJECT_DIR$/soko/commands.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/compat.py" afterPath="$PROJECT_DIR$/soko/compat.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/database.py" afterPath="$PROJECT_DIR$/soko/database.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/extensions.py" afterPath="$PROJECT_DIR$/soko/extensions.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/item/__init__.py" afterPath="$PROJECT_DIR$/soko/item/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/item/forms.py" afterPath="$PROJECT_DIR$/soko/item/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/item/models.py" afterPath="$PROJECT_DIR$/soko/item/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/item/views.py" afterPath="$PROJECT_DIR$/soko/item/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/public/__init__.py" afterPath="$PROJECT_DIR$/soko/public/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/public/forms.py" afterPath="$PROJECT_DIR$/soko/public/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/public/views.py" afterPath="$PROJECT_DIR$/soko/public/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/settings.py" afterPath="$PROJECT_DIR$/soko/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/bootstrap/_bootstrap-overrides.scss" afterPath="$PROJECT_DIR$/soko/static/css/bootstrap/_bootstrap-overrides.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/bootstrap/bootstrap.css" afterPath="$PROJECT_DIR$/soko/static/css/bootstrap/bootstrap.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/bootstrap/bootstrap.min.css" afterPath="$PROJECT_DIR$/soko/static/css/bootstrap/bootstrap.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/compiled/theme.css" afterPath="$PROJECT_DIR$/soko/static/css/compiled/theme.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/modules/_elements.scss" afterPath="$PROJECT_DIR$/soko/static/css/modules/_elements.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/modules/_mixins.scss" afterPath="$PROJECT_DIR$/soko/static/css/modules/_mixins.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/_config.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/_config.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/_layout.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/_layout.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_account.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_account.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_billing_form.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_billing_form.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_calendar.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_calendar.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_datatables.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_datatables.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_docs.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_docs.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_email_templates.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_email_templates.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_form.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_form.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_form_product.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_form_product.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_gallery.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_gallery.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_index.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_index.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_invoice.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_invoice.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_latest_activity.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_latest_activity.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_pricing.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_pricing.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_pricing_alt.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_pricing_alt.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_projects.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_projects.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_reports.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_reports.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_reports_alt.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_reports_alt.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_search.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_search.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_sidebar.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_sidebar.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_signin.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_signin.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_signup.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_signup.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_status.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_status.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_steps.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_steps.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_ui.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_ui.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_user_profile.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_user_profile.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_users.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_users.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/pages/_wizard.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/pages/_wizard.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/partials/snippets/_custom_animations.scss" afterPath="$PROJECT_DIR$/soko/static/css/partials/snippets/_custom_animations.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/theme.scss" afterPath="$PROJECT_DIR$/soko/static/css/theme.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/vendor/animate.css" afterPath="$PROJECT_DIR$/soko/static/css/vendor/animate.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/vendor/bootstrap-daterangepicker.css" afterPath="$PROJECT_DIR$/soko/static/css/vendor/bootstrap-daterangepicker.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/vendor/font-awesome.css" afterPath="$PROJECT_DIR$/soko/static/css/vendor/font-awesome.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/vendor/font-awesome.min.css" afterPath="$PROJECT_DIR$/soko/static/css/vendor/font-awesome.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/vendor/fullcalendar.css" afterPath="$PROJECT_DIR$/soko/static/css/vendor/fullcalendar.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/vendor/fullcalendar.print.css" afterPath="$PROJECT_DIR$/soko/static/css/vendor/fullcalendar.print.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/vendor/highlight.default.css" afterPath="$PROJECT_DIR$/soko/static/css/vendor/highlight.default.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/vendor/jquery.dataTables.css" afterPath="$PROJECT_DIR$/soko/static/css/vendor/jquery.dataTables.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/vendor/morris.css" afterPath="$PROJECT_DIR$/soko/static/css/vendor/morris.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/vendor/offline.chrome.css" afterPath="$PROJECT_DIR$/soko/static/css/vendor/offline.chrome.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/css/vendor/shepherd.css" afterPath="$PROJECT_DIR$/soko/static/css/vendor/shepherd.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/soko/static/fonts/glyphicons-halflings-regular.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/bootstrap/bootstrap.js" afterPath="$PROJECT_DIR$/soko/static/js/bootstrap/bootstrap.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/bootstrap/bootstrap.min.js" afterPath="$PROJECT_DIR$/soko/static/js/bootstrap/bootstrap.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/theme.js" afterPath="$PROJECT_DIR$/soko/static/js/theme.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/bootstrap-daterangepicker.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/bootstrap-daterangepicker.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/fullcalendar.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/fullcalendar.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/highlight.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/highlight.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/imagesloaded.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/imagesloaded.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.cookie.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.cookie.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.dataTables.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.dataTables.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/excanvas.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/excanvas.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.colorhelpers.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.colorhelpers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.colorhelpers.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.colorhelpers.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.canvas.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.canvas.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.canvas.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.canvas.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.categories.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.categories.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.categories.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.categories.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.crosshair.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.crosshair.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.crosshair.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.crosshair.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.errorbars.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.errorbars.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.errorbars.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.errorbars.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.fillbetween.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.fillbetween.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.fillbetween.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.fillbetween.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.image.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.image.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.image.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.image.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.navigate.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.navigate.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.navigate.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.navigate.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.pie.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.pie.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.pie.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.pie.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.resize.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.resize.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.resize.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.resize.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.selection.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.selection.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.selection.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.selection.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.stack.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.stack.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.stack.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.stack.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.symbol.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.symbol.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.symbol.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.symbol.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.threshold.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.threshold.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.threshold.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.threshold.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.time.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.time.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.time.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.time.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.tooltip.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.flot/jquery.flot.tooltip.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.maskedinput.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.maskedinput.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/jquery.validate.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/jquery.validate.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/moment.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/moment.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/morris.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/morris.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/offline.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/offline.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/raphael-min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/raphael-min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/shepherd.min.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/shepherd.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/js/vendor/zoomerang.js" afterPath="$PROJECT_DIR$/soko/static/js/vendor/zoomerang.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/templates/401.html" afterPath="$PROJECT_DIR$/soko/templates/401.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/templates/404.html" afterPath="$PROJECT_DIR$/soko/templates/404.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/templates/500.html" afterPath="$PROJECT_DIR$/soko/templates/500.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/templates/footer.html" afterPath="$PROJECT_DIR$/soko/templates/footer.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/templates/items/index.html" afterPath="$PROJECT_DIR$/soko/templates/items/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/templates/items/type_edit.html" afterPath="$PROJECT_DIR$/soko/templates/items/type_edit.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/templates/items/type_list.html" afterPath="$PROJECT_DIR$/soko/templates/items/type_list.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/templates/layout.html" afterPath="$PROJECT_DIR$/soko/templates/layout.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/templates/nav.html" afterPath="$PROJECT_DIR$/soko/templates/nav.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/templates/public/login.html" afterPath="$PROJECT_DIR$/soko/templates/public/login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/templates/public/register.html" afterPath="$PROJECT_DIR$/soko/templates/public/register.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/templates/users/members.html" afterPath="$PROJECT_DIR$/soko/templates/users/members.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/user/__init__.py" afterPath="$PROJECT_DIR$/soko/user/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/user/forms.py" afterPath="$PROJECT_DIR$/soko/user/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/user/models.py" afterPath="$PROJECT_DIR$/soko/user/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/user/views.py" afterPath="$PROJECT_DIR$/soko/user/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/utils.py" afterPath="$PROJECT_DIR$/soko/utils.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/__init__.py" afterPath="$PROJECT_DIR$/tests/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/conftest.py" afterPath="$PROJECT_DIR$/tests/conftest.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/factories.py" afterPath="$PROJECT_DIR$/tests/factories.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_config.py" afterPath="$PROJECT_DIR$/tests/test_config.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_forms.py" afterPath="$PROJECT_DIR$/tests/test_forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_functional.py" afterPath="$PROJECT_DIR$/tests/test_functional.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_models.py" afterPath="$PROJECT_DIR$/tests/test_models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/upgrade.sh" afterPath="$PROJECT_DIR$/upgrade.sh" />
+    </list>
+    <ignored path="dashboard.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="dashboard" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1301" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dashboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="92ae03c2-6e34-4825-ab80-9dc3e813ec41" name="Default" comment="" />
+      <created>1476704834153</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1476704834153</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="65" y="24" width="1301" height="744" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24980783" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+</project>

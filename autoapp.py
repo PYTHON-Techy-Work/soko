@@ -2,9 +2,9 @@
 """Create an application instance."""
 from flask.helpers import get_debug_flag
 
-from soko.app import create_app
+import soko.app
 from soko.settings import DevConfig, ProdConfig
 
 CONFIG = DevConfig if get_debug_flag() else ProdConfig
 
-app = create_app(CONFIG)
+app = soko.app.create_app(CONFIG)

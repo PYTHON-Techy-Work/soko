@@ -2,10 +2,10 @@
 """The app module, containing the app factory function."""
 from flask import Flask, render_template
 
-from soko import commands, public, user, item
-from soko.assets import assets
-from soko.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
-from soko.settings import ProdConfig
+import commands, public, user, item
+from assets import assets
+from extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
+from settings import ProdConfig
 
 
 def create_app(config_object=ProdConfig):
