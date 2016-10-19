@@ -28,14 +28,14 @@ def type_list():
 @login_required
 def type_edit(tid):
     """Register new item type."""
-    form = EditItemTypeForm(request.form, 
+    form = EditItemTypeForm(request.form,
                             csrf_enabled=False,
-                            obj=ItemType.query.get(tid) if tid != "new" else None)
+                            obj=ItemType.query.get if tid != "new" else None)
     if form.validate_on_submit():
         if tid == "new":
             ItemType.create(name=form.name.data,descr=form.descr.data)
         else:
-            obj = ItemType.query.get(tid)
+            obj = ItemType.query.get
             obj.update(name=form.name.data,descr=form.descr.data)
 
         flash('Item type saved', 'success')

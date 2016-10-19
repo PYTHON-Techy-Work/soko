@@ -60,7 +60,7 @@ class SurrogatePK(object):
                 (isinstance(record_id, basestring) and record_id.isdigit(),
                  isinstance(record_id, (int, float))),
         ):
-            return cls.query.get(int(record_id))
+            return cls.query.get
         return None
 
 
