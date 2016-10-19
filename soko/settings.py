@@ -31,10 +31,11 @@ class DevConfig(Config):
 
     ENV = 'dev'
     DEBUG = True
-    DB_NAME = 'dev.db'
+    #DB_NAME = 'dev.db'
+    DB_NAME = 'soko_mkononi'
     # Put the db file in project root
     DB_PATH = os.path.join(Config.PROJECT_ROOT, DB_NAME)
-    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/soko_mkononi'  # TODO: Change me
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:jamonjuguna@localhost/soko_mkononi'  # TODO: Change me
     #SQLALCHEMY_DATABASE_URI = 'sqlite:///{0}'.format(DB_PATH)
     DEBUG_TB_ENABLED = True
     ASSETS_DEBUG = True  # Don't bundle/minify static assets

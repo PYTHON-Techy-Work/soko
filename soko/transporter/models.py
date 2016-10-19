@@ -10,9 +10,9 @@ from soko.database import Column, Model, SurrogatePK, db, reference_col, relatio
 class Transporter(Model):
     """A transporter of the app."""
     __tablename__ = 'transporters'
-    id = Column(db.Integer(primary_key=True)
-    user= Column(db.Integer(foreign_key=True)
-    vehicle = Column(db.Integer(foreign_key=True)
+    id = Column(db.Integer(primary_key=True))
+    user= Column(db.Integer(foreign_key=True))
+    vehicle = Column(db.Integer(foreign_key=True))
     photo = Column(db.String(80), nullable=False)
     licence = Column(db.String(80), unique=True, nullable=False)
     location = Column(db.String(30), nullable=True)
