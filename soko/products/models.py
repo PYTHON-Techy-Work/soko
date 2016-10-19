@@ -2,15 +2,12 @@
 """Transporter models."""
 import datetime as dt
 
-
 from soko.database import Column, Model, SurrogatePK, db, reference_col, relationship
-
-
 
 class Products(db.Model):
     """A Products of the app."""
     __tablename__ = 'products'
-    id = Column(db.Integer(primary_key=True)
+    id = Column(db.Integer, primary_key=True)
     product_type = Column(db.Integer, nullable=False)
     description = Column(db.String(80), nullable=False)
     price = Column(db.Integer, nullable=False)
@@ -27,10 +24,10 @@ class Products(db.Model):
     def __repr__(self):
         return '<Product %r>' % self
 
-    class Product_Type(db.Model):
+class Product_Type(db.Model):
         """A product_type of the app."""
         __tablename__ = 'product_types'
-        id = Column(db.Integer(primary_key=True)
+        id = Column(db.Integer,primary_key=True)
         type = Column(db.String(80), nullable=True)
         created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
