@@ -2,10 +2,7 @@
 """Transporter models."""
 import datetime as dt
 
-
 from soko.database import Column, Model, SurrogatePK, db, reference_col, relationship
-
-
 
 class Products(db.Model):
     """A Products of the app."""
@@ -33,6 +30,7 @@ class Product_Type(db.Model):
     id = Column(db.Integer(primary_key=True))
     type = Column(db.String(80), nullable=True)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+
 
     def __init__(self, type):
         self.type = type
