@@ -2,7 +2,9 @@
 """The app module, containing the app factory function."""
 from flask import Flask, render_template
 
-from soko import commands, public, user, item, products, farmer, transporter, stores, driverslicence, vehicle
+from soko import commands, public, user, item, products, \
+                    farmer, transporter, stores, driverslicence, \
+                    vehicle, api
 from assets import assets
 from extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
 from settings import ProdConfig
@@ -43,6 +45,8 @@ def register_blueprints(app):
     app.register_blueprint(public.views.blueprint)
     app.register_blueprint(user.views.blueprint)
     app.register_blueprint(item.views.blueprint)
+    app.register_blueprint(api.views.blueprint)
+    
     return None
 
 
