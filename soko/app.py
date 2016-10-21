@@ -46,7 +46,7 @@ def register_blueprints(app):
     app.register_blueprint(user.views.blueprint)
     app.register_blueprint(item.views.blueprint)
     app.register_blueprint(api.views.blueprint)
-    
+
     return None
 
 
