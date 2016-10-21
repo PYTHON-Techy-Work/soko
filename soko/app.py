@@ -2,6 +2,7 @@
 """The app module, containing the app factory function."""
 from flask import Flask, render_template
 
+from soko import commands, public, user, item, products, farmer, transporter, stores, driverslicence, vehicle
 from assets import assets
 from extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
 from settings import ProdConfig
@@ -68,7 +69,8 @@ def register_shellcontext(app):
             'db': db,
             'User': user.models.User,
             'Item': user.models.Item,
-            "Product": products.models.Products}
+            "Product": products.models.Products,
+            "Transporter": transporter.models.Transporter}
 
     app.shell_context_processor(shell_context)
 
