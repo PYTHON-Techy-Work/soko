@@ -32,6 +32,7 @@ class DevConfig(Config):
     ENV = 'dev'
     DEBUG = True
     #DB_NAME = 'dev.db'
+    SECRET_KEY = os.environ.get('SOKO_SECRET', 'secret-key')  # TODO: Change me
     DB_NAME = 'soko_mkononi'
     # Put the db file in project root
     DB_PATH = os.path.join(Config.PROJECT_ROOT, DB_NAME)
