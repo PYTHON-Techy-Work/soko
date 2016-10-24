@@ -1,12 +1,10 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for, jsonify, make_response
+from flask import Blueprint, flash, redirect, render_template, request, url_for, jsonify, make_response, json
 from flask_login import login_required, login_user, logout_user
+from flask_restful import reqparse
 
 from soko.user.models import User
 from soko.utils import flash_errors
-
 from soko.extensions import csrf_protect
-
-
 
 blueprint = Blueprint('api', __name__, url_prefix='/api/v1')
 
@@ -23,28 +21,29 @@ users = [
     }
 ]
 
+
 @blueprint.route('/get_users', methods=['GET'])
 def get_users():
     # Query the database and return all users
     users = User.query.all()
     try:
-        results = jsonify({'status':'success','data':users})
+        results = jsonify({'status': 'success', 'data': users})
     except:
-        results = jsonify({'status':'failure','message':'No users found in the database'})
-    return results
+        results = jsonify({'status': 'failure', 'message': 'No users found in the database'})
+    return make_response(results)
 
-# @csrf.exempt
+
+@csrf_protect.exempt
 @blueprint.route('/register', methods=['POST'])
 def reg_user():
-    json_data = request.json
+    data = request.data
     user = User(
-        user_type=json_data['user_type'],
-        surname=json_data['surname'],
-        first_name=json_data['first_name'],
-        last_name=json_data['last_name'],
-        email=json_data['email'],
-        password=json_data['password'],
-        category=json_data['category']
+        surname=data["surname"],
+        first_name=data["first_name"],
+        last_name=data["last_name"],
+        email=data["email"],
+        password=data["password"],
+        category=data["category"]
     )
     try:
         db.session.add(user)
