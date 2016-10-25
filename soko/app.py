@@ -2,8 +2,8 @@
 """The app module, containing the app factory function."""
 from flask import Flask, render_template
 
-from soko import commands, public, user, item, products, \
-                    farmer, transporter, stores, driverslicence, \
+from soko import commands, public, user, products, \
+                    farmer, transporter, branches, driverslicence, \
                     vehicle, api
 from assets import assets
 from extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
@@ -44,7 +44,6 @@ def register_blueprints(app):
     """
     app.register_blueprint(public.views.blueprint)
     app.register_blueprint(user.views.blueprint)
-    app.register_blueprint(item.views.blueprint)
     app.register_blueprint(api.views.blueprint)
 
     return None
@@ -72,8 +71,8 @@ def register_shellcontext(app):
         return {
             'db': db,
             'User': user.models.User,
-            'Item': user.models.Item,
-            "Product": products.models.Products,
+            'Product': user.models.Product,
+            'Farmer': farmer.models.Farmer,
             "Transporter": transporter.models.Transporter}
 
     app.shell_context_processor(shell_context)

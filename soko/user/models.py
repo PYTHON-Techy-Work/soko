@@ -31,15 +31,15 @@ class User(UserMixin, SurrogatePK, Model):
     __tablename__ = 'users'
     username = Column(db.String(80), unique=True, nullable=False)
     email = Column(db.String(80), unique=True, nullable=False)
-    #: The hashed password
     password = Column(db.String(128), nullable=True)
-    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
-    first_name = Column(db.String(30), nullable=True)
-    surname = Column(db.String(30), nullable=True)
-    last_name = Column(db.String(30), nullable=True)
-    category = Column(db.String(30), nullable=True)
+    surname = Column(db.String(30), nullable=False)
+    first_name = Column(db.String(30), nullable=False)
+    last_name = Column(db.String(30), nullable=False)
+    phone_number = Column(db.String(15), nullable=False)
+    category = Column(db.String(30), nullable=False)
     active = Column(db.Boolean(), default=False)
     is_admin = Column(db.Boolean(), default=False)
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
     def __init__(self, username, email, password=None, **kwargs):
         """Create instance."""

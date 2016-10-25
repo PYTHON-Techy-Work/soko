@@ -6,6 +6,7 @@ from soko.user.models import User
 from soko.utils import flash_errors
 from soko.extensions import csrf_protect
 
+
 blueprint = Blueprint('api', __name__, url_prefix='/api/v1')
 
 
@@ -23,16 +24,17 @@ def get_users():
 @csrf_protect.exempt
 @blueprint.route('/register', methods=['POST'])
 def reg_user():
-    parser = reqparse.RequestParser()
-    parser.add_argument('surname', type=int, location='form')
-    parser.add_argument('first_name', type=int, location='form')
-    parser.add_argument('last_name', type=int, location='form')
-    parser.add_argument('email', type=int, location='form')
-    parser.add_argument('password', type=int, location='form')
-    parser.add_argument('category', type=int, location='form')
-    args = parser.parse_args()
+    data = request.json
+    user = User(
+        surname=data['surname'],
+        first_name=data['first_name'],
+        last_name=data['last_name'],
+        email=data['email'],
+        password=data['password'],
+        category=data['category']
+    )
     try:
-        db.session.add(args)
+        db.session.add(user)
         db.session.commit()
         status = 'success'
     except:
