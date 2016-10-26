@@ -7,6 +7,8 @@ from soko.utils import flash_errors
 from soko.extensions import csrf_protect
 
 
+
+
 blueprint = Blueprint('api', __name__, url_prefix='/api/v1')
 
 
@@ -26,11 +28,15 @@ def get_users():
 def reg_user():
     data = request.json
     user = User(
+        username=data['username'],
         surname=data['surname'],
         first_name=data['first_name'],
         last_name=data['last_name'],
         email=data['email'],
         password=data['password'],
+        phone_number=data['phone_number'],
+        is_admin=data['is_admin'],
+        active=data['active'],
         category=data['category']
     )
     try:

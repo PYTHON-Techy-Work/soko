@@ -3,8 +3,7 @@
 from flask import Flask, render_template
 
 from soko import commands, public, user, products, \
-                    farmer, transporter, branches, driverslicence, \
-                    vehicle, api
+                    farmer, transporter, vehicle, api
 from assets import assets
 from extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
 from settings import ProdConfig

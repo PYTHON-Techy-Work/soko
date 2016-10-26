@@ -5,11 +5,11 @@ from soko.database import Column, Model, SurrogatePK, db, reference_col, relatio
 
 
 class Vehicle(SurrogatePK, Model):
-    __tablename__ = 'Vehicles'
+    __tablename__ = 'vehicles'
     number = Column(db.String(30), unique=True)
-    type = Column(db.String(30), nullable=False)
+    type_id = reference_col('vehicle_Type', nullable=False)
+    type = relationship('VehicleType', backref='vehicles')
     colour = Column(db.String(30), unique=True)
-    user = relationship('transporter')
     expiry_date = Column(db.DateTime, nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
@@ -24,9 +24,9 @@ class Vehicle(SurrogatePK, Model):
         return '<Vehicle %r>' % self.licence + self.user + self.vehicle + self.expiry_date
 
 
-class Vehicle_Type(SurrogatePK, Model):
+class VehicleType(SurrogatePK, Model):
     __tablename__ = 'vehicle_Type'
-    name = Column(db.String(30), unique=True)
+    name = Column(db.String(30), nullable=False)
     make = Column(db.String(30), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 

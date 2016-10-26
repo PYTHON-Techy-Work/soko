@@ -2,7 +2,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="container-narrow">
-  <h1>Item Type editor</h1>
+  <h1>Product Type editor</h1>
     <br/>
     <form id="registerForm" class="form" method="POST" action="" role="form">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
@@ -15,7 +15,7 @@
                 {{form.descr.label}}
                 {{form.descr(placeholder="Description", class_="form-control")}}
             </div>
-           
+
             <p><input class="btn btn-default btn-submit" type="submit" value="Save changes"></p>
     </form>
 </div>

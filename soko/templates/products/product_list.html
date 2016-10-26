@@ -1,7 +1,7 @@
 {% set INCLUDE_DATATABLES = True %}
 {% extends "layout.html" %}
 {% block content %}
-    <h3>All item types</h3>
+    <h3>All product types</h3>
 
     <table class="table table-striped datatable">
         <thead>
@@ -11,7 +11,7 @@
             <th></th>
         </thead>
         <tbody>
-            {% for i in items %}
+            {% for i in products %}
                 <tr>
                     <td>{{i.id}}</td>
                     <td>{{i.name}}</td>

@@ -7,8 +7,8 @@ class Product(SurrogatePK, Model):
     """A Products of the app."""
     __tablename__ = 'products'
     name = Column(db.String(80), nullable=False)
-    farmer = relationship('Farmer')
-    product_type = relationship('ProductType')
+    type_id = reference_col('product_types', nullable=False)
+    type = relationship('ProductType', backref='products')
     description = Column(db.String(80), nullable=False)
     price = Column(db.Integer, nullable=False)
     quantity = Column(db.String(80), nullable=False)
@@ -42,8 +42,9 @@ class ProductType(SurrogatePK, Model):
 
 class ProductRatings(SurrogatePK, Model):
     __tablename__ = 'product_ratings'
-    product = relationship('Product')
-    description = Column(db.String(80), nullable=True)
+    product = Column(db.Integer, nullable=False)
+    rating = Column(db.Integer, nullable=False)
+    review = Column(db.String(80), nullable=True)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
     def __init__(self, product, description):
@@ -51,18 +52,5 @@ class ProductRatings(SurrogatePK, Model):
         self.description = description
 
     def __repr__(self):
-        return '<Product %r>' % self.user + self.description
+        return '<Product %r>' % self.user + self.rating + self.review
 
-
-class ProductReviews(SurrogatePK, Model):
-    __tablename__ = 'product_reviews'
-    product = Column(db.Integer, nullable=True)
-    review = Column(db.Text, nullable=True)
-    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
-
-    def __init__(self, product, review):
-        self.product = product
-        self.review = review
-
-    def __repr__(self):
-        return '<Product Review %r>' % self.product + self.review
