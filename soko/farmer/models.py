@@ -9,28 +9,26 @@ class Farmer(SurrogatePK, Model):
     user = relationship('User', backref='farmers')
     id_number = Column(db.Integer, nullable=True)
     photo = Column(db.String(80), nullable=True)
-    product_id = reference_col('products', nullable=False)
+    product_id = reference_col('products', nullable=True)
     product = relationship('Product', backref='farmers')
-    branch_id = reference_col('branches', nullable=True)
-    branch = relationship('Branch', backref='farmers')
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, user, photo, physical_address, stores):
+    def __init__(self, user, id_number, photo, product):
         self.user = user
+        self.id_number = id_number
         self.photo = photo
-        self.physical_address = physical_address
-        self.stores = stores
+        self.product = product
 
     def __repr__(self):
-        return '<Farmer %r>' % self.user
+        return '<Farmer %r>' % self.user + self.id_number + self.photo + self.product + self.branch
 
 
 class Branch(SurrogatePK, Model):
     __tablename__ = 'branches'
-    name = Column(db.String(80), unique=True, nullable=False)
-    location = Column(db.String(80), nullable=True)
+    name = Column(db.String(80), nullable=False)
     farmer_id = reference_col('farmers', nullable=True)
     farmer = relationship('Farmer', backref='branches')
+    location = Column(db.String(80), nullable=True)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
     def __init__(self, name, location, farmer):
@@ -39,6 +37,4 @@ class Branch(SurrogatePK, Model):
         self.farmer = farmer
 
     def __repr__(self):
-        return '<Branch %r>' % self.user
-
-
+        return '<Branch %r>' % self.name + self.location + self.farmer
