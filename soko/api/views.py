@@ -3,6 +3,7 @@ from flask_login import login_required, login_user, logout_user
 from flask_restful import reqparse
 
 from soko.user.models import User
+from soko.database import db
 from soko.utils import flash_errors
 from soko.extensions import csrf_protect
 

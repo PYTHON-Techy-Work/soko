@@ -11,7 +11,7 @@ class Farmer(SurrogatePK, Model):
     photo = Column(db.String(80), nullable=True)
     product_id = reference_col('products', nullable=False)
     product = relationship('Product', backref='farmers')
-    branch_id = Column(db.Integer, nullable=True)
+    branch_id = reference_col('branches', nullable=True)
     branch = relationship('Branch', backref='farmers')
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
