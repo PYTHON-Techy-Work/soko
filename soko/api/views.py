@@ -48,3 +48,21 @@ def reg_user():
         status = 'the user is already registered'
     db.session.close()
     return jsonify({'result': status})
+
+
+@csrf_protect.exempt
+@blueprint.route('/login', methods=['POST'])
+def login_user():
+    data = request.json
+    user = User(
+        username=data['username'],
+        password=data['password'],
+    )
+    try:
+        db.session.add(user)
+        db.session.commit()
+        status = 'success'
+    except:
+        status = 'the user is already registered'
+    db.session.close()
+    return jsonify({'result': status})
