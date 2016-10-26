@@ -44,4 +44,3 @@ docs/_build
 
 # Virtualenvs
 env/
-/migrations/
