@@ -39,6 +39,7 @@ class User(UserMixin, SurrogatePK, Model):
     category = Column(db.String(30), nullable=True)
     active = Column(db.Boolean(), default=False)
     is_admin = Column(db.Boolean(), default=False)
+    token = Column(db.String(100), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
     def __init__(self, username, email, password=None, **kwargs):
