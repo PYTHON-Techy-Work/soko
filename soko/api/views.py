@@ -64,11 +64,12 @@ def login():
     if registered_user is None:
         status = {'status': 'failure', 'message': 'Username does not exist. Register'}
     else:
-        if bcrypt.check_password_hash(User.password, password):
+        if registered_user.check_password(password):
             registered_user.token = uuid.uuid4()
             db.session.add(registered_user)
             db.session.commit()
             login_user(registered_user)
             status = {'status': 'success', 'message': 'success'}
-        status = {'status': 'faillure', 'message': 'Password is invalid'}
+        else:
+            status = {'status': 'faillure', 'message': 'Password is invalid'}
     return jsonify(status)

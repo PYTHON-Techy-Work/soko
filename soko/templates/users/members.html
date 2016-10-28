@@ -1,7 +1,47 @@
-
+{% set INCLUDE_DATATABLES = True %}
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Welcome <b>{{ current_user.username }}</b></h1>
-    <h3>(graphs will go here)</h3>
+    <h3>All users</h3>
+
+    <table class="table table-striped datatable">
+        <thead>
+            <th>#</th>
+            <th>Username</th>
+            <th>Category</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for i in users %}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.username}}</td>
+                    <td>{{i.category}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.first_name}}</td>
+                    <td>{{i.last_name}}</td>
+                    <td><a href="/users/edit/{{i.id}}">Edit</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary btn-lg" href=""><i class="fa fa-plus"></i> Add new</a>
+{% endblock %}
+
+{% block js %}
+<script>
+$(function() {
+    $('.datatable').dataTable({
+        "sPaginationType": "full_numbers",
+        "iDisplayLength": 20,
+        "aLengthMenu": [[20, 50, 100, -1], [20, 50, 100, "All"]]
+    });
+});
+</script>
 {% endblock %}
 

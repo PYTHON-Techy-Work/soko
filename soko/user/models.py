@@ -32,7 +32,6 @@ class User(UserMixin, SurrogatePK, Model):
     username = Column(db.String(80), unique=True, nullable=False)
     email = Column(db.String(80), unique=True, nullable=False)
     password = Column(db.String(128), nullable=True)
-    surname = Column(db.String(30), nullable=True)
     first_name = Column(db.String(30), nullable=True)
     last_name = Column(db.String(30), nullable=True)
     phone_number = Column(db.String(15), nullable=True)
@@ -41,6 +40,8 @@ class User(UserMixin, SurrogatePK, Model):
     is_admin = Column(db.Boolean(), default=False)
     token = Column(db.String(100), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+    region = Column(db.String(80), nullable=True)
+
 
     def __init__(self, username, email, password=None, **kwargs):
         """Create instance."""
@@ -54,6 +55,8 @@ class User(UserMixin, SurrogatePK, Model):
         """Set password."""
         self.password = bcrypt.generate_password_hash(password)
 
+        print "SET PASSWORD '" + str(password) + "'"
+
     def check_password(self, value):
         """Check password."""
         return bcrypt.check_password_hash(self.password, value)
@@ -66,3 +69,23 @@ class User(UserMixin, SurrogatePK, Model):
     def __repr__(self):
         """Represent instance as a unique string."""
         return '<User({username!r})>'.format(username=self.username)
+
+
+class Document(SurrogatePK, Model):
+    """an uploaded document."""
+
+    __tablename__ = 'documents'
+    name = Column(db.String(80), nullable=False)
+    filename = Column(db.String(256), nullable=False)
+    user_id = reference_col('users', nullable=True)
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+    user = relationship('User', backref='documents')
+
+    def __init__(self, name, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, name=name, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<Document({name})>'.format(name=self.name)
+
