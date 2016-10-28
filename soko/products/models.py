@@ -10,7 +10,7 @@ class Product(SurrogatePK, Model):
     type_id = reference_col('product_types', nullable=False)
     type = relationship('ProductType', backref='products')
     description = Column(db.String(80), nullable=False)
-    price = Column(db.Integer, nullable=False)
+    price = Column(db.Numeric(15, 2), nullable=False)
     quantity = Column(db.String(80), nullable=False)
     photo = Column(db.String(80), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
