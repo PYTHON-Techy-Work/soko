@@ -15,7 +15,7 @@ blueprint = Blueprint('public', __name__, static_folder='../static')
 @login_manager.user_loader
 def load_user(user_id):
     """Load user by ID."""
-    return User.get_by_id(int(user_id))
+    return User.query.get(int(user_id))
 
 
 @blueprint.route('/', methods=['GET', 'POST'])
@@ -27,7 +27,7 @@ def home():
         if form.validate_on_submit():
             login_user(form.user)
             flash('You are logged in.', 'success')
-            redirect_url = request.args.get or url_for('user.members')
+            redirect_url = request.args.get("next") or url_for('user.members')
             return redirect(redirect_url)
         else:
             flash_errors(form)
@@ -48,7 +48,11 @@ def register():
     """Register new user."""
     form = RegisterForm(request.form, csrf_enabled=False)
     if form.validate_on_submit():
-        User.create(username=form.username.data, email=form.email.data, password=form.password.data, active=True)
+        User.create(username=form.username.data, email=form.email.data, 
+            password=form.password.data, active=True, token="(not set)",
+            category=form.category.data, first_name=form.first_name.data,
+            last_name=form.last_name.data, phone_number=form.phone_number.data,
+            region=form.region.data)
         flash('Thank you for registering. You can now log in.', 'success')
         return redirect(url_for('public.home'))
     else:

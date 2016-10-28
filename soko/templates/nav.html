@@ -1,24 +1,17 @@
 <div id="sidebar-default" class="main-sidebar">
-      <div class="container"><h2 style="color:white"><i class="fa fa-globe"></i> Soko<b>Admin</b></h2></div>
+      <div class="container">
+        <img src="/static/images/logo.png" style="width:200px; margin:5px">
+      </div>
       <div class="current-user" style="height:50px">
-        <a href="index.html" class="name">
+        <a href="/" class="name">
           <span>
-            <i class="fa fa-user"></i> {{current_user.username}}
+            <i class="fa fa-user-circle"></i> <b>{{current_user.username}}</b> ({{current_user.category}})
             <i class="fa fa-chevron-down"></i>
           </span>
         </a>
         <ul class="menu">
           <li>
-            <a href="account-profile.html">Account settings</a>
-          </li>
-          <li>
-            <a href="account-billing.html">Billing</a>
-          </li>
-          <li>
-            <a href="account-notifications.html">Notifications</a>
-          </li>
-          <li>
-            <a href="account-support.html">Help / Support</a>
+            <a href="/users/edit/me">My profile</a>
           </li>
           <li>
             <a href="/logout">Sign out</a>
@@ -26,7 +19,7 @@
         </ul>
       </div>
       <div class="menu-section">
-        <h3>Home</h3>
+        <h3>{{current_user.category}}</h3>
         <ul>
           <li>
             <a href="/">
@@ -47,23 +40,7 @@
       <div class="menu-section">
         <h3>Products</h3>
         <ul>
-          <li>
-            <a href="{{url_for('item.index')}}"
-               {% if request.endpoint in ["item.index"] %}class="active"{% endif %}
-            >
-              <i class="fa fa-list"></i> 
-              <span>Current inventory</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="{{url_for('item.type_list')}}" 
-            {% if request.endpoint in ["item.type_list", "item.type_edit"] %}class="active"{% endif %}
-            >
-              <i class="ion-edit"></i> 
-              <span>Manage types</span>
-            </a>
-          </li>
+          
         </ul>
       </div>
 
@@ -80,44 +57,58 @@
         </ul>
       </div>
 
+      <div class="menu-section">
+        <h3>Documents</h3>
+        <ul>
+          <li {% if request.url.find("users/documents") >= 0 and not request.url.find("upload") >= 0 %}class="active" {% endif %}>
+            <a href="/users/documents">
+              <i class="fa fa-file-o"></i> 
+              <span>View uploaded</span>
+            </a>
+          </li>
+
+          <li {% if request.url.find("users/documents/upload") >= 0%}class="active" {% endif %}>
+            <a href="/users/documents/upload">
+              <i class="fa fa-upload"></i> 
+              <span>Upload new</span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
 
       <div class="menu-section">
-        <h3>Users</h3>
+        <h3>Administrator</h3>
         <ul>
-          <li>
-            <a href="/">
+          <li {% if request.endpoint == "user.members" and not request.args.get('category') %}class="active" {% endif %}>
+            <a href="/users">
               <i class="ion-person-stalker"></i> 
               <span>All users</span>
             </a>
           </li>
 
-          <li>
-            <a href="">
+          <li {% if request.url.find("users") >= 0 and request.args.get('category') == 'consumer' %}class="active" {% endif %}>
+            <a href="/users?category=consumer">
               <i class="ion-person"></i> 
               <span>Consumers</span>
             </a>
           </li>
 
-          <li>
-            <a href="">
+          <li {% if request.url.find("users") >= 0 and request.args.get('category') == 'transporter' %}class="active" {% endif %}>
+            <a href="/users?category=transporter">
               <i class="ion-person"></i> 
               <span>Transporters</span>
             </a>
           </li>
 
-          <li>
-            <a href="">
+          <li {% if request.url.find("users") >= 0 and request.args.get('category') == 'farmer' %}class="active" {% endif %}>
+            <a href="/users?category=farmer">
               <i class="ion-person"></i> 
               <span>Farmers</span>
             </a>
           </li>
 
-          <li>
-            <a href="">
-              <i class="ion-person"></i> 
-              <span>Admins</span>
-            </a>
-          </li>
         </ul>
       </div>
 
@@ -125,18 +116,7 @@
 
       <div class="bottom-menu hidden-sm">
         <ul>
-          <li><a href="#"><i class="ion-help"></i></a></li>
-          <li>
-            <a href="#">
-              <i class="ion-archive"></i>
-              <span class="flag"></span>
-            </a>
-            <ul class="menu">
-              <li><a href="#">5 unread messages</a></li>
-              <li><a href="#">12 tasks completed</a></li>
-              <!-- <li><a href="#">3 features added</a></li> -->
-            </ul>
-          </li>
+         
           <li><a href="/logout"><i class="ion-log-out"></i></a></li>
         </ul>
       </div>

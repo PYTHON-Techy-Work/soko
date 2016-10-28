@@ -17,19 +17,32 @@
 	<script src="/static/js/bootstrap/bootstrap.min.js"></script>
 	<script src="/static/js/theme.js"></script>
 
+    <script src="https://use.fontawesome.com/e618dce52b.js"></script>
+
+
 	<!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
 <body id="signup" class="clear">
 
+    {% set cat = request.args.get("category") %}
+
 	<a href="/" class="logo">
 		<i class="fa-globe fa fa-4x"></i>
 	</a>
 
-	<h3><b>Soko Mkononi</b> &middot; Register</h3>
+	
+
+    <h3>
+             <img src="/static/images/logo.png" style="width:200px; margin:5px">
+             
+   
+    </h3>
+
 
 	<div class="content">
+
 
 
 	 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -48,16 +61,58 @@
     {% endwith %}
 
 
+    <h1>1. <b>How do you want to use Soko Mkononi?</b></h1>
+
+    <div class="row">
+        <div class="col-md-4">
+            <a href="?category=farmer" class="btn btn-block {% if cat == 'farmer' %}btn-primary{% else %}btn-text{% endif %}">
+            <br>
+            <i class="fa fa-tree fa-4x"></i> <br>
+            <br>I'm a <b>farmer</b></a>
+            <br><br>
+        </div>
+
+        <div class="col-md-4">
+            <a href="?category=transporter" class="btn btn-block {% if cat == 'transporter' %}btn-primary{% else %}btn-text{% endif %}">
+            <br>
+            <i class="fa fa-motorcycle fa-4x"></i> <br>
+            <br>I'm a <b>transporter</b></a>
+            <br><br>
+        </div>
+
+        <div class="col-md-4">
+            <a href="?category=consumer" class="btn btn-block btn-text" disabled>
+            <br>
+            <i class="fa fa-user-circle-o fa-4x"></i> <br>
+            <br>I want to <b>buy goods</b></a>
+            <br><br>
+        </div>
+    </div>
+
+   
+
+    {% if "category" in request.args %}
+
+     <br><br>
+    <h1>2. <b>Fill in your details below to sign up as a {{cat}}!</b></h1>
+
+    <br>
+
+
+
 		<form id="registerForm" class="form form-register" method="POST" action="" role="form">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+            <input type="hidden" name="category" value="{{cat}}"/>
+
+
             <div class="form-group">
                 {{form.username.label}}
                 {{form.username(placeholder="Username", class_="form-control")}}
+
+                <div class="alert alert-primary"><i class="fa fa-info-circle"></i> This will be the username that you sign in with</div>
             </div>
-            <div class="form-group">
-                {{form.surname.label}}
-                {{form.surname(placeholder="Surname", class_="form-control")}}
-            </div>
+            
             <div class="form-group">
                 {{form.first_name.label}}
                 {{form.first_name(placeholder="First Name", class_="form-control")}}
@@ -66,24 +121,44 @@
                 {{form.last_name.label}}
                 {{form.last_name(placeholder="Last Name", class_="form-control")}}
             </div>
-            <div class="form-group">
-                {{form.phone_number.label}}
-                {{form.phone_number(placeholder="Phone Number", class_="form-control")}}
-            </div>
+
             <div class="form-group">
                 {{form.email.label}}
                 {{form.email(placeholder="Email", class_="form-control")}}
             </div>
+
+
+            <div class="form-group">
+                {{form.phone_number.label}}
+                {{form.phone_number(placeholder="Phone Number", class_="form-control")}}
+
+                <div class="alert alert-primary"><i class="fa fa-info-circle"></i> We need your phone number and email to send you updates</div>
+
+            </div>
+
+            <div class="form-group">
+                {{form.region.label}}
+                {{form.region(placeholder="City or town", class_="form-control")}}
+
+                <div class="alert alert-primary"><i class="fa fa-info-circle"></i> We need to know where you are so we can show you content relevant to your location</div>
+
+            </div>
+            
             <div class="form-group">
                 {{form.password.label}}
                 {{form.password(placeholder="Password", class_="form-control")}}
             </div>
             <div class="form-group">
                 {{form.confirm.label}}
-                {{form.confirm(placeholder="Password (again)", class_="form-control")}}
+                {{form.confirm(placeholder="Password (confirm)", class_="form-control")}}
+
+                <div class="alert alert-primary"><i class="fa fa-info-circle"></i> Your password must be at least 6 characters</div>
+
             </div>
-            <p><input class="btn btn-success btn-lg btn-submit" type="submit" value="Register"></p>
+            <p><button class="btn btn-success btn-lg btn-submit btn-block" type="submit"><i class="fa fa-check-circle"></i> Create my account!</button></p>
     </form>
+
+    {% endif %}
 
 	</div>
 

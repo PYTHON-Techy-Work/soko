@@ -1,0 +1,70 @@
+{% set INCLUDE_DATATABLES = True %}
+{% extends "layout.html" %}
+{% block content %}
+   
+
+<div class="container-narrow">
+  <h1>Editing {% if user == current_user %}my profile {% else %}{{user.username}}{% endif %}</h1>
+    <br/>
+<form id="registerForm" class="form form-register" method="POST" action="" role="form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+    <input type="hidden" name="category" value="{{cat}}"/>
+
+
+    <div class="form-group">
+        {{form.username.label}}
+        {{form.username(placeholder="Username", class_="form-control", value=user.username, readonly=True)}}
+
+        <div class="alert alert-primary"><i class="fa fa-info-circle"></i> This is the username that {% if user == current_user %}you{% else %}this user uses to{% endif %} sign in with. It cannot be modified.</div>
+    </div>
+    
+    <div class="form-group">
+        {{form.first_name.label}}
+        {{form.first_name(placeholder="First Name", class_="form-control",value=user.first_name,)}}
+    </div>
+    <div class="form-group">
+        {{form.last_name.label}}
+        {{form.last_name(placeholder="Last Name", class_="form-control",value=user.last_name,)}}
+    </div>
+
+    <div class="form-group">
+        {{form.email.label}}
+        {{form.email(placeholder="Email", class_="form-control",value=user.email,)}}
+    </div>
+
+
+    <div class="form-group">
+        {{form.phone_number.label}}
+        {{form.phone_number(placeholder="Phone Number", class_="form-control",value=user.phone_number,)}}
+
+    </div>
+
+    <div class="form-group">
+        {{form.region.label}}
+        {{form.region(placeholder="Region", class_="form-control",value=user.region)}}
+
+    </div>
+
+    <br><br>
+
+            <div class="alert alert-warning"><i class="fa fa-info-circle"></i> To change the password, input a new password below. </div>
+
+    
+    <div class="form-group">
+        {{form.password.label}}
+        {{form.password(placeholder="Password", class_="form-control")}}
+    </div>
+    <div class="form-group">
+        {{form.confirm.label}}
+        {{form.confirm(placeholder="Password (confirm)", class_="form-control")}}
+
+        <div class="alert alert-primary"><i class="fa fa-info-circle"></i> Your password must be at least 6 characters</div>
+
+    </div>
+    <p><button class="btn btn-success btn-lg btn-submit btn-block" type="submit"><i class="fa fa-check-circle"></i> Update profile</button></p>
+    </form>
+</div>
+
+{% endblock %}
+

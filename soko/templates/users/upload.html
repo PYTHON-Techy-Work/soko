@@ -1,0 +1,20 @@
+{% set INCLUDE_DATATABLES = True %}
+{% extends "layout.html" %}
+{% block content %}
+   
+
+<div class="container-narrow">
+  <h1>Upload documents</h1>
+  <p>Using this page, you can upload a document to be viewed by the Soko team</p>
+<form id="registerForm" class="form form-register" method="POST" action="" role="form" enctype=multipart/form-data>
+
+    <div class="form-group">
+        
+    <input type="file" class="form-control" name="file">
+    </div>
+    <p><button class="btn btn-success btn-lg btn-submit btn-block" type="submit"><i class="fa fa-check-circle"></i> Upload now</button></p>
+    </form>
+</div>
+
+{% endblock %}
+
