@@ -69,7 +69,6 @@ def login():
     if registered_user is None:
         status = {'status': 'failure', 'message': 'Username does not exist. Register'}
     else:
-<<<<<<< HEAD
         if bcrypt.check_password_hash(registered_user.password, password):
             registered_user.token = uuid.uuid4()
             db.session.add(registered_user)
@@ -79,16 +78,7 @@ def login():
             status = {'status': 'success', 'message': userdata}
         else:
             status = {'status': 'failure', 'message': 'Password is invalid'}
-=======
-        if registered_user.check_password(password):
-            registered_user.token = uuid.uuid4()
-            db.session.add(registered_user)
-            db.session.commit()
-            login_user(registered_user)
-            status = {'status': 'success', 'message': 'success'}
-        else:
-            status = {'status': 'faillure', 'message': 'Password is invalid'}
->>>>>>> f0cfcc62401b5bce7931ecc32c503d4703075d1d
+
     return jsonify(status)
 
 
