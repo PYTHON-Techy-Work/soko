@@ -27,6 +27,9 @@ class Product(SurrogatePK, Model):
     def __repr__(self):
         return '<Product %r>' % self.name + self.farmer + self.description + self.price + self.quantity
 
+    def serialize(self):
+        return {"id": self.id, "name": self.name, "farmer": self.farmer, "description": self.description, "price": self.quantity, "type": self.type}
+
 
 class ProductType(SurrogatePK, Model):
     __tablename__ = 'product_types'
@@ -37,7 +40,10 @@ class ProductType(SurrogatePK, Model):
         self.name = name
 
     def __repr__(self):
-        return '<Product %r>' % self.user
+        return '<Product Type %r>' % self.name
+
+    def serialize(self):
+        return {"id": self.id, "name": self.name}
 
 
 class ProductRatings(SurrogatePK, Model):

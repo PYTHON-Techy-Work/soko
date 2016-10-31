@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 """The app module, containing the app factory function."""
 from flask import Flask, render_template
+from flask_cors import CORS, cross_origin
 
 from soko import commands, public, user, products, \
                     farmer, transporter, vehicle, api, customer
 from assets import assets
 from extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
 from settings import ProdConfig
+
 
 
 def create_app(config_object=ProdConfig):
@@ -16,6 +18,7 @@ def create_app(config_object=ProdConfig):
     """
     app = Flask(__name__)
     app.config.from_object(config_object)
+    # app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     register_extensions(app)
     register_blueprints(app)
     register_errorhandlers(app)
@@ -27,6 +30,7 @@ def create_app(config_object=ProdConfig):
 def register_extensions(app):
     """Register Flask extensions."""
     assets.init_app(app)
+    CORS(app)
     bcrypt.init_app(app)
     cache.init_app(app)
     db.init_app(app)

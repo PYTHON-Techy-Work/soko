@@ -32,30 +32,34 @@ def get_users():
 @csrf_protect.exempt
 @blueprint.route('/register', methods=['POST'])
 def reg_user():
+    active = 'Yes'
+    is_admin = 'No'
+    token = ''
     data = request.json
+    print data
     user = User(
         username=data['username'],
-        surname=data['surname'],
-        first_name=data['first_name'],
-        last_name=data['last_name'],
         email=data['email'],
         password=data['password'],
+        first_name=data['first_name'],
+        last_name=data['last_name'],
         phone_number=data['phone_number'],
-        is_admin=data['is_admin'],
-        active=data['active'],
-        token=data['token'],
-        category=data['category']
+        is_admin=is_admin,
+        active=active,
+        token=token,
+        category=data['category'],
+        region=data['region']
     )
     try:
         db.session.add(user)
         db.session.commit()
         status = {'status': 'success', 'message': 'user registered successfully'}
+        print status
     except:
-        status = 'the user is already registered'
+        status ={'status': 'failure', 'message': 'the user is already registered'}
     db.session.close()
-    return jsonify({'result': status})
-
-
+    print status
+    return jsonify(status)
 
 
 # login api
@@ -83,7 +87,50 @@ def login():
 
 
 # api for all the product types
-@blueprint.route('/products', methods=["GET"])
+@blueprint.route('/get_product_types', methods=["GET"])
 def get_product_types():
-    product_types = ProductType.query.get
-    return jsonify(product_types)
+    ret = []
+    product_types = ProductType.query.all()
+    for pt in product_types:
+        ret.append(pt.serialize())
+    return jsonify(data=ret)
+
+
+@csrf_protect.exempt
+@blueprint.route('/insert_product_type', methods=["POST"])
+def put_product_types():
+    data = request.json
+    product_type = ProductType(
+        name=data['name']
+    )
+    try:
+        db.session.add(product_type)
+        db.session.commit()
+        status = {'status': 'success', 'message': 'product type added successfully'}
+    except:
+        status = 'the product type  is already registered'
+    db.session.close()
+    return jsonify({'result': status})
+
+# api to add products
+@csrf_protect.exempt
+@blueprint.route('/add_products', methods=["POST"])
+def add_products():
+    data = request.json
+    print data
+    product = Product(
+        name=data['name'],
+        type=data['type'],
+        description=data['description'],
+        price=data['description'],
+        quantity=data['quantity'],
+        photo=data['photo']
+    )
+    try:
+        db.session.add(product)
+        db.session.commit()
+        status = {'status': 'success', 'message': 'product type added successfully'}
+    except:
+        status = 'the product type  is already registered'
+    db.session.close()
+    return jsonify({'result': status})
