@@ -3,6 +3,8 @@ from flask_login import login_required, login_user, logout_user
 from flask_restful import reqparse
 from sqlalchemy import orm
 
+from werkzeug.utils import secure_filename
+
 from soko.user.models import User
 from soko.transporter.models import Transporter
 from soko.farmer.models import Farmer
@@ -13,6 +15,9 @@ from soko.utils import flash_errors
 from soko.extensions import csrf_protect, bcrypt
 
 import uuid
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
+
 
 blueprint = Blueprint('api', __name__, url_prefix='/api/v1')
 
@@ -113,25 +118,38 @@ def put_product_types():
     db.session.close()
     return jsonify({'result': status})
 
+
+# checking for the file extensions
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+
 # api to add products
 @csrf_protect.exempt
 @blueprint.route('/add_products', methods=["POST"])
 def add_products():
-    data = request.json
-    print data
-    product = Product(
-        name=data['name'],
-        type=data['type'],
-        description=data['description'],
-        price=data['price'],
-        quantity=data['quantity'],
-        photo=data['photo']
-    )
+    photo = request.files.get("photo")
+    print request.files.keys()
+    if photo and allowed_file(photo.filename):
+        filename = secure_filename(photo.filename)
+        path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        photo.save(path)
+        print filename
+        product = Product(
+            name=request.form['name'],
+            product_type_id=request.form['product_type_id'],
+            description=request.form['description'],
+            price=request.form['price'],
+            quantity=request.form['quantity'],
+            photo=filename
+        )
     try:
         db.session.add(product)
         db.session.commit()
         status = {'status': 'success', 'message': 'product type added successfully'}
-    except:
-        status = 'the product type  is already registered'
+    except Exception, e:
+        status = {'status': 'failure', 'message': 'there was a problem adding a new product'}
+        print e
     db.session.close()
-    return jsonify({'result': status})
+    return jsonify(status)

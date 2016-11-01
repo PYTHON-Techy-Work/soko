@@ -7,25 +7,26 @@ class Product(SurrogatePK, Model):
     """A Products of the app."""
     __tablename__ = 'products'
     name = Column(db.String(80), nullable=False)
-    type_id = reference_col('product_types', nullable=False)
-    type = relationship('ProductType', backref='products')
+    product_type_id = reference_col('product_types', nullable=False)
+    product_type = relationship('ProductType', backref='products')
+    user_id = reference_col('users', nullable=False)
+    user = relationship('User', backref='products')
     description = Column(db.String(80), nullable=False)
     price = Column(db.Numeric(15, 2), nullable=False)
     quantity = Column(db.String(80), nullable=False)
     photo = Column(db.String(80), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, name, farmer, product_type, description, price, quantity, photo):
+    def __init__(self, name,  product_type_id, description, price, quantity, photo):
         self.name = name
-        self.farmer = farmer
-        self.product_type = product_type
+        self.product_type_id = product_type_id
         self.description = description
         self.price = price
         self.quantity = quantity
         self.photo = photo
 
     def __repr__(self):
-        return '<Product %r>' % self.name + self.farmer + self.description + self.price + self.quantity
+        return '<Product %r>' % self.name + self.product_type + self.description + self.price + self.quantity + self.photo
 
     def serialize(self):
         return {"id": self.id, "name": self.name, "farmer": self.farmer, "description": self.description, "price": self.quantity, "type": self.type}
