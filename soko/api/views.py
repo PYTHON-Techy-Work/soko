@@ -14,6 +14,10 @@ from soko.database import db
 from soko.utils import flash_errors
 from soko.extensions import csrf_protect, bcrypt
 
+import os
+from flask import current_app as app
+
+
 import uuid
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
