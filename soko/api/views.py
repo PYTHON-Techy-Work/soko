@@ -67,6 +67,7 @@ def reg_user():
 @blueprint.route('/login', methods=["POST"])
 def login():
     data = request.json
+    print data
     username = data['username']
     password = data['password']
     registered_user = User.query.filter_by(username=username).first()
@@ -122,7 +123,7 @@ def add_products():
         name=data['name'],
         type=data['type'],
         description=data['description'],
-        price=data['description'],
+        price=data['price'],
         quantity=data['quantity'],
         photo=data['photo']
     )
