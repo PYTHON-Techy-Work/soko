@@ -45,3 +45,4 @@ docs/_build
 # Virtualenvs
 env/
 /soko/settings.py
+/settings.py
