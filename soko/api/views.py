@@ -81,7 +81,7 @@ def login():
     password = data['password']
     registered_user = User.query.filter_by(username=username).first()
     if registered_user is None:
-        status = {'status': 'failure', 'message': 'Username does not exist. Register'}
+        status = {'status': 'failure', 'message': 'Invalid Username or password'}
     else:
         if bcrypt.check_password_hash(registered_user.password, password):
             registered_user.token = uuid.uuid4()
@@ -91,7 +91,7 @@ def login():
                         'category': registered_user.category}
             status = {'status': 'success', 'message': userdata}
         else:
-            status = {'status': 'failure', 'message': 'Password is invalid'}
+            status = {'status': 'failure', 'message': 'Invalid Username or password'}
 
     return jsonify(status)
 
@@ -134,6 +134,9 @@ def allowed_file(filename):
 @blueprint.route('/add_products', methods=["POST"])
 def add_products():
     photo = request.files.get("photo")
+    user = User.query.filter_by(token=request.form["token"]).first()
+    print user.id
+    user_id = user.id
     print request.files.keys()
     if photo and allowed_file(photo.filename):
         filename = secure_filename(photo.filename)
@@ -146,14 +149,26 @@ def add_products():
             description=request.form['description'],
             price=request.form['price'],
             quantity=request.form['quantity'],
-            photo=filename
+            photo=filename,
+            user_id=user_id
         )
     try:
         db.session.add(product)
         db.session.commit()
-        status = {'status': 'success', 'message': 'product type added successfully'}
+        status = {'status': 'success', 'message': 'product added'}
     except Exception, e:
-        status = {'status': 'failure', 'message': 'there was a problem adding a new product'}
+        status = {'status': 'failure', 'message': 'problem adding product'}
         print e
     db.session.close()
     return jsonify(status)
+
+
+# api to get all the products
+@blueprint.route('/get_products', methods=["GET"])
+def get_products():
+    ret = []
+    products = Product.query.all()
+    for pt in products:
+        ret.append(pt.serialize())
+    print ret
+    return jsonify(data=ret)

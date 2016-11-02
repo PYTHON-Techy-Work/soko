@@ -30,18 +30,25 @@ class Transporter(SurrogatePK, Model):
 
 class DiversLicence(SurrogatePK, Model):
     __tablename__ = 'drivers_licence'
-    number = Column(db.String(30), nullable=False)
     transporter_id = reference_col('transporters', nullable=True)
     transporter = relationship('Transporter', backref='drivers_licence')
-    licence_photo = Column(db.String(80), nullable=False)
-    expiry_date = Column(db.DateTime, nullable=False)
+    drivers_licence = Column(db.String(80), nullable=True)
+    dl_expiry_date = Column(db.DateTime, nullable=False)
+    national_id = Column(db.String(80), nullable=False)
+    good_conduct = Column(db.String(80), nullable=True)
+    pin_certificate = Column(db.String(80), nullable=True)
+    psv_drivers_licence = Column(db.String(80), nullable=False)
+    photo = Column(db.String(80), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, number, transporter, licence_photo, expiry_date):
-        self.number = number
+    def __init__(self, transporter, drivers_licence, dl_expiry_date, national_id, good_conduct, pin_certificate, psv_drivers_licence):
         self.transporter = transporter
-        self.licence_photo = licence_photo
-        self.expiry_date = expiry_date
+        self.drivers_licence = drivers_licence
+        self.dl_expiry_date = dl_expiry_date
+        self.national_id = national_id
+        self.good_conduct = good_conduct
+        self.pin_certificate = pin_certificate
+        self.psv_drivers_licence = psv_drivers_licence
 
     def __repr__(self):
-        return '<Drivers Licence %r>' % self.number + self.transporter + self.licence_photo + self.expiry_date
+        return '<Driver %r>' % self.transporter + self.drivers_licence + self.dl_expiry_date + self.national_id + self.good_conduct + self.pin_certificate + self.psv_drivers_licence
