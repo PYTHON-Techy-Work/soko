@@ -6,7 +6,7 @@ from sqlalchemy import orm
 from werkzeug.utils import secure_filename
 
 from soko.user.models import User
-from soko.transporter.models import Transporter
+from soko.transporter.models import Transporter, County
 from soko.farmer.models import Farmer
 from soko.customer.models import Customer
 from soko.products.models import Product, ProductType, ProductRatings
@@ -15,6 +15,8 @@ from soko.utils import flash_errors
 from soko.extensions import csrf_protect, bcrypt
 
 import os
+import base64
+import time
 from flask import current_app as app
 
 
@@ -87,9 +89,8 @@ def login():
             registered_user.token = uuid.uuid4()
             db.session.add(registered_user)
             db.session.commit()
-            userdata = {'username': registered_user.username, 'token': registered_user.token,
-                        'category': registered_user.category}
-            status = {'status': 'success', 'message': userdata}
+            status = {'status': 'success', 'message': 'welcome '+registered_user.first_name, 'token': registered_user.token,
+                      'username': registered_user.username, 'category': registered_user.category}
         else:
             status = {'status': 'failure', 'message': 'Invalid Username or password'}
 
@@ -128,28 +129,51 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
+# checking for the image extensions
+def guess_image_extension(fdata):
+    if fdata.startswith("data:image/jpeg"):
+        return "jpg"
+    return "png"
+
 
 # api to add products
 @csrf_protect.exempt
 @blueprint.route('/add_products', methods=["POST"])
 def add_products():
-    photo = request.files.get("photo")
-    user = User.query.filter_by(token=request.form["token"]).first()
-    print user.id
+    data = request.get_json(force=True)
+
+    if "photo" not in data:
+        return jsonify({'status': 'failure', 'message': 'you need to provide a photo'})
+
+    photo = data["photo"]
+
+    # need to de-base-64 the image, as it is passed as long string
+    photo_decoded = base64.decodestring(photo)
+
+    # we don't have a filename, so let's make a random one
+    path = os.path.join(app.config['UPLOAD_FOLDER'],
+                        "upload_" + str(int(time.time())) + "." + guess_image_extension(photo))
+
+    fp = open(path, 'wb')  # create a writable image and write the decoding result
+    fp.write(photo_decoded)
+    fp.close()
+
+    user = User.query.filter_by(token=data["token"]).first()
     user_id = user.id
-    print request.files.keys()
-    if photo and allowed_file(photo.filename):
-        filename = secure_filename(photo.filename)
-        path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        photo.save(path)
-        print filename
+
+    if "product_type_id" in data:
+        typeid = data['product_type_id']
+    else:
+        typeid = ProductType.query.first().id
+
+    if photo:
         product = Product(
-            name=request.form['name'],
-            product_type_id=request.form['product_type_id'],
-            description=request.form['description'],
-            price=request.form['price'],
-            quantity=request.form['quantity'],
-            photo=filename,
+            name=data['name'],
+            product_type_id=typeid,
+            description=data['description'],
+            price=data['price'],
+            quantity=data['quantity'],
+            photo=path,
             user_id=user_id
         )
     try:
@@ -172,3 +196,33 @@ def get_products():
         ret.append(pt.serialize())
     print ret
     return jsonify(data=ret)
+
+
+# api for all the counties
+@blueprint.route('/get_counties', methods=["GET"])
+def get_counties():
+    ret = []
+    counties = County.query.all()
+    for pt in counties:
+        ret.append(pt.serialize())
+    return jsonify(data=ret)
+
+
+# api to add products
+@csrf_protect.exempt
+@blueprint.route('/add_county', methods=["POST"])
+def add_county():
+    data = request.json
+    print data
+    county = County(
+        name=data['name']
+    )
+    try:
+        db.session.add(county)
+        db.session.commit()
+        status = {'status': 'success', 'message': 'county added'}
+    except Exception, e:
+        status = {'status': 'failure', 'message': 'problem adding county'}
+        print e
+    db.session.close()
+    return jsonify(status)

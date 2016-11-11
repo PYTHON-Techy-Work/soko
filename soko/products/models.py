@@ -15,7 +15,7 @@ class Product(SurrogatePK, Model):
     description = Column(db.String(80), nullable=False)
     price = Column(db.Numeric(15, 2), nullable=False)
     quantity = Column(db.String(80), nullable=False)
-    photo = Column(db.String(80), nullable=False)
+    photo = Column(db.String(500), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
     def __init__(self, name,  product_type_id, description, price, quantity, photo, user_id):
