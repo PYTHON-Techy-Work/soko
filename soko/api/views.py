@@ -151,8 +151,8 @@ def add_products():
     photo_decoded = base64.decodestring(photo)
 
     # we don't have a filename, so let's make a random one
-    path = os.path.join(app.config['UPLOAD_FOLDER'],
-                        "upload_" + str(int(time.time())) + "." + guess_image_extension(photo))
+    filename = "upload_" + str(int(time.time())) + "." + guess_image_extension(photo)
+    path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
     fp = open(path, 'wb')  # create a writable image and write the decoding result
     fp.write(photo_decoded)
@@ -173,7 +173,7 @@ def add_products():
             description=data['description'],
             price=data['price'],
             quantity=data['quantity'],
-            photo=path,
+            photo=filename,
             user_id=user_id
         )
     try:
@@ -196,6 +196,25 @@ def get_products():
         ret.append(pt.serialize())
     print ret
     return jsonify(data=ret)
+
+
+# api to edit products
+@csrf_protect.exempt
+@blueprint.route('/edit_products', method=["POST"])
+def edit_products():
+    data = request.json
+    print data
+    if data:
+        user = User.query.filter_by(token=data["token"]).first()
+
+    if user.id:
+        product = Product.query.first().id(data["id"])
+        status = {'status': 'success', 'message': product}
+    else:
+        status = {'status': 'failure','message': 'error!'}
+
+    print status
+    return jsonify(status)
 
 
 # api for all the counties
