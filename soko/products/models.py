@@ -1,3 +1,4 @@
+from flask import url_for
 import datetime as dt
 import decimal
 
@@ -27,8 +28,8 @@ class Product(SurrogatePK, Model):
         self.photo = photo
         self.user_id = user_id
 
-    def __repr__(self):
-        return '<Product %r>' % self.name + self.product_type_id + self.description + self.price + self.quantity + self.photo + self.user_id
+    # def __repr__(self):
+    #     return '<Product %r>' % self.name
 
     def serialize(self):
         return {"id": self.id, "name": self.name, "photo": self.photo, "description": self.description, "farmer": self.user_id, "product_type":self.product_type_id, "price": float(self.price)}

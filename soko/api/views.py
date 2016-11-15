@@ -173,7 +173,7 @@ def add_products():
             description=data['description'],
             price=data['price'],
             quantity=data['quantity'],
-            photo=filename,
+            photo=url_for('static', filename='uploads/'+filename),
             user_id=user_id
         )
     try:
@@ -195,25 +195,27 @@ def get_products():
     for pt in products:
         ret.append(pt.serialize())
     print ret
+    print url_for('static', filename='uploads/tomatoes.jpg')
     return jsonify(data=ret)
 
 
 # api to edit products
 @csrf_protect.exempt
-@blueprint.route('/edit_products', method=["POST"])
+@blueprint.route('/edit_products', methods=["POST"])
 def edit_products():
     data = request.json
+    ret = []
     print data
     if data:
         user = User.query.filter_by(token=data["token"]).first()
 
     if user.id:
-        product = Product.query.first().id(data["id"])
-        status = {'status': 'success', 'message': product}
+        product = Product.query.get(data["id"])
+        ret.append(product.serialize())
+        status = {'status': 'success', 'message': ret}
     else:
-        status = {'status': 'failure','message': 'error!'}
+        status = {'status': 'failure', 'message': 'error!'}
 
-    print status
     return jsonify(status)
 
 
