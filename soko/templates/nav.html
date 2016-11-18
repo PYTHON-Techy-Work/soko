@@ -21,10 +21,17 @@
       <div class="menu-section">
         <h3>{{current_user.category}}</h3>
         <ul>
-          <li>
-            <a href="/">
+          <li {% if request.url.find("dashboard") >= 0 %}class="active" {% endif %}>
+            <a href="/users/dashboard">
               <i class="ion-arrow-graph-up-right"></i> 
               <span>Dashboard</span>
+            </a>
+          </li>
+
+          <li {% if request.url.find("map") >= 0 %}class="active" {% endif %}>
+            <a href="/users/locations/map">
+              <i class="ion-location"></i> 
+              <span>Map</span>
             </a>
           </li>
 

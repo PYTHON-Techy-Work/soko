@@ -98,3 +98,22 @@ def view_documents():
     if request.method == "GET":
         return render_template('users/documents.html', documents=Document.query.all())
 
+
+
+
+
+
+@blueprint.route('/dashboard', methods=["GET"])
+@login_required
+def dashboard():
+    if request.method == "GET":
+        return render_template('users/dashboard.html')
+
+
+
+@blueprint.route('/locations/map', methods=["GET"])
+@login_required
+def locations_map():
+    if request.method == "GET":
+        return render_template('users/locations_map.html')
+

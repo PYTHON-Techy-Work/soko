@@ -27,10 +27,17 @@
   <script src="/static/js/vendor/bootstrap-datepicker.js"></script>
   <script src="/static/js/vendor/jquery.validate.min.js"></script>
   <script src="/static/js/vendor/summernote.min.js"></script>
+  <script src="/static/js/vendor/moment.min.js"></script>
   <script src="/static/js/vendor/jquery.raty.js"></script>
   <script src="/static/js/vendor/jquery.cookie.js"></script>
   <script src="/static/js/vendor/jquery.minicolors.min.js"></script>
   <script src="/static/js/vendor/jquery.maskedinput.js"></script>
+
+
+  <script src="/static/js/vendor/jquery.flot/jquery.flot.js"></script>
+  <script src="/static/js/vendor/jquery.flot/jquery.flot.time.js"></script>
+  <script src="/static/js/vendor/jquery.flot/jquery.flot.tooltip.js"></script>
+
   <script src="/static/js/theme.js"></script>
 
   <script src="https://use.fontawesome.com/e618dce52b.js"></script>
@@ -114,7 +121,6 @@
 
 <!-- JavaScript at the bottom for fast page loading -->
 {% assets "js_all" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% if INCLUDE_DATATABLES %}
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>

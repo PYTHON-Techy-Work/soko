@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block content %}
+   
+
+<style>
+       #map {
+        height: 400px;
+        width: 100%;
+        border:1px solid #eee;
+       }
+    </style>
+
+<div class="content">
+  <h1><i class="ion-location"></i> User Map</h1>
+  <p>Current location of other Soko Mkononi users</p>
+
+</div>
+
+<div id="map"></div>
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJVhOd8TXT2BRxv-nl9n8oiusgjUxbBRw&callback=initMap">
+</script>
+
+<script type="text/javascript">
+    
+function initMap() {
+
+    $("#map").css("height", $(window).height() - 300 + "px");
+
+    var center = {lat: -1.2921, lng: 36.8219};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 16,
+    center: center
+  });
+
+    var infowindow = new google.maps.InfoWindow({
+        content: "User: Test<br>Last updated: 60s ago"
+      });
+
+  var marker = new google.maps.Marker({
+    position: center,
+    map: map,
+    title: 'Test User'
+  });
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });
+
+
+
+
+}
+
+
+</script>
+
+{% endblock %}
+

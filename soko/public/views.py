@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Public section, including homepage and signup."""
 from flask import Blueprint, flash, redirect, render_template, request, url_for
-from flask_login import login_required, login_user, logout_user
+from flask_login import login_required, login_user, logout_user, current_user
 
 from soko.extensions import login_manager
 from soko.public.forms import LoginForm
@@ -21,13 +21,16 @@ def load_user(user_id):
 @blueprint.route('/', methods=['GET', 'POST'])
 def home():
     """Home page."""
+    if current_user.is_authenticated:
+        return redirect("/users/dashboard")
+
     form = LoginForm(request.form)
     # Handle logging in
     if request.method == 'POST':
         if form.validate_on_submit():
             login_user(form.user)
             flash('You are logged in.', 'success')
-            redirect_url = request.args.get("next") or url_for('user.members')
+            redirect_url = request.args.get("next") or url_for('user.dashboard')
             return redirect(redirect_url)
         else:
             flash_errors(form)
