@@ -10,6 +10,7 @@ from soko.transporter.models import Transporter, County
 from soko.farmer.models import Farmer
 from soko.customer.models import Customer
 from soko.products.models import Product, ProductType, ProductRatings
+from soko.locations.models import Locations
 from soko.database import db
 from soko.utils import flash_errors
 from soko.extensions import csrf_protect, bcrypt
@@ -129,6 +130,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
+
 # checking for the image extensions
 def guess_image_extension(fdata):
     if fdata.startswith("data:image/jpeg"):
@@ -173,7 +175,7 @@ def add_products():
             description=data['description'],
             price=data['price'],
             quantity=data['quantity'],
-            photo=url_for('static', filename='uploads/'+filename),
+            photo=filename,
             user_id=user_id
         )
     try:
@@ -246,4 +248,47 @@ def add_county():
         status = {'status': 'failure', 'message': 'problem adding county'}
         print e
     db.session.close()
+    return jsonify(status)
+
+#get maps api
+@csrf_protect.exempt
+@blueprint.route('/post_maps', methods=["POST"])
+def get_maps():
+    data = request.json
+    print data
+    if data:
+        user = User.query.filter_by(token=data["token"]).first()
+        location = Locations(
+            user=user.id,
+            latitude=data['lat'],
+            longitude=data['lng']
+        )
+    try:
+        db.session.add(location)
+        db.session.commit()
+        status = {'status': 'success', 'message': 'location added'}
+    except Exception, e:
+        status = {'status': 'failure', 'message': 'problem saving location'}
+        print e
+    db.session.close()
+    return jsonify(status)
+
+
+#send maps api
+@blueprint.route('/send_maps', methods=["GET"])
+def send_maps():
+    data = request.args
+    print data
+    ret = []
+    if data:
+        user = User.query.filter_by(token=data["token"]).first()
+        if user:
+            locations = Locations.query.all()
+            for pt in locations:
+                ret.append(pt.serialize())
+            status ={'message': 'success', 'data': ret}
+        else:
+            status = {'message': 'failure', 'data': 'no riders at this time'}
+    else:
+        status = {'message': 'failure', 'data': 'no riders at this time'}
     return jsonify(status)

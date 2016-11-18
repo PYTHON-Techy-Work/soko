@@ -4,7 +4,7 @@ from flask import Flask, render_template
 from flask_cors import CORS, cross_origin
 
 from soko import commands, public, user, products, \
-                    farmer, transporter, vehicle, api, customer
+                    farmer, transporter, vehicle, api, customer, locations
 from assets import assets
 from extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
 from settings import ProdConfig
