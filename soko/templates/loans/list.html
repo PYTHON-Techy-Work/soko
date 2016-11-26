@@ -1,0 +1,49 @@
+{% set INCLUDE_DATATABLES = True %}
+{% extends "layout.html" %}
+{% block content %}
+    <h3>All loans</h3>
+
+    <table class="table table-striped datatable">
+        <thead>
+            <th>#</th>
+            <th>Description</th>
+            <th>User</th>
+            <th>Total (KES)</th>
+            <th>Paid to date (KES)</th>
+            <th>Issued on</th>
+            <th>Due on</th>
+            <th>Status</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for i in loans %}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.user.email}}</td>
+                    <td>{{i.total}}</td>
+                    <td>{{i.paid}}</td>
+                    <td>{{i.created_on}}</td>
+                    <td>{{i.due_on}}</td>
+                    <td>{{i.get_status_name()}}</td>
+                    <td><a href="/loans/edit/{{i.id}}">Edit</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary btn-lg" href="/loans/edit/new"><i class="fa fa-plus"></i> Add new</a>
+{% endblock %}
+
+{% block js %}
+<script>
+$(function() {
+    $('.datatable').dataTable({
+        "sPaginationType": "full_numbers",
+        "iDisplayLength": 20,
+        "aLengthMenu": [[20, 50, 100, -1], [20, 50, 100, "All"]]
+    });
+});
+</script>
+{% endblock %}
+

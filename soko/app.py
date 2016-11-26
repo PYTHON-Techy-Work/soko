@@ -4,7 +4,8 @@ from flask import Flask, render_template
 from flask_cors import CORS, cross_origin
 
 from soko import commands, public, user, products, \
-                    farmer, transporter, vehicle, api, customer, locations
+                    farmer, transporter, vehicle, api, customer, \
+                    loans
 from assets import assets
 from extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
 from settings import ProdConfig
@@ -48,6 +49,7 @@ def register_blueprints(app):
     app.register_blueprint(public.views.blueprint)
     app.register_blueprint(user.views.blueprint)
     app.register_blueprint(api.views.blueprint)
+    app.register_blueprint(loans.views.blueprint)
 
     return None
 

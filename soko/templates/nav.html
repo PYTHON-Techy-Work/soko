@@ -65,6 +65,19 @@
       </div>
 
       <div class="menu-section">
+        <h3>Loans</h3>
+        <ul>
+          <li {% if request.url.find("loans") >= 0 and not request.url.find("edit") >= 0 %}class="active" {% endif %}>
+            <a href="/loans">
+              <i class="fa fa-usd"></i> 
+              <span>View all</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+
+      <div class="menu-section">
         <h3>Documents</h3>
         <ul>
           <li {% if request.url.find("users/documents") >= 0 and not request.url.find("upload") >= 0 %}class="active" {% endif %}>

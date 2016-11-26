@@ -1,0 +1,51 @@
+{% set INCLUDE_DATATABLES = True %}
+{% extends "layout.html" %}
+{% block content %}
+   
+
+<div class="container-narrow">
+  <h1>Editing loan #{{loan.id}}</h1>
+    <br/>
+<form id="loanForm" class="form form-loan" method="POST" action="" role="form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+
+    <div class="form-group">
+        {{form.name.label}} -- description of this loan
+        {{form.name(placeholder="Name", class_="form-control", value=loan.name)}}
+    </div>
+
+     <div class="form-group">
+        {{form.user.label}} -- the Soko user this loan is issued to
+        {{form.user(placeholder="For", class_="form-control", value=loan.user_id)}}
+    </div>
+
+
+    <div class="form-group">
+        {{form.created_on.label}} -- when it was created
+        {{form.created_on(placeholder="Created On", class_="form-control", value=loan.created_on.strftime("%Y-%m-%d"))}}
+    </div>
+
+    <div class="form-group">
+        {{form.due_on.label}} -- when it's due
+        {{form.due_on(placeholder="Due On", class_="form-control", value=loan.due_on.strftime("%Y-%m-%d"))}}
+    </div>
+
+    <div class="form-group">
+        {{form.total.label}} -- amount in KSH loaned
+        {{form.total(placeholder="Total Loan Amount", class_="form-control", value=loan.total or "")}}
+    </div>
+
+    <div class="form-group">
+        {{form.paid.label}} -- amount in KSH paid back so far
+        {{form.paid(placeholder="Total Loan Amount", class_="form-control", value=loan.paid or "")}}
+    </div>
+
+
+
+    <p><button class="btn btn-success btn-lg btn-submit btn-block" type="submit"><i class="fa fa-check-circle"></i> Confirm</button></p>
+    </form>
+</div>
+
+{% endblock %}
+
