@@ -20,9 +20,6 @@ class Loan(SurrogatePK, Model):
 
     total = Column(db.Integer)
     paid = Column(db.Integer)
-    total = Column(db.Integer)
-    total = Column(db.Integer)
-
 
     def get_status_name(self):
         # TODO: figure out the status
