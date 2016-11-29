@@ -9,7 +9,7 @@ from soko.user.models import User
 from soko.transporter.models import Transporter, County
 from soko.farmer.models import Farmer
 from soko.customer.models import Customer
-from soko.products.models import Product, ProductType, ProductRatings
+from soko.products.models import Product, ProductType, ProductRatings, Cart
 from soko.locations.models import Locations
 from soko.database import db
 from soko.utils import flash_errors
@@ -20,11 +20,9 @@ import base64
 import time
 from flask import current_app as app
 
-
 import uuid
+
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
-
-
 
 blueprint = Blueprint('api', __name__, url_prefix='/api/v1')
 
@@ -68,7 +66,7 @@ def reg_user():
         status = {'status': 'success', 'message': 'user registered successfully'}
         print status
     except:
-        status ={'status': 'failure', 'message': 'the user is already registered'}
+        status = {'status': 'failure', 'message': 'the user is already registered'}
     db.session.close()
     print status
     return jsonify(status)
@@ -90,7 +88,8 @@ def login():
             registered_user.token = uuid.uuid4()
             db.session.add(registered_user)
             db.session.commit()
-            status = {'status': 'success', 'message': 'welcome '+registered_user.first_name, 'token': registered_user.token,
+            status = {'status': 'success', 'message': 'welcome ' + registered_user.first_name,
+                      'token': registered_user.token,
                       'username': registered_user.username, 'category': registered_user.category}
         else:
             status = {'status': 'failure', 'message': 'Invalid Username or password'}
@@ -197,7 +196,6 @@ def get_products():
     for pt in products:
         ret.append(pt.serialize())
     print ret
-    print url_for('static', filename='uploads/tomatoes.jpg')
     return jsonify(data=ret)
 
 
@@ -250,7 +248,8 @@ def add_county():
     db.session.close()
     return jsonify(status)
 
-#get maps api
+
+# get maps api
 @csrf_protect.exempt
 @blueprint.route('/post_maps', methods=["POST"])
 def get_maps():
@@ -274,7 +273,7 @@ def get_maps():
     return jsonify(status)
 
 
-#send maps api
+# send maps api
 @blueprint.route('/send_maps', methods=["GET"])
 def send_maps():
     data = request.args
@@ -286,9 +285,64 @@ def send_maps():
             locations = Locations.query.all()
             for pt in locations:
                 ret.append(pt.serialize())
-            status ={'message': 'success', 'data': ret}
+            status = {'message': 'success', 'data': ret}
         else:
             status = {'message': 'failure', 'data': 'no riders at this time'}
     else:
         status = {'message': 'failure', 'data': 'no riders at this time'}
     return jsonify(status)
+
+
+# get to cart
+@blueprint.route('/get_cart_items', methods=["GET"])
+def get_cart_items():
+    data = request.args
+    ret = []
+    print data["token"]
+    if data:
+        user = User.query.filter_by(token=data["token"]).first()
+        if user:
+            cart = Cart.query.all()
+            for pt in cart:
+                ret.append(pt.serialize())
+            print ret
+            status = {'status': 'success', 'data': ret}
+        else:
+            status = {'status': 'failure', 'message': 'Error!'}
+    return jsonify(status)
+
+
+# add to cart
+@csrf_protect.exempt
+@blueprint.route('/add_to_cart', methods=["POST"])
+def add_to_cart():
+    data = request.json
+    print data
+    if data:
+        user = User.query.filter_by(token=data["token"]).first()
+        print user.id
+        if user:
+            product = Product.query.filter_by(id=data["product"]).first();
+            print product.price
+            cart = Cart(
+                user=user.id,
+                product_id=data['product'],
+                quantity=data['quantity'],
+                total=data['quantity']*product.price
+            )
+            try:
+                db.session.add(cart)
+                db.session.commit()
+                status = {'status': 'success', 'message': 'product added to cart'}
+
+            except Exception, e:
+                status = {'status': 'failure', 'message': 'problem adding product to cart'}
+                print e
+            db.session.close()
+        else:
+            status = {'status': 'failure', 'message': 'Error!'}
+    else:
+        status = {'status': 'failure', 'message': 'Error!'}
+    return jsonify(status)
+
+
