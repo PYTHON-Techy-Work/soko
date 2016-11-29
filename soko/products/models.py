@@ -69,8 +69,8 @@ class Cart(SurrogatePK, Model):
     __tablename__ = 'cart'
     product_id = reference_col('products', nullable=False)
     product = relationship('Product', backref='cart')
-    user = Column(db.Integer, nullable=False),
-    quantity = Column(db.Integer, nullable=False),
+    user = Column(db.Integer, nullable=False)
+    quantity = Column(db.Integer, nullable=False)
     total = Column(db.Numeric(15, 2), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
