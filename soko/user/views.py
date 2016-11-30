@@ -94,7 +94,14 @@ def download_document(fid, fname):
 @blueprint.route('/documents', methods=["GET"])
 @login_required
 def view_documents():
+    if request.method == "GET":
+        return render_template('users/documents.html', documents=Document.query.filter_by(user=current_user))
 
+
+
+@blueprint.route('/documents/admin', methods=["GET"])
+@login_required
+def view_documents_admin():
     if request.method == "GET":
         return render_template('users/documents.html', documents=Document.query.all())
 

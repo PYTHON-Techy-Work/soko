@@ -11,35 +11,57 @@
 
 
     <div class="form-group">
-        {{form.name.label}} -- description of this loan
-        {{form.name(placeholder="Name", class_="form-control", value=loan.name)}}
+        {{form.name.label}} -- the reason for this loan
+        {{form.name(placeholder="Description", class_="form-control", value=loan.name)}}
     </div>
+
+    {% if is_admin %}
 
      <div class="form-group">
         {{form.user.label}} -- the Soko user this loan is issued to
         {{form.user(placeholder="For", class_="form-control", value=loan.user_id)}}
     </div>
 
-
     <div class="form-group">
         {{form.created_on.label}} -- when it was created
         {{form.created_on(placeholder="Created On", class_="form-control", value=loan.created_on.strftime("%Y-%m-%d"))}}
     </div>
 
+    
+
+    {% endif %}
+
     <div class="form-group">
-        {{form.due_on.label}} -- when it's due
+        {{form.due_on.label}} -- when this loan will be paid back by
         {{form.due_on(placeholder="Due On", class_="form-control", value=loan.due_on.strftime("%Y-%m-%d"))}}
     </div>
 
+
     <div class="form-group">
-        {{form.total.label}} -- amount in KSH loaned
+        {{form.total.label}} -- amount in KSH {% if loan.is_approved() %}loaned{% else %}requested{%endif %}
         {{form.total(placeholder="Total Loan Amount", class_="form-control", value=loan.total or "")}}
+    </div>
+
+    {% if is_admin %}
+
+     <div class="form-group"> 
+        {{form.status.label}} -- status of this loan
+        {{form.status(placeholder="Status", class_="form-control")}}
     </div>
 
     <div class="form-group">
         {{form.paid.label}} -- amount in KSH paid back so far
-        {{form.paid(placeholder="Total Loan Amount", class_="form-control", value=loan.paid or "")}}
+        {{form.paid(placeholder="Total Loan Amount", class_="form-control", value=loan.paid or "0")}}
     </div>
+
+    {% else %}
+
+    <input type="hidden" name="user" value="{{current_user.id}}">
+
+    {% endif %}
+
+
+
 
 
 

@@ -13,10 +13,12 @@ class LoanForm(Form):
     name = StringField('Description',
                            validators=[DataRequired(), Length(min=1)])
     user = SelectField('User', coerce=int)
-    created_on = DateField('Created On',validators=[DataRequired()])
+    created_on = DateField('Created On',validators=[])
     due_on = DateField('Due On',validators=[DataRequired()])
     total = IntegerField('Total',validators=[DataRequired()])
-    paid = IntegerField('Paid',validators=[DataRequired()])
+    paid = IntegerField('Paid',validators=[])
+    status = SelectField('Status',validators=[], 
+                choices=[('0', 'Pending'), ('1', 'Denied'), ('2', 'Approved'), ('3', 'Paid')])
 
 
     def __init__(self, *args, **kwargs):

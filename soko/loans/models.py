@@ -21,9 +21,50 @@ class Loan(SurrogatePK, Model):
     total = Column(db.Integer)
     paid = Column(db.Integer)
 
+    status = Column(db.Integer)
+
     def get_status_name(self):
         # TODO: figure out the status
-        return "Unpaid"
+        if not self.status:
+            return "Pending"
+        
+        elif self.status == 1:
+            return "Denied"
+
+        elif self.status == 2:
+            return "Unpaid"
+
+        elif self.status == 3:
+            return "Paid"
+
+        return "Unknown (" + str(self.status) + ")"
+
+    def is_approved(self):
+        return self.status in [2, 3]
+
+    def is_denied(self):
+        return self.status in [1]
+
+    def is_pending(self):
+        return not self.status 
+
+    def is_paid(self):
+        return self.paid >= self.total
+
+    def get_remaining(self):
+        if not self.total:
+            return 0
+
+        if not self.paid:
+            return self.total
+
+
+        r = self.total - self.paid
+
+        if r > 0:
+            return r
+
+        return 0
 
     def __init__(self, name, **kwargs):
         """Create instance."""

@@ -1,10 +1,12 @@
-<div id="sidebar-default" class="main-sidebar">
+<div id="sidebar-clear" class="main-sidebar">
       <div class="container">
-        <img src="/static/images/logo.png" style="width:200px; margin:5px">
+        <div class="logo-container">
+        <img src="/static/images/logo.png">
+        </div>
       </div>
-      <div class="current-user" style="height:50px">
+      <div class="current-user" style="height:50px; text-align: center;">
         <a href="/" class="name">
-          <span>
+          <span style="color:#428bca !important">
             <i class="fa fa-user-circle"></i> <b>{{current_user.username}}</b> ({{current_user.category}})
             <i class="fa fa-chevron-down"></i>
           </span>
@@ -44,16 +46,24 @@
         
         </ul>
       </div>
+      <!--
       <div class="menu-section">
         <h3>Products</h3>
         <ul>
           
         </ul>
-      </div>
+      </div>-->
 
       <div class="menu-section">
-        <h3>Sales</h3>
+        <h3>Products &amp; Sales</h3>
         <ul>
+          <li>
+            <a href="/">
+              <i class="fa fa-gift"></i> 
+              <span>My items</span>
+            </a>
+          </li>
+
           <li>
             <a href="/">
               <i class="fa fa-clock-o"></i> 
@@ -65,12 +75,18 @@
       </div>
 
       <div class="menu-section">
-        <h3>Loans</h3>
+        <h3>Finances</h3>
         <ul>
-          <li {% if request.url.find("loans") >= 0 and not request.url.find("edit") >= 0 %}class="active" {% endif %}>
+          <li {% if request.endpoint == "loans.my_account" %}class="active" {% endif %}>
+            <a href="/">
+              <i class="fa fa-book"></i> 
+              <span>My payments</span>
+            </a>
+          </li>
+          <li {% if request.endpoint == "loans.my_list" %}class="active" {% endif %}>
             <a href="/loans">
               <i class="fa fa-usd"></i> 
-              <span>View all</span>
+              <span>My loans</span>
             </a>
           </li>
         </ul>
@@ -80,10 +96,10 @@
       <div class="menu-section">
         <h3>Documents</h3>
         <ul>
-          <li {% if request.url.find("users/documents") >= 0 and not request.url.find("upload") >= 0 %}class="active" {% endif %}>
+          <li {% if request.endpoint == "user.view_documents">= 0 %}class="active" {% endif %}>
             <a href="/users/documents">
               <i class="fa fa-file-o"></i> 
-              <span>View uploaded</span>
+              <span>My documents</span>
             </a>
           </li>
 
@@ -104,10 +120,10 @@
           <li {% if request.endpoint == "user.members" and not request.args.get('category') %}class="active" {% endif %}>
             <a href="/users">
               <i class="ion-person-stalker"></i> 
-              <span>All users</span>
+              <span>Users</span>
             </a>
           </li>
-
+<!--
           <li {% if request.url.find("users") >= 0 and request.args.get('category') == 'consumer' %}class="active" {% endif %}>
             <a href="/users?category=consumer">
               <i class="ion-person"></i> 
@@ -127,7 +143,22 @@
               <i class="ion-person"></i> 
               <span>Farmers</span>
             </a>
+          </li>-->
+
+          <li {% if request.endpoint == "loans.admin_list" %}class="active" {% endif %}>
+            <a href="/loans/admin">
+              <i class="fa fa-usd"></i> 
+              <span>Loans</span>
+            </a>
           </li>
+
+          <li {% if request.endpoint == "user.view_documents_admin">= 0 %}class="active" {% endif %}>
+            <a href="/users/documents/admin">
+              <i class="fa fa-file-o"></i> 
+              <span>Documents</span>
+            </a>
+          </li>
+
 
         </ul>
       </div>

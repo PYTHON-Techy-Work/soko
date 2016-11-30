@@ -69,8 +69,8 @@ class Cart(SurrogatePK, Model):
     __tablename__ = 'cart'
     product_id = reference_col('products', nullable=False)
     product = relationship('Product', backref='cart')
-    user = Column(db.Integer, nullable=False),
-    quantity = Column(db.Integer, nullable=False),
+    user = Column(db.Integer, nullable=False)
+    quantity = Column(db.Integer, nullable=False)
     total = Column(db.Numeric(15, 2), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
@@ -84,6 +84,8 @@ class Cart(SurrogatePK, Model):
         return '<Cart %r>' % self.user + self.product_id + self.quantity + self.total
 
     def serialize(self):
+        
+
         return {"id": self.id, "user":self.user, "product": self.product_id, "quantity": self.quantity,
                 "total": float(self.total)}
 

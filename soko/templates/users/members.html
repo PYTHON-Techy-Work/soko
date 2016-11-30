@@ -1,7 +1,16 @@
 {% set INCLUDE_DATATABLES = True %}
 {% extends "layout.html" %}
 {% block content %}
-    <h3>All users</h3>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h1 class="panel-title" style="font-size:20pt"><i class="fa fa-users"></i> All users</h1>
+  </div>
+  <div class="panel-body">
+   
 
     <table class="table table-striped datatable">
         <thead>
@@ -29,8 +38,20 @@
             {% endfor %}
         </tbody>
     </table>
+        <hr>
 
-    <a class="btn btn-primary btn-lg" href=""><i class="fa fa-plus"></i> Add new</a>
+        <a class="btn btn-primary btn-lg" href=""><i class="fa fa-plus"></i> Add new</a>
+
+
+    </div>
+    </div>
+
+    </div>
+
+    </div>
+
+
+
 {% endblock %}
 
 {% block js %}
