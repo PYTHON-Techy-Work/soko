@@ -219,6 +219,23 @@ def edit_products():
     return jsonify(status)
 
 
+# delete a product
+@blueprint.route('/delete_product', methods=["GET"])
+def delete_product():
+    data = request.args
+    if data:
+        user = User.query.filter_by(token=data["token"]).first()
+        print user.id
+        try:
+            product = Product.query.filter(Product.user == user.id)
+            product.delete()
+            status = {'status': 'success', 'message': 'product deleted'}
+        except Exception, e:
+            print e
+            status = {'status': 'failure', 'message': e}
+    return jsonify(status)
+
+
 # api for all the counties
 @blueprint.route('/get_counties', methods=["GET"])
 def get_counties():
@@ -328,7 +345,7 @@ def add_to_cart():
                 user=user.id,
                 product_id=data['product'],
                 quantity=data['quantity'],
-                total=data['quantity']*product.price
+                total=data['quantity'] * product.price
             )
             try:
                 db.session.add(cart)
@@ -344,5 +361,3 @@ def add_to_cart():
     else:
         status = {'status': 'failure', 'message': 'Error!'}
     return jsonify(status)
-
-

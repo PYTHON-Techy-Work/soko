@@ -32,7 +32,7 @@ class Product(SurrogatePK, Model):
     #     return '<Product %r>' % self.name
 
     def serialize(self):
-        return {"id": self.id, "name": self.name, "photo": self.photo, "description": self.description, "farmer": self.user_id, "product_type":self.product_type_id, "price": float(self.price)}
+        return {"id": self.id, "name": self.name, "photo": self.photo, "description": self.description,  "quantity":self.quantity, "farmer": self.user_id, "product_type":self.product_type_id, "price": float(self.price)}
 
 
 class ProductType(SurrogatePK, Model):
