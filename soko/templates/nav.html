@@ -38,7 +38,7 @@
           </li>
 
           <li>
-            <a href="">
+            <a href="javascript:alert('Not implemented yet')">
               <i class="ion-flash"></i> 
               <span>Latest activity</span>
             </a>
@@ -57,15 +57,15 @@
       <div class="menu-section">
         <h3>Products &amp; Sales</h3>
         <ul>
-          <li>
-            <a href="/">
+          <li {% if request.endpoint == "item.index" %}class="active" {% endif %}>
+            <a href="/products">
               <i class="fa fa-gift"></i> 
               <span>My items</span>
             </a>
           </li>
 
           <li>
-            <a href="/">
+            <a href="javascript:alert('Not implemented yet')">
               <i class="fa fa-clock-o"></i> 
               <span>Sales history</span>
             </a>
@@ -78,7 +78,7 @@
         <h3>Finances</h3>
         <ul>
           <li {% if request.endpoint == "loans.my_account" %}class="active" {% endif %}>
-            <a href="/">
+            <a href="javascript:alert('Not implemented yet')">
               <i class="fa fa-book"></i> 
               <span>My payments</span>
             </a>
@@ -121,6 +121,20 @@
             <a href="/users">
               <i class="ion-person-stalker"></i> 
               <span>Users</span>
+            </a>
+          </li>
+
+          <li {% if request.endpoint == "item.admin_index" %}class="active" {% endif %}>
+            <a href="/products/admin">
+              <i class="fa fa-gift"></i> 
+              <span>Items</span>
+            </a>
+          </li>
+
+          <li {% if request.endpoint == "item.admin_type_list" %}class="active" {% endif %}>
+            <a href="/products/admin/types">
+              <i class="fa fa-edit"></i> 
+              <span>Categories</span>
             </a>
           </li>
 <!--

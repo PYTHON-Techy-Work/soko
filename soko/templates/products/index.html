@@ -1,30 +1,53 @@
 {% set INCLUDE_DATATABLES = True %}
 {% extends "layout.html" %}
 {% block content %}
-    <h3>All products currently for sale</h3>
 
+<div class="row">
+<div class="col-md-10 col-md-offset-1">
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h1 class="panel-title" style="font-size:20pt"><i class="fa fa-gift"></i> {{title}}</h1>
+  </div>
+  <div class="panel-body">
+   
         <table class="table table-striped datatable">
         <thead>
-            <th>#</th>
+            <th><i class="fa fa-camera"></i></th>
             <th>Name</th>
-            <th>Quantity</th>
+            <th>Descr</th>
             <th>User</th>
+            <th>Category</th>
+            <th>Quantity</th>
             <th>Price</th>
             <th></th>
         </thead>
         <tbody>
             {% for i in products %}
                 <tr>
-                    <td>{{i.id}}</td>
-                    <td>{{i.type.name}}</td>
+                    <td> {% if i.photo %}
+                            <img style="height:30px; width:30px; border-radius:50%" src="/static/uploads/{{i.photo.split("/")[-1]}}">
+                        {% endif %}
+                    </td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.description}}</td>
+                    <td>{{i.user.email}}</td>
+                    <td>{{i.product_type.name}}</td>
                     <td>{{i.quantity}}</td>
-                    <td>{{i.user.name}}</td>
                     <td>{{i.price}}</td>
-                    <td><a href="#">Edit</a></td>
+                    <td><a href="/products/admin/edit/{{i.id}}">Edit</a></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <hr>
+    <a href="/products/admin/edit/new" class="btn btn-lg btn-primary"><i class="fa fa-plus"></i> Add new</a>
+
+    </div>
+    </div>
+</div>
+</div>
 
 {% endblock %}
 

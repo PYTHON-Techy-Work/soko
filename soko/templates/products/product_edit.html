@@ -2,21 +2,67 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="container-narrow">
-  <h1>Product Type editor</h1>
+  <h1>Editing product for sale</h1>
     <br/>
-    <form id="registerForm" class="form" method="POST" action="" role="form">
+    <form id="registerForm" class="form" method="POST" action="" role="form" enctype="multipart/form-data">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+            <div class="form-group">
+                {{form.photo.label}}<br>
+
+
+                {% if item.photo %}
+                    <img src="/static/uploads/{{item.photo.split("/")[-1]}}" style='width:100px' class="img-thumbnail">
+                {% endif %}
+
+                <br>
+                {{form.photo(placeholder="For", class_="")}}
+
+            </div>
+
+
             <div class="form-group">
                 {{form.name.label}}
-                {{form.name(placeholder="Type Name", class_="form-control")}}
+                {{form.name(placeholder="Name of item", class_="form-control", value=item.name)}}
             </div>
 
             <div class="form-group">
-                {{form.descr.label}}
-                {{form.descr(placeholder="Description", class_="form-control")}}
+                {{form.description.label}}
+                {{form.description(placeholder="Description", class_="form-control", value=item.description)}}
             </div>
 
-            <p><input class="btn btn-default btn-submit" type="submit" value="Save changes"></p>
+            <div class="form-group">
+                {{form.price.label}}
+                {{form.price(placeholder="Item Price", class_="form-control", value=item.price)}}
+            </div>
+
+            <div class="form-group">
+                {{form.quantity.label}}
+                {{form.quantity(placeholder="Quantity", class_="form-control", value=item.quantity)}}
+            </div>
+
+            {% if False %}
+
+            <div class="form-group">
+                {{form.created_at.label}}
+                {{form.created_at(placeholder="Created At", class_="form-control", value=item.created_at.strftime("%Y-%m-%d")  if item.created_at else None)}}
+            </div>
+
+            {% endif %}
+
+            <div class="form-group">
+                {{form.product_type_id.label}}
+                {{form.product_type_id(placeholder="For", class_="form-control", value=item.product_type_id)}}
+            </div>
+
+            <div class="form-group">
+                {{form.user_id.label}}
+                {{form.user_id(placeholder="For", class_="form-control", value=item.user_id)}}
+            </div>
+
+            <hr>
+
+            <p><input class="btn btn-primary btn-lg btn-submit" type="submit" value="Save changes"></p>
     </form>
 </div>
 {% endblock %}

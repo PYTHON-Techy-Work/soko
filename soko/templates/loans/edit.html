@@ -24,7 +24,7 @@
 
     <div class="form-group">
         {{form.created_on.label}} -- when it was created
-        {{form.created_on(placeholder="Created On", class_="form-control", value=loan.created_on.strftime("%Y-%m-%d"))}}
+        {{form.created_on(placeholder="Created On", class_="form-control", value=loan.created_on.strftime("%Y-%m-%d") if loan.created_at else None)}}
     </div>
 
     

@@ -50,6 +50,7 @@ def register_blueprints(app):
     app.register_blueprint(user.views.blueprint)
     app.register_blueprint(api.views.blueprint)
     app.register_blueprint(loans.views.blueprint)
+    app.register_blueprint(products.views.blueprint)
 
     return None
 
