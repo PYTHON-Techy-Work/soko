@@ -315,15 +315,16 @@ def send_maps():
 def get_cart_items():
     data = request.args
     ret = []
-    print data["token"]
+    total = 0
     if data:
         user = User.query.filter_by(token=data["token"]).first()
         if user:
-            cart = Cart.query.all()
+            cart = Cart.query.filter_by(user=user.id)
             for pt in cart:
                 ret.append(pt.serialize())
+                total += pt.total
             print ret
-            status = {'status': 'success', 'data': ret}
+            status = {'status': 'success', 'data': {"items": ret, "total": float(total)}}
         else:
             status = {'status': 'failure', 'message': 'Error!'}
     return jsonify(status)
@@ -334,10 +335,8 @@ def get_cart_items():
 @blueprint.route('/add_to_cart', methods=["POST"])
 def add_to_cart():
     data = request.json
-    print data
     if data:
         user = User.query.filter_by(token=data["token"]).first()
-        print user.id
         if user:
             product = Product.query.filter_by(id=data["product"]).first();
             print product.price
@@ -350,7 +349,7 @@ def add_to_cart():
             try:
                 db.session.add(cart)
                 db.session.commit()
-                status = {'status': 'success', 'message': 'product added to cart'}
+                status = {'status': 'success', 'message': str(data['quantity']) + ' items added to cart'}
 
             except Exception, e:
                 status = {'status': 'failure', 'message': 'problem adding product to cart'}
@@ -361,3 +360,49 @@ def add_to_cart():
     else:
         status = {'status': 'failure', 'message': 'Error!'}
     return jsonify(status)
+
+
+
+# add to cart
+@csrf_protect.exempt
+@blueprint.route('/remove_from_cart', methods=["POST"])
+def remove_from_cart():
+    
+    if "token" not in request.json or "cid" not in request.json:
+        return jsonify({'status': 'failure', 'message': 'Error!'})
+
+    user = User.query.filter_by(token=request.json["token"]).first()
+
+    if not user:
+        return jsonify({'status': 'failure', 'message': 'Error!'})
+
+    cid = Cart.query.get(request.json["cid"])
+
+    if not cid or cid.user != user.id:
+        return jsonify({'status': 'failure', 'message': 'Couldn\'t find cart item'})
+
+    db.session.delete(cid)
+    db.session.commit()
+    
+    return jsonify({'status': 'success', 'message': 'product removed from cart'})
+
+
+@csrf_protect.exempt
+@blueprint.route('/purchase_cart', methods=["POST"])
+def purchase_cart():
+    
+    if "token" not in request.json:
+        return jsonify({'status': 'failure', 'message': 'Error!'})
+
+    user = User.query.filter_by(token=request.json["token"]).first()
+
+    for cart in Cart.query.filter_by(user=user.id):
+        # todo: do some stuff with the cart
+        # add to 'purchases' table or somethign
+        db.session.delete(cart)
+
+    db.session.commit()
+    
+    return jsonify({'status': 'success', 'message': 'Items successfully purchased!'})
+
+

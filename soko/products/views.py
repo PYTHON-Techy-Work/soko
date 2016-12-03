@@ -55,8 +55,8 @@ def item_edit_admin(pid):
 
         if "photo" in request.files and request.files["photo"].filename:
             filename = "upload_" + str(int(time.time())) + request.files["photo"].filename
-            photo = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            request.files["photo"].save(photo)
+            photo = filename
+            request.files["photo"].save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
         if pid == "new":
             Product.create(name=form.name.data,

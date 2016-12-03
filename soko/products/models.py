@@ -85,9 +85,13 @@ class Cart(SurrogatePK, Model):
 
     def serialize(self):
         
-
-        return {"id": self.id, "user":self.user, "product": self.product_id, "quantity": self.quantity,
-                "total": float(self.total)}
+        return {
+            "id": self.id, 
+            "user":self.user, 
+            "product": self.product.serialize(), 
+            "quantity": self.quantity,
+            "total": float(self.total),
+            }
 
 # class Purchase(SurrogatePK, Model):
 #     __tablename__ = 'purchases'
