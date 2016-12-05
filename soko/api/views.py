@@ -408,9 +408,9 @@ def purchase_cart():
         # add to 'purchases' table or somethign
         purchase = Purchase(
             user=user.id,
-            product=cart['product'],
-            quantity=cart['quantity'],
-            total=cart['total'],
+            product=cart.product,
+            quantity=cart.quantity,
+            total=cart.total,
         )
         db.session.add(purchase)
         db.session.delete(cart)
