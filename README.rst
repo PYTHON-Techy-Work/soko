@@ -35,8 +35,8 @@ Once you have installed your DBMS, run the following to create your app's
 database tables and perform the initial migration ::
 
     flask db init
-    flask db migrate
     flask db upgrade
+    flask db migrate
     flask run
 
 
