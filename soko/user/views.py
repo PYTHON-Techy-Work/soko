@@ -108,8 +108,6 @@ def view_documents_admin():
 
 
 
-
-
 @blueprint.route('/dashboard', methods=["GET"])
 @login_required
 def dashboard():

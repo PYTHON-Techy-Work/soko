@@ -19,7 +19,7 @@ class Product(SurrogatePK, Model):
     photo = Column(db.String(500), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, name,  product_type_id, description, price, quantity, photo, user_id):
+    def __init__(self, name, product_type_id, description, price, quantity, photo, user_id):
         self.name = name
         self.product_type_id = product_type_id
         self.description = description
@@ -32,7 +32,9 @@ class Product(SurrogatePK, Model):
     #     return '<Product %r>' % self.name
 
     def serialize(self):
-        return {"id": self.id, "name": self.name, "photo": self.photo, "description": self.description,  "quantity":self.quantity, "farmer": self.user_id, "product_type":self.product_type_id, "price": float(self.price)}
+        return {"id": self.id, "name": self.name, "photo": self.photo, "description": self.description,
+                "quantity": self.quantity, "farmer": self.user_id, "product_type": self.product_type_id,
+                "price": float(self.price)}
 
 
 class ProductType(SurrogatePK, Model):
@@ -74,7 +76,7 @@ class Cart(SurrogatePK, Model):
     total = Column(db.Numeric(15, 2), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self,  user, product_id, quantity, total):
+    def __init__(self, user, product_id, quantity, total):
         self.user = user
         self.product_id = product_id
         self.quantity = quantity
@@ -84,14 +86,36 @@ class Cart(SurrogatePK, Model):
         return '<Cart %r>' % self.user + self.product_id + self.quantity + self.total
 
     def serialize(self):
-        
         return {
-            "id": self.id, 
-            "user":self.user, 
-            "product": self.product.serialize(), 
+            "id": self.id,
+            "user": self.user,
+            "product": self.product.serialize(),
             "quantity": self.quantity,
             "total": float(self.total),
-            }
+        }
 
-# class Purchase(SurrogatePK, Model):
-#     __tablename__ = 'purchases'
+
+class Purchase(SurrogatePK, Model):
+    __tablename__ = 'purchases'
+    product_id = reference_col('products', nullable=False)
+    product = relationship('Product', backref='purchases')
+    user = Column(db.Integer, nullable=False)
+    quantity = Column(db.Integer, nullable=False)
+    total = Column(db.Numeric(15, 2), nullable=False)
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+
+    def __init__(self, user, product, quantity, total):
+        self.user = user
+        self.product = product
+        self.quantity = quantity
+        self.total = total
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user": self.user,
+            "product": self.product.serialize(),
+            "quantity": self.quantity,
+            "total": float(self.total),
+            "Date": self.created_at,
+        }

@@ -9,7 +9,7 @@ from soko.user.models import User
 from soko.transporter.models import Transporter, County
 from soko.farmer.models import Farmer
 from soko.customer.models import Customer
-from soko.products.models import Product, ProductType, ProductRatings, Cart
+from soko.products.models import Product, ProductType, ProductRatings, Cart, Purchase
 from soko.locations.models import Locations
 from soko.database import db
 from soko.utils import flash_errors
@@ -72,7 +72,7 @@ def reg_user():
     return jsonify(status)
 
 
-# login api
+#login_api
 @csrf_protect.exempt
 @blueprint.route('/login', methods=["POST"])
 def login():
@@ -93,7 +93,6 @@ def login():
                       'username': registered_user.username, 'category': registered_user.category}
         else:
             status = {'status': 'failure', 'message': 'Invalid Username or password'}
-
     return jsonify(status)
 
 
@@ -141,7 +140,10 @@ def guess_image_extension(fdata):
 @csrf_protect.exempt
 @blueprint.route('/add_products', methods=["POST"])
 def add_products():
-    data = request.get_json(force=True)
+    if request.get_json(force=True):
+        data = request.get_json(force=True)
+    else:
+        data = request.form
 
     if "photo" not in data:
         return jsonify({'status': 'failure', 'message': 'you need to provide a photo'})
@@ -246,7 +248,7 @@ def get_counties():
     return jsonify(data=ret)
 
 
-# api to add products
+# api to add county
 @csrf_protect.exempt
 @blueprint.route('/add_county', methods=["POST"])
 def add_county():
@@ -399,7 +401,15 @@ def purchase_cart():
     for cart in Cart.query.filter_by(user=user.id):
         # todo: do some stuff with the cart
         # add to 'purchases' table or somethign
+        purchase = Purchase(
+            user=user.id,
+            product=cart['product'],
+            quantity=cart['quantity'],
+            total=cart['total'],
+        )
+        db.session.add(purchase)
         db.session.delete(cart)
+        db.session.commit()
 
     db.session.commit()
     
