@@ -150,8 +150,13 @@ def add_products():
 
     photo = data["photo"]
 
+    print photo
+
     # need to de-base-64 the image, as it is passed as long string
-    photo_decoded = base64.decodestring(photo)
+    if "base64," in photo:
+        photo_decoded = base64.decodestring(photo.partition("base64,")[2])
+    else:
+        photo_decoded = base64.decodestring(photo)
 
     # we don't have a filename, so let's make a random one
     filename = "upload_" + str(int(time.time())) + "." + guess_image_extension(photo)
