@@ -429,12 +429,13 @@ def purchase_cart():
 @blueprint.route('/get_product_sub_types', methods=["GET"])
 def get_product_name():
         data = request.args
-        print data
+        print data['product_type']
         ret = []
         if data:
             user = User.query.filter_by(token=data["token"]).first()
             if user:
-                product_sub_type = ProductSubType.query.all()
+                product_sub_type = ProductSubType.query.filter_by(product_type_id=data["product_type"])
+                print product_sub_type
                 for pt in product_sub_type:
                     ret.append(pt.serialize())
                 status = {'message': 'success', 'data': ret}
