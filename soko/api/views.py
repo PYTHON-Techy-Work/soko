@@ -9,7 +9,7 @@ from soko.user.models import User
 from soko.transporter.models import Transporter, County
 from soko.farmer.models import Farmer
 from soko.customer.models import Customer
-from soko.products.models import Product, ProductType, ProductRatings, Cart, Purchase, ProductName
+from soko.products.models import Product, ProductType, ProductRatings, Cart, Purchase, ProductSubType
 from soko.locations.models import Locations
 from soko.database import db
 from soko.utils import flash_errors
@@ -140,57 +140,58 @@ def guess_image_extension(fdata):
 @csrf_protect.exempt
 @blueprint.route('/add_products', methods=["POST"])
 def add_products():
-    if request.get_json(force=True):
-        data = request.get_json(force=True)
-    else:
-        data = request.form
-
-    if "photo" not in data:
-        return jsonify({'status': 'failure', 'message': 'you need to provide a photo'})
-
-    photo = data["photo"]
-
-    print photo
-
-    # need to de-base-64 the image, as it is passed as long string
-    if "base64," in photo:
-        photo_decoded = base64.decodestring(photo.partition("base64,")[2])
-    else:
-        photo_decoded = base64.decodestring(photo)
-
-    # we don't have a filename, so let's make a random one
-    filename = "upload_" + str(int(time.time())) + "." + guess_image_extension(photo)
-    path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-
-    fp = open(path, 'wb')  # create a writable image and write the decoding result
-    fp.write(photo_decoded)
-    fp.close()
-
+    # if request.get_json(force=True):
+    #     data = request.get_json(force=True)
+    # else:
+    #     data = request.form
+    #
+    # if "photo" not in data:
+    #     return jsonify({'status': 'failure', 'message': 'you need to provide a photo'})
+    #
+    # photo = data["photo"]
+    #
+    # print photo
+    #
+    # # need to de-base-64 the image, as it is passed as long string
+    # if "base64," in photo:
+    #     photo_decoded = base64.decodestring(photo.partition("base64,")[2])
+    # else:
+    #     photo_decoded = base64.decodestring(photo)
+    #
+    # # we don't have a filename, so let's make a random one
+    # filename = "upload_" + str(int(time.time())) + "." + guess_image_extension(photo)
+    # path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    #
+    # fp = open(path, 'wb')  # create a writable image and write the decoding result
+    # fp.write(photo_decoded)
+    # fp.close()
+    data = request.get_json(force=True)
     user = User.query.filter_by(token=data["token"]).first()
     user_id = user.id
-
-    if "product_type_id" in data:
-        typeid = data['product_type_id']
-    else:
-        typeid = ProductType.query.first().id
-
-    if photo:
+    if user_id:
+        if "product_type_id" in data and "product_sub_type_id":
+            typeid = data['product_type_id']
+            subtypeid = data['product_sub_type_id']
+        else:
+            typeid = ProductType.query.first().id
         product = Product(
             name=data['name'],
             product_type_id=typeid,
+            product_sub_type_id=subtypeid,
             description=data['description'],
+            packaging = data['packaging'],
             price=data['price'],
             quantity=data['quantity'],
-            photo=filename,
+            photo=data['photo'],
             user_id=user_id
         )
-    try:
-        db.session.add(product)
-        db.session.commit()
-        status = {'status': 'success', 'message': 'product added'}
-    except Exception, e:
-        status = {'status': 'failure', 'message': 'problem adding product'}
-        print e
+        try:
+            db.session.add(product)
+            db.session.commit()
+            status = {'status': 'success', 'message': 'product added'}
+        except Exception, e:
+            status = {'status': 'failure', 'message': 'problem adding product'}
+            print e
     db.session.close()
     return jsonify(status)
 
@@ -198,11 +199,15 @@ def add_products():
 # api to get all the products
 @blueprint.route('/get_products', methods=["GET"])
 def get_products():
+    data = request.args
     ret = []
-    products = Product.query.all()
-    for pt in products:
-        ret.append(pt.serialize())
-    print ret
+    if data:
+        user = User.query.filter_by(token=data["token"]).first()
+        if user:
+            products = Product.query.all()
+            for pt in products:
+                ret.append(pt.serialize())
+            print ret
     return jsonify(data=ret)
 
 
@@ -421,7 +426,7 @@ def purchase_cart():
     return jsonify({'status': 'success', 'message': 'Items successfully purchased!'})
 
 
-@blueprint.route('/get_product_name', methods=["GET"])
+@blueprint.route('/get_product_sub_types', methods=["GET"])
 def get_product_name():
         data = request.args
         print data
@@ -429,8 +434,8 @@ def get_product_name():
         if data:
             user = User.query.filter_by(token=data["token"]).first()
             if user:
-                productname = ProductName.query.all()
-                for pt in productname:
+                product_sub_type = ProductSubType.query.all()
+                for pt in product_sub_type:
                     ret.append(pt.serialize())
                 status = {'message': 'success', 'data': ret}
             else:
@@ -441,18 +446,17 @@ def get_product_name():
 
 
 @csrf_protect.exempt
-@blueprint.route('/add_product_name', methods=["POST"])
-def add_product_name():
+@blueprint.route('/add_product_sub_type', methods=["POST"])
+def add_product_sub_type():
         data = request.form
-        print data['photo']
-        if data:
-            product = ProductName(
-                name=data['name'],
-                description=data['description'],
-                photo=data['photo']
-            )
+        product_sub_type = ProductSubType(
+            name=data['name'],
+            description=data['description'],
+            product_type_id=data['product_type'],
+            photo=data['photo']
+        )
         try:
-            db.session.add(product)
+            db.session.add(product_sub_type)
             db.session.commit()
             status = {'status': 'success', 'message': 'product name added'}
         except Exception, e:
