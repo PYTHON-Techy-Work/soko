@@ -1,41 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="92ae03c2-6e34-4825-ab80-9dc3e813ec41" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/blue_band.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/potatoe.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/tomatoes.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1478526682.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1478526785.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1478526790.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1478527083.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1478856157.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479280808.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479280864.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479280870.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479280871.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479280900.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479280902.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479280910.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479280912.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479280916.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479280917.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479280918.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479280919.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479280920.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479280921.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479280922.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479281874.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479289063.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479289066.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479289067.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479450956.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1479731278.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soko/static/uploads/upload_1480323968.jpg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/api/views.py" afterPath="$PROJECT_DIR$/soko/api/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/products/models.py" afterPath="$PROJECT_DIR$/soko/products/models.py" />
-    </list>
+    <list default="true" id="92ae03c2-6e34-4825-ab80-9dc3e813ec41" name="Default" comment="" />
     <ignored path="dashboard.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
