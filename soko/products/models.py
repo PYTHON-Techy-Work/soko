@@ -6,7 +6,6 @@ from soko.database import Column, Model, SurrogatePK, db, reference_col, relatio
 
 
 class Product(SurrogatePK, Model):
-    """A Products of the app."""
     __tablename__ = 'products'
     name = Column(db.String(80), nullable=False)
     product_type_id = reference_col('product_types', nullable=False)
@@ -28,13 +27,41 @@ class Product(SurrogatePK, Model):
         self.photo = photo
         self.user_id = user_id
 
-    # def __repr__(self):
-    #     return '<Product %r>' % self.name
+    def serialize(self):
+        return {
+                "id": self.id,
+                "name": self.name,
+                "photo": self.photo,
+                "description": self.description,
+                "quantity": self.quantity,
+                "farmer": self.user_id,
+                "product_type": self.product_type_id,
+                "price": float(self.price)
+        }
+
+
+class ProductName(SurrogatePK, Model):
+    __tablename__ = 'productname'
+    name = Column(db.String(80), nullable=False)
+    description = Column(db.String(500), nullable=False)
+    photo = Column(db.String(500), nullable=False)
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+
+    def __init__(self, name, description, photo):
+        self.name = name
+        self.description = description
+        self.photo = photo
+
+    def __repr__(self):
+        return '<Product Name %r>' % self.name
 
     def serialize(self):
-        return {"id": self.id, "name": self.name, "photo": self.photo, "description": self.description,
-                "quantity": self.quantity, "farmer": self.user_id, "product_type": self.product_type_id,
-                "price": float(self.price)}
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description":self.description,
+            "photo": self.photo
+        }
 
 
 class ProductType(SurrogatePK, Model):
@@ -49,7 +76,10 @@ class ProductType(SurrogatePK, Model):
         return '<Product Type %r>' % self.name
 
     def serialize(self):
-        return {"id": self.id, "name": self.name}
+        return {
+            "id": self.id,
+            "name": self.name
+        }
 
 
 class ProductRatings(SurrogatePK, Model):
@@ -59,9 +89,10 @@ class ProductRatings(SurrogatePK, Model):
     review = Column(db.String(80), nullable=True)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, product, description):
+    def __init__(self, product, rating, review):
         self.product = product
-        self.description = description
+        self.rating = rating
+        self.review = review
 
     def __repr__(self):
         return '<Product %r>' % self.user + self.rating + self.review

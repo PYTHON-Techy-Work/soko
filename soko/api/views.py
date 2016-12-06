@@ -9,7 +9,7 @@ from soko.user.models import User
 from soko.transporter.models import Transporter, County
 from soko.farmer.models import Farmer
 from soko.customer.models import Customer
-from soko.products.models import Product, ProductType, ProductRatings, Cart, Purchase
+from soko.products.models import Product, ProductType, ProductRatings, Cart, Purchase, ProductName
 from soko.locations.models import Locations
 from soko.database import db
 from soko.utils import flash_errors
@@ -419,5 +419,46 @@ def purchase_cart():
     db.session.commit()
     
     return jsonify({'status': 'success', 'message': 'Items successfully purchased!'})
+
+
+@blueprint.route('/get_product_name', methods=["GET"])
+def get_product_name():
+        data = request.args
+        print data
+        ret = []
+        if data:
+            user = User.query.filter_by(token=data["token"]).first()
+            if user:
+                productname = ProductName.query.all()
+                for pt in productname:
+                    ret.append(pt.serialize())
+                status = {'message': 'success', 'data': ret}
+            else:
+                status = {'message': 'failure', 'data': 'no product_names available on the system'}
+        else:
+            status = {'message': 'failure', 'data': 'no product_names available on the system'}
+        return jsonify(status)
+
+
+@csrf_protect.exempt
+@blueprint.route('/add_product_name', methods=["POST"])
+def add_product_name():
+        data = request.form
+        print data['photo']
+        if data:
+            product = ProductName(
+                name=data['name'],
+                description=data['description'],
+                photo=data['photo']
+            )
+        try:
+            db.session.add(product)
+            db.session.commit()
+            status = {'status': 'success', 'message': 'product name added'}
+        except Exception, e:
+            status = {'status': 'failure', 'message': 'problem adding product name'}
+            print e
+        db.session.close()
+        return jsonify(status)
 
 
