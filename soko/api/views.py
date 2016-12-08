@@ -166,23 +166,24 @@ def add_products():
     # fp.write(photo_decoded)
     # fp.close()
     data = request.get_json(force=True)
+    print data
     user = User.query.filter_by(token=data["token"]).first()
     user_id = user.id
     if user_id:
-        if "product_type_id" in data and "product_sub_type_id":
-            typeid = data['product_type_id']
+        if "product_sub_type_id" in data:
             subtypeid = data['product_sub_type_id']
-        else:
-            typeid = ProductType.query.first().id
+
+        product_name = ProductSubType.query.filter_by(id=subtypeid).first()
+        print product_name
         product = Product(
-            name=data['name'],
-            product_type_id=typeid,
+            name=product_name.name,
+            product_type_id=product_name.product_type_id,
             product_sub_type_id=subtypeid,
-            description=data['description'],
+            description=product_name.description,
             packaging = data['packaging'],
             price=data['price'],
             quantity=data['quantity'],
-            photo=data['photo'],
+            photo=product_name.photo,
             user_id=user_id
         )
         try:
