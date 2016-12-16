@@ -2,6 +2,7 @@ from flask import Blueprint, flash, redirect, render_template, request, url_for,
 from flask_login import login_required, login_user, logout_user
 from flask_restful import reqparse
 from sqlalchemy import orm
+from flask_mail import Mail, Message
 
 from werkzeug.utils import secure_filename
 
@@ -19,6 +20,10 @@ import os
 import base64
 import time
 from flask import current_app as app
+mail = Mail()
+mail.init_app(app)
+
+
 
 import uuid
 
@@ -38,7 +43,7 @@ def get_users():
     return make_response(results)
 
 
-# registetation api farmer, transporter, customer
+# registration api farmer, transporter, customer
 @csrf_protect.exempt
 @blueprint.route('/register', methods=['POST'])
 def reg_user():
@@ -46,7 +51,6 @@ def reg_user():
     is_admin = 'No'
     token = ''
     data = request.json
-    print data
     user = User(
         username=data['username'],
         email=data['email'],
@@ -64,11 +68,15 @@ def reg_user():
         db.session.add(user)
         db.session.commit()
         status = {'status': 'success', 'message': 'user registered successfully'}
-        print status
-    except:
+        msg = Message("Welcome" + data['username'],
+                      recipients=[],
+                      sender="njugunanduati@gmail.com")
+        msg.add_recipient(data['email'])
+        msg.body = "You have successfully registered to soko mkononi as a"+data['category']
+    except Exception, e:
+        print e
         status = {'status': 'failure', 'message': 'the user is already registered'}
     db.session.close()
-    print status
     return jsonify(status)
 
 
@@ -284,9 +292,11 @@ def add_county():
 @blueprint.route('/post_maps', methods=["POST"])
 def get_maps():
     data = request.json
-    print data
+    token = request.args
+    print token
     if data:
-        user = User.query.filter_by(token=data["token"]).first()
+        user = User.query.filter_by(token=token["token"]).first()
+        print user
         location = Locations(
             user=user.id,
             latitude=data['lat'],
@@ -466,5 +476,3 @@ def add_product_sub_type():
             print e
         db.session.close()
         return jsonify(status)
-
-

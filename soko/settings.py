@@ -16,6 +16,7 @@ class Config(object):
     DEBUG_TB_INTERCEPT_REDIRECTS = False
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    MAIL_SUPPRESS_SEND = False
 
 
 class ProdConfig(Config):
@@ -32,16 +33,22 @@ class DevConfig(Config):
 
     ENV = 'dev'
     DEBUG = True
-    #DB_NAME = 'dev.db'
+    # DB_NAME = 'dev.db'
     SECRET_KEY = os.environ.get('SOKO_SECRET', 'secret-key')  # TODO: Change me
     DB_NAME = 'soko_mkononi'
     # Put the db file in project root
     DB_PATH = os.path.join(Config.PROJECT_ROOT, DB_NAME)
     SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:jamonjuguna@localhost/soko_mkononi'  # TODO: Change me
-    #SQLALCHEMY_DATABASE_URI = 'sqlite:///{0}'.format(DB_PATH)
+    # SQLALCHEMY_DATABASE_URI = 'sqlite:///{0}'.format(DB_PATH)
     DEBUG_TB_ENABLED = True
     ASSETS_DEBUG = True  # Don't bundle/minify static assets
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
+    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_PORT = 465
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
+    MAIL_USERNAME = 'njugunanduati@gmail.com'
+    MAIL_PASSWORD = 'njugunanduati@-1987'
 
 
 class TestConfig(Config):
