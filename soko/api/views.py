@@ -14,17 +14,11 @@ from soko.products.models import Product, ProductType, ProductRatings, Cart, Pur
 from soko.locations.models import Locations
 from soko.database import db
 from soko.utils import flash_errors
-from soko.extensions import csrf_protect, bcrypt
+from soko.extensions import csrf_protect, bcrypt, mail
 
 import os
 import base64
 import time
-from flask import current_app as app
-mail = Mail()
-mail.init_app(app)
-
-
-
 import uuid
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
@@ -476,3 +470,18 @@ def add_product_sub_type():
             print e
         db.session.close()
         return jsonify(status)
+
+
+
+@csrf_protect.exempt
+@blueprint.route('/test_mail', methods=["GET"])
+def test_mail():
+    msg = Message("Hello",
+                  sender="from@example.com",
+                  recipients=[request.args.get('to')])
+    msg.body = "testing"
+    msg.html = "<b>testing</b>" #optional
+
+    mail.send(msg)
+
+    return jsonify(status=True)

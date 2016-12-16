@@ -7,9 +7,8 @@ from soko import commands, public, user, products, \
                     farmer, transporter, vehicle, api, customer, \
                     loans
 from assets import assets
-from extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
+from extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, mail
 from settings import ProdConfig
-
 
 
 def create_app(config_object=ProdConfig):
@@ -39,6 +38,9 @@ def register_extensions(app):
     login_manager.init_app(app)
     debug_toolbar.init_app(app)
     migrate.init_app(app, db)
+    mail.init_app(app)
+
+
     return None
 
 
