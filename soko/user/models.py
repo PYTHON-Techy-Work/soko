@@ -35,6 +35,7 @@ class User(UserMixin, SurrogatePK, Model):
     first_name = Column(db.String(30), nullable=True)
     last_name = Column(db.String(30), nullable=True)
     phone_number = Column(db.String(15), nullable=True)
+    profile_photo = Column(db.String(150), nullable=True)
     category = Column(db.String(30), nullable=True)
     active = Column(db.Boolean(), default=False)
     is_admin = Column(db.Boolean(), default=False)

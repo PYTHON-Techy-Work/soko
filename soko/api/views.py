@@ -62,11 +62,44 @@ def reg_user():
         db.session.add(user)
         db.session.commit()
         status = {'status': 'success', 'message': 'user registered successfully'}
-        msg = Message("Welcome" + data['username'],
-                      recipients=[],
-                      sender="njugunanduati@gmail.com")
-        msg.add_recipient(data['email'])
-        msg.body = "You have successfully registered to soko mkononi as a"+data['category']
+        msg = Message("Welcome To Soko Mkononi",
+                      sender="from@example.com",
+                      recipients=[data['email']])
+        msg.body = "You have successfully registered to soko mkononi as a  "+data['category']
+        msg.html = "<b>Hi</b> "+data['first_name']+"<br/> <b>You have successfully registered to soko mkononi as a "+data['category']+"</b>"
+        mail.send(msg)
+    except Exception, e:
+        print e
+        status = {'status': 'failure', 'message': 'the user is already registered'}
+    db.session.close()
+    return jsonify(status)
+
+
+# update_profile api farmer, transporter, customer
+@csrf_protect.exempt
+@blueprint.route('/update_profile', methods=['POST'])
+def update_profile():
+    data = request.json
+    print data
+    user = User.query.filter_by(token=data['token']).first()
+    print user
+    try:
+        user.username = data['username']
+        user.email = data['email']
+        user.phone_number = data['phone_number']
+        user.profile_photo = data['profile_photo']
+        user.region = data['region']
+        db.session.update(user)
+        db.session.commit()
+        status = {'status': 'success', 'message': 'user profile successfully updated'}
+        msg = Message("Welcome To Soko Mkononi",
+                      sender="from@example.com",
+                      recipients=[data['email']])
+        msg.body = "You have successfully Updated your profile a  "+user.category
+        msg.html = "<b>Hi</b> "+user.first_name+"<br/> " \
+                                                "<b>You have successfully Updated your profile on Soko Mkononi as a "+user.category+\
+                   "</b>"
+        mail.send(msg)
     except Exception, e:
         print e
         status = {'status': 'failure', 'message': 'the user is already registered'}
@@ -182,7 +215,7 @@ def add_products():
             product_type_id=product_name.product_type_id,
             product_sub_type_id=subtypeid,
             description=product_name.description,
-            packaging = data['packaging'],
+            packaging =data['packaging'],
             price=data['price'],
             quantity=data['quantity'],
             photo=product_name.photo,
@@ -473,7 +506,7 @@ def add_product_sub_type():
 
 
 
-@csrf_protect.exempt
+# @csrf_protect.exempt
 @blueprint.route('/test_mail', methods=["GET"])
 def test_mail():
     msg = Message("Hello",
