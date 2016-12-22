@@ -89,7 +89,6 @@ def update_profile():
         user.phone_number = data['phone_number']
         user.profile_photo = data['profile_photo']
         user.region = data['region']
-        db.session.update(user)
         db.session.commit()
         status = {'status': 'success', 'message': 'user profile successfully updated'}
         msg = Message("Welcome To Soko Mkononi",
@@ -412,7 +411,6 @@ def add_to_cart():
     return jsonify(status)
 
 
-
 # add to cart
 @csrf_protect.exempt
 @blueprint.route('/remove_from_cart', methods=["POST"])
@@ -448,7 +446,7 @@ def purchase_cart():
 
     for cart in Cart.query.filter_by(user=user.id):
         # todo: do some stuff with the cart
-        # add to 'purchases' table or somethign
+        # add to 'purchases' table or something
         purchase = Purchase(
             user=user.id,
             product=cart.product,
@@ -456,12 +454,30 @@ def purchase_cart():
             total=cart.total,
         )
         db.session.add(purchase)
+        product = Product.query.get(cart.product_id)
+        product.quantity = int(product.quantity) - int(purchase.quantity)
         db.session.delete(cart)
         db.session.commit()
-
     db.session.commit()
     
     return jsonify({'status': 'success', 'message': 'Items successfully purchased!'})
+
+
+@blueprint.route('/get_purchases', methods=["GET"])
+def get_purchase():
+    data = request.args
+    if "token" not in data:
+        return jsonify({'status': 'failure', 'message': 'Error!'})
+    print data
+    user = User.query.filter_by(token=data["token"]).first()
+    print user.id
+    if user:
+        for purchase in Purchase.query.filter_by(user=user.id):
+             purchases =[purchase.serialize()]
+        status = {"status":"success", "message": purchases}
+    else:
+        status = {'status': 'failure', 'message': 'You have not purchased any items on soko mkononi'}
+    return jsonify(status)
 
 
 @blueprint.route('/get_product_sub_types', methods=["GET"])
@@ -503,18 +519,3 @@ def add_product_sub_type():
             print e
         db.session.close()
         return jsonify(status)
-
-
-
-# @csrf_protect.exempt
-@blueprint.route('/test_mail', methods=["GET"])
-def test_mail():
-    msg = Message("Hello",
-                  sender="from@example.com",
-                  recipients=[request.args.get('to')])
-    msg.body = "testing"
-    msg.html = "<b>testing</b>" #optional
-
-    mail.send(msg)
-
-    return jsonify(status=True)

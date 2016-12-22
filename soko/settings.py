@@ -47,8 +47,8 @@ class DevConfig(Config):
     MAIL_PORT = 465
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
-    MAIL_USERNAME = '#'
-    MAIL_PASSWORD = '#'
+    MAIL_USERNAME = 'njugunanduati@gmail.com'
+    MAIL_PASSWORD = 'njugunanduati@-@1987'
 
 
 class TestConfig(Config):
