@@ -10,7 +10,7 @@ from soko.user.models import User
 from soko.transporter.models import Transporter, County
 from soko.farmer.models import Farmer
 from soko.customer.models import Customer
-from soko.products.models import Product, ProductType, ProductRatings, Cart, Purchase, ProductSubType
+from soko.products.models import Product, ProductType, ProductRatings, Cart, Purchase, ProductSubType, ShoppingList
 from soko.locations.models import Locations
 from soko.database import db
 from soko.utils import flash_errors
@@ -453,7 +453,13 @@ def purchase_cart():
             quantity=cart.quantity,
             total=cart.total,
         )
+        shopping_list = ShoppingList(
+            user_id=user.id,
+            product_id=cart.product_id,
+            quantity=cart.quantity
+        )
         db.session.add(purchase)
+        db.session.add(shopping_list)
         product = Product.query.get(cart.product_id)
         product.quantity = int(product.quantity) - int(purchase.quantity)
         db.session.delete(cart)
@@ -519,3 +525,9 @@ def add_product_sub_type():
             print e
         db.session.close()
         return jsonify(status)
+
+
+@blueprint.route('/get_shopping_list', methods=["GET"])
+def get_shopping_list():
+        data = request.args
+        return jsonify(data)
