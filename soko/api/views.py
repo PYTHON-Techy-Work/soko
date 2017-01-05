@@ -258,8 +258,10 @@ def edit_products():
 
     if user.id:
         product = Product.query.get(data["id"])
-        ret.append(product.serialize())
-        status = {'status': 'success', 'message': ret}
+        product.price = data["price"]
+        product.quantity = data["quantity"]
+        db.session.commit()
+        status = {'status': 'success', 'message': "product updated"}
     else:
         status = {'status': 'failure', 'message': 'error!'}
 
@@ -530,4 +532,16 @@ def add_product_sub_type():
 @blueprint.route('/get_shopping_list', methods=["GET"])
 def get_shopping_list():
         data = request.args
-        return jsonify(data)
+        if data:
+            user = User.query.filter_by(token=data["token"]).first()
+            if user:
+                ret = []
+                for ls in ShoppingList.query.filter_by(user_id=user.id):
+                    product = Product.query.filter_by(id=ls.product_id).first()
+                    ret.append(product)
+                status = {"status": "success", "message": ret}
+            else:
+                status = {"status": "failure", "message": "No records found"}
+        else:
+            status = {"status": "failure", "message": "No records found"}
+        return jsonify(status)
