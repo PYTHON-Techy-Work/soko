@@ -534,14 +534,33 @@ def get_shopping_list():
         data = request.args
         if data:
             user = User.query.filter_by(token=data["token"]).first()
+            # print user.id
             if user:
                 ret = []
+                ls = ShoppingList.query.filter_by(user_id=user.id)
                 for ls in ShoppingList.query.filter_by(user_id=user.id):
                     product = Product.query.filter_by(id=ls.product_id).first()
-                    ret.append(product)
+                    print product.name
+                    ret.append(product.serialize())
                 status = {"status": "success", "message": ret}
             else:
                 status = {"status": "failure", "message": "No records found"}
         else:
             status = {"status": "failure", "message": "No records found"}
         return jsonify(status)
+
+
+@csrf_protect.exempt
+@blueprint.route('/remove_from_shopping_list', methods=["POST"])
+def remove_from_shopping_list():
+    data = request.json
+    if data:
+        user = User.query.filter_by(token=data["token"]).first()
+        try:
+            shopping_list = ShoppingList.query.filter_by(user_id=user.id, product_id=data["id"]).first()
+            shopping_list.delete()
+            status = {'status': 'success', 'message': 'shopping list product deleted'}
+        except Exception, e:
+            print e
+            status = {'status': 'failure', 'message': e}
+    return jsonify(status)
