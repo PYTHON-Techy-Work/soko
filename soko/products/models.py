@@ -183,3 +183,56 @@ class ShoppingList(SurrogatePK, Model):
             "product": self.product,
             "quantity": self.quantity
         }
+
+
+class Orders(SurrogatePK, Model):
+    __tablename__ = 'orders'
+    user_id = reference_col('users', nullable=False)
+    user = relationship('User', backref='orders')
+    product_id = reference_col('products', nullable=False)
+    product = relationship('Product', backref='purchases')
+    status = Column(db.Integer, nullable=False)
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+
+    def __init__(self, user, product, status, total):
+        self.user = user
+        self.product = product
+        self.status = status
+        self.total = total
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user": self.user,
+            "product": self.product.serialize(),
+            "status": self.status,
+            "Date": self.created_at,
+        }
+
+
+class deliveries(SurrogatePK, Model):
+    __tablename__ = 'deliveries'
+    order_id = reference_col('orders', nullable=False)
+    order = relationship('Order', backref='deliveries')
+    transporter = Column(db.Integer, nullable=False)
+    consumer = Column(db.Integer, nullable=False)
+    location = Column(db.String, nullable=False)
+    status = Column(db.Integer, nullable=False)#(ongoing, completed, rejected)
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+
+    def __init__(self, order, transporter, consumer, location, status):
+        self.order = order
+        self.transporter = transporter
+        self.consumer = consumer
+        self.location = location
+        self.status = status
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "order": self.order,
+            "transporter": self.transporter,
+            "consumer": self.consumer,
+            "status": self.status,
+            "Date": self.created_at,
+        }

@@ -53,6 +53,7 @@ class DiversLicence(SurrogatePK, Model):
     def __repr__(self):
         return '<Driver %r>' % self.transporter + self.drivers_licence + self.dl_expiry_date + self.national_id + self.good_conduct + self.pin_certificate + self.psv_drivers_licence
 
+
 class County(SurrogatePK, Model):
     __tablename__ = 'counties'
     name = Column(db.String(80), nullable=True)

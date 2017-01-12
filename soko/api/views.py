@@ -45,6 +45,8 @@ def reg_user():
     is_admin = 'No'
     token = ''
     data = request.json
+    region = County.query.filter_by(id=data["region"]).first()
+    print region.name
     user = User(
         username=data['username'],
         email=data['email'],
@@ -56,7 +58,7 @@ def reg_user():
         active=active,
         token=token,
         category=data['category'],
-        region=data['region']
+        region=region.name
     )
     try:
         db.session.add(user)
@@ -564,3 +566,23 @@ def remove_from_shopping_list():
             print e
             status = {'status': 'failure', 'message': e}
     return jsonify(status)
+
+
+@csrf_protect.exempt
+@blueprint.route('/incoming_requests', methods=["POST"])
+def incoming_order_requests():
+    data = request.json
+    return jsonify(data)
+
+
+@blueprint.route('/get_requests', methods=["GET"])
+def get_order_requests():
+    data = request.json
+    return jsonify(data)
+
+# save faramer location
+@csrf_protect.exempt
+@blueprint.route('/get_requests', methods=["POST"])
+def get_farmer_location():
+    data = request.json
+    return jsonify(data)
