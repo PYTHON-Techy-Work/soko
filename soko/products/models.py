@@ -190,7 +190,7 @@ class Orders(SurrogatePK, Model):
     user_id = reference_col('users', nullable=False)
     user = relationship('User', backref='orders')
     product_id = reference_col('products', nullable=False)
-    product = relationship('Product', backref='purchases')
+    product = relationship('Product', backref='orders')
     status = Column(db.Integer, nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
@@ -210,14 +210,14 @@ class Orders(SurrogatePK, Model):
         }
 
 
-class deliveries(SurrogatePK, Model):
+class Deliveries(SurrogatePK, Model):
     __tablename__ = 'deliveries'
     order_id = reference_col('orders', nullable=False)
-    order = relationship('Order', backref='deliveries')
+    order = relationship('Orders', backref='deliveries')
     transporter = Column(db.Integer, nullable=False)
     consumer = Column(db.Integer, nullable=False)
     location = Column(db.String, nullable=False)
-    status = Column(db.Integer, nullable=False)#(ongoing, completed, rejected)
+    status = Column(db.Integer, nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
     def __init__(self, order, transporter, consumer, location, status):

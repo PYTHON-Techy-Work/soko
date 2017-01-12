@@ -582,7 +582,7 @@ def get_order_requests():
 
 # save faramer location
 @csrf_protect.exempt
-@blueprint.route('/get_requests', methods=["POST"])
+@blueprint.route('/get_farmer location', methods=["POST"])
 def get_farmer_location():
     data = request.json
     return jsonify(data)
