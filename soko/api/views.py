@@ -136,8 +136,8 @@ def login():
     registered_user = User.query.filter_by(username=username).first()
     if registered_user is None:
         status = {'status': 'failure', 'message': 'Invalid Username or password'}
-    elif registered_user.active is False:
-        status = {'status': 'failure', 'message': 'Your documents have not yet been verified'}
+    # elif registered_user.active is False:
+    #     status = {'status': 'failure', 'message': 'Your documents have not yet been verified'}
     else:
         if bcrypt.check_password_hash(registered_user.password, password):
             registered_user.token = uuid.uuid4()
@@ -145,7 +145,7 @@ def login():
             db.session.commit()
             status = {'status': 'success', 'message': 'welcome ' + registered_user.first_name,
                       'token': registered_user.token,
-                      'username': registered_user.username, 'category': registered_user.category}
+                      'username': registered_user.username, 'category': registered_user.category, 'active': registered_user.active}
         else:
             status = {'status': 'failure', 'message': 'Invalid Username or password'}
     return jsonify(status)
@@ -655,7 +655,7 @@ def add_product_sub_type():
             db.session.commit()
             status = {'status': 'success', 'message': 'product name added'}
         except Exception, e:
-            status = {'status': 'failure', 'message': 'problem adding product name'}
+            status = {'status': 'failure', 'message': str(e)}
             print e
         db.session.close()
         return jsonify(status)
