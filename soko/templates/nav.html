@@ -30,12 +30,16 @@
             </a>
           </li>
 
+          {% if current_user.category.lower() in ["transporter"] %}
+
           <li {% if request.url.find("map") >= 0 %}class="active" {% endif %}>
             <a href="/users/locations/map">
               <i class="ion-location"></i> 
               <span>Map</span>
             </a>
           </li>
+
+          {% endif %}
 
           <li>
             <a href="javascript:alert('Not implemented yet')">
@@ -53,6 +57,8 @@
           
         </ul>
       </div>-->
+
+    {% if current_user.category.lower() in ["consumer", "farmer"] %}
 
       <div class="menu-section">
         <h3>Products &amp; Sales</h3>
@@ -73,6 +79,9 @@
 
         </ul>
       </div>
+    {% endif %}
+
+    {% if current_user.category.lower() in ["transporter", "consumer", "farmer"] %}
 
       <div class="menu-section">
         <h3>Finances</h3>
@@ -92,6 +101,9 @@
         </ul>
       </div>
 
+    {% endif %}
+
+    {% if current_user.category.lower() in ["transporter"] %}
 
       <div class="menu-section">
         <h3>Documents</h3>
@@ -112,6 +124,10 @@
 
         </ul>
       </div>
+
+      {% endif %}
+
+      {% if current_user.is_admin %}
 
 
       <div class="menu-section">
@@ -176,6 +192,8 @@
 
         </ul>
       </div>
+
+      {% endif %}
 
 
 
