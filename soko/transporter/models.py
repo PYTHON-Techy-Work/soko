@@ -10,48 +10,36 @@ class Transporter(SurrogatePK, Model):
     __tablename__ = 'transporters'
     user_id = reference_col('users', nullable=True)
     user = relationship('User', backref='transporters')
-    vehicle_id = reference_col('vehicles', nullable=False)
-    vehicle = relationship('Vehicle', backref='transporters')
-    photo = Column(db.String(80), nullable=False)
-    licence = Column(db.String(80), unique=True, nullable=False)
-    location = Column(db.String(30), nullable=True)
+    vehicle_type = Column(db.String(80), nullable=False)
+    vehicle_reg_no = Column(db.String(80), nullable=False)
+    vehicle_color = Column(db.String(80), unique=True, nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, user, vehicle, photo, licence, location):
-        self.user = user
-        self.vehicle = vehicle
-        self.photo = photo
-        self.licence = licence
-        self.location = location
+    def __init__(self, user_id, vehicle_type, vehicle_reg_no, vehicle_color):
+        self.user_id = user_id
+        self.vehicle_type = vehicle_type
+        self.vehicle_reg_no = vehicle_reg_no
+        self.vehicle_color = vehicle_color
 
     def __repr__(self):
         return '<Transporter %r>' % self.user + self.vehicle + self.licence + self.location
 
 
-class DiversLicence(SurrogatePK, Model):
-    __tablename__ = 'drivers_licence'
-    transporter_id = reference_col('transporters', nullable=True)
-    transporter = relationship('Transporter', backref='drivers_licence')
-    drivers_licence = Column(db.String(80), nullable=True)
-    dl_expiry_date = Column(db.DateTime, nullable=False)
-    national_id = Column(db.String(80), nullable=False)
-    good_conduct = Column(db.String(80), nullable=True)
-    pin_certificate = Column(db.String(80), nullable=True)
-    psv_drivers_licence = Column(db.String(80), nullable=False)
-    photo = Column(db.String(80), nullable=False)
+class TransporterCurrentLocation(SurrogatePK, Model):
+    __tablename__ = 'transporter_current_location'
+    user_id = reference_col('users', nullable=True)
+    user = relationship('User', backref='transporter_current_location')
+    latitude = Column(db.String(80), nullable=True)
+    longitude = Column(db.String(80), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, transporter, drivers_licence, dl_expiry_date, national_id, good_conduct, pin_certificate, psv_drivers_licence):
-        self.transporter = transporter
-        self.drivers_licence = drivers_licence
-        self.dl_expiry_date = dl_expiry_date
-        self.national_id = national_id
-        self.good_conduct = good_conduct
-        self.pin_certificate = pin_certificate
-        self.psv_drivers_licence = psv_drivers_licence
+    def __init__(self, user_id, latitude, longitude):
+        self.user_id = user_id
+        self.latitude = latitude
+        self.longitude = longitude
 
     def __repr__(self):
-        return '<Driver %r>' % self.transporter + self.drivers_licence + self.dl_expiry_date + self.national_id + self.good_conduct + self.pin_certificate + self.psv_drivers_licence
+        return '<Driver %r>' % self.user_id + self.latitude + self.longitude
 
 
 class County(SurrogatePK, Model):

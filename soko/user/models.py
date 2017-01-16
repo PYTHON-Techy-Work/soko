@@ -27,7 +27,6 @@ class Role(SurrogatePK, Model):
 
 class User(UserMixin, SurrogatePK, Model):
     """A user of the app."""
-
     __tablename__ = 'users'
     username = Column(db.String(80), unique=True, nullable=False)
     email = Column(db.String(80), unique=True, nullable=False)
@@ -40,6 +39,7 @@ class User(UserMixin, SurrogatePK, Model):
     active = Column(db.Boolean(), default=False)
     is_admin = Column(db.Boolean(), default=False)
     token = Column(db.String(100), nullable=False)
+    # photo = Column(db.String(300), nullable=True)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
     region = Column(db.String(80), nullable=True)
 

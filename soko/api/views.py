@@ -6,15 +6,16 @@ from flask_mail import Mail, Message
 
 from werkzeug.utils import secure_filename
 
-from soko.user.models import User
-from soko.transporter.models import Transporter, County
-from soko.farmer.models import Farmer
+from soko.user.models import User, Document
+from soko.transporter.models import Transporter, County, TransporterCurrentLocation
+from soko.farmer.models import Farmer, FarmerAddress
 from soko.customer.models import Customer
 from soko.products.models import Product, ProductType, ProductRatings, Cart, Purchase, ProductSubType, ShoppingList
 from soko.locations.models import Locations
 from soko.database import db
 from soko.utils import flash_errors
-from soko.extensions import csrf_protect, bcrypt, mail
+from soko.extensions import csrf_protect, bcrypt, mail, geolocator
+from math import sin, cos, atan2, sqrt, radians
 
 import os
 import base64
@@ -26,6 +27,20 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 blueprint = Blueprint('api', __name__, url_prefix='/api/v1')
 
 
+# checking for the file extensions
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+
+# checking for the image extensions
+def guess_image_extension(fdata):
+    if fdata.startswith("data:image/jpeg"):
+        return "jpg"
+    return "png"
+
+
+# getting the list of all the users
 @blueprint.route('/get_users', methods=['GET'])
 def get_users():
     # Query the database and return all users
@@ -107,7 +122,6 @@ def update_profile():
     db.session.close()
     return jsonify(status)
 
-
 #login_api
 @csrf_protect.exempt
 @blueprint.route('/login', methods=["POST"])
@@ -132,7 +146,130 @@ def login():
     return jsonify(status)
 
 
-# api for all the product types
+#add transporter details #lorry, pick-up, van, truck, motorcycle
+@csrf_protect.exempt
+@blueprint.route('/add_transporter_details', methods=["POST"])
+def add_transporter_details():
+    data = request.json
+    if data:
+        user = User.query.filter_by(token=data["token"]).first()
+        try:
+            transporter = Transporter(
+                user_id=user.id,
+                vehicle_type=data["vehicle_type"],
+                vehicle_reg_no=data["vehicle_reg_no"],
+                vehicle_color=data["vehicle_color"]
+            )
+            db.session.add(transporter)
+            db.session.commit()
+            status = {"status": "success", "message": "Data added successfully"}
+        except Exception, e:
+            status = {"status": "failure", "message": str(e)}
+    else:
+        status = {"status": "failure", "message": "Please enter the correct data"}
+    db.session.close()
+    return jsonify(status)
+
+
+# add driver's licence for verification
+@csrf_protect.exempt
+@blueprint.route('/add_driver_licence', methods=["POST"])
+def add_driver_licence():
+    # data = request.json
+    if request.get_json(force=True):
+        data = request.get_json(force=True)
+    else:
+        data = request.form
+
+    if "drivers_licence" not in data:
+        return jsonify({'status': 'failure', 'message': 'you need to provide a drivers_licence'})
+
+    drivers_licence = data["drivers_licence"]
+    print drivers_licence
+
+    # need to de-base-64 the image, as it is passed as long string
+    if "base64," in drivers_licence:
+        drivers_licence_decoded = base64.decodestring(drivers_licence.partition("base64,")[2])
+    else:
+        drivers_licence_decoded = base64.decodestring(drivers_licence)
+
+    # we don't have a filename, so let's make a random one
+    filename = "upload_" + str(int(time.time())) + "." + guess_image_extension(drivers_licence)
+    path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+    fp = open(path, 'wb')  # create a writable image and write the decoding result
+    fp.write(drivers_licence_decoded)
+
+    fp.close()
+    if data:
+        user = User.query.filter_by(token=data["token"]).first()
+        try:
+            document = Document(
+                name=data["name"],
+                filename=path,
+                user_id=user.id,
+            )
+            db.session.add(document)
+            db.session.commit()
+            status = {"status": "success", "message": "Driver's licence added successfully"}
+        except Exception, e:
+            status = {"status":"failure", "message": str(e)}
+    else:
+        status = {"status": "failure", "message": "Please add the correct data"}
+    db.session.close()
+    return jsonify(status)
+
+
+# add id card for verification
+@csrf_protect.exempt
+@blueprint.route('/add_id_card', methods=["POST"])
+def add_id_card():
+    # data = request.json
+    if request.get_json(force=True):
+        data = request.get_json(force=True)
+    else:
+        data = request.form
+
+    if "id_card" not in data:
+        return jsonify({'status': 'failure', 'message': 'you need to provide a id_card'})
+
+    id_card = data["id_card"]
+    print id_card
+
+    # need to de-base-64 the image, as it is passed as long string
+    if "base64," in id_card:
+        id_card_decoded = base64.decodestring(id_card.partition("base64,")[2])
+    else:
+        id_card_decoded = base64.decodestring(id_card)
+
+    # we don't have a filename, so let's make a random one
+    filename = "upload_" + str(int(time.time())) + "." + guess_image_extension(id_card)
+    path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+    fp = open(path, 'wb')  # create a writable image and write the decoding result
+    fp.write(id_card_decoded)
+
+    fp.close()
+    if data:
+        user = User.query.filter_by(token=data["token"]).first()
+        try:
+            document = Document(
+                name=data["name"],
+                filename=path,
+                user_id=user.id,
+            )
+            db.session.add(document)
+            db.session.commit()
+            status = {"status": "success", "message": "Identity Card added successfully"}
+        except Exception, e:
+            status = {"status":"failure", "message": str(e)}
+    else:
+        status = {"status": "failure", "message": "Please add the correct data"}
+    db.session.close()
+    return jsonify(status)
+
+
+# api for getting all the product types
 @blueprint.route('/get_product_types', methods=["GET"])
 def get_product_types():
     ret = []
@@ -142,6 +279,7 @@ def get_product_types():
     return jsonify(data=ret)
 
 
+# api for inserting a product type
 @csrf_protect.exempt
 @blueprint.route('/insert_product_type', methods=["POST"])
 def put_product_types():
@@ -157,19 +295,6 @@ def put_product_types():
         status = 'the product type  is already registered'
     db.session.close()
     return jsonify({'result': status})
-
-
-# checking for the file extensions
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
-
-
-# checking for the image extensions
-def guess_image_extension(fdata):
-    if fdata.startswith("data:image/jpeg"):
-        return "jpg"
-    return "png"
 
 
 # api to add products
@@ -580,9 +705,100 @@ def get_order_requests():
     data = request.json
     return jsonify(data)
 
+
 # save faramer location
 @csrf_protect.exempt
-@blueprint.route('/get_farmer location', methods=["POST"])
+@blueprint.route('/get_farmer_location', methods=["POST"])
 def get_farmer_location():
     data = request.json
-    return jsonify(data)
+    latitude = data["lat"]
+    longitude = data["lng"]
+    user = User.query.filter_by(token=data["token"]).first()
+    print user.region
+    if user:
+        try:
+            location = geolocator.reverse(str(latitude) + "," + str(longitude))
+            print location.address
+            farmer_address = FarmerAddress(
+                user_id=user.id,
+                primary_address=location.address,
+                location=user.region
+            )
+            db.session.add(farmer_address)
+            db.session.commit()
+            status = {"status": "success", "message": location.address}
+        except Exception, e:
+            print e
+            status = {"status": "failure", "message": str(e)}
+    else:
+        status = {"status": "failure", "message": "user not found"}
+    db.session.close()
+    return jsonify(status)
+
+# get_transporter_current_location
+@csrf_protect.exempt
+@blueprint.route('/get_transporter_current_location', methods=["POST"])
+def transporter_current_location():
+    data = request.json
+    if data:
+        user = User.query.filter_by(token=data["token"]).first()
+        try:
+            tranporter_current_location = TransporterCurrentLocation(
+                user_id=user.id,
+                latitude=data["lat"],
+                longitude=data["lng"]
+            )
+            db.session.add(tranporter_current_location)
+            db.session.commit()
+            status = {"status": "failure", "message": "Location added successfully"}
+        except Exception, e:
+            status = {"status":"failure", "message": str(e)}
+    else:
+        status = {"status": "failure", "message": "Pass the correct data"}
+    db.session.close()
+    return jsonify(status)
+
+
+
+# send request location
+#
+# @csrf_protect.exempt
+# @blueprint.route('/get_distance', methods=["POST"])
+# def get_distance():
+#     data = request.json
+#     if data:
+#         user = User.query.filter_by(token=data["token"]).first()
+#         # print user.id
+#         if user:
+#             ret = []
+#             ls = .query.filter_by(user_id=user.id)
+#             for ls in ShoppingList.query.filter_by(user_id=user.id):
+#                 product = Product.query.filter_by(id=ls.product_id).first()
+#                 print product.name
+#                 ret.append(product.serialize())
+#             status = {"status": "success", "message": ret}
+#         else:
+#             status = {"status": "failure", "message": "No records found"}
+#     else:
+#         status = {"status": "failure", "message": "No records found"}
+#     return jsonify(status)
+
+
+
+
+
+
+
+#
+# >>> from math import sin, cos, sqrt, atan2, radians
+# >>> R = 6373.0
+# >>> lat1 = radians(52.2296756)
+# >>> lon1 = radians(21.0122287)
+# >>> lat2 = radians(52.406374)
+# >>> lon2 = radians(16.9251681)
+# >>> dlon = lon2 - lon1
+# >>> dlat = lat2 - lat1
+# >>> a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+# >>> c = 2 * atan2(sqrt(a), sqrt(1 - a))
+# >>> distance = R * c
+# >>> print("Result:", distance)

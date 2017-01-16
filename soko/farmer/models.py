@@ -28,7 +28,7 @@ class Branch(SurrogatePK, Model):
     name = Column(db.String(80), nullable=False)
     farmer_id = reference_col('farmers', nullable=True)
     farmer = relationship('Farmer', backref='branches')
-    location = Column(db.String(80), nullable=True)
+    location = Column(db.String(300), nullable=True)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
     def __init__(self, name, location, farmer):
@@ -38,3 +38,26 @@ class Branch(SurrogatePK, Model):
 
     def __repr__(self):
         return '<Branch %r>' % self.name + self.location + self.farmer
+
+
+class FarmerAddress(SurrogatePK, Model):
+    __tablename__ = 'farmer_address'
+    user_id = reference_col('users', nullable=True)
+    user = relationship('User', backref='farmer_address')
+    primary_address = Column(db.String(300), nullable=False)
+    location = Column(db.String(80), nullable=True)
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+
+    def __init__(self, user_id, primary_address, location):
+        self.user_id = user_id
+        self.primary_address = primary_address
+        self.location = location
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user": self.user_id,
+            "primary_address": self.primary_address,
+            "location": self.location,
+            "Date": self.created_at,
+        }

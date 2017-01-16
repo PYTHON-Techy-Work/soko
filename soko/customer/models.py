@@ -26,4 +26,4 @@ class Customer(SurrogatePK, Model):
         self.location = location
 
     def __repr__(self):
-        return '<Transporter %r>' % self.user + self.vehicle + self.licence + self.location
+        return '<Customer %r>' % self.user + self.vehicle + self.licence + self.location
