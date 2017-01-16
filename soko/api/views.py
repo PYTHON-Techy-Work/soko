@@ -56,10 +56,13 @@ def get_users():
 @csrf_protect.exempt
 @blueprint.route('/register', methods=['POST'])
 def reg_user():
-    active = 'Yes'
-    is_admin = 'No'
-    token = ''
     data = request.json
+    if "Transporter" in data["category"]:
+        active = False
+    else:
+        active = True
+    is_admin = False
+    token = ''
     region = County.query.filter_by(id=data["region"]).first()
     print region.name
     user = User(
@@ -133,6 +136,8 @@ def login():
     registered_user = User.query.filter_by(username=username).first()
     if registered_user is None:
         status = {'status': 'failure', 'message': 'Invalid Username or password'}
+    elif registered_user.active is False:
+        status = {'status': 'failure', 'message': 'Your documents have not yet been verified'}
     else:
         if bcrypt.check_password_hash(registered_user.password, password):
             registered_user.token = uuid.uuid4()
