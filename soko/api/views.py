@@ -572,11 +572,11 @@ def remove_from_cart():
 @csrf_protect.exempt
 @blueprint.route('/purchase_cart', methods=["POST"])
 def purchase_cart():
-    
+    data = request.json
     if "token" not in request.json:
         return jsonify({'status': 'failure', 'message': 'Error!'})
 
-    user = User.query.filter_by(token=request.json["token"]).first()
+    user = User.query.filter_by(token=data["token"]).first()
 
     for cart in Cart.query.filter_by(user=user.id):
         # todo: do some stuff with the cart
@@ -590,7 +590,9 @@ def purchase_cart():
         shopping_list = ShoppingList(
             user_id=user.id,
             product_id=cart.product_id,
-            quantity=cart.quantity
+            quantity=cart.quantity,
+            lat=data["lat"],
+            lng=data["lng"]
         )
         db.session.add(purchase)
         db.session.add(shopping_list)
@@ -698,19 +700,6 @@ def remove_from_shopping_list():
     return jsonify(status)
 
 
-@csrf_protect.exempt
-@blueprint.route('/incoming_requests', methods=["POST"])
-def incoming_order_requests():
-    data = request.json
-    return jsonify(data)
-
-
-@blueprint.route('/get_requests', methods=["GET"])
-def get_order_requests():
-    data = request.json
-    return jsonify(data)
-
-
 # save faramer location
 @csrf_protect.exempt
 @blueprint.route('/get_farmer_location', methods=["POST"])
@@ -764,46 +753,29 @@ def transporter_current_location():
     return jsonify(status)
 
 
-
-# send request location
-#
-# @csrf_protect.exempt
-# @blueprint.route('/get_distance', methods=["POST"])
-# def get_distance():
-#     data = request.json
-#     if data:
-#         user = User.query.filter_by(token=data["token"]).first()
-#         # print user.id
-#         if user:
-#             ret = []
-#             ls = .query.filter_by(user_id=user.id)
-#             for ls in ShoppingList.query.filter_by(user_id=user.id):
-#                 product = Product.query.filter_by(id=ls.product_id).first()
-#                 print product.name
-#                 ret.append(product.serialize())
-#             status = {"status": "success", "message": ret}
-#         else:
-#             status = {"status": "failure", "message": "No records found"}
-#     else:
-#         status = {"status": "failure", "message": "No records found"}
-#     return jsonify(status)
-
-
-
-
-
-
-
-#
-# >>> from math import sin, cos, sqrt, atan2, radians
-# >>> R = 6373.0
-# >>> lat1 = radians(52.2296756)
-# >>> lon1 = radians(21.0122287)
-# >>> lat2 = radians(52.406374)
-# >>> lon2 = radians(16.9251681)
-# >>> dlon = lon2 - lon1
-# >>> dlat = lat2 - lat1
-# >>> a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
-# >>> c = 2 * atan2(sqrt(a), sqrt(1 - a))
-# >>> distance = R * c
-# >>> print("Result:", distance)
+@csrf_protect.exempt
+@blueprint.route('/available_orders', methods=["POST"])
+def get_distance():
+    data = request.json
+    R = 6373.0
+    if data:
+        lat1 = radians(data["lat"])
+        lon1 = radians(data["lng"])
+        user = User.query.filter_by(token=data["token"]).first()
+        if user:
+            lat2 = radians(52.406374)
+            lon2 = radians(16.9251681)
+            try:
+                dlon = lon2 - lon1
+                dlat = lat2 - lat1
+                a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+                c = 2 * atan2(sqrt(a), sqrt(1 - a))
+                distance = R * c
+                status = {"status": "success", "message": distance}
+            except Exception, e:
+                status = {"status": "failure", "message": str(e)}
+        else:
+            status = {"status": "failure", "message": "No records found"}
+    else:
+        status = {"status": "failure", "message": "No records found"}
+    return jsonify(status)

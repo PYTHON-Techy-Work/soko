@@ -39,7 +39,7 @@ class User(UserMixin, SurrogatePK, Model):
     active = Column(db.Boolean(), default=False)
     is_admin = Column(db.Boolean(), default=False)
     token = Column(db.String(100), nullable=False)
-    # photo = Column(db.String(300), nullable=True)
+    photo = Column(db.String(300), nullable=True)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
     region = Column(db.String(80), nullable=True)
 

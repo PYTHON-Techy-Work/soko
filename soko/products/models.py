@@ -170,18 +170,24 @@ class ShoppingList(SurrogatePK, Model):
     product_id = reference_col('products', nullable=False)
     product = relationship('Product', backref='shopping_list')
     quantity = Column(db.Integer),
+    lat = Column(db.String(80)),
+    lng = Column(db.String(80)),
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, user_id, product_id, quantity):
+    def __init__(self, user_id, product_id, quantity, lat, lng):
         self.user_id = user_id
         self.product_id = product_id
         self.quantity = quantity
+        self.lat = lat
+        self.lng = lng
 
     def serialize(self):
         return {
             "user_id": self.user_id,
-            "product": self.product,
-            "quantity": self.quantity
+            "product": self.product_id,
+            "quantity": self.quantity,
+            "lat": self.lat,
+            "lng": self.lng
         }
 
 
