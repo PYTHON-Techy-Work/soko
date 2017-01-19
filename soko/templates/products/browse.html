@@ -1,0 +1,80 @@
+{% set INCLUDE_DATATABLES = True %}
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="row">
+
+<h2>All items for sale</h2>
+<hr>
+
+{% if current_user.cart_count > 0 %}
+<div class="alert alert-info">
+    You have <b>{{current_user.cart_count}}</b> items in your cart. To complete your purchase, click below:
+
+    <br><br>
+    <a href="/products/cart" class="btn btn-primary">View cart</a>
+</div>
+{% endif %}
+
+{% for i in products %}
+<div class="col-md-2">
+<div class="panel panel-default">
+  <div class="panel-body">
+    {% if i.photo %}
+        <img style="width:100%;" src="/static/uploads/{{i.photo.split("/")[-1]}}">
+    {% endif %}
+
+    <a href="javascript:addToCart({{i.id}}, '{{i.name}}', {{i.quantity}})" class="btn btn-default" style="position:absolute; top:10px; right:25px"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+
+  </div>
+  <div class="panel-footer"><b>{{i.name}}</b> -- {{i.price}} ksh</div>
+</div>
+</div>
+{% else %}
+(nothing for sale)
+{% endfor %}
+      
+</div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="addmodal">
+<form method="post">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><b><span id="carttitle"></span></b> -- add to cart</h4>
+      </div>
+      <div class="modal-body">
+        <p>How many do you want to add?</p>
+        <input type="hidden" name="addid" id="addid">
+        <input type="number" class="form-control" min="1" max="100" value="1" name="quantity" id="quantity">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Confirm</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+  </form>
+</div><!-- /.modal -->
+
+
+{% endblock %}
+
+
+{% block js %}
+<script>
+
+function addToCart(i, name, maximum){
+    $("#carttitle").html(name);
+    $("#addid").val(i);
+    $("#quantity").val(maximum);
+    $("#quantity").prop("max", maximum);
+    $("#addmodal").modal("show");
+}
+
+</script>
+{% endblock %}
+
+

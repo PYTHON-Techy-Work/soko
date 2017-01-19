@@ -58,7 +58,7 @@
         </ul>
       </div>-->
 
-    {% if current_user.category.lower() in ["consumer", "farmer"] %}
+    {% if current_user.category.lower() in ["farmer"] %}
 
       <div class="menu-section">
         <h3>Products &amp; Sales</h3>
@@ -74,6 +74,46 @@
             <a href="javascript:alert('Not implemented yet')">
               <i class="fa fa-clock-o"></i> 
               <span>Sales history</span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    {% endif %}
+
+
+     {% if current_user.category.lower() in ["consumer"] %}
+
+      <div class="menu-section">
+        <h3>Products &amp; Sales</h3>
+        <ul>
+          <li {% if request.endpoint == "products.index" %}class="active" {% endif %}>
+            <a href="/products/browse">
+              <i class="fa fa-gift"></i> 
+              <span>Browse</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/products/cart">
+              <i class="fa fa-shopping-cart"></i> 
+              <span>My cart 
+
+              {% if current_user.cart_count %}<b>({{current_user.cart_count}})</b> {% endif %}</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="javascript:alert('Not implemented yet')">
+              <i class="fa fa-map-marker"></i> 
+              <span>Deliveries in progress</span>
+            </a>
+          </li>
+
+          <li {% if request.endpoint == "products.orders" %}class="active" {% endif %}>
+            <a href="/products/orders">
+              <i class="fa fa-list"></i> 
+              <span>Order history</span>
             </a>
           </li>
 

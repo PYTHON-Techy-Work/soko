@@ -6,10 +6,10 @@ from soko.utils import flash_errors
 import time, os
 
 from flask import current_app as app
-
+from soko.extensions import csrf_protect
 from flask_login import login_required, current_user
 
-from soko.user.models import User
+#from soko.user.models import User
 from .models import ProductType
 
 blueprint = Blueprint('item', __name__, url_prefix='/products', static_folder='../static')
@@ -118,3 +118,94 @@ def type_edit(tid):
         flash_errors(form)
         
     return render_template('products/type_edit.html', form=form, item=obj)
+
+
+
+
+
+
+@blueprint.route('/browse', methods=["GET", "POST"])
+@login_required
+@csrf_protect.exempt
+def browse():
+
+    if "addid" in request.form:
+        product = Product.query.get(request.form.get("addid"))
+
+        total = float(request.form.get("quantity")) * float(product.price)
+        c = Cart(current_user.id, product.id, request.form.get("quantity"), total)
+
+        db.session.add(c)
+        db.session.commit()
+
+        flash("Addeed to cart", "success")
+        return redirect("/products/browse")
+
+    """List all products."""
+    products = Product.query.all()
+
+    return render_template('products/browse.html', products=products, title="All items for sale")
+
+
+@blueprint.route('/cart', methods=["GET", "POST"])
+@login_required
+@csrf_protect.exempt
+def cart():
+
+    if "remove" in request.args:
+        c = Cart.query.get(request.args.get("remove"))
+        db.session.delete(c)
+        flash("Removed from cart", "success")
+        db.session.commit()
+        return redirect("/products/cart")
+
+    items = Cart.query.filter_by(user=current_user.id)
+
+    total = 0
+    for i in items:
+        total += i.total
+
+    return render_template('products/cart.html', items=items, total=total)
+
+
+
+
+@blueprint.route('/pay', methods=["GET", "POST"])
+@login_required
+@csrf_protect.exempt
+def pay():
+
+    for cart in Cart.query.filter_by(user=current_user.id):
+        purchase = Purchase(
+            user=current_user.id,
+            product=cart.product,
+            quantity=cart.quantity,
+            total=cart.total,
+        )
+        shopping_list = ShoppingList(
+            user_id=current_user.id,
+            product_id=cart.product_id,
+            quantity=cart.quantity,
+            lat=None,
+            lng=None
+        )
+        db.session.add(purchase)
+        db.session.add(shopping_list)
+        product = Product.query.get(cart.product_id)
+        product.quantity = int(product.quantity) - int(purchase.quantity)
+        db.session.delete(cart)
+        db.session.commit()
+    db.session.commit()
+
+    flash("Payment completed", "success")
+
+    return redirect("/products/orders")
+
+
+
+@blueprint.route('/orders', methods=["GET"])
+@login_required
+def orders():
+    items = Purchase.query.filter_by(user=current_user.id)
+    return render_template('products/orders.html', items=items)
+

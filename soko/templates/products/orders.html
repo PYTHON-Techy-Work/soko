@@ -1,0 +1,58 @@
+{% set INCLUDE_DATATABLES = True %}
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="row">
+        <div class="col-lg-10 col-lg-offset-1 col-md-12">
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h1 class="panel-title" style="font-size:20pt"><i class="fa fa-gift"></i> Purchase history</h1>
+  </div>
+  <div class="panel-body">
+   
+        <table class="table table-striped datatable">
+        <thead>
+            <th><i class="fa fa-camera"></i></th>
+            <th>Name</th>
+            <th>Purchased on</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </thead>
+        <tbody>
+            {% for i in items %}
+                <tr>
+                    <td> {% if i.product.photo %}
+                            <img style="height:30px; width:30px; border-radius:50%" src="/static/uploads/{{i.product.photo.split("/")[-1]}}">
+                        {% endif %}
+                    </td>
+                    <td>{{i.product.name}}</td>
+                    <td>{{i.created_at}}</td>
+                    <td>{{i.quantity}}</td>
+                    <td>{{i.total}} ksh</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}
+
+
+{% block js %}
+<script>
+$(function() {
+    $('.datatable').dataTable({
+        "sPaginationType": "full_numbers",
+        "iDisplayLength": 20,
+        "aLengthMenu": [[20, 50, 100, -1], [20, 50, 100, "All"]]
+    });
+});
+</script>
+{% endblock %}
+
+

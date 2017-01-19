@@ -7,6 +7,7 @@ from flask_login import UserMixin
 from soko.database import Column, Model, SurrogatePK, db, reference_col, relationship
 from soko.extensions import bcrypt
 
+from soko.products.models import Cart
 
 class Role(SurrogatePK, Model):
     """A role for a user."""
@@ -61,6 +62,10 @@ class User(UserMixin, SurrogatePK, Model):
     def check_password(self, value):
         """Check password."""
         return bcrypt.check_password_hash(self.password, value)
+
+    @property
+    def cart_count(self):
+        return Cart.query.filter_by(user=self.id).count()
 
     @property
     def full_name(self):

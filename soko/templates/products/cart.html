@@ -1,0 +1,94 @@
+{% set INCLUDE_DATATABLES = True %}
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="row">
+        <div class="col-lg-10 col-lg-offset-1 col-md-12">
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h1 class="panel-title" style="font-size:20pt"><i class="fa fa-shopping-cart"></i> My cart</h1>
+  </div>
+  <div class="panel-body">
+   
+        <table class="table table-striped datatable">
+        <thead>
+            <th style="width:50px"><i class="fa fa-camera"></i></th>
+            <th>Name</th>
+            <th style="width:50px">Quantity</th>
+            <th style="width:50px">Price</th>
+            <th style="width:50px">Total</th>
+            <th style="width:50px"></th>
+        </thead>
+        <tbody>
+            {% for i in items %}
+                <tr>
+                    <td> {% if i.product.photo %}
+                            <img style="height:30px; width:30px; border-radius:50%" src="/static/uploads/{{i.product.photo.split("/")[-1]}}">
+                        {% endif %}
+                    </td>
+                    <td>{{i.product.name}}</td>
+                    <td>{{i.quantity}}</td>
+                    <td>{{i.product.price}}</td>
+                    <td>{{i.total}} ksh</td>
+                    <td><a href="?remove={{i.id}}"><i class="fa fa-trash"></i></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if items.count() %}
+
+    <hr>
+    <div class="pull-right" style="text-align: right">
+    <h2>Total: <b>{{total}} KSH</b></h2>
+    <br>
+
+    <a href="javascript:$('#paymodal').modal('show')"" class="btn btn-lg btn-primary"><i class="fa fa-credit-card"></i> Complete purchase</a>
+    {% endif %}
+    </div>
+
+    </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="paymodal">
+<form method="post" action="pay">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Complete purchase</h4>
+      </div>
+      <div class="modal-body">
+        <p>Complete the form below to complete your purchase</p>
+
+        <div class="alert alert-info">Payment goes here</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Confirm</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+  </form>
+</div><!-- /.modal -->
+
+{% endblock %}
+
+
+{% block js %}
+<script>
+$(function() {
+    $('.datatable').dataTable({
+        "sPaginationType": "full_numbers",
+        "iDisplayLength": 20,
+        "aLengthMenu": [[20, 50, 100, -1], [20, 50, 100, "All"]]
+    });
+});
+</script>
+{% endblock %}
+
+
