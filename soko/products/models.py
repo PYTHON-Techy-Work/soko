@@ -5,12 +5,82 @@ import decimal
 from soko.database import Column, Model, SurrogatePK, db, reference_col, relationship
 
 
+class ProductCategory(SurrogatePK, Model):
+    __tablename__ = 'product_categories'
+    name = Column(db.String(80), nullable=False)
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return '<Product Category Type %r>' % self.name
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name
+        }
+
+
+class ProductType(SurrogatePK, Model):
+    __tablename__ = 'product_types'
+    name = Column(db.String(80), nullable=False)
+    product_category_id = reference_col('product_categories', nullable=False)
+    product_category = relationship('ProductType', backref='product_types')
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+
+    def __init__(self, name, product_category_id):
+        self.name = name
+        self.product_category_id = product_category_id
+
+    def __repr__(self):
+        return '<Product Type Name %r>' % self.name
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "product_category": self.product_category_id
+        }
+
+
+class ProductSubType(SurrogatePK, Model):
+    __tablename__ = 'product_sub_types'
+    name = Column(db.String(80), nullable=False)
+    description = Column(db.String(500), nullable=False)
+    product_type_id = reference_col('product_types', nullable=False)
+    product_type = relationship('ProductType', backref='product_sub_types')
+    photo = Column(db.String(500), nullable=False)
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+
+    def __init__(self, name, description, product_type_id, photo):
+        self.name = name
+        self.description = description
+        self.product_type_id = product_type_id
+        self.photo = photo
+
+    def __repr__(self):
+        return '<Product Sub Type Name %r>' % self.name
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "product_type": self.product_type_id,
+            "photo": self.photo
+        }
+
+
 class Product(SurrogatePK, Model):
     __tablename__ = 'products'
     name = Column(db.String(80), nullable=False)
+    product_category_id = reference_col('product_categories', nullable=False)
+    product_category = relationship('ProductCategory', backref='products')
     product_type_id = reference_col('product_types', nullable=False)
     product_type = relationship('ProductType', backref='products')
-    product_sub_type_id = reference_col('product_sub_type', nullable=False)
+    product_sub_type_id = reference_col('product_sub_types', nullable=False)
     product_sub_type = relationship('ProductSubType', backref='products')
     user_id = reference_col('users', nullable=False)
     user = relationship('User', backref='products')
@@ -44,52 +114,6 @@ class Product(SurrogatePK, Model):
             "product_type": self.product_type_id,
             "product_sub_type": self.product_sub_type_id,
             "price": float(self.price)
-        }
-
-
-class ProductType(SurrogatePK, Model):
-    __tablename__ = 'product_types'
-    name = Column(db.String(80), nullable=True)
-    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
-
-    def __init__(self, name):
-        self.name = name
-
-    def __repr__(self):
-        return '<Product Type %r>' % self.name
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "name": self.name
-        }
-
-
-class ProductSubType(SurrogatePK, Model):
-    __tablename__ = 'product_sub_type'
-    name = Column(db.String(80), nullable=False)
-    description = Column(db.String(500), nullable=False)
-    product_type_id = reference_col('product_types', nullable=False)
-    product_type = relationship('ProductType', backref='product_sub_type')
-    photo = Column(db.String(500), nullable=False)
-    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
-
-    def __init__(self, name, description, product_type_id, photo):
-        self.name = name
-        self.description = description
-        self.product_type_id = product_type_id
-        self.photo = photo
-
-    def __repr__(self):
-        return '<Product Name %r>' % self.name
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "description": self.description,
-            "product_type": self.product_type_id,
-            "photo": self.photo
         }
 
 
@@ -146,9 +170,9 @@ class Purchase(SurrogatePK, Model):
     total = Column(db.Numeric(15, 2), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, user, product, quantity, total):
+    def __init__(self, user, product_id, quantity, total):
         self.user = user
-        self.product = product
+        self.product_id = product_id
         self.quantity = quantity
         self.total = total
 
@@ -170,56 +194,60 @@ class ShoppingList(SurrogatePK, Model):
     product_id = reference_col('products', nullable=False)
     product = relationship('Product', backref='shopping_list')
     quantity = Column(db.Integer),
-    lat = Column(db.String(80)),
-    lng = Column(db.String(80)),
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, user_id, product_id, quantity, lat, lng):
+    def __init__(self, user_id, product_id, quantity):
         self.user_id = user_id
         self.product_id = product_id
         self.quantity = quantity
-        self.lat = lat
-        self.lng = lng
+
 
     def serialize(self):
         return {
             "user_id": self.user_id,
             "product": self.product_id,
             "quantity": self.quantity,
-            "lat": self.lat,
-            "lng": self.lng
         }
 
 
-class Orders(SurrogatePK, Model):
+class Order(SurrogatePK, Model):
     __tablename__ = 'orders'
     user_id = reference_col('users', nullable=False)
     user = relationship('User', backref='orders')
     product_id = reference_col('products', nullable=False)
     product = relationship('Product', backref='orders')
-    status = Column(db.Integer, nullable=False)
+    status = Column(db.Boolean(), nullable=False)
+    delivered = Column(db.Boolean(), nullable=False)
+    lat = Column(db.String(80)),
+    lng = Column(db.String(80)),
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, user, product, status, total):
-        self.user = user
+    def __init__(self, user_id, product, status,delivered, total, lat, lng):
+        self.user_id = user_id
         self.product = product
         self.status = status
+        self.delivered = delivered
         self.total = total
+        self.lat = lat
+        self.lng = lng
 
     def serialize(self):
         return {
             "id": self.id,
-            "user": self.user,
+            "user": self.user_id,
             "product": self.product.serialize(),
             "status": self.status,
-            "Date": self.created_at,
+            "delivered": self.delivered,
+            "lat": self.lat,
+            "lng": self.lng,
+            "date": self.created_at
         }
 
 
 class Deliveries(SurrogatePK, Model):
     __tablename__ = 'deliveries'
     order_id = reference_col('orders', nullable=False)
-    order = relationship('Orders', backref='deliveries')
+    order = relationship('Order', backref='deliveries')
     transporter = Column(db.Integer, nullable=False)
     consumer = Column(db.Integer, nullable=False)
     location = Column(db.String, nullable=False)

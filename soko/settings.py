@@ -44,17 +44,17 @@ class DevConfig(Config):
     if hostname == "paul-pro":
         SQLALCHEMY_DATABASE_URI = 'postgresql://paul@localhost/soko_mkononi'
     else:
-        SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:tracom123@10.16.0.230/soko_mkononi'  # TODO: Change me
+        SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:jamonjuguna@localhost/soko_mkononi'  # TODO: Change me
         
     DEBUG_TB_ENABLED = True
     ASSETS_DEBUG = True  # Don't bundle/minify static assets
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
-    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_SERVER = 'server.tracom.co.ke'
     MAIL_PORT = 465
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
-    MAIL_USERNAME = ''
-    MAIL_PASSWORD = ''
+    MAIL_USERNAME = 'soko@tracom.co.ke'
+    MAIL_PASSWORD = 'Tr@c0m1234!'
 
 
 class TestConfig(Config):

@@ -10,7 +10,7 @@ from soko.user.models import User, Document
 from soko.transporter.models import Transporter, County, TransporterCurrentLocation
 from soko.farmer.models import Farmer, FarmerAddress
 from soko.customer.models import Customer
-from soko.products.models import Product, ProductType, ProductRatings, Cart, Purchase, ProductSubType, ShoppingList
+from soko.products.models import Product, ProductCategory, ProductType, ProductRatings, Cart, Purchase, ProductSubType, ShoppingList, Order
 from soko.locations.models import Locations
 from soko.database import db
 from soko.utils import flash_errors
@@ -594,8 +594,16 @@ def purchase_cart():
             lat=data["lat"],
             lng=data["lng"]
         )
+        order = Orders(
+            user_id=user.id,
+            product_id=cart.product_id,
+            quantity=cart.quantity,
+            lat=data["lat"],
+            lng=data["lng"]
+        )
         db.session.add(purchase)
         db.session.add(shopping_list)
+        db.session.add(order)
         product = Product.query.get(cart.product_id)
         product.quantity = int(product.quantity) - int(purchase.quantity)
         db.session.delete(cart)
@@ -656,6 +664,25 @@ def add_product_sub_type():
             db.session.add(product_sub_type)
             db.session.commit()
             status = {'status': 'success', 'message': 'product name added'}
+        except Exception, e:
+            status = {'status': 'failure', 'message': str(e)}
+            print e
+        db.session.close()
+        return jsonify(status)
+
+
+@csrf_protect.exempt
+@blueprint.route('/add_product_categories', methods=["POST"])
+def add_product_categories():
+        data = request.json
+        print data
+        product_category = ProductCategory(
+            name=data['name']
+        )
+        try:
+            db.session.add(product_category)
+            db.session.commit()
+            status = {'status': 'success', 'message': 'product category added'}
         except Exception, e:
             status = {'status': 'failure', 'message': str(e)}
             print e
@@ -755,27 +782,22 @@ def transporter_current_location():
 
 @csrf_protect.exempt
 @blueprint.route('/available_orders', methods=["POST"])
-def get_distance():
+def available_orders():
     data = request.json
     R = 6373.0
-    if data:
-        lat1 = radians(data["lat"])
-        lon1 = radians(data["lng"])
-        user = User.query.filter_by(token=data["token"]).first()
-        if user:
-            lat2 = radians(52.406374)
-            lon2 = radians(16.9251681)
-            try:
-                dlon = lon2 - lon1
-                dlat = lat2 - lat1
-                a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
-                c = 2 * atan2(sqrt(a), sqrt(1 - a))
-                distance = R * c
-                status = {"status": "success", "message": distance}
-            except Exception, e:
-                status = {"status": "failure", "message": str(e)}
-        else:
-            status = {"status": "failure", "message": "No records found"}
+    lat1 = radians(data["lat"])
+    lon1 = radians(data["lng"])
+    user = User.query.filter_by(token=data["token"]).first()
+    if user:
+        order = Order.query.filter_by(delivered=False)
+        lat2 = order.lat
+        lon2 = order.lng
+        dlon = lon2 - lon1
+        dlat = lat2 - lat1
+        a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+        c = 2 * atan2(sqrt(a), sqrt(1 - a))
+        distance = R * c
+        status = {"status": "failure", "message": distance}
     else:
         status = {"status": "failure", "message": "No records found"}
     return jsonify(status)

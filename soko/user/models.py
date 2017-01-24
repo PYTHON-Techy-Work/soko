@@ -37,6 +37,7 @@ class User(UserMixin, SurrogatePK, Model):
     phone_number = Column(db.String(15), nullable=True)
     profile_photo = Column(db.String(150), nullable=True)
     category = Column(db.String(30), nullable=True)
+    user_type = Column(db.String(80), nullable=True)#company or individual
     active = Column(db.Boolean(), default=False)
     is_admin = Column(db.Boolean(), default=False)
     token = Column(db.String(100), nullable=False)
