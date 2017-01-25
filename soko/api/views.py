@@ -10,7 +10,7 @@ from soko.user.models import User, Document
 from soko.transporter.models import Transporter, County, TransporterCurrentLocation
 from soko.farmer.models import Farmer, FarmerAddress
 from soko.customer.models import Customer
-from soko.products.models import Product, ProductCategory, ProductType, ProductRatings, Cart, Purchase, ProductSubType, ShoppingList, Order
+from soko.products.models import Product, ProductCategory, ProductType, ProductSubType, ProductRatings, Cart, Purchase, ShoppingList, Order
 from soko.locations.models import Locations
 from soko.database import db
 from soko.utils import flash_errors
@@ -90,7 +90,7 @@ def reg_user():
         mail.send(msg)
     except Exception, e:
         print e
-        status = {'status': 'failure', 'message': 'the user is already registered'}
+        status = {'status': 'failure', 'message': str(e)}
     db.session.close()
     return jsonify(status)
 
@@ -629,48 +629,7 @@ def get_purchase():
         status = {'status': 'failure', 'message': 'You have not purchased any items on soko mkononi'}
     return jsonify(status)
 
-
-@blueprint.route('/get_product_sub_types', methods=["GET"])
-def get_product_name():
-        data = request.args
-        print data['product_type']
-        ret = []
-        if data:
-            user = User.query.filter_by(token=data["token"]).first()
-            if user:
-                product_sub_type = ProductSubType.query.filter_by(product_type_id=data["product_type"])
-                print product_sub_type
-                for pt in product_sub_type:
-                    ret.append(pt.serialize())
-                status = {'message': 'success', 'data': ret}
-            else:
-                status = {'message': 'failure', 'data': 'no product_names available on the system'}
-        else:
-            status = {'message': 'failure', 'data': 'no product_names available on the system'}
-        return jsonify(status)
-
-
-@csrf_protect.exempt
-@blueprint.route('/add_product_sub_type', methods=["POST"])
-def add_product_sub_type():
-        data = request.form
-        product_sub_type = ProductSubType(
-            name=data['name'],
-            description=data['description'],
-            product_type_id=data['product_type'],
-            photo=data['photo']
-        )
-        try:
-            db.session.add(product_sub_type)
-            db.session.commit()
-            status = {'status': 'success', 'message': 'product name added'}
-        except Exception, e:
-            status = {'status': 'failure', 'message': str(e)}
-            print e
-        db.session.close()
-        return jsonify(status)
-
-
+# add the product categories api
 @csrf_protect.exempt
 @blueprint.route('/add_product_categories', methods=["POST"])
 def add_product_categories():
@@ -688,6 +647,88 @@ def add_product_categories():
             print e
         db.session.close()
         return jsonify(status)
+
+# add the product type api
+@csrf_protect.exempt
+@blueprint.route('/add_product_type', methods=["POST"])
+def add_product_type():
+        data = request.json
+        print data
+        product_type = ProductType(
+            name=data['name'],
+            product_category_id=data['product_category']
+        )
+        try:
+            db.session.add(product_type)
+            db.session.commit()
+            status = {'status': 'success', 'message': 'product type added'}
+        except Exception, e:
+            status = {'status': 'failure', 'message': str(e)}
+            print e
+        db.session.close()
+        return jsonify(status)
+
+
+# add the product sub type api
+@csrf_protect.exempt
+@blueprint.route('/add_product_sub_type', methods=["POST"])
+def add_product_sub_type():
+        data = request.json
+        print data
+        product_sub_type = ProductSubType(
+            name=data['name'],
+            product_type_id=data['product_type'],
+            product_category_id = data['product_category']
+        )
+        try:
+            db.session.add(product_sub_type)
+            db.session.commit()
+            status = {'status': 'success', 'message': 'product sub type added'}
+        except Exception, e:
+            status = {'status': 'failure', 'message': str(e)}
+            print e
+        db.session.close()
+        return jsonify(status)
+
+# @blueprint.route('/get_product_sub_types', methods=["GET"])
+# def get_product_name():
+#         data = request.args
+#         print data['product_type']
+#         ret = []
+#         if data:
+#             user = User.query.filter_by(token=data["token"]).first()
+#             if user:
+#                 product_sub_type = ProductSubType.query.filter_by(product_type_id=data["product_type"])
+#                 print product_sub_type
+#                 for pt in product_sub_type:
+#                     ret.append(pt.serialize())
+#                 status = {'message': 'success', 'data': ret}
+#             else:
+#                 status = {'message': 'failure', 'data': 'no product_names available on the system'}
+#         else:
+#             status = {'message': 'failure', 'data': 'no product_names available on the system'}
+#         return jsonify(status)
+
+# # add the product sub type api
+# @csrf_protect.exempt
+# @blueprint.route('/add_product_sub_type', methods=["POST"])
+# def add_product_sub_type():
+#         data = request.form
+#         product_sub_type = ProductSubType(
+#             name=data['name'],
+#             description=data['description'],
+#             product_type_id=data['product_type'],
+#             photo=data['photo']
+#         )
+#         try:
+#             db.session.add(product_sub_type)
+#             db.session.commit()
+#             status = {'status': 'success', 'message': 'product name added'}
+#         except Exception, e:
+#             status = {'status': 'failure', 'message': str(e)}
+#             print e
+#         db.session.close()
+#         return jsonify(status)
 
 
 @blueprint.route('/get_shopping_list', methods=["GET"])
