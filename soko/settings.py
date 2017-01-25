@@ -49,12 +49,12 @@ class DevConfig(Config):
     DEBUG_TB_ENABLED = True
     ASSETS_DEBUG = True  # Don't bundle/minify static assets
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
-    MAIL_SERVER = 'smtp.googlemail.com'
-    MAIL_PORT = 587
+    MAIL_SERVER = 'smtp.tracom.co.ke'
+    MAIL_PORT = 465
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
-    MAIL_USERNAME = 'njugunanduati'
-    MAIL_PASSWORD = 'njugunanduati@-@1987'
+    MAIL_USERNAME = 'soko'
+    MAIL_PASSWORD = 'Tr@c0m1234!'
 
 
 class TestConfig(Config):
