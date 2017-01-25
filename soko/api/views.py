@@ -10,7 +10,7 @@ from soko.user.models import User, Document
 from soko.transporter.models import Transporter, County, TransporterCurrentLocation
 from soko.farmer.models import Farmer, FarmerAddress
 from soko.customer.models import Customer
-from soko.products.models import Product, ProductCategory, ProductType, ProductSubType, ProductRatings, Cart, Purchase, ShoppingList, Order
+from soko.products.models import Product, ProductCategory, ProductType, ProductSubType, ProductSubSubType, ProductRatings, Cart, Purchase, ShoppingList, Order
 from soko.locations.models import Locations
 from soko.database import db
 from soko.utils import flash_errors
@@ -689,6 +689,32 @@ def add_product_sub_type():
             print e
         db.session.close()
         return jsonify(status)
+
+
+# add the product sub sub type api
+@csrf_protect.exempt
+@blueprint.route('/add_product_sub_sub_type', methods=["POST"])
+def add_product_sub_sub_type():
+        data = request.json
+        print data
+        product_sub_sub_type = ProductSubSubType(
+            name=data['name'],
+            description=data['description'],
+            product_sub_type_id=data['product_sub_type'],
+            product_type_id=data['product_type'],
+            product_category_id=data['product_category'],
+            photo=data['photo']
+        )
+        try:
+            db.session.add(product_sub_sub_type)
+            db.session.commit()
+            status = {'status': 'success', 'message': 'product sub sub type added'}
+        except Exception, e:
+            status = {'status': 'failure', 'message': str(e)}
+            print e
+        db.session.close()
+        return jsonify(status)
+
 
 # @blueprint.route('/get_product_sub_types', methods=["GET"])
 # def get_product_name():
