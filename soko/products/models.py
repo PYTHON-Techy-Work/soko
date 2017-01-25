@@ -27,7 +27,7 @@ class ProductType(SurrogatePK, Model):
     __tablename__ = 'product_types'
     name = Column(db.String(80), nullable=False)
     product_category_id = reference_col('product_categories', nullable=False)
-    product_category = relationship('ProductType', backref='product_types')
+    product_category = relationship('ProductCategory', backref='product_types')
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
     def __init__(self, name, product_category_id):
