@@ -10,7 +10,7 @@ from soko.extensions import csrf_protect
 from flask_login import login_required, current_user
 
 #from soko.user.models import User
-from .models import ProductType
+from .models import ProductType, ProductCategory
 
 blueprint = Blueprint('item', __name__, url_prefix='/products', static_folder='../static')
 
@@ -18,7 +18,6 @@ from .models import *
 from .forms import *
 
 @blueprint.route('/')
-@login_required
 def index():
     """List all products."""
     products = Product.query.filter_by(user_id=current_user.id)
@@ -125,7 +124,6 @@ def type_edit(tid):
 
 
 @blueprint.route('/browse', methods=["GET", "POST"])
-@login_required
 @csrf_protect.exempt
 def browse():
 
@@ -144,7 +142,8 @@ def browse():
     """List all products."""
     products = Product.query.all()
 
-    return render_template('products/browse.html', products=products, title="All items for sale")
+    return render_template('products/browse.html', 
+        products=products, title="All items for sale", product_categories=ProductCategory.query.all())
 
 
 @blueprint.route('/cart', methods=["GET", "POST"])

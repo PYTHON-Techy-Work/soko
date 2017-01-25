@@ -19,7 +19,11 @@ def load_user(user_id):
 
 
 @blueprint.route('/', methods=['GET', 'POST'])
-def home():
+def index():
+    return redirect("/users/dashboard")
+
+@blueprint.route('/login', methods=['GET', 'POST'])
+def login():
     """Home page."""
     if current_user.is_authenticated:
         return redirect("/users/dashboard")

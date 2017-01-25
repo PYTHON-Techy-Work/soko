@@ -2,38 +2,140 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div class="row">
+<link href="/static/css/form.css" rel="stylesheet" type="text/css" media="all" />
 
-<h2>All items for sale</h2>
-<hr>
+<script type="text/javascript" src="/static/js/jquery.jscrollpane.min.js"></script>
+    <script type="text/javascript" id="sourcecode">
+      $(function()
+      {
+        $('.scroll-pane').jScrollPane();
+      });
+    </script>
+<!-- //the jScrollPane script -->
 
-{% if current_user.cart_count > 0 %}
-<div class="alert alert-info">
-    You have <b>{{current_user.cart_count}}</b> items in your cart. To complete your purchase, click below:
 
-    <br><br>
-    <a href="/products/cart" class="btn btn-primary">View cart</a>
-</div>
-{% endif %}
 
+<div class="product-model">  
+   <div class="container">
+      <ol class="breadcrumb">
+      <li><a href="index.html">Home</a></li>
+      <li class="active">Products</li>
+     </ol>
+      <h2>Our Products</h2>   
+
+
+<div class="col-md-9 product-model-sec">
 {% for i in products %}
-<div class="col-md-2">
-<div class="panel panel-default">
-  <div class="panel-body">
-    {% if i.photo %}
-        <img style="width:100%;" src="/static/uploads/{{i.photo.split("/")[-1]}}">
-    {% endif %}
+           <a href="single.html"><div class="product-grid">
+            <div class="more-product"><span> </span></div>            
+            <div class="product-img b-link-stripe b-animate-go  thickbox">
+          {% if i.photo %}
+                  <img class="img-responsive" src="/static/uploads/{{i.photo.split("/")[-1]}}">
+              {% endif %}
 
-    <a href="javascript:addToCart({{i.id}}, '{{i.name}}', {{i.quantity}})" class="btn btn-default" style="position:absolute; top:10px; right:25px"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-
-  </div>
-  <div class="panel-footer"><b>{{i.name}}</b> -- {{i.price}} ksh</div>
-</div>
-</div>
+                  <div class="b-wrapper">
+              <h4 class="b-animate b-from-left  b-delay03">             
+              <button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Quick View</button>
+              </h4>
+              </div>
+            </div></a>            
+            <div class="product-info simpleCart_shelfItem">
+              <div class="product-info-cust prt_name">
+                <h4>{{i.name}}</h4>                
+                <span class="item_price">{{i.price}} ksh</span>
+                <div class="ofr">
+                  <p class="pric1">{{i.quantity}} available</p>
+                </div>
+                <input type="text" class="item_quantity" value="1" />
+                <input type="button" class="item_add items" value="ADD">
+                <div class="clearfix"> </div>
+              </div>                        
+              
+            </div>
+          </div>  
+          </a>
 {% else %}
 (nothing for sale)
 {% endfor %}
+
+
+</div>
+
+<div class="rsidebar span_1_of_left">
+         <section  class="sky-form">
+           <div class="product_right">
+             <h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Categories</h4>
+
+             {% for pc in product_categories %}
+             <div class="tab{{loop.index}}">
+               <ul class="place">               
+                 <li class="sort">{{pc.name}}</li>
+                 <li class="by"><img src="/static/images/do.png" alt=""></li>
+                  <div class="clearfix"> </div>
+                </ul>
+               <div class="single-bottom">      
+                  {% for pt in pc.get_types() %}      
+                  <a href="#"><p>{{pt.name}}</p></a>
+                  {% endfor %}
+                 </div>
+                </div>   
+              {% endfor %}           
+             
+              
+              <!--script-->
+            <script>
+              $(document).ready(function(){
+
+                  {% for pc in product_categories %}
+
+                $(".tab{{loop.index}} .single-bottom").hide();
+                
+                $(".tab{{loop.index}} ul").click(function(){
+                  //$(".single-bottom").hide();
+                  $(".tab{{loop.index}} .single-bottom").slideToggle(300);
+                })
+
+                {% endfor %}
+                
+              });
+            </script>
+            <!-- script -->          
+         </section>
       
+         <section  class="sky-form">
+            <h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Price</h4>
+              <ul class="dropdown-menu1">
+                 <li><a href="">                               
+                <div id="slider-range"></div>             
+                <input type="text" id="amount" style="border: 0; font-weight: NORMAL;   font-family: 'Dosis-Regular';" />
+               </a></li>      
+              </ul>
+           </section>
+           <!---->
+           <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+           <link rel="stylesheet" type="text/css" href="/static/css/jquery-ui.css">
+          <script type='text/javascript'>//<![CDATA[ 
+          $(window).load(function(){
+           $( "#slider-range" ).slider({
+                range: true,
+                min: 0,
+                max: 100000,
+                values: [ 500, 100000 ],
+                slide: function( event, ui ) {  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+                }
+           });
+          $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+
+          });//]]> 
+          </script>
+           <!---->
+  
+           
+                
+       </div>        
+      
+</div>
+
 </div>
 
 

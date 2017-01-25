@@ -1,125 +1,71 @@
+<!--A Design by W3layouts 
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
-  
-  <title>{% block page_title %}Soko Mkononi - {{request.endpoint}}{% endblock %}</title>
+<title>{% block page_title %}Soko Mkononi - {{request.endpoint}}{% endblock %}</title>
+<link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- Custom Theme files -->
+<!--theme style-->
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />  
+<script src="/static/js/jquery.min.js"></script>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- stylesheets -->
-  <link rel="stylesheet" type="text/css" href="/static/css/compiled/theme.css" />
-  <link rel="stylesheet" type="text/css" href="/static/css/vendor/animate.css" />
-  <link rel="stylesheet" type="text/css" href="/static/css/vendor/brankic.css" />
-  <link rel="stylesheet" type="text/css" href="/static/css/vendor/ionicons.min.css" />
-  <link rel="stylesheet" type="text/css" href="/static/css/vendor/font-awesome.min.css" />
-  <link rel="stylesheet" type="text/css" href="/static/css/vendor/select2.css" />
-  <link rel="stylesheet" type="text/css" href="/static/css/vendor/select2-bootstrap.css" />
-  <link rel="stylesheet" type="text/css" href="/static/css/vendor/datepicker.css" />
-  <link rel="stylesheet" type="text/css" href="/static/css/vendor/jquery.minicolors.css" />
-  <link rel="stylesheet" type="text/css" href="/static/css/vendor/summernote.css" />
-
-  <!-- javascript -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-  <script src="/static/js/bootstrap/bootstrap.min.js"></script>
-  <script src="/static/js/vendor/select2.min.js"></script>
-  <script src="/static/js/vendor/bootstrap-datepicker.js"></script>
-  <script src="/static/js/vendor/jquery.validate.min.js"></script>
-  <script src="/static/js/vendor/summernote.min.js"></script>
-  <script src="/static/js/vendor/moment.min.js"></script>
-  <script src="/static/js/vendor/jquery.raty.js"></script>
-  <script src="/static/js/vendor/jquery.cookie.js"></script>
-  <script src="/static/js/vendor/jquery.minicolors.min.js"></script>
-  <script src="/static/js/vendor/jquery.maskedinput.js"></script>
-
-
-  <script src="/static/js/vendor/jquery.flot/jquery.flot.js"></script>
-  <script src="/static/js/vendor/jquery.flot/jquery.flot.time.js"></script>
-  <script src="/static/js/vendor/jquery.flot/jquery.flot.tooltip.js"></script>
-
-  <script src="/static/js/theme.js"></script>
-
-  <script src="https://use.fontawesome.com/e618dce52b.js"></script>
+<!--//theme style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Wedding Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- start menu -->
+<!-- start menu -->
+<link href="/static/css/memenu.css" rel="stylesheet" type="text/css" media="all" />
 
    {% if INCLUDE_DATATABLES %}
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
   {% endif %}
 
+<script type="text/javascript" src="/static/js/memenu.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script>$(document).ready(function(){$(".memenu").memenu();});</script> 
+<!-- /start menu -->
+</head>
+<body> 
+<!--header--> 
+<script src="/static/js/responsiveslides.min.js"></script>
+<script src="https://use.fontawesome.com/e618dce52b.js"></script>
+<script>  
+    $(function () {
+      $("#slider").responsiveSlides({
+        auto: true,
+        nav: true,
+        speed: 500,
+        namespace: "callbacks",
+        pager: false,
+      });
+    });
+  </script>
+  
   {% block css %}{% endblock %}
 
   <style type="text/css">
     
-    .container-narrow{
-      width:600px;
-      margin-left:auto;
-      margin-right:auto;
-    }
-
-    #sidebar-clear > div > ul > li.active > a{
-      font-weight: bold;
-      background-color:#428bca;
-      color:white;
-      border-top:1px solid #ccc;
-      border-bottom:1px solid #ccc;
-    }
-
-    .logo-container{
-      width:180px;
-      height:110px;
-      padding-left:50px;
-      padding-top:10px;
-      margin-top:10px;
-    }
-
-    .logo-container img{
-      height:100%;
-    }
-
-    #sidebar-clear .menu-section h3{
-      color:#428bca;
-    }
-
-    .disabled{
-      cursor:not-allowed;
-      opacity: 0.5;
-    }
+  
   </style>
 
   <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
+{% include "nav.html" %}
 
 
 <body id="form-product">
-{% block body %}
-{% if current_user and current_user.is_authenticated %}
-{% with form=form  %}
-<div id="wrapper">
-{% include "nav.html" %}
-</div>
-{% endwith %}
-{% endif %}
 
-<div id="content">
-      <div class="menubar">
-                <div class="sidebar-toggler visible-xs">
-                    <i class="ion-navicon"></i>
-                </div>
-                
-        <div class="page-title">
-          {% block page_header %}
-          <a href="/"><i class="fa fa-home"></i> Home</a> 
-          <span style="color:#ccc">&rarr;</span> 
-          <a href=""><i class="fa fa-file-o"></i> {{request.endpoint.replace(".", " ").capitalize()}}</a>{% endblock %}
-        </div>
-      </div>
-
-  <div class="content-wrapper">
-
-  <div role="main">
-    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
     <div class="row">
       <div class="col-md-12">
@@ -134,12 +80,9 @@
         {% endif %}
     {% endwith %}
 
-    {% block content %}{% endblock %}
-    </div>
 
-  </div>
-
-</div><!-- end container -->
+    
+{% block content %}{% endblock %}
 
 {% include "footer.html" %}
 
@@ -151,8 +94,7 @@
     {% endif %}
 {% endassets %}
 {% block js %}{% endblock %}
-<!-- end scripts -->cc
-{% endblock %}
+<!-- end scripts -->
 </body>
 </html>
 

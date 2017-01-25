@@ -22,6 +22,9 @@ class ProductCategory(SurrogatePK, Model):
             "name": self.name
         }
 
+    def get_types(self):
+        return ProductType.query.filter_by(product_category_id=self.id)
+
 
 class ProductType(SurrogatePK, Model):
     __tablename__ = 'product_types'
