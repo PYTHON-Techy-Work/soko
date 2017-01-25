@@ -48,20 +48,16 @@ class ProductType(SurrogatePK, Model):
 class ProductSubType(SurrogatePK, Model):
     __tablename__ = 'product_sub_types'
     name = Column(db.String(80), nullable=False)
-    description = Column(db.String(500), nullable=False)
     product_category_id = reference_col('product_categories', nullable=False)
     product_category = relationship('ProductCategory', backref='product_sub_types')
     product_type_id = reference_col('product_types', nullable=False)
     product_type = relationship('ProductType', backref='product_sub_types')
-    photo = Column(db.String(500), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, name, description, product_category_id, product_type_id, photo):
+    def __init__(self, name, product_category_id, product_type_id):
         self.name = name
-        self.description = description
         self.product_category_id = product_category_id
         self.product_type_id = product_type_id
-        self.photo = photo
 
     def __repr__(self):
         return '<Product Sub Type Name %r>' % self.name
@@ -70,10 +66,8 @@ class ProductSubType(SurrogatePK, Model):
         return {
             "id": self.id,
             "name": self.name,
-            "description": self.description,
             "product_category": self.product_category_id,
-            "product_type": self.product_type_id,
-            "photo": self.photo
+            "product_type": self.product_type_id
         }
 
 

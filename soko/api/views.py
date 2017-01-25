@@ -678,7 +678,7 @@ def add_product_sub_type():
         product_sub_type = ProductSubType(
             name=data['name'],
             product_type_id=data['product_type'],
-            product_category_id = data['product_category']
+            product_category_id=data['product_category']
         )
         try:
             db.session.add(product_sub_type)
