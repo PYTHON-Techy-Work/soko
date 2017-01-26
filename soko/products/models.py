@@ -55,51 +55,19 @@ class ProductType(SurrogatePK, Model):
 class ProductSubType(SurrogatePK, Model):
     __tablename__ = 'product_sub_types'
     name = Column(db.String(80), nullable=False)
-    product_category_id = reference_col('product_categories', nullable=False)
-    product_category = relationship('ProductCategory', backref='product_sub_types')
-    product_type_id = reference_col('product_types', nullable=False)
-    product_type = relationship('ProductType', backref='product_sub_types')
-    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
-
-    def __init__(self, name, product_category_id, product_type_id):
-        self.name = name
-        self.product_category_id = product_category_id
-        self.product_type_id = product_type_id
-
-    def __repr__(self):
-        return '<Product Sub Type Name %r>' % self.name
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "product_category": self.product_category_id,
-            "product_type": [pt.serialize() for pt in self.get_sub_sub_types()]
-        }
-
-    def get_sub_sub_types(self):
-        return ProductSubSubType.query.filter_by(product_sub_type_id=self.id)
-
-
-class ProductSubSubType(SurrogatePK, Model):
-    __tablename__ = 'product_sub_sub_types'
-    name = Column(db.String(80), nullable=False)
     description = Column(db.String(500), nullable=False)
     product_category_id = reference_col('product_categories', nullable=False)
     product_category = relationship('ProductCategory', backref='product_sub_sub_types')
     product_type_id = reference_col('product_types', nullable=False)
     product_type = relationship('ProductType', backref='product_sub_sub_types')
-    product_sub_type_id = reference_col('product_sub_types', nullable=False)
-    product_sub_type = relationship('ProductSubType', backref='product_sub_sub_types')
     photo = Column(db.String(500), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, name, description, product_category_id, product_type_id, product_sub_type_id, photo):
+    def __init__(self, name, description, product_category_id, product_type_id, photo):
         self.name = name
         self.description = description
         self.product_category_id = product_category_id
         self.product_type_id = product_type_id
-        self.product_sub_type_id = product_sub_type_id
         self.photo = photo
 
     def __repr__(self):
@@ -112,7 +80,6 @@ class ProductSubSubType(SurrogatePK, Model):
             "description": self.description,
             "product_category": self.product_category_id,
             "product_type": self.product_type_id,
-            "product_sub_type": self.product_sub_type_id,
             "photo": self.photo
         }
 

@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for,
 from flask_login import login_required, current_user
 
 from soko.user.models import User, Document
-from soko.products.models import Product, ProductSubSubType
+from soko.products.models import Product, ProductSubType
 from soko.user.forms import UpdateForm
 from soko.utils import flash_errors
 from soko.extensions import csrf_protect, bcrypt
@@ -112,7 +112,7 @@ def view_documents_admin():
 @blueprint.route('/dashboard', methods=["GET"])
 def dashboard():
     if request.method == "GET":
-        return render_template('users/dashboard.html', items=ProductSubSubType.query.limit(4))
+        return render_template('users/dashboard.html', items=ProductSubType.query.limit(4))
 
 
 
