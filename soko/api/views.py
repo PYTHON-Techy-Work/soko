@@ -354,13 +354,14 @@ def add_products():
     data = request.get_json(force=True)
     print data
     user = User.query.filter_by(token=data["token"]).first()
+    print user.id
     user_id = user.id
-    if user_id:
+    if user.id:
         if "product_sub_type_id" in data:
             subtypeid = data['product_sub_type_id']
 
         product_name = ProductSubType.query.filter_by(id=subtypeid).first()
-        print product_name
+        print product_name.product_category_id
         product = Product(
             name=product_name.name,
             product_category_id=product_name.product_category_id,
@@ -371,7 +372,7 @@ def add_products():
             price=data['price'],
             quantity=data['quantity'],
             photo=product_name.photo,
-            user_id=user_id
+            user_id=user.id
         )
         try:
             db.session.add(product)

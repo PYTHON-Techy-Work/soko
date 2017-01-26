@@ -102,9 +102,10 @@ class Product(SurrogatePK, Model):
     photo = Column(db.String(500), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, name, product_type_id, product_sub_type_id, description, packaging, price, quantity, photo,
+    def __init__(self, name,product_category_id, product_type_id, product_sub_type_id, description, packaging, price, quantity, photo,
                  user_id):
         self.name = name
+        self.product_category_id = product_category_id
         self.product_type_id = product_type_id
         self.product_sub_type_id = product_sub_type_id
         self.description = description
