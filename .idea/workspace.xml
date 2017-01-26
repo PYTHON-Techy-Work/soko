@@ -5,15 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92ae03c2-6e34-4825-ab80-9dc3e813ec41" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/berrys.jpg" afterPath="$PROJECT_DIR$/soko/static/images/berrys.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/fruits-and-vegetables.jpg" afterPath="$PROJECT_DIR$/soko/static/images/fruits-and-vegetables.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/meat.jpg" afterPath="$PROJECT_DIR$/soko/static/images/meat.jpg" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/migrations/versions/0ab352f9eb15_.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/migrations/versions/5478d6543dec_.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/migrations/versions/f2591591fddf_.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/migrations/alembic.ini" afterPath="$PROJECT_DIR$/migrations/alembic.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/migrations/versions/0ab352f9eb15_.py" afterPath="$PROJECT_DIR$/migrations/versions/0ab352f9eb15_.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/migrations/versions/5478d6543dec_.py" afterPath="$PROJECT_DIR$/migrations/versions/5478d6543dec_.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/migrations/versions/f2591591fddf_.py" afterPath="$PROJECT_DIR$/migrations/versions/f2591591fddf_.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/api/views.py" afterPath="$PROJECT_DIR$/soko/api/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/products/models.py" afterPath="$PROJECT_DIR$/soko/products/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/settings.py" afterPath="$PROJECT_DIR$/soko/settings.py" />
     </list>
     <ignored path="dashboard.iws" />
@@ -34,11 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/soko/api/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="893" column="24" lean-forward="false" selection-start-line="893" selection-start-column="24" selection-end-line="893" selection-end-column="24" />
+            <state relative-caret-position="253">
+              <caret line="880" column="8" lean-forward="false" selection-start-line="880" selection-start-column="8" selection-end-line="880" selection-end-column="70" />
               <folding>
                 <element signature="e#0#109#0" expanded="true" />
               </folding>
@@ -49,8 +47,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/soko/products/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="70" column="30" lean-forward="false" selection-start-line="70" selection-start-column="30" selection-end-line="70" selection-end-column="30" />
+            <state relative-caret-position="195">
+              <caret line="76" column="76" lean-forward="false" selection-start-line="76" selection-start-column="76" selection-end-line="76" selection-end-column="76" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -70,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/soko/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="47" column="8" lean-forward="true" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
+            <state relative-caret-position="211">
+              <caret line="46" column="78" lean-forward="false" selection-start-line="46" selection-start-column="78" selection-end-line="46" selection-end-column="78" />
               <folding>
                 <element signature="e#57#66#0" expanded="true" />
               </folding>
@@ -131,9 +129,9 @@
         <option value="$PROJECT_DIR$/soko/farmer/models.py" />
         <option value="$PROJECT_DIR$/soko/transporter/models.py" />
         <option value="$PROJECT_DIR$/soko/user/models.py" />
+        <option value="$PROJECT_DIR$/soko/api/views.py" />
         <option value="$PROJECT_DIR$/soko/products/models.py" />
         <option value="$PROJECT_DIR$/soko/settings.py" />
-        <option value="$PROJECT_DIR$/soko/api/views.py" />
       </list>
     </option>
   </component>
@@ -218,11 +216,29 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dashboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dashboard" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="uploads" />
+              <option name="myItemId" value="soko" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="products" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -258,11 +274,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
+              <option name="myItemId" value="products" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -447,7 +459,7 @@
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20266041" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20266041" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5062598" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -476,7 +488,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39628482" sideWeight="0.49374023" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32972136" sideWeight="0.49374023" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20266041" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -505,26 +517,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/soko/products/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1395">
-          <caret line="97" column="14" lean-forward="false" selection-start-line="97" selection-start-column="6" selection-end-line="97" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/soko/api/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#109#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/soko/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -846,16 +838,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/soko/transporter/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="e#50#71#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/soko/user/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="690">
@@ -869,10 +851,46 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/soko/templates/products/browse.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-600">
+          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="81" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soko/products/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-510">
+          <caret line="90" column="8" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="93" selection-end-column="96" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soko/api/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="880" column="8" lean-forward="false" selection-start-line="880" selection-start-column="8" selection-end-line="880" selection-end-column="70" />
+          <folding>
+            <element signature="e#0#109#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soko/transporter/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="e#50#71#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/soko/products/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="70" column="30" lean-forward="false" selection-start-line="70" selection-start-column="30" selection-end-line="70" selection-end-column="30" />
+        <state relative-caret-position="195">
+          <caret line="76" column="76" lean-forward="false" selection-start-line="76" selection-start-column="76" selection-end-line="76" selection-end-column="76" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
@@ -881,20 +899,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/soko/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="47" column="8" lean-forward="true" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
+        <state relative-caret-position="211">
+          <caret line="46" column="78" lean-forward="false" selection-start-line="46" selection-start-column="78" selection-end-line="46" selection-end-column="78" />
           <folding>
             <element signature="e#57#66#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/soko/api/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="893" column="24" lean-forward="false" selection-start-line="893" selection-start-column="24" selection-end-line="893" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#109#0" expanded="true" />
           </folding>
         </state>
       </provider>

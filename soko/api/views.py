@@ -869,6 +869,7 @@ def available_orders():
         status = {"status": "failure", "message": "No records found"}
     return jsonify(status)
 
+
 # categories api
 @blueprint.route('/get_categories', methods=["GET"])
 def get_categories():
@@ -877,10 +878,11 @@ def get_categories():
     data = []
     products_categories = ProductCategory.query.all()
     for ls in products_categories:
+        # "product_types": [pt.serialize() for pt in self.get_types()]
         ret.append(ls.serialize())
     data.append(ret)
     if ret:
-        status = {"status": "success", "message": ret}
+        status = {"status": "success", "message": data}
     else:
         status = {"status": "failure", "message": "no records found"}
     return jsonify(status)

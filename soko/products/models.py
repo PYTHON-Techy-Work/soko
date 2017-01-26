@@ -19,7 +19,8 @@ class ProductCategory(SurrogatePK, Model):
     def serialize(self):
         return {
             "id": self.id,
-            "name": self.name
+            "name": self.name,
+            "product_types": [pt.serialize() for pt in self.get_types()]
         }
 
     def get_types(self):
@@ -44,8 +45,11 @@ class ProductType(SurrogatePK, Model):
         return {
             "id": self.id,
             "name": self.name,
-            "product_category": self.product_category_id
+            "product_type": [pt.serialize() for pt in self.get_sub_types()]
         }
+
+    def get_sub_types(self):
+        return ProductSubType.query.filter_by(product_type_id=self.id)
 
 
 class ProductSubType(SurrogatePK, Model):
@@ -70,8 +74,11 @@ class ProductSubType(SurrogatePK, Model):
             "id": self.id,
             "name": self.name,
             "product_category": self.product_category_id,
-            "product_type": self.product_type_id
+            "product_type": [pt.serialize() for pt in self.get_sub_sub_types()]
         }
+
+    def get_sub_sub_types(self):
+        return ProductSubSubType.query.filter_by(product_sub_type_id=self.id)
 
 
 class ProductSubSubType(SurrogatePK, Model):
