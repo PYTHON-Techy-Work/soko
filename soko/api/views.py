@@ -363,7 +363,7 @@ def add_products():
         print product_name
         product = Product(
             name=product_name.name,
-            product_category_id=product_name.product_type_id,
+            product_category_id=product_name.product_category_id,
             product_type_id=product_name.product_type_id,
             product_sub_type_id=subtypeid,
             description=product_name.description,
