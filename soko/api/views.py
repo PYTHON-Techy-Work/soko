@@ -868,3 +868,27 @@ def available_orders():
     else:
         status = {"status": "failure", "message": "No records found"}
     return jsonify(status)
+
+# categories api
+@blueprint.route('/get_categories', methods=["GET"])
+def get_categories():
+    # data = request.args
+    ret = []
+    data = []
+    products_categories = ProductCategory.query.all()
+    for ls in products_categories:
+        ret.append(ls.serialize())
+    data.append(ret)
+    if ret:
+        status = {"status": "success", "message": ret}
+    else:
+        status = {"status": "failure", "message": "no records found"}
+    return jsonify(status)
+
+
+# accept payments api
+@csrf_protect.exempt
+@blueprint.route('/accept_payments', methods=["POST"])
+def accept_payments():
+    data = request.son
+    return jsonify(data)
