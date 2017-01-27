@@ -700,7 +700,6 @@ def add_product_sub_type():
         product_sub_sub_type = ProductSubType(
             name=data['name'],
             description=data['description'],
-            product_sub_type_id=data['product_sub_type'],
             product_type_id=data['product_type'],
             product_category_id=data['product_category'],
             photo=data['photo']
