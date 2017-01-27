@@ -1,78 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<!----> 
-<div class="slider">
-    <div class="callbacks_container">
-       <ul class="rslides" id="slider">
-           <li>
-         <div class="banner1" style="background:url(/static/images/fruits-and-vegetables.jpg) no-repeat 0px 0px">          
-            <div class="banner-info">
-            <h3>Welcome to Soko Mkonoki.</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. consectetur adipiscing elit. consectetur adipiscing elit.</p>
-            </div>
-         </div>
-           </li>
-           <li>
-         <div class="banner2" style="background:url(/static/images/meat.jpg) no-repeat 0px 0px">
-           <div class="banner-info">
-           <h3>Phasellus elementum tincidunt.</h3>
-           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. consectetur adipiscing elit. consectetur adipiscing elit.</p>
-           </div>
-         </div>
-       </li>
-           <li>
-               <div class="banner3" style="background:url(/static/images/berrys.jpg) no-repeat 0px 0px">
-             <div class="banner-info">
-             <h3>Maecenas interposuere volutpat.</h3>
-               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. consectetur adipiscing elit. consectetur adipiscing elit.</p>
-         </div>
-         </div>
-           </li>
-        </ul>
-    </div>
-  </div>
-<!---->
-
-<!---->
-
-<div class="items">
-   <div class="container">
-     <div class="items-sec">
-
-     {% for item in items %}
-       <div class="col-md-3 feature-grid">
-         <a href="/products/browse"><img src="/static/uploads/{{item.photo}}" alt=""/> 
-           <div class="arrival-info">
-             <h4>{{item.name}}</h4>
-             <p>Rs 12000</p>
-             <span class="pric1"><del>Rs 18000</del></span>
-             <span class="disc">[12% Off]</span>
-           </div>
-           <div class="viw">
-            <a href="product.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>View</a>
-           </div>
-          </a>
-       </div>
-      {% endfor %}
-      
-       <div class="clearfix"></div>
-     </div>
-   </div>
-</div>
-
-
-<div class="subscribe">
-   <div class="container">
-     <h3>Newsletter</h3>
-     <form>
-       <input type="text" class="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
-       <input type="submit" value="Subscribe">
-     </form>
-   </div>
-</div>
-<!---->
-
+user dashboard goes here
 
 {% endblock %}
 

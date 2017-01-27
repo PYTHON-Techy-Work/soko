@@ -20,13 +20,13 @@ def load_user(user_id):
 
 @blueprint.route('/', methods=['GET', 'POST'])
 def index():
-    return redirect("/users/dashboard")
+    return redirect("/products")
 
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     """Home page."""
     if current_user.is_authenticated:
-        return redirect("/users/dashboard")
+        return redirect("/")
 
     form = LoginForm(request.form)
     # Handle logging in
@@ -34,11 +34,11 @@ def login():
         if form.validate_on_submit():
             login_user(form.user)
             flash('You are logged in.', 'success')
-            redirect_url = request.args.get("next") or url_for('user.dashboard')
+            redirect_url = request.args.get("next") or "/"
             return redirect(redirect_url)
         else:
             flash_errors(form)
-    return render_template('public/login.html', form=form)
+    return redirect("/")
 
 
 @blueprint.route('/logout/')
@@ -47,7 +47,7 @@ def logout():
     """Logout."""
     logout_user()
     flash('You are logged out.', 'info')
-    return redirect(url_for('public.home'))
+    return redirect("/")
 
 
 @blueprint.route('/register/', methods=['GET', 'POST'])

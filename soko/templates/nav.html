@@ -1,29 +1,27 @@
 <div class="header-top">
    <div class="header-bottom">      
         <div class="logo">
-          <h1><a href="index.html">Soko</a></h1>          
+          <h1><a href="index.html"><i class="fa fa-motorcycle fa-border" style="font-size:70%; margin-top:0px; margin-bottom:0px"></i> Soko<b>Mkononi</b></a></h1>          
         </div>
        <!---->     
        <div class="top-nav">
         <ul class="memenu skyblue">
 
-        <li {% if request.endpoint in ['user.dashboard'] %}class="active"{% endif %}><a href="/">Home</a></li>
+        <li {% if request.endpoint in ['item.index'] %}class="active"{% endif %}><a href="/"><i class="fa fa-home"></i> Home</a></li>
 
-        <li {% if request.endpoint in ['item.cart', 'item.browse'] %}class="active"{% endif %}><a href="/products/browse">Shop</a></li>
+        <li {% if request.endpoint in ['item.cart', 'item.browse'] %}class="active"{% endif %}><a href="/products/browse"><i class="fa fa-gift"></i> Shop</a></li>
+
+        <li {% if request.endpoint in [''] %}class="active"{% endif %}><a href="/products/browse"><i class="fa fa-info-circle"></i> About</a></li>
 
        {% if current_user.is_authenticated %}
 
-        <li {% if request.endpoint in ['item.orders'] %}class="active"{% endif %}><a href="/products/orders">Order History</a></li>
+        <li {% if request.endpoint in ['item.orders'] %}class="active"{% endif %}><a href="/products/orders"><i class="fa fa-clock-o"></i> Orders</a></li>
 
         <li {% if request.endpoint in ['user.edit_user'] %}class="active"{% endif %}><a href="/users/edit/me""><i class="fa fa-user"></i> My profile</a></li>
 
-        <li><a href="/logout">Log out</a></li>
+        <li><a href="/logout" onclick="return confirm('Really log out?')"><i class="fa fa-sign-out"></i></a></li>
 
         {% else %}
-
-        <li><a href="/login">Log in</a></li>
-        
-        <li><a href="/register">Register</a></li>
 
         {% endif %}
 
@@ -40,6 +38,19 @@
         <p><a href="/products/cart" class="">View cart</a></p>
         <div class="clearfix"> </div>
        </div>
+       {% else %}
+
+        <div class="cart box_1">
+         <a href="javascript:show_login_modal()">
+          <div class="total">
+          <span class="fa fa-user" aria-hidden="true"></span>
+
+          <span class=""></span> Log in</div>
+        </a>
+        <p><a href="/register" class="">or register</a></p>
+        <div class="clearfix"> </div>
+       </div>
+
        {% endif %}
        <div class="clearfix"> </div>
        <!---->       

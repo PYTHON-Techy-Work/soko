@@ -2,6 +2,15 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<style type="text/css">
+  
+
+.product-grid{
+  outline:1px solid #eee;
+}
+
+</style>
+
 <link href="/static/css/form.css" rel="stylesheet" type="text/css" media="all" />
 
 <script type="text/javascript" src="/static/js/jquery.jscrollpane.min.js"></script>
@@ -26,11 +35,11 @@
 
 <div class="col-md-9 product-model-sec">
 {% for i in products %}
-           <a href="single.html"><div class="product-grid">
+           <a href="javascript:quickview('{{i.get_photo()}}')"><div class="product-grid">
             <div class="more-product"><span> </span></div>            
             <div class="product-img b-link-stripe b-animate-go  thickbox">
           {% if i.photo %}
-                  <img class="img-responsive" src="/static/uploads/{{i.photo.split("/")[-1]}}">
+                  <img class="img-responsive" src="/static/uploads/{{i.get_photo()}}">
               {% endif %}
 
                   <div class="b-wrapper">
@@ -46,8 +55,8 @@
                 <div class="ofr">
                   <p class="pric1">{{i.quantity}} available</p>
                 </div>
-                <input type="text" class="item_quantity" value="1" />
-                <input type="button" class="item_add items" value="ADD">
+                <input type="text" class="item_quantity" value="1" id="quantity_{{i.id}}"/>
+                <input type="button" class="item_add items" value="ADD" onclick="addToCart({{i.id}})">
                 <div class="clearfix"> </div>
               </div>                        
               
@@ -139,26 +148,18 @@
 </div>
 
 
-<div class="modal fade" tabindex="-1" role="dialog" id="addmodal">
-<form method="post">
+<div class="modal fade" tabindex="-1" role="dialog" id="quickview_modal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"><b><span id="carttitle"></span></b> -- add to cart</h4>
+        <h4 class="modal-title">Product details</h4>
       </div>
       <div class="modal-body">
-        <p>How many do you want to add?</p>
-        <input type="hidden" name="addid" id="addid">
-        <input type="number" class="form-control" min="1" max="100" value="1" name="quantity" id="quantity">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary">Confirm</button>
+        <p id="quickview_body">One fine body&hellip;</p>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
-  </form>
 </div><!-- /.modal -->
 
 
@@ -168,12 +169,14 @@
 {% block js %}
 <script>
 
-function addToCart(i, name, maximum){
-    $("#carttitle").html(name);
-    $("#addid").val(i);
-    $("#quantity").val(maximum);
-    $("#quantity").prop("max", maximum);
-    $("#addmodal").modal("show");
+function addToCart(i){
+    var count = $("#quantity_" + i).val();
+    window.location = '?addid=' + i + "&quantity=" + count;
+}
+
+function quickview(photo){
+  $("#quickview_body").html("<img src='/static/uploads/" + photo + "' class='img-thumbnail img-responsive'>");
+  $("#quickview_modal").modal("show");
 }
 
 </script>

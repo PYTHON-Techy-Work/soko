@@ -70,7 +70,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="row">
       <div class="col-md-12">
         {% for category, message in messages %}
-        <div class="alert alert-{{ category }}">
+        <div class="alert alert-{{ category }}" style="margin-bottom:0px">
           <a class="close" title="Close" href="#" data-dismiss="alert">&times;</a>
          {{message}}
         </div><!-- end .alert -->
@@ -86,6 +86,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 {% include "footer.html" %}
 
+<script type="text/javascript">
+  
+function show_login_modal(){
+  $("#loginmodal").modal("show");
+}
+
+
+</script>
+
 <!-- JavaScript at the bottom for fast page loading -->
 {% assets "js_all" %}
     {% if INCLUDE_DATATABLES %}
@@ -95,6 +104,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 {% endassets %}
 {% block js %}{% endblock %}
 <!-- end scripts -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="loginmodal">
+  <div class="modal-dialog" role="document">
+           <form method="post" action="/login">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Log in</h4>
+      </div>
+      <div class="modal-body">
+        
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+      <div class="fields">
+        <strong>Username</strong>
+        <input class="form-control" type="text" name="username" placeholder="Your username" />
+      </div>
+      <div class="fields">
+        <strong>Password</strong>
+        <input class="form-control" type="password" name="password" placeholder="Password" />
+      </div>
+      <div class="info">
+        <label>
+          <input type="checkbox" name="remember" checked />
+          Remember me
+        </label>
+      </div>
+      
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </div>
+    </div><!-- /.modal-content -->
+        </form>
+
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 </body>
 </html>
 

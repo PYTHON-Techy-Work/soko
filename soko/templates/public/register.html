@@ -1,42 +1,31 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />	
-	<title>Soko | Register</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% set INCLUDE_DATATABLES = True %}
+{% extends "layout.html" %}
+{% block content %}
 
-	<!-- stylesheets -->
-	<link rel="stylesheet" type="text/css" href="/static/css/compiled/theme.css" />
-	<link rel="stylesheet" type="text/css" href="/static/css/vendor/brankic.css" />
-	<link rel="stylesheet" type="text/css" href="/static/css/vendor/ionicons.min.css" />
-	<link rel="stylesheet" type="text/css" href="/static/css/vendor/font-awesome.min.css" />
-
-	<!-- javascript -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-	<script src="/static/js/bootstrap/bootstrap.min.js"></script>
-	<script src="/static/js/theme.js"></script>
-
-    <script src="https://use.fontawesome.com/e618dce52b.js"></script>
-
-
-	<!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-</head>
-<body id="signup" class="clear">
 
     {% set cat = request.args.get("category") %}
+<style type="text/css">
+    
+.bottom-wrapper{
+    text-align: center;
+    padding:10px;
+    color:#333;
+}
 
+</style>
 	
-    <h3>
-             <img src="/static/images/logo.png" style="width:200px; margin:5px">
-             
-   
-    </h3>
 
 
-	<div class="content">
+<div class="row">
+        <div class="col-md-6 col-md-offset-2">
+
+<div class="product-model">  
+   <div class="container">
+
+
+
+  <div class="panel-body">
+  <br><br>
 
 
 
@@ -56,7 +45,8 @@
     {% endwith %}
 
 
-    <h1>1. <b>How do you want to use Soko Mkononi?</b></h1>
+    <h2>1. <b>How do you want to use Soko Mkononi?</b></h2>
+    <br>
 
     <div class="row">
         <div class="col-md-4">
@@ -76,7 +66,7 @@
         </div>
 
         <div class="col-md-4">
-            <a href="?category=consumer" class="btn btn-block btn-text" disabled>
+            <a href="?category=consumer" class="btn btn-block btn-text {% if cat == 'consumer' %}btn-primary{% else %}btn-text{% endif %}">
             <br>
             <i class="fa fa-user-circle-o fa-4x"></i> <br>
             <br>I want to <b>buy goods</b></a>
@@ -89,13 +79,16 @@
     {% if "category" in request.args %}
 
      <br><br>
-    <h1>2. <b>Fill in your details below to sign up as a {{cat}}!</b></h1>
+    <h2>2. <b>Fill in your details below to sign up as a {{cat}}!</b></h2>
 
     <br>
 
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
 
 
-		<form id="registerForm" class="form form-register" method="POST" action="" role="form">
+
+		<form id="registerForm" class="well" method="POST" action="" role="form">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 
             <input type="hidden" name="category" value="{{cat}}"/>
@@ -266,6 +259,9 @@
 
     </form>
 
+    </div>
+    </div>
+
     {% endif %}
 
 	</div>
@@ -273,9 +269,14 @@
 	<div class="bottom-wrapper">
 		<div class="message">
 			<span>Already have an account?</span>
-			<a href="/">Sign in here</a>.
+			<a href="javascript:show_login_modal()">Sign in here</a>.
 		</div>
 	</div>
+
+    </div>
+    </div>
+    </div>
+    </div>
 
 
 	<script type="text/javascript">
@@ -297,5 +298,13 @@
 		});
 	</script>
 
-</body>
-</html>
+
+{% endblock %}
+
+
+{% block js %}
+
+
+{% endblock %}
+
+

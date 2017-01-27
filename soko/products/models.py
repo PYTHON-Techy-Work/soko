@@ -1,6 +1,7 @@
 from flask import url_for
 import datetime as dt
 import decimal
+import os
 
 from soko.database import Column, Model, SurrogatePK, db, reference_col, relationship
 
@@ -83,6 +84,12 @@ class ProductSubType(SurrogatePK, Model):
             "photo": self.photo
         }
 
+    def get_photo(self):
+        if os.path.exists("soko/static/uploads/" + self.photo):
+            return self.photo
+        return "missing.jpg"
+
+
 
 class Product(SurrogatePK, Model):
     __tablename__ = 'products'
@@ -127,6 +134,12 @@ class Product(SurrogatePK, Model):
             "product_sub_type": self.product_sub_type_id,
             "price": float(self.price)
         }
+
+    def get_photo(self):
+        if os.path.exists("soko/static/uploads/" + self.photo):
+            return self.photo
+        return "missing.jpg"
+
 
 
 class ProductRatings(SurrogatePK, Model):
