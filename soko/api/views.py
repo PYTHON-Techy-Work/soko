@@ -16,11 +16,13 @@ from soko.database import db
 from soko.utils import flash_errors
 from soko.extensions import csrf_protect, bcrypt, mail, geolocator
 from math import sin, cos, atan2, sqrt, radians
+from suds.client import Client
 
 import os
 import base64
 import time
 import uuid
+import xmltodict
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -851,3 +853,18 @@ def get_categories():
 def accept_payments():
     data = request.json
     return jsonify(data)
+
+# will use this api to simulate the mpesa response
+@blueprint.route('/current_oil_price', methods=['GET'])
+def oil_current_price():
+    # Get SOAP Service via suds
+    url = 'http://www.pttplc.com/webservice/pttinfo.asmx?WSDL'
+    client = Client(url)
+    # Execute CurrentOilPrice method of SOAP
+    xml = client.service.CurrentOilPrice("EN")
+    # Convert XML to dict
+    res_dict = xmltodict.parse(xml)
+    result = {}
+    result['result'] = res_dict['PTT_DS']['DataAccess']
+    # Convert dict to JSON
+    return jsonify(**result)
