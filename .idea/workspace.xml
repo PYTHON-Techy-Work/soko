@@ -5,22 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92ae03c2-6e34-4825-ab80-9dc3e813ec41" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/migrations/versions/679763f2d873_.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/uploads/Drostdy Hof Cape Red Shiraz Merlot.png" afterPath="$PROJECT_DIR$/soko/static/uploads/Drostdy Hof Cape Red Shiraz Merlot.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/uploads/drostdy hof claret select.png" afterPath="$PROJECT_DIR$/soko/static/uploads/drostdy hof claret select.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/uploads/drostdy hof late harvest.png" afterPath="$PROJECT_DIR$/soko/static/uploads/drostdy hof late harvest.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/uploads/jack daniels.jpg" afterPath="$PROJECT_DIR$/soko/static/uploads/jack daniels.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/uploads/jameson whisky.png" afterPath="$PROJECT_DIR$/soko/static/uploads/jameson whisky.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/uploads/johny walker blue label.png" afterPath="$PROJECT_DIR$/soko/static/uploads/johny walker blue label.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/uploads/martell vsop medaillon cognac.jpg" afterPath="$PROJECT_DIR$/soko/static/uploads/martell vsop medaillon cognac.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/uploads/missing.jpg" afterPath="$PROJECT_DIR$/soko/static/uploads/missing.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/api/views.py" afterPath="$PROJECT_DIR$/soko/api/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/static/images/payment.png" afterPath="$PROJECT_DIR$/soko/static/images/payment.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/settings.py" afterPath="$PROJECT_DIR$/soko/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/templates/footer.html" afterPath="$PROJECT_DIR$/soko/templates/footer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/templates/nav.html" afterPath="$PROJECT_DIR$/soko/templates/nav.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/templates/products/browse.html" afterPath="$PROJECT_DIR$/soko/templates/products/browse.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/templates/products/home.html" afterPath="$PROJECT_DIR$/soko/templates/products/home.html" />
     </list>
     <ignored path="dashboard.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,7 +29,7 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/soko/api/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1075">
+            <state relative-caret-position="1794">
               <caret line="856" column="50" lean-forward="false" selection-start-line="856" selection-start-column="50" selection-end-line="856" selection-end-column="50" />
               <folding>
                 <element signature="e#0#109#0" expanded="true" />
@@ -101,8 +87,8 @@
         <option value="$PROJECT_DIR$/soko/templates/products/home.html" />
         <option value="$PROJECT_DIR$/soko/templates/nav.html" />
         <option value="$PROJECT_DIR$/soko/templates/products/browse.html" />
-        <option value="$PROJECT_DIR$/soko/api/views.py" />
         <option value="$PROJECT_DIR$/soko/templates/footer.html" />
+        <option value="$PROJECT_DIR$/soko/api/views.py" />
         <option value="$PROJECT_DIR$/soko/settings.py" />
       </list>
     </option>
@@ -802,7 +788,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/soko/api/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1075">
+        <state relative-caret-position="1794">
           <caret line="856" column="50" lean-forward="false" selection-start-line="856" selection-start-column="50" selection-end-line="856" selection-end-column="50" />
           <folding>
             <element signature="e#0#109#0" expanded="true" />
