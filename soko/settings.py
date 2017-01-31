@@ -53,7 +53,7 @@ class DevConfig(Config):
     MAIL_PORT = 465
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
-    MAIL_USERNAME = 'soko'
+    MAIL_USERNAME = 'soko@tracom.co.ke'
     MAIL_PASSWORD = 'Tr@c0m1234!'
 
 
