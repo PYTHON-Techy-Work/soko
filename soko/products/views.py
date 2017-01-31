@@ -19,10 +19,7 @@ from .forms import *
 
 @blueprint.route('/')
 def index():
-    """List all products."""
-    products = Product.query.filter_by(user_id=current_user.id)
-
-    return render_template('products/index.html', products=products, title="My items for sale")
+    return render_template('products/home.html', items=ProductSubType.query.limit(20))
 
 
 @blueprint.route('/admin')
@@ -127,16 +124,16 @@ def type_edit(tid):
 @csrf_protect.exempt
 def browse():
 
-    if "addid" in request.form:
-        product = Product.query.get(request.form.get("addid"))
+    if "addid" in request.args:
+        product = Product.query.get(request.args.get("addid"))
 
-        total = float(request.form.get("quantity")) * float(product.price)
-        c = Cart(current_user.id, product.id, request.form.get("quantity"), total)
+        total = float(request.args.get("quantity")) * float(product.price)
+        c = Cart(current_user.id, product.id, request.args.get("quantity"), total)
 
         db.session.add(c)
         db.session.commit()
 
-        flash("Addeed to cart", "success")
+        flash("Added to cart", "success")
         return redirect("/products/browse")
 
     """List all products."""
@@ -177,7 +174,7 @@ def pay():
     for cart in Cart.query.filter_by(user=current_user.id):
         purchase = Purchase(
             user=current_user.id,
-            product=cart.product,
+            product_id=cart.product_id,
             quantity=cart.quantity,
             total=cart.total,
         )
@@ -185,8 +182,6 @@ def pay():
             user_id=current_user.id,
             product_id=cart.product_id,
             quantity=cart.quantity,
-            lat=None,
-            lng=None
         )
         db.session.add(purchase)
         db.session.add(shopping_list)
