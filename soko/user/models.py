@@ -32,6 +32,7 @@ class User(UserMixin, SurrogatePK, Model):
     username = Column(db.String(80), unique=True, nullable=False)
     email = Column(db.String(80), unique=True, nullable=False)
     password = Column(db.String(128), nullable=True)
+    password_reset = Column(db.Integer, nullable=True)
     first_name = Column(db.String(30), nullable=True)
     last_name = Column(db.String(30), nullable=True)
     phone_number = Column(db.String(15), nullable=True)

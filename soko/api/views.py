@@ -71,6 +71,7 @@ def reg_user():
         username=data['username'],
         email=data['email'],
         password=data['password'],
+        password_reset=0,
         first_name=data['first_name'],
         last_name=data['last_name'],
         phone_number=data['phone_number'],
@@ -147,7 +148,8 @@ def login():
             db.session.commit()
             status = {'status': 'success', 'message': 'welcome ' + registered_user.first_name,
                       'token': registered_user.token,
-                      'username': registered_user.username, 'category': registered_user.category, 'active': registered_user.active}
+                      'username': registered_user.username, 'category': registered_user.category, 'active': registered_user.active,
+                      'password reset': registered_user.password_reset}
         else:
             status = {'status': 'failure', 'message': 'Invalid Username or password'}
     return jsonify(status)
@@ -280,8 +282,18 @@ def add_id_card():
 @blueprint.route('/get_product_categories', methods=["GET"])
 def get_product_categories():
     ret = []
-    product_categoriess = ProductCategory.query.all()
-    for pt in product_categoriess:
+    product_categories = ProductCategory.query.all()
+    for pt in product_categories:
+        ret.append(pt.serialize())
+    return jsonify(data=ret)
+
+
+# api for getting all the product category
+@blueprint.route('/get_product_category', methods=["GET"])
+def get_product_category():
+    ret = []
+    product_categories = ProductCategory.query.all()
+    for pt in product_categories:
         ret.append(pt.serialize())
     return jsonify(data=ret)
 
@@ -289,8 +301,10 @@ def get_product_categories():
 # api for getting all the product types
 @blueprint.route('/get_product_types', methods=["GET"])
 def get_product_types():
+    data = request.args
+    print data
     ret = []
-    product_types = ProductType.query.all()
+    product_types = ProductType.query.filter_by(product_category_id=data['id'])
     for pt in product_types:
         ret.append(pt.serialize())
     return jsonify(data=ret)
@@ -299,8 +313,9 @@ def get_product_types():
 # api for getting all the product sub types
 @blueprint.route('/get_product_sub_types', methods=["GET"])
 def get_product_sub_types():
+    data = request.args
     ret = []
-    product_sub_types = ProductSubType.query.all()
+    product_sub_types = ProductSubType.query.filter_by(product_type_id=data['id'])
     for pst in product_sub_types:
         ret.append(pst.serialize())
     return jsonify(data=ret)
@@ -868,3 +883,11 @@ def oil_current_price():
     result['result'] = res_dict['PTT_DS']['DataAccess']
     # Convert dict to JSON
     return jsonify(**result)
+
+
+# forget password api
+@blueprint.route('/forgot_password', methods=['POST'])
+def forgot_password():
+    data = request.json
+    if data:
+        user = User.query.filter_by(email=data['email']).first()
