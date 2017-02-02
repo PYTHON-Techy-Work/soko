@@ -86,7 +86,7 @@ def reg_user():
         db.session.commit()
         status = {'status': 'success', 'message': 'user registered successfully'}
         msg = Message("Welcome To Soko Mkononi",
-                      sender="from@example.com",
+                      sender="soko@tracom.co.ke",
                       recipients=[data['email']])
         msg.body = "You have successfully registered to soko mkononi as a  "+data['category']
         msg.html = "<b>Hi</b> "+data['first_name']+"<br/> <b>You have successfully registered to soko mkononi as a "+data['category']+"</b>"
