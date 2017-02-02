@@ -11,7 +11,7 @@
   </div>
   <div class="panel-body">
    
-
+  {% if loans|length or is_admin %}
     <table class="table datatable">
         <thead>
             <th></th>
@@ -81,8 +81,12 @@
             {% endfor %}
         </tbody>
     </table>
-
     <hr>
+
+    {% else %}
+    <div class="alert alert-info"><i class="fa fa-info-circle"></i> You have no loans<br><br>Some informational text here about the loans module</div>
+    {% endif %}
+
 
     {% if not is_admin %}
     <a class="btn btn-primary btn-lg" href="/loans/edit/new"><i class="fa fa-plus"></i> Apply for new loan</a>

@@ -11,13 +11,15 @@
 
         <li {% if request.endpoint in ['item.cart', 'item.browse'] %}class="active"{% endif %}><a href="/products/browse"><i class="fa fa-gift"></i> Shop</a></li>
 
-        <li {% if request.endpoint in [''] %}class="active"{% endif %}><a href="/products/browse"><i class="fa fa-info-circle"></i> About</a></li>
+       <!-- <li {% if request.endpoint in [''] %}class="active"{% endif %}><a href="/products/browse"><i class="fa fa-info-circle"></i> About</a></li>-->
+       
+       <li {% if request.endpoint in ['loans.my_list', 'loans.edit_loan'] %}class="active"{% endif %}><a href="/loans"><i class="fa fa-usd"></i> My Loans</a></li>
 
        {% if current_user.is_authenticated %}
 
         <li {% if request.endpoint in ['item.orders'] %}class="active"{% endif %}><a href="/products/orders"><i class="fa fa-clock-o"></i> Orders</a></li>
 
-        <li {% if request.endpoint in ['user.edit_user'] %}class="active"{% endif %}><a href="/users/edit/me""><i class="fa fa-user"></i> My profile</a></li>
+        <li {% if request.endpoint in ['user.edit_user'] %}class="active"{% endif %}><a href="/users/edit/me""><i class="fa fa-user"></i></a></li>
 
         <li><a href="/logout" onclick="return confirm('Really log out?')"><i class="fa fa-sign-out"></i></a></li>
 
@@ -59,6 +61,17 @@
        </div>
       <div class="clearfix"> </div>
 </div>
+
+{% if current_user.is_admin %}
+<div class="alert alert-warning" style="margin-bottom:0px">
+<b>Admin:</b> 
+<a href="/users">Users</a> &middot; 
+<a href="/loans/admin">Loans</a> &middot; 
+<a href="/products/admin">Products</a> &middot; 
+<a href="/products/admin/types">Categories</a> &middot; 
+<a href="/users/documents/admin">Documents</a> 
+</div>
+{% endif %}
 
 <!--
 {% if current_user.is_authenticated %}
