@@ -23,6 +23,8 @@ import base64
 import time
 import uuid
 import xmltodict
+import string
+import random
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -149,7 +151,7 @@ def login():
             status = {'status': 'success', 'message': 'welcome ' + registered_user.first_name,
                       'token': registered_user.token,
                       'username': registered_user.username, 'category': registered_user.category, 'active': registered_user.active,
-                      'password reset': registered_user.password_reset}
+                      'password_reset': registered_user.password_reset}
         else:
             status = {'status': 'failure', 'message': 'Invalid Username or password'}
     return jsonify(status)
@@ -869,6 +871,7 @@ def accept_payments():
     data = request.json
     return jsonify(data)
 
+
 # will use this api to simulate the mpesa response
 @blueprint.route('/current_oil_price', methods=['GET'])
 def oil_current_price():
@@ -885,9 +888,32 @@ def oil_current_price():
     return jsonify(**result)
 
 
+# generate random password for password reset api
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
+
+
 # forget password api
+@csrf_protect.exempt
 @blueprint.route('/forgot_password', methods=['POST'])
 def forgot_password():
     data = request.json
     if data:
+        new_password = id_generator()
         user = User.query.filter_by(email=data['email']).first()
+        user.password = bcrypt.generate_password_hash(new_password)
+        user.password_reset = 1
+        db.session.commit()
+        status = {"status": "success", "message": "your password has been reset", "new_password": new_password}
+        msg = Message("Soko Mkononi Password Reset",
+                      sender="soko@tracom.co.ke",
+                      recipients=[data['email']])
+        msg.body = "You have successfully reset your password"
+        msg.html = "<b>Hi</b> "+user.first_name+"<br/> " \
+                                                "<b>You password has been reset successfully. Your new password is" + new_password+\
+                   "</b>"
+        mail.send(msg)
+    else:
+        status = {"status": "failure", "message": "problem resetting your password"}
+    db.session.close()
+    return jsonify(status)
