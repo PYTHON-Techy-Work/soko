@@ -49,7 +49,7 @@ class DevConfig(Config):
     DEBUG_TB_ENABLED = True
     ASSETS_DEBUG = True  # Don't bundle/minify static assets
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
-    MAIL_SERVER = 'smtp.tracom.co.ke'
+    MAIL_SERVER = 'server.tracom.co.ke'
     MAIL_PORT = 465
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True

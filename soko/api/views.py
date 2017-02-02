@@ -16,11 +16,15 @@ from soko.database import db
 from soko.utils import flash_errors
 from soko.extensions import csrf_protect, bcrypt, mail, geolocator
 from math import sin, cos, atan2, sqrt, radians
+from suds.client import Client
 
 import os
 import base64
 import time
 import uuid
+import xmltodict
+import string
+import random
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -69,6 +73,7 @@ def reg_user():
         username=data['username'],
         email=data['email'],
         password=data['password'],
+        password_reset=0,
         first_name=data['first_name'],
         last_name=data['last_name'],
         phone_number=data['phone_number'],
@@ -83,7 +88,7 @@ def reg_user():
         db.session.commit()
         status = {'status': 'success', 'message': 'user registered successfully'}
         msg = Message("Welcome To Soko Mkononi",
-                      sender="from@example.com",
+                      sender="soko@tracom.co.ke",
                       recipients=[data['email']])
         msg.body = "You have successfully registered to soko mkononi as a  "+data['category']
         msg.html = "<b>Hi</b> "+data['first_name']+"<br/> <b>You have successfully registered to soko mkononi as a "+data['category']+"</b>"
@@ -145,7 +150,8 @@ def login():
             db.session.commit()
             status = {'status': 'success', 'message': 'welcome ' + registered_user.first_name,
                       'token': registered_user.token,
-                      'username': registered_user.username, 'category': registered_user.category, 'active': registered_user.active}
+                      'username': registered_user.username, 'category': registered_user.category, 'active': registered_user.active,
+                      'password_reset': registered_user.password_reset}
         else:
             status = {'status': 'failure', 'message': 'Invalid Username or password'}
     return jsonify(status)
@@ -278,8 +284,18 @@ def add_id_card():
 @blueprint.route('/get_product_categories', methods=["GET"])
 def get_product_categories():
     ret = []
-    product_categoriess = ProductCategory.query.all()
-    for pt in product_categoriess:
+    product_categories = ProductCategory.query.all()
+    for pt in product_categories:
+        ret.append(pt.serialize())
+    return jsonify(data=ret)
+
+
+# api for getting all the product category
+@blueprint.route('/get_product_category', methods=["GET"])
+def get_product_category():
+    ret = []
+    product_categories = ProductCategory.query.all()
+    for pt in product_categories:
         ret.append(pt.serialize())
     return jsonify(data=ret)
 
@@ -287,8 +303,10 @@ def get_product_categories():
 # api for getting all the product types
 @blueprint.route('/get_product_types', methods=["GET"])
 def get_product_types():
+    data = request.args
+    print data
     ret = []
-    product_types = ProductType.query.all()
+    product_types = ProductType.query.filter_by(product_category_id=data['id'])
     for pt in product_types:
         ret.append(pt.serialize())
     return jsonify(data=ret)
@@ -297,8 +315,9 @@ def get_product_types():
 # api for getting all the product sub types
 @blueprint.route('/get_product_sub_types', methods=["GET"])
 def get_product_sub_types():
+    data = request.args
     ret = []
-    product_sub_types = ProductSubType.query.all()
+    product_sub_types = ProductSubType.query.filter_by(product_type_id=data['id'])
     for pst in product_sub_types:
         ret.append(pst.serialize())
     return jsonify(data=ret)
@@ -851,3 +870,50 @@ def get_categories():
 def accept_payments():
     data = request.json
     return jsonify(data)
+
+
+# will use this api to simulate the mpesa response
+@blueprint.route('/current_oil_price', methods=['GET'])
+def oil_current_price():
+    # Get SOAP Service via suds
+    url = 'http://www.pttplc.com/webservice/pttinfo.asmx?WSDL'
+    client = Client(url)
+    # Execute CurrentOilPrice method of SOAP
+    xml = client.service.CurrentOilPrice("EN")
+    # Convert XML to dict
+    res_dict = xmltodict.parse(xml)
+    result = {}
+    result['result'] = res_dict['PTT_DS']['DataAccess']
+    # Convert dict to JSON
+    return jsonify(**result)
+
+
+# generate random password for password reset api
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
+
+
+# forget password api
+@csrf_protect.exempt
+@blueprint.route('/forgot_password', methods=['POST'])
+def forgot_password():
+    data = request.json
+    if data:
+        new_password = id_generator()
+        user = User.query.filter_by(email=data['email']).first()
+        user.password = bcrypt.generate_password_hash(new_password)
+        user.password_reset = 1
+        db.session.commit()
+        status = {"status": "success", "message": "your password has been reset", "new_password": new_password}
+        msg = Message("Soko Mkononi Password Reset",
+                      sender="soko@tracom.co.ke",
+                      recipients=[data['email']])
+        msg.body = "You have successfully reset your password"
+        msg.html = "<b>Hi</b> "+user.first_name+"<br/> " \
+                                                "<b>You password has been reset successfully. Your new password is" + new_password+\
+                   "</b>"
+        mail.send(msg)
+    else:
+        status = {"status": "failure", "message": "problem resetting your password"}
+    db.session.close()
+    return jsonify(status)

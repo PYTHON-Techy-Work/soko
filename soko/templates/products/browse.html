@@ -85,6 +85,11 @@
                <div class="single-bottom">      
                   {% for pt in pc.get_types() %}      
                   <a href="#"><p>{{pt.name}}</p></a>
+                       <!--<div class="single-bottom">-->
+                      <!--{% for ps in pt.get_sub_types() %}-->
+                      <!--<a href="#"><p>{{ps.name}}</p></a>-->
+                      <!--{% endfor %}-->
+                       <!--</div>-->
                   {% endfor %}
                  </div>
                 </div>   
@@ -100,7 +105,7 @@
                 $(".tab{{loop.index}} .single-bottom").hide();
                 
                 $(".tab{{loop.index}} ul").click(function(){
-                  //$(".single-bottom").hide();
+                   $(".single-bottom").hide();
                   $(".tab{{loop.index}} .single-bottom").slideToggle(300);
                 })
 
