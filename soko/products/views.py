@@ -9,7 +9,6 @@ from flask import current_app as app
 from soko.extensions import csrf_protect
 from flask_login import login_required, current_user
 
-#from soko.user.models import User
 from .models import ProductType, ProductCategory
 
 blueprint = Blueprint('item', __name__, url_prefix='/products', static_folder='../static')
@@ -35,6 +34,8 @@ def admin_index():
 @blueprint.route('/admin/edit/<pid>', methods=["GET", "POST"])
 @login_required
 def item_edit_admin(pid):
+
+    from soko.user.models import User
 
     """Register new item type."""
     form = EditProductForm(request.form,
