@@ -26,7 +26,7 @@ blueprint = Blueprint('loans', __name__, url_prefix='/loans', static_folder='../
 @login_required
 def admin_list():
     """List loans."""
-    loans = Loan.query.all()
+    loans = Loan.query
 
     return render_template('loans/list.html', loans=loans, title="All Loans", is_admin=True)
 

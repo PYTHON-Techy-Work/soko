@@ -16,9 +16,11 @@
             <th><i class="fa fa-camera"></i></th>
             <th>Name</th>
             <th>Descr</th>
+            {% if is_admin %}
             <th>User</th>
+            {% endif %}
             <th>Category</th>
-            <th>Quantity</th>
+            <th>Quantity remaining</th>
             <th>Price</th>
             <th></th>
         </thead>
@@ -31,18 +33,33 @@
                     </td>
                     <td>{{i.name}}</td>
                     <td>{{i.description}}</td>
+                    {% if is_admin %}
                     <td>{{i.user.email}}</td>
+                    {% endif %}
                     <td>{{i.product_type.name}}</td>
                     <td>{{i.quantity}}</td>
                     <td>{{i.price}}</td>
+                    {% if is_admin %}
                     <td><a href="/products/admin/edit/{{i.id}}">Edit</a></td>
+                    {% else %}
+                    <td><a href="/products/mine/edit/{{i.id}}">Edit</a></td>
+                    {% endif %}
+
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
     <hr>
+
+      {% if is_admin %}
     <a href="/products/admin/edit/new" class="btn btn-lg btn-primary"><i class="fa fa-plus"></i> Add new</a>
+    {% else %}
+    <a href="/products/mine/edit/new" class="btn btn-lg btn-primary"><i class="fa fa-plus"></i> Sell {% if products.count() %}another{% else %}your first{% endif %} item</a>
+     {% endif %}
+
+
+
 
     </div>
     </div>

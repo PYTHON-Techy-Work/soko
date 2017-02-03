@@ -211,6 +211,10 @@ class Purchase(SurrogatePK, Model):
             "Date": self.created_at,
         }
 
+    def get_user(self):
+        from soko.user.models import User
+        return User.query.get(self.user)
+
 
 class ShoppingList(SurrogatePK, Model):
     __tablename__ = 'shopping_list'

@@ -11,7 +11,7 @@
   </div>
   <div class="panel-body">
    
-  {% if loans|length or is_admin %}
+  {% if loans.count() or is_admin %}
     <table class="table datatable">
         <thead>
             <th></th>
@@ -21,7 +21,7 @@
             {% endif %}
             <th>Total</th>
             <th>Paid</th>
-            <th>Remaining</th>
+            <th>Balance</th>
             <th>Issued on</th>
             <th>Due on</th>
             <th>Status</th>

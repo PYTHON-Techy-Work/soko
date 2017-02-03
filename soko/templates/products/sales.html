@@ -1,0 +1,67 @@
+{% set INCLUDE_DATATABLES = True %}
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="row">
+        <div class="col-lg-10 col-lg-offset-1 col-md-12">
+
+<div class="product-model">  
+   <div class="container">
+      <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li class="active">Sales</li>
+     </ol>
+      <h2>Items you've sold to other Soko users</h2>   
+
+
+  <div class="panel-body">
+  <br><br>
+
+        <table class="table table-striped datatable">
+        <thead>
+            <th><i class="fa fa-camera"></i></th>
+            <th>Name</th>
+            <th>Purchased on</th>
+            <th>Purchased by</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </thead>
+        <tbody>
+            {% for i in items %}
+                <tr>
+                    <td> {% if i.product.photo %}
+                            <img style="height:30px; width:30px; border-radius:50%" src="/static/uploads/{{i.product.photo.split("/")[-1]}}">
+                        {% endif %}
+                    </td>
+                    <td>{{i.product.name}}</td>
+                    <td>{{i.created_at}}</td>
+                    <td>{{i.get_user().email}}</td>
+                    <td>{{i.quantity}}</td>
+                    <td>{{i.total}} ksh</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+    </div>
+</div>
+</div>
+</div>
+
+{% endblock %}
+
+
+{% block js %}
+<script>
+$(function() {
+    $('.datatable').dataTable({
+        "sPaginationType": "full_numbers",
+        "iDisplayLength": 20,
+        "aLengthMenu": [[20, 50, 100, -1], [20, 50, 100, "All"]]
+    });
+});
+</script>
+{% endblock %}
+
+

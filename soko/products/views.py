@@ -27,27 +27,34 @@ def admin_index():
     """List all products."""
     products = Product.query.all()
 
-    return render_template('products/index.html', products=products, title="All items for sale")
+    return render_template('products/index.html', products=products, title="All items for sale", is_admin=True)
+
+
+@blueprint.route('/mine')
+@login_required
+def my_products():
+    """List all products."""
+    products = Product.query.filter_by(user_id=current_user.id)
+
+    return render_template('products/index.html', 
+        products=products, title="My items for sale", is_admin=False)
 
 
 
 @blueprint.route('/admin/edit/<pid>', methods=["GET", "POST"])
+@blueprint.route('/mine/edit/<pid>', methods=["GET", "POST"])
 @login_required
-def item_edit_admin(pid):
+def item_edit(pid):
 
     from soko.user.models import User
 
-    """Register new item type."""
-    form = EditProductForm(request.form,
-                            csrf_enabled=False)
-    form.user_id.choices = [(g.id, g.email) for g in User.query.all()]
-    form.product_type_id.choices = [(g.id, g.name) for g in ProductType.query.all()]
+    is_admin = request.url.find("mine") == -1
 
     obj = None
     if pid != "new":
         obj = Product.query.get(pid)
 
-    if form.validate_on_submit():
+    if request.method == "POST":
         photo = None
 
         if "photo" in request.files and request.files["photo"].filename:
@@ -55,32 +62,45 @@ def item_edit_admin(pid):
             photo = filename
             request.files["photo"].save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        if pid == "new":
-            Product.create(name=form.name.data,
-                            description=form.description.data,
-                            price=form.price.data,
-                            quantity=form.quantity.data,
-                            product_type_id=form.product_type_id.data,
-                            user_id=form.user_id.data,
-                            photo=photo)
-        else:
-            if not photo:
-                photo = obj.photo
+        pc = ProductCategory.query.get(request.form.get("category_id"))
+        pt = ProductType.query.get(request.form.get("product_type_id"))
+        pst = ProductSubType.query.get(request.form.get("product_sub_type_id"))
 
-            obj.update(name=form.name.data,
-                            description=form.description.data,
-                            price=form.price.data,
-                            quantity=form.quantity.data,
-                            product_type_id=form.product_type_id.data,
-                            user_id=form.user_id.data,
-                            photo=photo)
+        if pid == "new":
+            Product.create(name=pst.name,
+                            description=pst.description,
+                            price=request.form.get("price"),
+                            quantity=request.form.get("quantity"),
+                            product_type_id=pt.id,
+                            product_category_id=pc.id,
+                            product_sub_type_id=pst.id,
+                            user_id=request.form.get("user_id"),
+                            photo=pst.photo,
+                            packaging="")
+        else:
+            obj.update(name=pst.name,
+                            description=pst.description,
+                            price=request.form.get("price"),
+                            quantity=request.form.get("quantity"),
+                            product_type_id=pt.id,
+                            product_category_id=pc.id,
+                            product_sub_type_id=pst.id,
+                            user_id=request.form.get("user_id"),
+                            photo=pst.photo,
+                            packaging="")
 
         flash('Item saved', 'success')
-        return redirect(url_for('item.admin_index'))
-    else:
-        flash_errors(form)
+
+        if is_admin:
+            return redirect(url_for('item.admin_index'))
+        else:
+            return redirect("/products/mine")
+    
         
-    return render_template('products/product_edit.html', form=form, item=obj)
+    return render_template('products/product_edit.html', 
+        item=obj, categories=ProductCategory.query.all(),
+        users=User.query.all(),
+        is_admin=is_admin)
 
 
 
@@ -203,4 +223,15 @@ def pay():
 def orders():
     items = Purchase.query.filter_by(user=current_user.id)
     return render_template('products/orders.html', items=items)
+
+@blueprint.route('/sold', methods=["GET"])
+@login_required
+def sold():
+    items = []
+
+    for p in Purchase.query.all():
+        if p.product.user_id == current_user.id:
+            items.append(p)
+
+    return render_template('products/sales.html', items=items)
 

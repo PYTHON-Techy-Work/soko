@@ -13,15 +13,17 @@
 
        <!-- <li {% if request.endpoint in [''] %}class="active"{% endif %}><a href="/products/browse"><i class="fa fa-info-circle"></i> About</a></li>-->
        
-       <li {% if request.endpoint in ['loans.my_list', 'loans.edit_loan'] %}class="active"{% endif %}><a href="/loans"><i class="fa fa-usd"></i> My Loans</a></li>
 
        {% if current_user.is_authenticated %}
+
+       <li {% if request.endpoint in ['loans.my_list', 'loans.edit_loan'] %}class="active"{% endif %}><a href="/loans"><i class="fa fa-usd"></i> My Loans</a></li>
 
         <li {% if request.endpoint in ['item.orders'] %}class="active"{% endif %}><a href="/products/orders"><i class="fa fa-clock-o"></i> Orders</a></li>
 
         <li {% if request.endpoint in ['user.edit_user'] %}class="active"{% endif %}><a href="/users/edit/me""><i class="fa fa-user"></i></a></li>
 
         <li><a href="/logout" onclick="return confirm('Really log out?')"><i class="fa fa-sign-out"></i></a></li>
+
 
         {% else %}
 
@@ -49,8 +51,9 @@
 
           <span class=""></span> Log in</div>
         </a>
+        <br>
             <a href="/register">
-                <span class="fa fa-user" aria-hidden="true">Sign Up</span>
+                <i class="fa fa-user" aria-hidden="true"></i> Sign up
             </a>
         <div class="clearfix"> </div>
        </div>
@@ -61,16 +64,32 @@
        </div>
       <div class="clearfix"> </div>
 </div>
+{% set user_type = current_user.category.lower() %}
+
+{% if current_user.is_admin or user_type != "consumer" %}
+<div class="alert alert-warning" style="margin-bottom:0px">
 
 {% if current_user.is_admin %}
-<div class="alert alert-warning" style="margin-bottom:0px">
 <b>Admin:</b> 
 <a href="/users">Users</a> &middot; 
 <a href="/loans/admin">Loans</a> &middot; 
 <a href="/products/admin">Products</a> &middot; 
 <a href="/products/admin/types">Categories</a> &middot; 
 <a href="/users/documents/admin">Documents</a> 
+
+<span style="margin-right:30px"></span>
+{% endif %}
+
+{% if user_type == "farmer" %}
+<b>Farmer:</b> 
+<a href="/products/mine">Sell items</a> &middot;
+<a href="/products/sold">Reports</a>
 </div>
+{% endif %}
+
+</div>
+
+
 {% endif %}
 
 <!--
