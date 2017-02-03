@@ -90,7 +90,6 @@ class ProductSubType(SurrogatePK, Model):
         return "missing.jpg"
 
 
-
 class Product(SurrogatePK, Model):
     __tablename__ = 'products'
     name = Column(db.String(80), nullable=False)
@@ -127,6 +126,7 @@ class Product(SurrogatePK, Model):
             "id": self.id,
             "name": self.name,
             "photo": self.photo,
+            "seller": self.get_user().username,
             "description": self.description,
             "quantity": self.quantity,
             "farmer": self.user_id,
@@ -139,6 +139,10 @@ class Product(SurrogatePK, Model):
         if os.path.exists("soko/static/uploads/" + self.photo):
             return self.photo
         return "missing.jpg"
+
+    def get_user(self):
+        from soko.user.models import User
+        return User.query.filter_by(id=self.user_id).first()
 
 
 

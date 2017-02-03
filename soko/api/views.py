@@ -917,3 +917,20 @@ def forgot_password():
         status = {"status": "failure", "message": "problem resetting your password"}
     db.session.close()
     return jsonify(status)
+
+
+# reset password api
+@csrf_protect.exempt
+@blueprint.route('/reset_password', methods=['POST'])
+def reset_password():
+    data = request.json
+    if data:
+        user = User.query.filter_by(token=data['token']).first()
+        user.password = bcrypt.generate_password_hash(data['password'])
+        user.password_reset = 0
+        db.session.commit()
+        status = {"status": "success", "message": "password changed"}
+    else:
+        status = {"status": "failure", "message": "problem resetting your password"}
+    db.session.close()
+    return jsonify(status)
