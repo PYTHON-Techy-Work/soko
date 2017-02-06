@@ -146,6 +146,10 @@ def type_edit(tid):
 def browse():
 
     if "addid" in request.args:
+        if not current_user.is_authenticated:
+            flash("You need to be logged in to do that!", "danger")
+            return redirect("/products/browse")
+
         product = Product.query.get(request.args.get("addid"))
 
         total = float(request.args.get("quantity")) * float(product.price)
