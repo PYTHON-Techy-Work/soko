@@ -64,6 +64,7 @@
        </div>
       <div class="clearfix"> </div>
 </div>
+{% if current_user.is_authenticated %}
 {% set user_type = current_user.category.lower() %}
 
 {% if current_user.is_admin or user_type != "consumer" %}
@@ -88,6 +89,8 @@
 {% endif %}
 
 </div>
+
+{% endif %}
 
 
 {% endif %}
