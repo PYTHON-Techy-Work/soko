@@ -639,16 +639,17 @@ def purchase_cart():
         shopping_list = ShoppingList(
             user_id=user.id,
             product_id=cart.product_id,
-            quantity=cart.quantity,
-            lat=data["lat"],
-            lng=data["lng"]
+            quantity=cart.quantity
         )
         deliveries = Delivery(
             user_id=user.id,
             product_id=cart.product_id,
             quantity=cart.quantity,
             lat=data["lat"],
-            lng=data["lng"]
+            lng=data["lng"],
+            transporter="",
+            status="Not Delivered",
+            total=cart.total,
         )
         db.session.add(purchase)
         db.session.add(shopping_list)

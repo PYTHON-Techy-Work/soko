@@ -145,7 +145,6 @@ class Product(SurrogatePK, Model):
         return User.query.filter_by(id=self.user_id).first()
 
 
-
 class ProductRatings(SurrogatePK, Model):
     __tablename__ = 'product_ratings'
     product = Column(db.Integer, nullable=False)
@@ -249,20 +248,16 @@ class Delivery(SurrogatePK, Model):
     product_id = reference_col('products', nullable=False)
     product = relationship('Product', backref='orders')
     transporter = Column(db.Integer, nullable=False)
-    consumer = Column(db.Integer, nullable=False)
-    status = Column(db.Boolean(), nullable=False)
-    delivered = Column(db.Boolean(), nullable=False)
+    status = Column(db.String(50), nullable=False)
     lat = Column(db.String(80)),
     lng = Column(db.String(80)),
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, user_id, product_id, transporter,consumer, status, delivered, total, lat, lng):
+    def __init__(self, user_id, product_id, transporter, status, total, lat, lng):
         self.user_id = user_id
         self.product_id = product_id
         self.transporter = transporter
-        self.consumer = consumer
         self.status = status
-        self.delivered = delivered
         self.total = total
         self.lat = lat
         self.lng = lng
@@ -273,9 +268,7 @@ class Delivery(SurrogatePK, Model):
             "user": self.user_id,
             "product": self.product.serialize(),
             "transporter": self.transporter,
-            "consumer": self.consumer,
             "status": self.status,
-            "delivered": self.delivered,
             "lat": self.lat,
             "lng": self.lng,
             "date": self.created_at
