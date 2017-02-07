@@ -255,12 +255,12 @@ class Order(SurrogatePK, Model):
     lng = Column(db.String(80)),
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, user_id, product, status,delivered, total, lat, lng):
+    def __init__(self, user_id, product_id, status, lat, lng, delivered = False):
         self.user_id = user_id
-        self.product = product
+        self.product_id = product_id
         self.status = status
         self.delivered = delivered
-        self.total = total
+        #self.total = total
         self.lat = lat
         self.lng = lng
 
@@ -287,8 +287,8 @@ class Deliveries(SurrogatePK, Model):
     status = Column(db.Integer, nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, order, transporter, consumer, location, status):
-        self.order = order
+    def __init__(self, order_id, transporter, consumer, location, status):
+        self.order_id = order_id
         self.transporter = transporter
         self.consumer = consumer
         self.location = location

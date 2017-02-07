@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+{% block content %}
+   
+
+<style>
+       #map {
+        height: 400px;
+        width: 100%;
+        border-left:1px solid #ccc;
+       }
+    </style>
+
+<div class="row">
+ <div class="col-md-6">
+
+<div class="panel panel-default" style="margin-left:20px; margin-top:20px">
+  <div class="panel-heading">
+    <h3 class="panel-title"><i class="fa fa-motorcycle"></i> Available orders</h3>
+  </div>
+  <div class="panel-body">
+    <div class="alert alert-info">
+    <i class="fa fa-info-circle"></i> These are Soko orders that are near you and are not assigned to a transporter yet
+    </div>
+
+    <table class="table table-bordered">
+    <thead>
+      <th>#</th>
+      <th>Item</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Quantity</th>
+      <th>Actions</th>
+    </thead>
+    <tbody>
+    {% for order in items %}
+      <tr>
+        <td>#{{order.id}}</td>
+        <td>{{order.product.name}}</td>
+        <td></td>
+        <td></td>
+        <td>{{order.quantity}}</td>
+        <td><a href="#">View on map</a></td>
+      </tr>
+    {% else %}
+      No items
+    {% endfor %}
+    </table>
+
+  </div>
+</div>
+
+
+
+ </div>
+  <div class="col-md-6">
+
+<div id="map"></div>
+
+</div>
+</div>
+
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJVhOd8TXT2BRxv-nl9n8oiusgjUxbBRw&callback=initMap">
+</script>
+
+<script type="text/javascript">
+    
+function initMap() {
+
+    $("#map").css("height", $(window).height() - 300 + "px");
+
+    var center = {lat: -1.2921, lng: 36.8219};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 16,
+    center: center
+  });
+
+    var infowindow = new google.maps.InfoWindow({
+        content: "#7: <b>Almonds (1)</b><br><br><a href='#' class='btn btn-primary'>Accept order</a>"
+      });
+
+  var marker = new google.maps.Marker({
+    position: center,
+    map: map,
+    title: 'Test User'
+  });
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });
+
+
+
+
+}
+
+
+</script>
+
+{% endblock %}
+
