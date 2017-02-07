@@ -8,8 +8,6 @@ from werkzeug.utils import secure_filename
 
 from soko.user.models import User, Document
 from soko.transporter.models import Transporter, County, TransporterCurrentLocation
-from soko.farmer.models import Farmer, FarmerAddress
-from soko.customer.models import Customer
 from soko.products.models import Product, ProductCategory, ProductType, ProductSubType, ProductRatings, Cart, Purchase, \
     ShoppingList, Delivery
 from soko.locations.models import Locations

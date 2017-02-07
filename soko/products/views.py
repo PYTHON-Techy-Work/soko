@@ -9,7 +9,7 @@ from flask import current_app as app
 from soko.extensions import csrf_protect
 from flask_login import login_required, current_user
 
-from .models import ProductType, ProductCategory, Order
+from .models import ProductType, ProductCategory, Delivery
 
 blueprint = Blueprint('item', __name__, url_prefix='/products', static_folder='../static')
 
