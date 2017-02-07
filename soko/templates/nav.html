@@ -1,7 +1,7 @@
 <div class="header-top">
    <div class="header-bottom">      
         <div class="logo">
-          <h1><a href="index.html"></i> Soko<b>Mkononi</b></a></h1>
+          <h1 style="font-size:40px; padding-bottom:0px; line-height: 23px"><a href="index.html"> Soko<br><b style="font-size:30px; text-shadow: 2px 2px #000;">Mkononi</b></a></h1>
         </div>
        <!---->     
        <div class="top-nav">
@@ -85,6 +85,15 @@
 <b>Farmer:</b> 
 <a href="/products/mine">Sell items</a> &middot;
 <a href="/products/sold">Reports</a>
+</div>
+{% endif %}
+
+
+{% if user_type == "transporter" %}
+<b>Transporter:</b> 
+<a href="/transporter/available">Available deliveries</a> &middot;
+<a href="/transporter/me">My deliveries</a> &middot;
+<a href="/users/documents">Documents</a>
 </div>
 {% endif %}
 

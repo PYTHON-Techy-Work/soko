@@ -9,7 +9,7 @@ from flask import current_app as app
 from soko.extensions import csrf_protect
 from flask_login import login_required, current_user
 
-from .models import ProductType, ProductCategory
+from .models import ProductType, ProductCategory, Order
 
 blueprint = Blueprint('item', __name__, url_prefix='/products', static_folder='../static')
 
@@ -146,6 +146,10 @@ def type_edit(tid):
 def browse():
 
     if "addid" in request.args:
+        if not current_user.is_authenticated:
+            flash("You need to be logged in to do that!", "danger")
+            return redirect("/products/browse")
+
         product = Product.query.get(request.args.get("addid"))
 
         total = float(request.args.get("quantity")) * float(product.price)
@@ -204,6 +208,7 @@ def pay():
             product_id=cart.product_id,
             quantity=cart.quantity,
         )
+
         db.session.add(purchase)
         db.session.add(shopping_list)
         product = Product.query.get(cart.product_id)
