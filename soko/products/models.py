@@ -256,20 +256,14 @@ class Delivery(SurrogatePK, Model):
     lng = Column(db.String(80)),
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-<<<<<<< HEAD
-    def __init__(self, user_id, product, transporter,consumer, status,delivered, total, lat, lng):
-        self.user_id = user_id
-        self.product = product
-        self.transporter = transporter
-        self.consumer = consumer
-=======
-    def __init__(self, user_id, product_id, status, lat, lng, delivered = False):
+    def __init__(self, user_id, product_id, transporter,consumer, status, delivered, total, lat, lng):
         self.user_id = user_id
         self.product_id = product_id
->>>>>>> d4d8bb8c3adebdffdc0f8a6411811a9a8145aa6b
+        self.transporter = transporter
+        self.consumer = consumer
         self.status = status
         self.delivered = delivered
-        #self.total = total
+        self.total = total
         self.lat = lat
         self.lng = lng
 
@@ -286,34 +280,3 @@ class Delivery(SurrogatePK, Model):
             "lng": self.lng,
             "date": self.created_at
         }
-<<<<<<< HEAD
-=======
-
-
-class Deliveries(SurrogatePK, Model):
-    __tablename__ = 'deliveries'
-    order_id = reference_col('orders', nullable=False)
-    order = relationship('Order', backref='deliveries')
-    transporter = Column(db.Integer, nullable=False)
-    consumer = Column(db.Integer, nullable=False)
-    location = Column(db.String, nullable=False)
-    status = Column(db.Integer, nullable=False)
-    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
-
-    def __init__(self, order_id, transporter, consumer, location, status):
-        self.order_id = order_id
-        self.transporter = transporter
-        self.consumer = consumer
-        self.location = location
-        self.status = status
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "order": self.order,
-            "transporter": self.transporter,
-            "consumer": self.consumer,
-            "status": self.status,
-            "Date": self.created_at,
-        }
->>>>>>> d4d8bb8c3adebdffdc0f8a6411811a9a8145aa6b

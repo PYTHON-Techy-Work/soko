@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92ae03c2-6e34-4825-ab80-9dc3e813ec41" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/migrations/versions/ae7b580f3e46_.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/migrations/alembic.ini" afterPath="$PROJECT_DIR$/migrations/alembic.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/api/views.py" afterPath="$PROJECT_DIR$/soko/api/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/migrations/versions/a52128e85a42_.py" afterPath="$PROJECT_DIR$/migrations/versions/a52128e85a42_.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/migrations/versions/deac18fcff74_.py" afterPath="$PROJECT_DIR$/migrations/versions/deac18fcff74_.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/products/models.py" afterPath="$PROJECT_DIR$/soko/products/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/templates/products/sales.html" afterPath="$PROJECT_DIR$/soko/templates/products/sales.html" />
     </list>
     <ignored path="dashboard.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,7 +28,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/soko/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="200">
@@ -50,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/soko/products/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="244" column="14" lean-forward="false" selection-start-line="244" selection-start-column="6" selection-end-line="244" selection-end-column="14" />
+            <state relative-caret-position="381">
+              <caret line="281" column="9" lean-forward="false" selection-start-line="281" selection-start-column="9" selection-end-line="281" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -132,9 +130,9 @@
         <option value="$PROJECT_DIR$/soko/templates/footer.html" />
         <option value="$PROJECT_DIR$/soko/templates/products/browse.html" />
         <option value="$PROJECT_DIR$/soko/user/models.py" />
-        <option value="$PROJECT_DIR$/soko/products/models.py" />
         <option value="$PROJECT_DIR$/soko/api/views.py" />
         <option value="$PROJECT_DIR$/soko/settings.py" />
+        <option value="$PROJECT_DIR$/soko/products/models.py" />
       </list>
     </option>
   </component>
@@ -741,14 +739,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/soko/products/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="244" column="14" lean-forward="false" selection-start-line="244" selection-start-column="6" selection-end-line="244" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/soko/user/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
@@ -779,6 +769,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="46" column="78" lean-forward="false" selection-start-line="46" selection-start-column="78" selection-end-line="46" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soko/products/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="281" column="9" lean-forward="false" selection-start-line="281" selection-start-column="9" selection-end-line="281" selection-end-column="9" />
           <folding />
         </state>
       </provider>
