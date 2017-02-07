@@ -634,7 +634,7 @@ def purchase_cart():
             user=user.id,
             product=cart.product,
             quantity=cart.quantity,
-            total=cart.total,
+            total=cart.total
         )
         shopping_list = ShoppingList(
             user_id=user.id,
