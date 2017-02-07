@@ -10,7 +10,8 @@ from soko.user.models import User, Document
 from soko.transporter.models import Transporter, County, TransporterCurrentLocation
 from soko.farmer.models import Farmer, FarmerAddress
 from soko.customer.models import Customer
-from soko.products.models import Product, ProductCategory, ProductType, ProductSubType, ProductRatings, Cart, Purchase, ShoppingList, Order
+from soko.products.models import Product, ProductCategory, ProductType, ProductSubType, ProductRatings, Cart, Purchase, \
+    ShoppingList, Delivery
 from soko.locations.models import Locations
 from soko.database import db
 from soko.utils import flash_errors
@@ -90,8 +91,10 @@ def reg_user():
         msg = Message("Welcome To Soko Mkononi",
                       sender="soko@tracom.co.ke",
                       recipients=[data['email']])
-        msg.body = "You have successfully registered to soko mkononi as a  "+data['category']
-        msg.html = "<b>Hi</b> "+data['first_name']+"<br/> <b>You have successfully registered to soko mkononi as a "+data['category']+"</b>"
+        msg.body = "You have successfully registered to soko mkononi as a  " + data['category']
+        msg.html = "<b>Hi</b> " + data[
+            'first_name'] + "<br/> <b>You have successfully registered to soko mkononi as a " + data[
+                       'category'] + "</b>"
         mail.send(msg)
     except Exception, e:
         print e
@@ -119,9 +122,9 @@ def update_profile():
         msg = Message("Welcome To Soko Mkononi",
                       sender="from@example.com",
                       recipients=[data['email']])
-        msg.body = "You have successfully Updated your profile a  "+user.category
-        msg.html = "<b>Hi</b> "+user.first_name+"<br/> " \
-                                                "<b>You have successfully Updated your profile on Soko Mkononi as a "+user.category+\
+        msg.body = "You have successfully Updated your profile a  " + user.category
+        msg.html = "<b>Hi</b> " + user.first_name + "<br/> " \
+                                                    "<b>You have successfully Updated your profile on Soko Mkononi as a " + user.category + \
                    "</b>"
         mail.send(msg)
     except Exception, e:
@@ -130,7 +133,8 @@ def update_profile():
     db.session.close()
     return jsonify(status)
 
-#login_api
+
+# login_api
 @csrf_protect.exempt
 @blueprint.route('/login', methods=["POST"])
 def login():
@@ -150,14 +154,15 @@ def login():
             db.session.commit()
             status = {'status': 'success', 'message': 'welcome ' + registered_user.first_name,
                       'token': registered_user.token,
-                      'username': registered_user.username, 'category': registered_user.category, 'active': registered_user.active,
+                      'username': registered_user.username, 'category': registered_user.category,
+                      'active': registered_user.active,
                       'password_reset': registered_user.password_reset}
         else:
             status = {'status': 'failure', 'message': 'Invalid Username or password'}
     return jsonify(status)
 
 
-#add transporter details #lorry, pick-up, van, truck, motorcycle
+# add transporter details #lorry, pick-up, van, truck, motorcycle
 @csrf_protect.exempt
 @blueprint.route('/add_transporter_details', methods=["POST"])
 def add_transporter_details():
@@ -224,7 +229,7 @@ def add_driver_licence():
             db.session.commit()
             status = {"status": "success", "message": "Driver's licence added successfully"}
         except Exception, e:
-            status = {"status":"failure", "message": str(e)}
+            status = {"status": "failure", "message": str(e)}
     else:
         status = {"status": "failure", "message": "Please add the correct data"}
     db.session.close()
@@ -273,7 +278,7 @@ def add_id_card():
             db.session.commit()
             status = {"status": "success", "message": "Identity Card added successfully"}
         except Exception, e:
-            status = {"status":"failure", "message": str(e)}
+            status = {"status": "failure", "message": str(e)}
     else:
         status = {"status": "failure", "message": "Please add the correct data"}
     db.session.close()
@@ -495,20 +500,27 @@ def get_maps():
     data = request.json
     token = request.args
     print token
-    if data:
-        user = User.query.filter_by(token=token["token"]).first()
-        print user
-        location = Locations(
-            user=user.id,
-            latitude=data['lat'],
-            longitude=data['lng']
-        )
+    print data
+    user = User.query.filter_by(token=token["token"]).first()
+    location = Locations.query.filter_by(user=user.id).first()
     try:
-        db.session.add(location)
-        db.session.commit()
-        status = {'status': 'success', 'message': 'location added'}
+        if location:
+            location.latitude = data['lat']
+            location.longitude = data['lng']
+            db.session.add(location)
+            db.session.commit()
+            status = {'status': 'success', 'message': 'location updated'}
+        else:
+            location = Locations(
+                latitude=data['lat'],
+                longitude=data['lng'],
+                user=user.id
+            )
+            db.session.add(location)
+            db.session.commit()
+            status = {'status': 'success', 'message': 'location added'}
     except Exception, e:
-        status = {'status': 'failure', 'message': 'problem saving location'}
+        status = {'status': 'failure', 'message': str(e)}
         print e
     db.session.close()
     return jsonify(status)
@@ -590,7 +602,6 @@ def add_to_cart():
 @csrf_protect.exempt
 @blueprint.route('/remove_from_cart', methods=["POST"])
 def remove_from_cart():
-    
     if "token" not in request.json or "cid" not in request.json:
         return jsonify({'status': 'failure', 'message': 'Error!'})
 
@@ -606,7 +617,7 @@ def remove_from_cart():
 
     db.session.delete(cid)
     db.session.commit()
-    
+
     return jsonify({'status': 'success', 'message': 'product removed from cart'})
 
 
@@ -618,7 +629,6 @@ def purchase_cart():
         return jsonify({'status': 'failure', 'message': 'Error!'})
 
     user = User.query.filter_by(token=data["token"]).first()
-
     for cart in Cart.query.filter_by(user=user.id):
         # todo: do some stuff with the cart
         # add to 'purchases' table or something
@@ -635,7 +645,7 @@ def purchase_cart():
             lat=data["lat"],
             lng=data["lng"]
         )
-        order = Orders(
+        deliveries = Delivery(
             user_id=user.id,
             product_id=cart.product_id,
             quantity=cart.quantity,
@@ -644,13 +654,12 @@ def purchase_cart():
         )
         db.session.add(purchase)
         db.session.add(shopping_list)
-        db.session.add(order)
+        db.session.add(deliveries)
         product = Product.query.get(cart.product_id)
         product.quantity = int(product.quantity) - int(purchase.quantity)
         db.session.delete(cart)
         db.session.commit()
     db.session.commit()
-    
     return jsonify({'status': 'success', 'message': 'Items successfully purchased!'})
 
 
@@ -664,95 +673,97 @@ def get_purchase():
     print user.id
     if user:
         for purchase in Purchase.query.filter_by(user=user.id):
-             purchases =[purchase.serialize()]
-        status = {"status":"success", "message": purchases}
+            purchases = [purchase.serialize()]
+        status = {"status": "success", "message": purchases}
     else:
         status = {'status': 'failure', 'message': 'You have not purchased any items on soko mkononi'}
     return jsonify(status)
+
 
 # add the product categories api
 @csrf_protect.exempt
 @blueprint.route('/add_product_categories', methods=["POST"])
 def add_product_categories():
-        data = request.json
-        print data
-        product_category = ProductCategory(
-            name=data['name']
-        )
-        try:
-            db.session.add(product_category)
-            db.session.commit()
-            status = {'status': 'success', 'message': 'product category added'}
-        except Exception, e:
-            status = {'status': 'failure', 'message': str(e)}
-            print e
-        db.session.close()
-        return jsonify(status)
+    data = request.json
+    print data
+    product_category = ProductCategory(
+        name=data['name']
+    )
+    try:
+        db.session.add(product_category)
+        db.session.commit()
+        status = {'status': 'success', 'message': 'product category added'}
+    except Exception, e:
+        status = {'status': 'failure', 'message': str(e)}
+        print e
+    db.session.close()
+    return jsonify(status)
+
 
 # add the product type api
 @csrf_protect.exempt
 @blueprint.route('/add_product_type', methods=["POST"])
 def add_product_type():
-        data = request.json
-        print data
-        product_type = ProductType(
-            name=data['name'],
-            product_category_id=data['product_category']
-        )
-        try:
-            db.session.add(product_type)
-            db.session.commit()
-            status = {'status': 'success', 'message': 'product type added'}
-        except Exception, e:
-            status = {'status': 'failure', 'message': str(e)}
-            print e
-        db.session.close()
-        return jsonify(status)
+    data = request.json
+    print data
+    product_type = ProductType(
+        name=data['name'],
+        product_category_id=data['product_category']
+    )
+    try:
+        db.session.add(product_type)
+        db.session.commit()
+        status = {'status': 'success', 'message': 'product type added'}
+    except Exception, e:
+        status = {'status': 'failure', 'message': str(e)}
+        print e
+    db.session.close()
+    return jsonify(status)
 
 
 # add the product sub type api
 @csrf_protect.exempt
 @blueprint.route('/add_product_sub_type', methods=["POST"])
 def add_product_sub_type():
-        data = request.json
-        print data
-        product_sub_sub_type = ProductSubType(
-            name=data['name'],
-            description=data['description'],
-            product_type_id=data['product_type'],
-            product_category_id=data['product_category'],
-            photo=data['photo']
-        )
-        try:
-            db.session.add(product_sub_sub_type)
-            db.session.commit()
-            status = {'status': 'success', 'message': 'product sub sub type added'}
-        except Exception, e:
-            status = {'status': 'failure', 'message': str(e)}
-            print e
-        db.session.close()
-        return jsonify(status)
+    data = request.json
+    print data
+    product_sub_sub_type = ProductSubType(
+        name=data['name'],
+        description=data['description'],
+        product_type_id=data['product_type'],
+        product_category_id=data['product_category'],
+        photo=data['photo']
+    )
+    try:
+        db.session.add(product_sub_sub_type)
+        db.session.commit()
+        status = {'status': 'success', 'message': 'product sub sub type added'}
+    except Exception, e:
+        status = {'status': 'failure', 'message': str(e)}
+        print e
+    db.session.close()
+    return jsonify(status)
 
 
 @blueprint.route('/get_shopping_list', methods=["GET"])
 def get_shopping_list():
-        data = request.args
-        if data:
-            user = User.query.filter_by(token=data["token"]).first()
-            # print user.id
-            if user:
-                ret = []
-                ls = ShoppingList.query.filter_by(user_id=user.id)
-                for ls in ShoppingList.query.filter_by(user_id=user.id):
-                    product = Product.query.filter_by(id=ls.product_id).first()
-                    print product.name
-                    ret.append(product.serialize())
-                status = {"status": "success", "message": ret}
-            else:
-                status = {"status": "failure", "message": "No records found"}
+    data = request.args
+    if data:
+        user = User.query.filter_by(token=data["token"]).first()
+        # print user.id
+        if user:
+            ret = []
+            ls = ShoppingList.query.filter_by(user_id=user.id)
+            for ls in ShoppingList.query.filter_by(user_id=user.id):
+                product = Product.query.filter_by(id=ls.product_id).first()
+                print product.name
+                ret.append(product.serialize())
+            status = {"status": "success", "message": ret}
         else:
             status = {"status": "failure", "message": "No records found"}
-        return jsonify(status)
+    else:
+        status = {"status": "failure", "message": "No records found"}
+    return jsonify(status)
 
 
 @csrf_protect.exempt
@@ -800,6 +811,7 @@ def get_farmer_location():
     db.session.close()
     return jsonify(status)
 
+
 # get_transporter_current_location
 @csrf_protect.exempt
 @blueprint.route('/get_transporter_current_location', methods=["POST"])
@@ -817,7 +829,7 @@ def transporter_current_location():
             db.session.commit()
             status = {"status": "failure", "message": "Location added successfully"}
         except Exception, e:
-            status = {"status":"failure", "message": str(e)}
+            status = {"status": "failure", "message": str(e)}
     else:
         status = {"status": "failure", "message": "Pass the correct data"}
     db.session.close()
@@ -838,7 +850,7 @@ def available_orders():
         lon2 = order.lng
         dlon = lon2 - lon1
         dlat = lat2 - lat1
-        a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+        a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
         c = 2 * atan2(sqrt(a), sqrt(1 - a))
         distance = R * c
         status = {"status": "failure", "message": distance}
@@ -909,8 +921,8 @@ def forgot_password():
                       sender="soko@tracom.co.ke",
                       recipients=[data['email']])
         msg.body = "You have successfully reset your password"
-        msg.html = "<b>Hi</b> "+user.first_name+"<br/> " \
-                                                "<b>You password has been reset successfully. Your new password is" + new_password+\
+        msg.html = "<b>Hi</b> " + user.first_name + "<br/> " \
+                                                    "<b>You password has been reset successfully. Your new password is " + new_password + \
                    "</b>"
         mail.send(msg)
     else:
