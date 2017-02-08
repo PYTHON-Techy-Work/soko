@@ -661,6 +661,7 @@ def purchase_cart():
             print product.quantity
             print purchase.quantity
             product.quantity = int(product.quantity) - int(purchase.quantity)
+            print product.quantity
             db.session.delete(cart)
             db.session.commit()
             status = {'status': 'success', 'message': 'Items successfully purchased!'}
