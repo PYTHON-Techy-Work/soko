@@ -122,11 +122,15 @@ class Product(SurrogatePK, Model):
         self.user_id = user_id
 
     def serialize(self):
+        if self.get_user().business_name:
+            seller = self.get_user().business_name,
+        else:
+            seller = self.get_user().firtsname + self.get_user().username,
         return {
             "id": self.id,
             "name": self.name,
             "photo": self.photo,
-            "seller": self.get_user().username,
+            "seller": seller,
             "description": self.description,
             "quantity": self.quantity,
             "farmer": self.user_id,
