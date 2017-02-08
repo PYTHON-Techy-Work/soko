@@ -635,7 +635,7 @@ def purchase_cart():
             # add to 'purchases' table or something
             purchase = Purchase(
                 user=user.id,
-                product_id=cart.product,
+                product_id=cart.product_id,
                 quantity=cart.quantity,
                 total=cart.total
             )
