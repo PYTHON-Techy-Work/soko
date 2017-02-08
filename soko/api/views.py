@@ -615,7 +615,7 @@ def remove_from_cart():
 
     db.session.delete(cid)
     db.session.commit()
-
+    db.session.close()
     return jsonify({'status': 'success', 'message': 'product removed from cart'})
 
 
@@ -660,10 +660,11 @@ def purchase_cart():
             product = Product.query.get(cart.product_id)
             product.quantity = int(product.quantity) - int(purchase.quantity)
             db.session.delete(cart)
+            db.session.commit()
             status = {'status': 'success', 'message': 'Items successfully purchased!'}
     except Exception, e:
         status = {"status":"failure","message": str(e)}
-    db.session.commit()
+    db.session.close()
     return jsonify(status)
 
 
