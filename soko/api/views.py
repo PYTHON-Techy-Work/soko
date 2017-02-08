@@ -947,7 +947,7 @@ def reset_password():
 
 
 # rate a product
-@csrf_protect
+@csrf_protect.exempt()
 @blueprint.route('/rate_product', methods=['POST'])
 def rate_product():
     data=request.json
