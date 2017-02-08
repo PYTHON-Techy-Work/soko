@@ -684,6 +684,7 @@ def purchase_cart():
 @blueprint.route('/get_purchases', methods=["GET"])
 def get_purchase():
     data = request.args
+    purchases = []
     if "token" not in data:
         return jsonify({'status': 'failure', 'message': 'Error!'})
     print data
