@@ -658,6 +658,8 @@ def purchase_cart():
             db.session.add(shopping_list)
             db.session.add(deliveries)
             product = Product.query.get(cart.product_id)
+            print product.quantity
+            print purchase.quantity
             product.quantity = int(product.quantity) - int(purchase.quantity)
             db.session.delete(cart)
             db.session.commit()
