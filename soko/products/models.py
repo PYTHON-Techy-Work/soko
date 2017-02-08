@@ -260,6 +260,7 @@ class Delivery(SurrogatePK, Model):
     quantity = Column(db.Integer, nullable=False)
     transporter = Column(db.Integer, nullable=False)
     status = Column(db.String(50), nullable=False)
+    total = Column(db.Numeric(15, 2), nullable=False)
     lat = Column(db.String(80), nullable=False)
     lng = Column(db.String(80), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
@@ -282,6 +283,7 @@ class Delivery(SurrogatePK, Model):
             "quantity": self.quantity,
             "transporter": self.transporter,
             "status": self.status,
+            "total": self.total,
             "lat": self.lat,
             "lng": self.lng,
             "date": self.created_at
