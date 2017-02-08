@@ -125,7 +125,7 @@ class Product(SurrogatePK, Model):
         if self.get_user().business_name:
             seller = self.get_user().business_name,
         else:
-            seller = self.get_user().firtsname + self.get_user().username,
+            seller = self.get_user().first_name + self.get_user().last_name,
         return {
             "id": self.id,
             "name": self.name,
