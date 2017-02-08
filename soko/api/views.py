@@ -657,7 +657,7 @@ def purchase_cart():
             db.session.add(shopping_list)
             db.session.add(deliveries)
             product = Product.query.get(cart.product_id)
-            product.quantity = product.quantity - purchase.quantity
+            product.quantity = int(product.quantity) - int(purchase.quantity)
             db.session.delete(cart)
             status = {'status': 'success', 'message': 'Items successfully purchased!'}
     except Exception, e:
