@@ -631,7 +631,6 @@ def purchase_cart():
     print user.id
     try:
         for cart in Cart.query.filter_by(user=user.id):
-            print cart
             # todo: do some stuff with the cart
             # add to 'purchases' table or something
             purchase = Purchase(
