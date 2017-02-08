@@ -649,6 +649,7 @@ def purchase_cart():
                 product_id=cart.product_id,
                 transporter=transporter,
                 status=delivery_status,
+                total=cart.total,
                 lat=data["lat"],
                 lng=data["lng"],
                 quantity=cart.quantity
