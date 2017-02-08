@@ -221,7 +221,7 @@ class Purchase(SurrogatePK, Model):
     def serialize(self):
         return {
             "id": self.id,
-            "user": self.user,
+            "user": self.get_user().first_name,
             "product": self.product.serialize(),
             "quantity": self.quantity,
             "total": float(self.total),
