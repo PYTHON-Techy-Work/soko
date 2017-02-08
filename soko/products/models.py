@@ -147,18 +147,28 @@ class Product(SurrogatePK, Model):
 
 class ProductRatings(SurrogatePK, Model):
     __tablename__ = 'product_ratings'
-    product = Column(db.Integer, nullable=False)
+    product_id = reference_col('products', nullable=False)
+    product = relationship('Product', backref='product_ratings')
+    user_id = reference_col('users', nullable=False)
+    user = relationship('User', backref='product_ratings')
     rating = Column(db.Integer, nullable=False)
     review = Column(db.String(80), nullable=True)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, product, rating, review):
-        self.product = product
+    def __init__(self, product_id, user_id, rating, review):
+        self.product_id = product_id
+        self.user_id = user_id
         self.rating = rating
         self.review = review
 
-    def __repr__(self):
-        return '<Product %r>' % self.user + self.rating + self.review
+    def serialize(self):
+        return {
+            "id":self.id,
+            "product":self.product_id,
+            "user":self.user_id,
+            "rating":self.rating,
+            "review":self.review
+        }
 
 
 class Cart(SurrogatePK, Model):
@@ -249,8 +259,8 @@ class Delivery(SurrogatePK, Model):
     product = relationship('Product', backref='orders')
     transporter = Column(db.Integer, nullable=False)
     status = Column(db.String(50), nullable=False)
-    lat = Column(db.String(80)),
-    lng = Column(db.String(80)),
+    lat = Column(db.String(80), nullable=False),
+    lng = Column(db.String(80), nullable=False),
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
     def __init__(self, user_id, product_id, transporter, status, total, lat, lng):

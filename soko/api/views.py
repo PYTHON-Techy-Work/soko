@@ -648,8 +648,7 @@ def purchase_cart():
             lat=data["lat"],
             lng=data["lng"],
             transporter="",
-            status="Not Delivered",
-            total=cart.total,
+            status="Not Delivered"
         )
         db.session.add(purchase)
         db.session.add(shopping_list)
@@ -844,9 +843,9 @@ def available_orders():
     lon1 = radians(data["lng"])
     user = User.query.filter_by(token=data["token"]).first()
     if user:
-        order = Order.query.filter_by(delivered=False)
-        lat2 = order.lat
-        lon2 = order.lng
+        delivery = Delivery.query.filter_by(delivered=False)
+        lat2 = delivery.lat
+        lon2 = delivery.lng
         dlon = lon2 - lon1
         dlat = lat2 - lat1
         a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
@@ -945,3 +944,28 @@ def reset_password():
         status = {"status": "failure", "message": "problem resetting your password"}
     db.session.close()
     return jsonify(status)
+
+
+# rate a product
+@csrf_protect
+@blueprint.route('/rate_product', methods=['POST'])
+def rate_product():
+    data=request.json
+    if data:
+        user = User.query.filter_by(token=data['token']).first()
+        rate_product=ProductRatings(
+            product_id=data["product_id"],
+            user_id=user.id,
+            rating=data["rating"],
+            review=data["review"]
+        )
+        try:
+            db.session.add(rate_product)
+            db.session.commit()
+            status = {"status":"success", "message":"product rated"}
+        except Exception, e:
+            status = {"status":"failure ", "message":str(e)}
+        db.session.close()
+        return jsonify(status)
+
+
