@@ -631,6 +631,7 @@ def purchase_cart():
     print user.id
     try:
         for cart in Cart.query.filter_by(user=user.id):
+            print cart
             # todo: do some stuff with the cart
             # add to 'purchases' table or something
             purchase = Purchase(
@@ -647,11 +648,11 @@ def purchase_cart():
             deliveries = Delivery(
                 user_id=user.id,
                 product_id=cart.product_id,
-                quantity=cart.quantity,
+                transporter=transporter,
+                status=delivery_status,
                 lat=data["lat"],
                 lng=data["lng"],
-                transporter=transporter,
-                status=delivery_status
+                quantity=cart.quantity
             )
             db.session.add(purchase)
             db.session.add(shopping_list)
@@ -662,7 +663,6 @@ def purchase_cart():
             status = {'status': 'success', 'message': 'Items successfully purchased!'}
     except Exception, e:
         status = {"status":"failure","message":str(e)}
-        db.session.commit()
     db.session.commit()
     return jsonify(status)
 
