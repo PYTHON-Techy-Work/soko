@@ -987,18 +987,3 @@ def rate_product():
             status = {"status":"failure ", "message":str(e)}
         db.session.close()
         return jsonify(status)
-
-
-# api to get all the purchases
-@blueprint.route('/get_purchases', methods=["GET"])
-def get_purchases():
-    data = request.args
-    ret = []
-    if data:
-        user = User.query.filter_by(token=data["token"]).first()
-        if user:
-            purchases = Purchase.query.all()
-            for pc in purchases:
-                ret.append(pc.serialize())
-            print ret
-    return jsonify(data=ret)
