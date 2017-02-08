@@ -623,42 +623,48 @@ def remove_from_cart():
 @blueprint.route('/purchase_cart', methods=["POST"])
 def purchase_cart():
     data = request.json
+    delivery_status = "Not Delivered"
+    transporter = ""
     if "token" not in request.json:
-        return jsonify({'status': 'failure', 'message': 'Error!'})
-
+        status = {'status': 'failure', 'message': 'Error!'}
     user = User.query.filter_by(token=data["token"]).first()
-    for cart in Cart.query.filter_by(user=user.id):
-        # todo: do some stuff with the cart
-        # add to 'purchases' table or something
-        purchase = Purchase(
-            user=user.id,
-            product_id=cart.product,
-            quantity=cart.quantity,
-            total=cart.total
-        )
-        shopping_list = ShoppingList(
-            user_id=user.id,
-            product_id=cart.product_id,
-            quantity=cart.quantity
-        )
-        deliveries = Delivery(
-            user_id=user.id,
-            product_id=cart.product_id,
-            quantity=cart.quantity,
-            lat=data["lat"],
-            lng=data["lng"],
-            transporter="",
-            status="Not Delivered"
-        )
-        db.session.add(purchase)
-        db.session.add(shopping_list)
-        db.session.add(deliveries)
-        product = Product.query.get(cart.product_id)
-        product.quantity = int(product.quantity) - int(purchase.quantity)
-        db.session.delete(cart)
+    print user.id
+    try:
+        for cart in Cart.query.filter_by(user=user.id):
+            # todo: do some stuff with the cart
+            # add to 'purchases' table or something
+            purchase = Purchase(
+                user=user.id,
+                product_id=cart.product,
+                quantity=cart.quantity,
+                total=cart.total
+            )
+            shopping_list = ShoppingList(
+                user_id=user.id,
+                product_id=cart.product_id,
+                quantity=cart.quantity
+            )
+            deliveries = Delivery(
+                user_id=user.id,
+                product_id=cart.product_id,
+                quantity=cart.quantity,
+                lat=data["lat"],
+                lng=data["lng"],
+                transporter=transporter,
+                status=delivery_status
+            )
+            db.session.add(purchase)
+            db.session.add(shopping_list)
+            db.session.add(deliveries)
+            product = Product.query.get(cart.product_id)
+            product.quantity = int(product.quantity) - int(purchase.quantity)
+            db.session.delete(cart)
+            status = {'status': 'success', 'message': 'Items successfully purchased!'}
+    except Exception, e:
+        status = {"status":"failure","message":str(e)}
         db.session.commit()
     db.session.commit()
-    return jsonify({'status': 'success', 'message': 'Items successfully purchased!'})
+    return jsonify(status)
 
 
 @blueprint.route('/get_purchases', methods=["GET"])

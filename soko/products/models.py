@@ -235,7 +235,7 @@ class ShoppingList(SurrogatePK, Model):
     user = relationship('User', backref='shopping_list')
     product_id = reference_col('products', nullable=False)
     product = relationship('Product', backref='shopping_list')
-    quantity = Column(db.Integer),
+    quantity = Column(db.Integer)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
     def __init__(self, user_id, product_id, quantity):
@@ -257,15 +257,17 @@ class Delivery(SurrogatePK, Model):
     user = relationship('User', backref='orders')
     product_id = reference_col('products', nullable=False)
     product = relationship('Product', backref='orders')
+    quantity = Column(db.Integer)
     transporter = Column(db.Integer, nullable=False)
     status = Column(db.String(50), nullable=False)
     lat = Column(db.String(80), nullable=False)
     lng = Column(db.String(80), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, user_id, product_id, transporter, status, total, lat, lng):
+    def __init__(self, user_id, product_id, quantity, transporter, status, total, lat, lng):
         self.user_id = user_id
         self.product_id = product_id
+        self.quantity = quantity
         self.transporter = transporter
         self.status = status
         self.total = total
@@ -277,6 +279,7 @@ class Delivery(SurrogatePK, Model):
             "id": self.id,
             "user": self.user_id,
             "product": self.product.serialize(),
+            "quantity": self.quantity,
             "transporter": self.transporter,
             "status": self.status,
             "lat": self.lat,
