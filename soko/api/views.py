@@ -624,7 +624,7 @@ def remove_from_cart():
 def purchase_cart():
     data = request.json
     delivery_status = "Not Delivered"
-    transporter = ""
+    transporter = 0
     if "token" not in request.json:
         status = {'status': 'failure', 'message': 'Error!'}
     user = User.query.filter_by(token=data["token"]).first()
