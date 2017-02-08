@@ -29,7 +29,6 @@ class Role(SurrogatePK, Model):
 class User(UserMixin, SurrogatePK, Model):
     """A user of the app."""
     __tablename__ = 'users'
-    username = Column(db.String(80), unique=True, nullable=False)
     email = Column(db.String(80), unique=True, nullable=False)
     password = Column(db.String(128), nullable=True)
     password_reset = Column(db.Integer, nullable=True)
@@ -39,6 +38,8 @@ class User(UserMixin, SurrogatePK, Model):
     profile_photo = Column(db.String(150), nullable=True)
     category = Column(db.String(30), nullable=True)
     user_type = Column(db.String(80), nullable=True)#company or individual
+    business_name = Column(db.String(300), nullable=True)#company or individual
+    business_branch = Column(db.String(300), nullable=True)  # company or individual
     active = Column(db.Boolean(), default=False)
     is_admin = Column(db.Boolean(), default=False)
     token = Column(db.String(100), nullable=False)
@@ -46,9 +47,9 @@ class User(UserMixin, SurrogatePK, Model):
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
     region = Column(db.String(80), nullable=True)
 
-    def __init__(self, username, email, password=None, **kwargs):
+    def __init__(self, email, password=None, **kwargs):
         """Create instance."""
-        db.Model.__init__(self, username=username, email=email, **kwargs)
+        db.Model.__init__(self, email=email, **kwargs)
         if password:
             self.set_password(password)
         else:

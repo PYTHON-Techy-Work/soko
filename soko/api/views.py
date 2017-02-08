@@ -64,18 +64,32 @@ def reg_user():
         active = False
     else:
         active = True
+    if "Business" in data["user_type"]:
+        first_name = ""
+        last_name = ""
+        business_name = data['business_name']
+        business_branch = data['business_branch']
+        user_type = data['user_type']
+    else:
+        first_name = data['first_name']
+        last_name = data['last_name']
+        business_name = ""
+        business_branch = ""
+        user_type = ""
     is_admin = False
     token = ''
     region = County.query.filter_by(id=data["region"]).first()
     print region.name
     user = User(
-        username=data['username'],
         email=data['email'],
         password=data['password'],
         password_reset=0,
-        first_name=data['first_name'],
-        last_name=data['last_name'],
+        first_name=first_name,
+        last_name=last_name,
         phone_number=data['phone_number'],
+        user_type=data['user_type'],
+        business_name=business_name,
+        business_branch=business_branch,
         is_admin=is_admin,
         active=active,
         token=token,
@@ -110,7 +124,6 @@ def update_profile():
     user = User.query.filter_by(token=data['token']).first()
     print user
     try:
-        user.username = data['username']
         user.email = data['email']
         user.phone_number = data['phone_number']
         user.profile_photo = data['profile_photo']
@@ -138,11 +151,11 @@ def update_profile():
 def login():
     data = request.json
     print data
-    username = data['username']
+    email = data['email']
     password = data['password']
-    registered_user = User.query.filter_by(username=username).first()
+    registered_user = User.query.filter_by(email=email).first()
     if registered_user is None:
-        status = {'status': 'failure', 'message': 'Invalid Username or password'}
+        status = {'status': 'failure', 'message': 'Invalid Email or password'}
     # elif registered_user.active is False:
     #     status = {'status': 'failure', 'message': 'Your documents have not yet been verified'}
     else:
@@ -152,11 +165,11 @@ def login():
             db.session.commit()
             status = {'status': 'success', 'message': 'welcome ' + registered_user.first_name,
                       'token': registered_user.token,
-                      'username': registered_user.username, 'category': registered_user.category,
+                      'email': registered_user.email, 'category': registered_user.category,
                       'active': registered_user.active,
                       'password_reset': registered_user.password_reset}
         else:
-            status = {'status': 'failure', 'message': 'Invalid Username or password'}
+            status = {'status': 'failure', 'message': 'Invalid Email or password'}
     return jsonify(status)
 
 
