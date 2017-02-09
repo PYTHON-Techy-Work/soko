@@ -222,7 +222,8 @@ class Purchase(SurrogatePK, Model):
         return {
             "id": self.id,
             "user": self.get_user().first_name,
-            "product": self.product.serialize(),
+            "product name": self.get_product().name,
+            "Product price": self.get_product().price,
             "quantity": self.quantity,
             "total": float(self.total),
             "Date": self.created_at,
@@ -231,6 +232,9 @@ class Purchase(SurrogatePK, Model):
     def get_user(self):
         from soko.user.models import User
         return User.query.get(self.user)
+
+    def get_product(self):
+        return Product.query.get(self.product_id)
 
 
 class ShoppingList(SurrogatePK, Model):
