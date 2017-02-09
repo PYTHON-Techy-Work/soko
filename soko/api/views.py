@@ -862,8 +862,8 @@ def transporter_current_location():
 def available_orders():
     data = request.json
     R = 6373.0
-    lat1 = radians(data["lat"])
-    lon1 = radians(data["lng"])
+    lat1 = radians(float(data["lat"]))
+    lon1 = radians(float(data["lng"]))
     user = User.query.filter_by(token=data["token"]).first()
     if user:
         try:
