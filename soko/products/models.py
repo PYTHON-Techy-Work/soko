@@ -265,8 +265,8 @@ class Delivery(SurrogatePK, Model):
     transporter = Column(db.Integer, nullable=False)
     status = Column(db.String(50), nullable=False)
     total = Column(db.Numeric(15, 2), nullable=False)
-    lat = Column(db.String(80), nullable=False)
-    lng = Column(db.String(80), nullable=False)
+    lat = Column(db.Numeric(15, 10), nullable=False)
+    lng = Column(db.Numeric(15, 10), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
     def __init__(self, user_id, product_id, quantity, transporter, status, total, lat, lng):
