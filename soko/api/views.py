@@ -856,6 +856,7 @@ def transporter_current_location():
     return jsonify(status)
 
 
+# sending the notifications to the drivers with the location
 @csrf_protect.exempt
 @blueprint.route('/available_orders', methods=["POST"])
 def available_orders():
@@ -865,15 +866,18 @@ def available_orders():
     lon1 = radians(data["lng"])
     user = User.query.filter_by(token=data["token"]).first()
     if user:
-        delivery = Delivery.query.filter_by(delivered=False)
-        lat2 = delivery.lat
-        lon2 = delivery.lng
-        dlon = lon2 - lon1
-        dlat = lat2 - lat1
-        a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
-        c = 2 * atan2(sqrt(a), sqrt(1 - a))
-        distance = R * c
-        status = {"status": "failure", "message": distance}
+        try:
+            for delivery in Delivery.query.filter_by(delivered="Not Delivered"):
+                lat2 = radians(delivery.lat)
+                lon2 = radians(delivery.lng)
+                dlon = lon2 - lon1
+                dlat = lat2 - lat1
+                a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
+                c = 2 * atan2(sqrt(a), sqrt(1 - a))
+                distance = R * c
+                status = {"status": "success", "message": distance}
+        except Exception, e:
+            status = {"status": "failure", "message": str(e)}
     else:
         status = {"status": "failure", "message": "No records found"}
     return jsonify(status)
@@ -986,6 +990,6 @@ def rate_product():
             db.session.commit()
             status = {"status":"success", "message":"product rated"}
         except Exception, e:
-            status = {"status":"failure ", "message":str(e)}
+            status = {"status":"failure ", "message": str(e)}
         db.session.close()
         return jsonify(status)
