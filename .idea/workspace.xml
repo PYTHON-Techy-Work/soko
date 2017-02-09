@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92ae03c2-6e34-4825-ab80-9dc3e813ec41" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/migrations/versions/a52128e85a42_.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/migrations/versions/c67c8b90fa31_.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/migrations/versions/deac18fcff74_.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/migrations/alembic.ini" afterPath="$PROJECT_DIR$/migrations/alembic.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/products/models.py" afterPath="$PROJECT_DIR$/soko/products/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/settings.py" afterPath="$PROJECT_DIR$/soko/settings.py" />
     </list>
     <ignored path="dashboard.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -93,7 +87,7 @@
         <entry file="file://$PROJECT_DIR$/soko/products/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="328">
-              <caret line="268" column="34" lean-forward="false" selection-start-line="268" selection-start-column="34" selection-end-line="268" selection-end-column="34" />
+              <caret line="268" column="27" lean-forward="false" selection-start-line="268" selection-start-column="27" selection-end-line="268" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -834,7 +828,7 @@
     <entry file="file://$PROJECT_DIR$/soko/products/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
-          <caret line="268" column="34" lean-forward="false" selection-start-line="268" selection-start-column="34" selection-end-line="268" selection-end-column="34" />
+          <caret line="268" column="27" lean-forward="false" selection-start-line="268" selection-start-column="27" selection-end-line="268" selection-end-column="27" />
           <folding />
         </state>
       </provider>
