@@ -861,13 +861,14 @@ def transporter_current_location():
 @blueprint.route('/available_orders', methods=["POST"])
 def available_orders():
     data = request.json
+    status = "Not Delivered"
     R = 6373.0
     lat1 = radians(float(data["lat"]))
     lon1 = radians(float(data["lng"]))
     user = User.query.filter_by(token=data["token"]).first()
     if user:
         try:
-            for delivery in Delivery.query.filter_by(delivered="Not Delivered"):
+            for delivery in Delivery.query.filter_by(delivered=status):
                 lat2 = radians(delivery.lat)
                 lon2 = radians(delivery.lng)
                 dlon = lon2 - lon1
