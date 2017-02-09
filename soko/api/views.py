@@ -692,7 +692,8 @@ def get_purchase():
     print user.id
     if user:
         for purchase in Purchase.query.filter_by(user=user.id):
-            purchases = [purchase.serialize()]
+            purchases.append(purchase.serialize())
+            print purchases
         status = {"status": "success", "message": purchases}
     else:
         status = {'status': 'failure', 'message': 'You have not purchased any items on soko mkononi'}

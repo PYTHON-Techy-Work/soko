@@ -258,9 +258,9 @@ class ShoppingList(SurrogatePK, Model):
 class Delivery(SurrogatePK, Model):
     __tablename__ = 'deliveries'
     user_id = reference_col('users', nullable=False)
-    user = relationship('User', backref='orders')
+    user = relationship('User', backref='deliveries')
     product_id = reference_col('products', nullable=False)
-    product = relationship('Product', backref='orders')
+    product = relationship('Product', backref='deliveries')
     quantity = Column(db.Integer, nullable=False)
     transporter = Column(db.Integer, nullable=False)
     status = Column(db.String(50), nullable=False)
