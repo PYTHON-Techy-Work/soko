@@ -222,8 +222,8 @@ class Purchase(SurrogatePK, Model):
         return {
             "id": self.id,
             "user": self.get_user().first_name,
-            "product name": self.get_product().name,
-            "Product price": float(self.get_product().price),
+            "product_name": self.get_product().name,
+            "Product_price": float(self.get_product().price),
             "quantity": self.quantity,
             "total": float(self.total),
             "Date": self.created_at,
