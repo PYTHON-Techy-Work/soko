@@ -87,7 +87,7 @@ def reg_user():
         first_name=first_name,
         last_name=last_name,
         phone_number=data['phone_number'],
-        user_type=data['user_type'],
+        user_type=user_type,
         business_name=business_name,
         business_branch=business_branch,
         is_admin=is_admin,
