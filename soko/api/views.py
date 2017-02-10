@@ -543,17 +543,16 @@ def send_maps():
     data = request.args
     print data
     ret = []
-    if data:
+    try:
         user = User.query.filter_by(token=data["token"]).first()
         if user:
             locations = Locations.query.all()
             for pt in locations:
+                print pt
                 ret.append(pt.serialize())
             status = {'message': 'success', 'data': ret}
-        else:
-            status = {'message': 'failure', 'data': 'no riders at this time'}
-    else:
-        status = {'message': 'failure', 'data': 'no riders at this time'}
+    except Exception, e:
+        status = {'message': 'failure', 'data': str(e)}
     return jsonify(status)
 
 
