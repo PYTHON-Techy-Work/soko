@@ -62,20 +62,25 @@ def reg_user():
     data = request.json
     if "Transporter" in data["category"]:
         active = False
-    else:
-        active = True
-    if "Business" in data["user_type"]:
-        first_name = ""
-        last_name = ""
-        business_name = data['business_name']
-        business_branch = data['business_branch']
-        user_type = data['user_type']
-    else:
         first_name = data['first_name']
         last_name = data['last_name']
         business_name = ""
         business_branch = ""
         user_type = ""
+    elif "Farmer" in data["category"]:
+        active = False
+        if "Business" in data["user_type"]:
+            first_name = ""
+            last_name = ""
+            business_name = data['business_name']
+            business_branch = data['business_branch']
+            user_type = data['user_type']
+        else:
+            first_name = data['first_name']
+            last_name = data['last_name']
+            business_name = ""
+            business_branch = ""
+            user_type = ""
     is_admin = False
     token = ''
     region = County.query.filter_by(id=data["region"]).first()
