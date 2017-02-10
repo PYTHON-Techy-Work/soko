@@ -872,7 +872,7 @@ def available_orders():
     user = User.query.filter_by(token=data["token"]).first()
     if user:
         try:
-            for delivery in Delivery.query.filter_by(delivered=status):
+            for delivery in Delivery.query.filter_by(status=status):
                 lat2 = radians(delivery.lat)
                 lon2 = radians(delivery.lng)
                 dlon = lon2 - lon1
