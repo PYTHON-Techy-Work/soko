@@ -81,6 +81,14 @@ def reg_user():
             business_name = ""
             business_branch = ""
             user_type = ""
+    else:
+        active = True
+        first_name = data['first_name']
+        last_name = data['last_name']
+        business_name = ""
+        business_branch = ""
+        user_type = ""
+
     is_admin = False
     token = ''
     region = County.query.filter_by(id=data["region"]).first()
@@ -136,7 +144,7 @@ def update_profile():
         db.session.commit()
         status = {'status': 'success', 'message': 'user profile successfully updated'}
         msg = Message("Welcome To Soko Mkononi",
-                      sender="from@example.com",
+                      sender="soko@tracom.co.ke",
                       recipients=[data['email']])
         msg.body = "You have successfully Updated your profile a  " + user.category
         msg.html = "<b>Hi</b> " + user.first_name + "<br/> " \
@@ -155,7 +163,7 @@ def update_profile():
 @blueprint.route('/login', methods=["POST"])
 def login():
     data = request.json
-    print data
+    # print data
     email = data['email']
     password = data['password']
     registered_user = User.query.filter_by(email=email).first()
@@ -164,6 +172,7 @@ def login():
     # elif registered_user.active is False:
     #     status = {'status': 'failure', 'message': 'Your documents have not yet been verified'}
     else:
+        print data
         if bcrypt.check_password_hash(registered_user.password, password):
             registered_user.token = uuid.uuid4()
             db.session.add(registered_user)
@@ -864,6 +873,7 @@ def transporter_current_location():
 @csrf_protect.exempt
 @blueprint.route('/available_orders', methods=["POST"])
 def available_orders():
+    ret = []
     data = request.json
     status = "Not Delivered"
     R = 6373.0
@@ -880,6 +890,8 @@ def available_orders():
                 a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
                 c = 2 * atan2(sqrt(a), sqrt(1 - a))
                 distance = R * c
+                if distance <= 5:
+                    ret.append(delivery)
                 status = {"status": "success", "message": distance}
         except Exception, e:
             status = {"status": "failure", "message": str(e)}

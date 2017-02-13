@@ -122,15 +122,11 @@ class Product(SurrogatePK, Model):
         self.user_id = user_id
 
     def serialize(self):
-        if self.get_user().business_name:
-            seller = self.get_user().business_name,
-        else:
-            seller = self.get_user().first_name,
         return {
             "id": self.id,
             "name": self.name,
             "photo": self.photo,
-            "seller": seller,
+            "seller": self.get_user(),
             "description": self.description,
             "quantity": self.quantity,
             "farmer": self.user_id,
@@ -146,7 +142,11 @@ class Product(SurrogatePK, Model):
 
     def get_user(self):
         from soko.user.models import User
-        return User.query.filter_by(id=self.user_id).first()
+        user = User.query.filter_by(id=self.user_id).first()
+        if user.first_name:
+            return user.first_name
+        else:
+            return user.business_name
 
 
 class ProductRatings(SurrogatePK, Model):
