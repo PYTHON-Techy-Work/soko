@@ -17,10 +17,8 @@ class Loan(SurrogatePK, Model):
     created_on = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
     due_on = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
     user = relationship('User', backref='loans')
-
     total = Column(db.Integer)
     paid = Column(db.Integer)
-
     status = Column(db.Integer)
 
     def get_status_name(self):
@@ -70,6 +68,16 @@ class Loan(SurrogatePK, Model):
         """Create instance."""
         db.Model.__init__(self, name=name, **kwargs)
 
-    def __repr__(self):
-        """Represent instance as a unique string."""
-        return '<Loan({name})>'.format(name=self.name)
+    # def __repr__(self):
+    #     """Represent instance as a unique string."""
+    #     return '<Loan({name})>'.format(name=self.name)
+
+    def serialize(self):
+        return {
+            "id": self.user_id,
+            "name": self.name,
+            "due_on": self.due_on,
+            "amount paid": self.paid,
+            "total": float(self.total),
+            "status": self.status
+        }

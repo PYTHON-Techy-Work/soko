@@ -42,6 +42,29 @@ class TransporterCurrentLocation(SurrogatePK, Model):
         return '<Driver %r>' % self.user_id + self.latitude + self.longitude
 
 
+class TransporterRatings(SurrogatePK, Model):
+    __tablename__ = 'transporter_ratings'
+    user_id = reference_col('users', nullable=False)
+    user = relationship('User', backref='transporter_ratings')
+    rating = Column(db.Integer, nullable=False)
+    review = Column(db.String(80), nullable=True)
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+
+    def __init__(self, transporter_id, user_id, rating, review):
+        self.transporter_id = transporter_id
+        self.user_id = user_id
+        self.rating = rating
+        self.review = review
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user": self.user_id,
+            "rating": self.rating,
+            "review": self.review
+        }
+
+
 class County(SurrogatePK, Model):
     __tablename__ = 'counties'
     name = Column(db.String(80), nullable=True)

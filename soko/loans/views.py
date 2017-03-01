@@ -55,7 +55,6 @@ def cancel_loan(uid):
     return redirect("/loans")
 
 
-
 @blueprint.route('/pay', methods=["GET", "POST"])
 @login_required
 @csrf_protect.exempt
@@ -74,7 +73,6 @@ def pay_loan():
         flash("Couldn't pay loan", "danger")
 
     return redirect("/loans")
-
 
 
 @blueprint.route('/admin/edit/<uid>', methods=["GET", "POST"])

@@ -4,10 +4,11 @@ from flask_mail import Mail, Message
 from werkzeug.utils import secure_filename
 
 from soko.user.models import User, Document
-from soko.transporter.models import Transporter, County, TransporterCurrentLocation
+from soko.transporter.models import Transporter, County, TransporterCurrentLocation, TransporterRatings
 from soko.products.models import Product, ProductCategory, ProductType, ProductSubType, ProductRatings, Cart, Purchase, \
     ShoppingList, Delivery
 from soko.locations.models import Locations
+from soko.loans.models import Loan
 from soko.database import db
 from soko.utils import flash_errors
 from soko.extensions import csrf_protect, bcrypt, mail, geolocator
@@ -658,7 +659,7 @@ def purchase_cart():
             db.session.commit()
             status = {'status': 'success', 'message': 'Items successfully purchased!'}
     except Exception as e:
-        status = {"status":"failure","message": str(e)}
+        status = {"status": "failure", "message": str(e)}
     db.session.close()
     return jsonify(status)
 
@@ -947,10 +948,10 @@ def reset_password():
 @csrf_protect.exempt
 @blueprint.route('/rate_product', methods=['POST'])
 def rate_product():
-    data=request.json
+    data = request.json
     if data:
         user = User.query.filter_by(token=data['token']).first()
-        rate_product=ProductRatings(
+        rate_product = ProductRatings(
             product_id=data["product_id"],
             user_id=user.id,
             rating=data["rating"],
@@ -959,8 +960,74 @@ def rate_product():
         try:
             db.session.add(rate_product)
             db.session.commit()
-            status = {"status":"success", "message":"product rated"}
+            status = {"status": "success", "message": "product rated"}
         except Exception as e:
-            status = {"status":"failure ", "message": str(e)}
+            status = {"status": "failure ", "message": str(e)}
         db.session.close()
         return jsonify(status)
+
+
+# rate a transporter
+@csrf_protect.exempt
+@blueprint.route('/rate_transporter', methods=['POST'])
+def rate_transporter():
+    data = request.json
+    if data:
+        user = User.query.filter_by(token=data['token']).first()
+        rate_transporter = TransporterRatings(
+            user_id=user.id,
+            rating=data["rating"],
+            review=data["review"]
+        )
+        try:
+            db.session.add(rate_transporter)
+            db.session.commit()
+            status = {"status": "success", "message": "Transporter rated Successfully"}
+        except Exception as e:
+            status = {"status": "failure ", "message": str(e)}
+        db.session.close()
+        return jsonify(status)
+
+
+# loans api --get my loans
+@blueprint.route('/get_loan', methods=["GET"])
+def get_loan():
+    data = request.args
+    ret = []
+    user = User.query.filter_by(token=data["token"]).first()
+    print(user.id)
+    if user:
+        loan = Loan.query.filter_by(user_id=user.id).first()
+        loan_data = {"total": float(loan.total), "paid": float(loan.paid), "name": loan.name, "due date": loan.due_on}
+        status = {"status": "success", "message": loan_data}
+    else:
+        status = {"status": "failure", "message": "no records found"}
+    return jsonify(status)
+
+
+# apply fo a loan
+@csrf_protect.exempt
+@blueprint.route('/apply_loan', methods=["POST"])
+def apply_loan():
+    data = request.json
+    print(data)
+    user = User.query.filter_by(token=data['token']).first()
+    print(user.id)
+    # check whether the user has an existing loan
+    check_loan = Loan.query.filter_by(user_id=user.id).first()
+    if check_loan:
+        status = {"status": "failure", "message": "Please clear your existing loan to get another loan"}
+    else:
+        loan = Loan(
+            name=user.first_name + " " + user.last_name,
+            user_id=user.id,
+            due_on=data["due_date"],
+            total=data["total"],
+            paid=0,
+            status=0
+        )
+        db.session.add(loan)
+        db.session.commit()
+        status = {"status": "success", "message": "Loan application successful"}
+    db.session.close()
+    return jsonify(status)
