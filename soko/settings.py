@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Application configuration."""
 import os
-import socket 
+import socket
 
 hostname = socket.gethostname()
 

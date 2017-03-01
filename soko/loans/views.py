@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for,
 from flask_login import login_required, current_user
 
 from soko.user.models import User, Document
-from forms import LoanForm
+from .forms import LoanForm
 from soko.utils import flash_errors
 from soko.extensions import csrf_protect, bcrypt
 from werkzeug.utils import secure_filename
@@ -14,7 +14,7 @@ from datetime import datetime
 
 import os, time
 
-from models import *
+from .models import *
 
 from flask import current_app as app
 

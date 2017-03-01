@@ -1,7 +1,4 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for, jsonify, make_response, json
-from flask_login import login_required, login_user, logout_user
-from flask_restful import reqparse
-from sqlalchemy import orm
 from flask_mail import Mail, Message
 
 from werkzeug.utils import secure_filename
@@ -15,7 +12,7 @@ from soko.database import db
 from soko.utils import flash_errors
 from soko.extensions import csrf_protect, bcrypt, mail, geolocator
 from math import sin, cos, atan2, sqrt, radians
-from suds.client import Client
+import suds
 
 import os
 import base64
@@ -92,7 +89,6 @@ def reg_user():
     is_admin = False
     token = ''
     region = County.query.filter_by(id=data["region"]).first()
-    print region.name
     user = User(
         email=data['email'],
         password=data['password'],
@@ -121,8 +117,7 @@ def reg_user():
             'first_name'] + "<br/> <b>You have successfully registered to soko mkononi as a " + data[
                        'category'] + "</b>"
         mail.send(msg)
-    except Exception, e:
-        print e
+    except Exception as e:
         status = {'status': 'failure', 'message': str(e)}
     db.session.close()
     return jsonify(status)
@@ -133,9 +128,7 @@ def reg_user():
 @blueprint.route('/update_profile', methods=['POST'])
 def update_profile():
     data = request.json
-    print data
     user = User.query.filter_by(token=data['token']).first()
-    print user
     try:
         user.email = data['email']
         user.phone_number = data['phone_number']
@@ -151,8 +144,7 @@ def update_profile():
                                                     "<b>You have successfully Updated your profile on Soko Mkononi as a " + user.category + \
                    "</b>"
         mail.send(msg)
-    except Exception, e:
-        print e
+    except Exception as e:
         status = {'status': 'failure', 'message': 'the user is already registered'}
     db.session.close()
     return jsonify(status)
@@ -172,7 +164,6 @@ def login():
     # elif registered_user.active is False:
     #     status = {'status': 'failure', 'message': 'Your documents have not yet been verified'}
     else:
-        print data
         if bcrypt.check_password_hash(registered_user.password, password):
             registered_user.token = uuid.uuid4()
             db.session.add(registered_user)
@@ -204,7 +195,7 @@ def add_transporter_details():
             db.session.add(transporter)
             db.session.commit()
             status = {"status": "success", "message": "Data added successfully"}
-        except Exception, e:
+        except Exception as e:
             status = {"status": "failure", "message": str(e)}
     else:
         status = {"status": "failure", "message": "Please enter the correct data"}
@@ -226,7 +217,6 @@ def add_driver_licence():
         return jsonify({'status': 'failure', 'message': 'you need to provide a drivers_licence'})
 
     drivers_licence = data["drivers_licence"]
-    print drivers_licence
 
     # need to de-base-64 the image, as it is passed as long string
     if "base64," in drivers_licence:
@@ -253,7 +243,7 @@ def add_driver_licence():
             db.session.add(document)
             db.session.commit()
             status = {"status": "success", "message": "Driver's licence added successfully"}
-        except Exception, e:
+        except Exception as e:
             status = {"status": "failure", "message": str(e)}
     else:
         status = {"status": "failure", "message": "Please add the correct data"}
@@ -275,7 +265,6 @@ def add_id_card():
         return jsonify({'status': 'failure', 'message': 'you need to provide a id_card'})
 
     id_card = data["id_card"]
-    print id_card
 
     # need to de-base-64 the image, as it is passed as long string
     if "base64," in id_card:
@@ -302,7 +291,7 @@ def add_id_card():
             db.session.add(document)
             db.session.commit()
             status = {"status": "success", "message": "Identity Card added successfully"}
-        except Exception, e:
+        except Exception as e:
             status = {"status": "failure", "message": str(e)}
     else:
         status = {"status": "failure", "message": "Please add the correct data"}
@@ -334,7 +323,6 @@ def get_product_category():
 @blueprint.route('/get_product_types', methods=["GET"])
 def get_product_types():
     data = request.args
-    print data
     ret = []
     product_types = ProductType.query.filter_by(product_category_id=data['id'])
     for pt in product_types:
@@ -401,16 +389,13 @@ def add_products():
     # fp.write(photo_decoded)
     # fp.close()
     data = request.get_json(force=True)
-    print data
     user = User.query.filter_by(token=data["token"]).first()
-    print user.id
     user_id = user.id
     if user.id:
         if "product_sub_type_id" in data:
             subtypeid = data['product_sub_type_id']
 
         product_name = ProductSubType.query.filter_by(id=subtypeid).first()
-        print product_name.product_category_id
         product = Product(
             name=product_name.name,
             product_category_id=product_name.product_category_id,
@@ -427,9 +412,8 @@ def add_products():
             db.session.add(product)
             db.session.commit()
             status = {'status': 'success', 'message': 'product added'}
-        except Exception, e:
+        except Exception as e:
             status = {'status': 'failure', 'message': 'problem adding product'}
-            print e
     db.session.close()
     return jsonify(status)
 
@@ -445,7 +429,6 @@ def get_products():
             products = Product.query.all()
             for pt in products:
                 ret.append(pt.serialize())
-            print ret
     return jsonify(data=ret)
 
 
@@ -455,7 +438,6 @@ def get_products():
 def edit_products():
     data = request.json
     ret = []
-    print data
     if data:
         user = User.query.filter_by(token=data["token"]).first()
 
@@ -477,14 +459,12 @@ def delete_product():
     data = request.args
     if data:
         user = User.query.filter_by(token=data["token"]).first()
-        print user.id
         try:
             product = Product.query.filter(Product.user == user.id)
             product.delete()
             status = {'status': 'success', 'message': 'product deleted'}
-        except Exception, e:
-            print e
-            status = {'status': 'failure', 'message': e}
+        except Exception as e:
+            status = {'status': 'failure', 'message': str(e)}
     return jsonify(status)
 
 
@@ -503,7 +483,6 @@ def get_counties():
 @blueprint.route('/add_county', methods=["POST"])
 def add_county():
     data = request.json
-    print data
     county = County(
         name=data['name']
     )
@@ -511,9 +490,8 @@ def add_county():
         db.session.add(county)
         db.session.commit()
         status = {'status': 'success', 'message': 'county added'}
-    except Exception, e:
-        status = {'status': 'failure', 'message': 'problem adding county'}
-        print e
+    except Exception as e:
+        status = {'status': 'failure', 'message': str(e)}
     db.session.close()
     return jsonify(status)
 
@@ -524,8 +502,6 @@ def add_county():
 def get_maps():
     data = request.json
     token = request.args
-    print token
-    print data
     user = User.query.filter_by(token=token["token"]).first()
     location = Locations.query.filter_by(user=user.id).first()
     try:
@@ -544,9 +520,8 @@ def get_maps():
             db.session.add(location)
             db.session.commit()
             status = {'status': 'success', 'message': 'location added'}
-    except Exception, e:
+    except Exception as e:
         status = {'status': 'failure', 'message': str(e)}
-        print e
     db.session.close()
     return jsonify(status)
 
@@ -555,17 +530,15 @@ def get_maps():
 @blueprint.route('/send_maps', methods=["GET"])
 def send_maps():
     data = request.args
-    print data
     ret = []
     try:
         user = User.query.filter_by(token=data["token"]).first()
         if user:
             locations = Locations.query.all()
             for pt in locations:
-                print pt
                 ret.append(pt.serialize())
             status = {'message': 'success', 'data': ret}
-    except Exception, e:
+    except Exception as e:
         status = {'message': 'failure', 'data': str(e)}
     return jsonify(status)
 
@@ -583,7 +556,6 @@ def get_cart_items():
             for pt in cart:
                 ret.append(pt.serialize())
                 total += pt.total
-            print ret
             status = {'status': 'success', 'data': {"items": ret, "total": float(total)}}
         else:
             status = {'status': 'failure', 'message': 'Error!'}
@@ -599,7 +571,6 @@ def add_to_cart():
         user = User.query.filter_by(token=data["token"]).first()
         if user:
             product = Product.query.filter_by(id=data["product"]).first();
-            print product.price
             cart = Cart(
                 user=user.id,
                 product_id=data['product'],
@@ -611,9 +582,8 @@ def add_to_cart():
                 db.session.commit()
                 status = {'status': 'success', 'message': str(data['quantity']) + ' items added to cart'}
 
-            except Exception, e:
+            except Exception as e:
                 status = {'status': 'failure', 'message': 'problem adding product to cart'}
-                print e
             db.session.close()
         else:
             status = {'status': 'failure', 'message': 'Error!'}
@@ -654,7 +624,6 @@ def purchase_cart():
     if "token" not in request.json:
         status = {'status': 'failure', 'message': 'Error!'}
     user = User.query.filter_by(token=data["token"]).first()
-    print user.id
     try:
         for cart in Cart.query.filter_by(user=user.id):
             # todo: do some stuff with the cart
@@ -688,7 +657,7 @@ def purchase_cart():
             db.session.delete(cart)
             db.session.commit()
             status = {'status': 'success', 'message': 'Items successfully purchased!'}
-    except Exception, e:
+    except Exception as e:
         status = {"status":"failure","message": str(e)}
     db.session.close()
     return jsonify(status)
@@ -700,13 +669,10 @@ def get_purchase():
     purchases = []
     if "token" not in data:
         return jsonify({'status': 'failure', 'message': 'Error!'})
-    print data
     user = User.query.filter_by(token=data["token"]).first()
-    print user.id
     if user:
         for purchase in Purchase.query.filter_by(user=user.id):
             purchases.append(purchase.serialize())
-            print purchases
         status = {"status": "success", "message": purchases}
     else:
         status = {'status': 'failure', 'message': 'You have not purchased any items on soko mkononi'}
@@ -718,7 +684,6 @@ def get_purchase():
 @blueprint.route('/add_product_categories', methods=["POST"])
 def add_product_categories():
     data = request.json
-    print data
     product_category = ProductCategory(
         name=data['name']
     )
@@ -726,9 +691,8 @@ def add_product_categories():
         db.session.add(product_category)
         db.session.commit()
         status = {'status': 'success', 'message': 'product category added'}
-    except Exception, e:
+    except Exception as e:
         status = {'status': 'failure', 'message': str(e)}
-        print e
     db.session.close()
     return jsonify(status)
 
@@ -738,7 +702,6 @@ def add_product_categories():
 @blueprint.route('/add_product_type', methods=["POST"])
 def add_product_type():
     data = request.json
-    print data
     product_type = ProductType(
         name=data['name'],
         product_category_id=data['product_category']
@@ -747,9 +710,8 @@ def add_product_type():
         db.session.add(product_type)
         db.session.commit()
         status = {'status': 'success', 'message': 'product type added'}
-    except Exception, e:
+    except Exception as e:
         status = {'status': 'failure', 'message': str(e)}
-        print e
     db.session.close()
     return jsonify(status)
 
@@ -759,7 +721,6 @@ def add_product_type():
 @blueprint.route('/add_product_sub_type', methods=["POST"])
 def add_product_sub_type():
     data = request.json
-    print data
     product_sub_sub_type = ProductSubType(
         name=data['name'],
         description=data['description'],
@@ -771,9 +732,8 @@ def add_product_sub_type():
         db.session.add(product_sub_sub_type)
         db.session.commit()
         status = {'status': 'success', 'message': 'product sub sub type added'}
-    except Exception, e:
+    except Exception as e:
         status = {'status': 'failure', 'message': str(e)}
-        print e
     db.session.close()
     return jsonify(status)
 
@@ -783,13 +743,11 @@ def get_shopping_list():
     data = request.args
     if data:
         user = User.query.filter_by(token=data["token"]).first()
-        # print user.id
         if user:
             ret = []
             ls = ShoppingList.query.filter_by(user_id=user.id)
             for ls in ShoppingList.query.filter_by(user_id=user.id):
                 product = Product.query.filter_by(id=ls.product_id).first()
-                print product.name
                 ret.append(product.serialize())
             status = {"status": "success", "message": ret}
         else:
@@ -809,8 +767,7 @@ def remove_from_shopping_list():
             shopping_list = ShoppingList.query.filter_by(user_id=user.id, product_id=data["id"]).first()
             shopping_list.delete()
             status = {'status': 'success', 'message': 'shopping list product deleted'}
-        except Exception, e:
-            print e
+        except Exception as e:
             status = {'status': 'failure', 'message': e}
     return jsonify(status)
 
@@ -823,11 +780,9 @@ def get_farmer_location():
     latitude = data["lat"]
     longitude = data["lng"]
     user = User.query.filter_by(token=data["token"]).first()
-    print user.region
     if user:
         try:
             location = geolocator.reverse(str(latitude) + "," + str(longitude))
-            print location.address
             farmer_address = FarmerAddress(
                 user_id=user.id,
                 primary_address=location.address,
@@ -836,8 +791,7 @@ def get_farmer_location():
             db.session.add(farmer_address)
             db.session.commit()
             status = {"status": "success", "message": location.address}
-        except Exception, e:
-            print e
+        except Exception as e:
             status = {"status": "failure", "message": str(e)}
     else:
         status = {"status": "failure", "message": "user not found"}
@@ -861,7 +815,7 @@ def transporter_current_location():
             db.session.add(tranporter_current_location)
             db.session.commit()
             status = {"status": "failure", "message": "Location added successfully"}
-        except Exception, e:
+        except Exception as e:
             status = {"status": "failure", "message": str(e)}
     else:
         status = {"status": "failure", "message": "Pass the correct data"}
@@ -893,7 +847,7 @@ def available_orders():
                 if distance <= 5:
                     ret.append(delivery)
                 status = {"status": "success", "message": distance}
-        except Exception, e:
+        except Exception as e:
             status = {"status": "failure", "message": str(e)}
     else:
         status = {"status": "failure", "message": "No records found"}
@@ -1006,7 +960,7 @@ def rate_product():
             db.session.add(rate_product)
             db.session.commit()
             status = {"status":"success", "message":"product rated"}
-        except Exception, e:
+        except Exception as e:
             status = {"status":"failure ", "message": str(e)}
         db.session.close()
         return jsonify(status)

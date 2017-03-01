@@ -1,3 +1,1 @@
-from . import *
-
-import views
+from . import views

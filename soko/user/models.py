@@ -9,6 +9,7 @@ from soko.extensions import bcrypt
 
 from soko.products.models import Cart
 
+
 class Role(SurrogatePK, Model):
     """A role for a user."""
 
@@ -58,8 +59,7 @@ class User(UserMixin, SurrogatePK, Model):
     def set_password(self, password):
         """Set password."""
         self.password = bcrypt.generate_password_hash(password)
-
-        print "SET PASSWORD '" + str(password) + "'"
+        print ("SET PASSWORD '" + str(password) + "'")
 
     def check_password(self, value):
         """Check password."""
