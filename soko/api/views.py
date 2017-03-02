@@ -134,7 +134,7 @@ def get_profile():
         user = User.query.filter_by(token=data['token']).first()
         user_data = {
             "email": user.email,
-            "phone number": user.phone_number,
+            "phone_number": user.phone_number,
             "photo": user.profile_photo,
             "first_name": user.first_name,
             "last_name": user.last_name
