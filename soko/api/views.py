@@ -999,7 +999,7 @@ def get_loan():
     print(user.id)
     if user:
         loan = Loan.query.filter_by(user_id=user.id).first()
-        loan_data = {"total": float(loan.total), "paid": float(loan.paid), "name": loan.name, "due date": loan.due_on}
+        loan_data = {"total": float(loan.total), "paid": float(loan.paid), "name": loan.name, "due_date": loan.due_on}
         status = {"status": "success", "message": loan_data}
     else:
         status = {"status": "failure", "message": "no records found"}
