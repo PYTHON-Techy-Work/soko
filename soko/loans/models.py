@@ -79,5 +79,6 @@ class Loan(SurrogatePK, Model):
             "due_on": self.due_on,
             "amount paid": self.paid,
             "total": float(self.total),
-            "status": self.status
+            "status": self.status,
+            "created_at":self.created_on
         }

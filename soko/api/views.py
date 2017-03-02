@@ -13,7 +13,7 @@ from soko.database import db
 from soko.utils import flash_errors
 from soko.extensions import csrf_protect, bcrypt, mail, geolocator
 from math import sin, cos, atan2, sqrt, radians
-import suds
+from suds.client import Client as SudsClient
 
 import os
 import base64
@@ -22,6 +22,7 @@ import uuid
 import xmltodict
 import string
 import random
+import suds.client
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -885,7 +886,7 @@ def accept_payments():
 def oil_current_price():
     # Get SOAP Service via suds
     url = 'http://www.pttplc.com/webservice/pttinfo.asmx?WSDL'
-    client = Client(url)
+    client = SudsClient(url)
     # Execute CurrentOilPrice method of SOAP
     xml = client.service.CurrentOilPrice("EN")
     # Convert XML to dict
