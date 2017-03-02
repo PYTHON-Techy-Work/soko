@@ -125,6 +125,27 @@ def reg_user():
     return jsonify(status)
 
 
+# get user profile
+# update_profile api farmer, transporter, customer
+@blueprint.route('/get_profile', methods=['GET'])
+def get_profile():
+    data = request.args
+    try:
+        user = User.query.filter_by(token=data['token']).first()
+        user_data = {
+            "email": user.email,
+            "phone number": user.phone_number,
+            "photo": user.profile_photo,
+            "first_name": user.first_name,
+            "last_name": user.last_name
+        }
+        status = {'status': 'success', 'message': user_data}
+    except Exception as e:
+        status = {'status': 'failure', 'message': str(e)}
+    db.session.close()
+    return jsonify(status)
+
+
 # update_profile api farmer, transporter, customer
 @csrf_protect.exempt
 @blueprint.route('/update_profile', methods=['POST'])
