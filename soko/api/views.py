@@ -156,7 +156,8 @@ def update_profile():
         user.email = data['email']
         user.phone_number = data['phone_number']
         user.profile_photo = data['profile_photo']
-        user.region = data['region']
+        user.first_name = data["first_name"]
+        user.last_name = data["last_name"]
         db.session.commit()
         status = {'status': 'success', 'message': 'user profile successfully updated'}
         msg = Message("Welcome To Soko Mkononi",
