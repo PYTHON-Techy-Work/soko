@@ -155,7 +155,7 @@ def update_profile():
     try:
         user.email = data['email']
         user.phone_number = data['phone_number']
-        user.profile_photo = data['profile_photo']
+        # user.profile_photo = data['profile_photo']
         user.first_name = data["first_name"]
         user.last_name = data["last_name"]
         db.session.commit()
