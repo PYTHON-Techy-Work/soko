@@ -52,8 +52,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/soko/api/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="1001" column="99" lean-forward="false" selection-start-line="1001" selection-start-column="99" selection-end-line="1001" selection-end-column="99" />
+            <state relative-caret-position="232">
+              <caret line="1002" column="85" lean-forward="false" selection-start-line="1002" selection-start-column="85" selection-end-line="1002" selection-end-column="85" />
               <folding>
                 <element signature="e#0#109#0" expanded="true" />
               </folding>
@@ -86,8 +86,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/soko/loans/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="681">
-              <caret line="82" column="40" lean-forward="true" selection-start-line="82" selection-start-column="40" selection-end-line="82" selection-end-column="40" />
+            <state relative-caret-position="381">
+              <caret line="81" column="22" lean-forward="true" selection-start-line="81" selection-start-column="22" selection-end-line="81" selection-end-column="33" />
               <folding>
                 <element signature="e#43#64#0" expanded="true" />
               </folding>
@@ -1058,16 +1058,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/soko/loans/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="681">
-          <caret line="82" column="40" lean-forward="true" selection-start-line="82" selection-start-column="40" selection-end-line="82" selection-end-column="40" />
-          <folding>
-            <element signature="e#43#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/soko/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="366">
@@ -1078,10 +1068,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/soko/loans/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="81" column="22" lean-forward="true" selection-start-line="81" selection-start-column="22" selection-end-line="81" selection-end-column="33" />
+          <folding>
+            <element signature="e#43#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/soko/api/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="1001" column="99" lean-forward="false" selection-start-line="1001" selection-start-column="99" selection-end-line="1001" selection-end-column="99" />
+        <state relative-caret-position="232">
+          <caret line="1002" column="85" lean-forward="false" selection-start-line="1002" selection-start-column="85" selection-end-line="1002" selection-end-column="85" />
           <folding>
             <element signature="e#0#109#0" expanded="true" />
           </folding>
