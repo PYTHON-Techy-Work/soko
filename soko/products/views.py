@@ -162,7 +162,7 @@ def browse():
         return redirect("/products/browse")
 
     """List all products."""
-    products = Product.query.all()
+    products = Product.query.filter(Product.quantity > 0)
 
     return render_template('products/browse.html', 
         products=products, title="All items for sale", product_categories=ProductCategory.query.all())

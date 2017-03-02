@@ -10,8 +10,8 @@ from .models import User
 class RegisterForm(Form):
     """Register form."""
 
-    username = StringField('Username',
-                           validators=[DataRequired(), Length(min=3, max=25)])
+    #username = StringField('Username',
+    #                       validators=[DataRequired(), Length(min=3, max=25)])
    
     first_name = StringField('First Name',
                         validators=[DataRequired(), Length(min=3, max=40)])
@@ -23,13 +23,13 @@ class RegisterForm(Form):
                         validators=[DataRequired()])
 
     last_name = StringField('Last Name',
-                             validators=[DataRequired(), Length(min=3, max=40)])
+                             validators=[DataRequired(), Length(min=1, max=40)])
     phone_number = StringField('Phone Number',
-                             validators=[DataRequired(), Length(min=6, max=40)])
+                             validators=[DataRequired(), Length(min=1, max=40)])
     email = StringField('Email',
                         validators=[DataRequired(), Email(), Length(min=6, max=40)])
     password = PasswordField('Password',
-                             validators=[DataRequired(), Length(min=6, max=40)])
+                             validators=[DataRequired(), Length(min=1, max=40)])
     confirm = PasswordField('Verify password',
                             [DataRequired(), EqualTo('password', message='Passwords must match')])
 
@@ -43,9 +43,9 @@ class RegisterForm(Form):
         initial_validation = super(RegisterForm, self).validate()
         if not initial_validation:
             return False
-        user = User.query.filter_by(username=self.username.data).first()
+        user = User.query.filter_by(email=self.email.data).first()
         if user:
-            self.username.errors.append('Username already registered')
+            self.email.errors.append('Email already registered')
             return False
         user = User.query.filter_by(email=self.email.data).first()
         if user:

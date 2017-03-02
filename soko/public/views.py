@@ -25,7 +25,7 @@ def index():
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     """Home page."""
-    if current_user.is_authenticated:
+    if current_user.is_authenticated():
         return redirect("/")
 
     form = LoginForm(request.form)
@@ -55,13 +55,13 @@ def register():
     """Register new user."""
     form = RegisterForm(request.form, csrf_enabled=False)
     if form.validate_on_submit():
-        User.create(username=form.username.data, email=form.email.data, 
+        User.create(email=form.email.data, 
             password=form.password.data, active=True, token="(not set)",
             category=form.category.data, first_name=form.first_name.data,
             last_name=form.last_name.data, phone_number=form.phone_number.data,
             region=form.region.data)
         flash('Thank you for registering. You can now log in.', 'success')
-        return redirect(url_for('public.home'))
+        return redirect("/")
     else:
         flash_errors(form)
     return render_template('public/register.html', form=form)

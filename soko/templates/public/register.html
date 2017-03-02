@@ -29,22 +29,6 @@
 
 
 
-	 {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    <div class="row">
-      <div class="col-md-12">
-        {% for category, message in messages %}
-        <div class="alert alert-{{ category }}">
-          <a class="close" title="Close" href="#" data-dismiss="alert">&times;</a>
-         {{message}}
-        </div><!-- end .alert -->
-        {% endfor %}
-      </div><!-- end col-md -->
-    </div><!-- end row -->
-        {% endif %}
-    {% endwith %}
-
-
     <h2>1. <b>How do you want to use Soko Mkononi?</b></h2>
     <br>
 
@@ -93,62 +77,10 @@
 
             <input type="hidden" name="category" value="{{cat}}"/>
 
-<!--
-            <div class="form-group">
-                {{form.username.label}}
-                {{form.username(placeholder="Username", class_="form-control")}}
-
-                <div class="alert alert-primary"><i class="fa fa-info-circle"></i> This will be the username that you sign in with</div>
-            </div>
-            
-            <div class="form-group">
-                {{form.first_name.label}}
-                {{form.first_name(placeholder="First Name", class_="form-control")}}
-            </div>
-            <div class="form-group">
-                {{form.last_name.label}}
-                {{form.last_name(placeholder="Last Name", class_="form-control")}}
-            </div>
-
-            <div class="form-group">
-                {{form.email.label}}
-                {{form.email(placeholder="Email", class_="form-control")}}
-            </div>
-
-
-            <div class="form-group">
-                {{form.phone_number.label}}
-                {{form.phone_number(placeholder="Phone Number", class_="form-control")}}
-
-                <div class="alert alert-primary"><i class="fa fa-info-circle"></i> We need your phone number and email to send you updates</div>
-
-            </div>
-
-            <div class="form-group">
-                {{form.region.label}}
-                {{form.region(placeholder="City or town", class_="form-control")}}
-
-                <div class="alert alert-primary"><i class="fa fa-info-circle"></i> We need to know where you are so we can show you content relevant to your location</div>
-
-            </div>
-            
-            <div class="form-group">
-                {{form.password.label}}
-                {{form.password(placeholder="Password", class_="form-control")}}
-            </div>
-            <div class="form-group">
-                {{form.confirm.label}}
-                {{form.confirm(placeholder="Password (confirm)", class_="form-control")}}
-
-                <div class="alert alert-primary"><i class="fa fa-info-circle"></i> Your password must be at least 6 characters</div>
-
-            </div>
-            <p><button class="btn btn-success btn-lg btn-submit btn-block" type="submit"><i class="fa fa-check-circle"></i> Create my account!</button></p>-->
-
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist" style="margin-bottom:20px">
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">1. Username</a></li>
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">1. Email</a></li>
     <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">2. Your details</a></li>
     <li role="presentation"><a href="#location" aria-controls="location" role="tab" data-toggle="tab">3. Location</a></li>
     <li role="presentation"><a href="#password" aria-controls="password" role="tab" data-toggle="tab">4. Password</a></li>
@@ -159,10 +91,10 @@
     <div role="tabpanel" class="tab-pane active" id="home">
 
     <div class="form-group">
-        {{form.username.label}}
-        {{form.username(placeholder="Username", class_="form-control")}}
+        {{form.email.label}}
+        {{form.email(placeholder="Your email", class_="form-control")}}
 
-        <div class="alert alert-primary"><i class="fa fa-info-circle"></i> This will be the username that you sign in with</div>
+        <div class="alert alert-primary"><i class="fa fa-info-circle"></i> This will be the email that you sign in with</div>
 
         <div class="pull-right">
             <a class="btn btn-primary btn-lg" href="javascript:next_tab()">Continue <i class="fa fa-chevron-right"></i></a>
@@ -183,12 +115,12 @@
                 {{form.last_name.label}}
                 {{form.last_name(placeholder="Last Name", class_="form-control")}}
             </div>
-
+<!--
             <div class="form-group">
                 {{form.email.label}}
                 {{form.email(placeholder="Email", class_="form-control")}}
             </div>
-
+-->
 
             <div class="form-group">
                 {{form.phone_number.label}}
