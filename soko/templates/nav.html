@@ -16,7 +16,7 @@
        <!-- <li {% if request.endpoint in [''] %}class="active"{% endif %}><a href="/products/browse"><i class="fa fa-info-circle"></i> About</a></li>-->
        
 
-       {% if current_user.is_authenticated() %}
+       {% if current_user.is_authenticated  %}
 
        <li {% if request.endpoint in ['loans.my_list', 'loans.edit_loan'] %}class="active"{% endif %}><a href="/loans"><i class="fa fa-usd"></i> My Loans</a></li>
 
@@ -34,7 +34,7 @@
         </ul>       
        </div>
        <!---->
-       {% if current_user.is_authenticated() %}
+       {% if current_user.is_authenticated %}
        <div class="cart box_1">
          <a href="checkout.html">
           <div class="total">
@@ -66,7 +66,7 @@
        </div>
       <div class="clearfix"> </div>
 </div>
-{% if current_user.is_authenticated() %}
+{% if current_user.is_authenticated %}
 {% set user_type = current_user.category.lower() %}
 
 {% if current_user.is_admin or user_type != "consumer" %}

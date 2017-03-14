@@ -275,21 +275,17 @@ class Delivery(SurrogatePK, Model):
     product = relationship('Product', backref='deliveries')
     quantity = Column(db.Integer, nullable=False)
     transporter = Column(db.Integer, nullable=False)
-    status = Column(db.Enum('Accepted', 'Delivered', 'Not Delivered', name='status'), nullable=False, default='Not Delivered')
+    status = Column(db.Enum('Accepted', 'Delivered', 'Pending', name='status'), nullable=False, default='Pending')
     total = Column(db.Numeric(15, 2), nullable=False)
-    lat = Column(db.Numeric(9, 6), nullable=False)
-    lng = Column(db.Numeric(9, 6), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, user_id, product_id, quantity, transporter, status, total, lat, lng):
+    def __init__(self, user_id, product_id, quantity, transporter, status, total):
         self.user_id = user_id
         self.product_id = product_id
         self.quantity = quantity
         self.transporter = transporter
         self.status = status
         self.total = total
-        self.lat = lat
-        self.lng = lng
 
     def serialize(self):
         return {
@@ -300,7 +296,55 @@ class Delivery(SurrogatePK, Model):
             "transporter": self.transporter,
             "status": self.status,
             "total": float(self.total),
+            "date": self.created_at
+        }
+
+
+class Order(SurrogatePK, Model):
+    __tablename__ = 'orders'
+    user_id = reference_col('users', nullable=False)
+    user = relationship('User', backref='orders')
+    delivery_id = reference_col('deliveries', nullable=False)
+    delivery = relationship('Delivery', backref='orders')
+    transporter = Column(db.Integer, nullable=False)
+    status = Column(db.Enum('Accepted', 'Delivered', 'Pending', name='status'), nullable=False, default='Pending')
+    lat = Column(db.Numeric(9, 6), nullable=False)
+    lng = Column(db.Numeric(9, 6), nullable=False)
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+
+    def __init__(self, user_id, delivery_id, transporter, status, lat, lng):
+        self.user_id = user_id
+        self.delivery_id = delivery_id
+        self.transporter = transporter
+        self.status = status
+        self.lat = lat
+        self.lng = lng
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user": self.user_id,
+            "transporter": self.transporter,
+            "status": self.status,
             "lat": float(self.lat),
             "lng": float(self.lng),
             "date": self.created_at
         }
+
+
+class Variable(SurrogatePK, Model):
+    __tablename__ = 'variables'
+    cost_per_km_normal_time = Column(db.Numeric(15, 2), nullable=False)
+    cost_per_km_peak_time = Column(db.Numeric(15, 2), nullable=False)
+    cost_per_km_scheduled = Column(db.Numeric(15, 2), nullable=False)
+    cost_waiting_time = Column(db.Numeric(15, 2), nullable=False)
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+
+    def __init__(self, cost_per_km_normal_time, cost_per_km_peak_time, cost_per_km_scheduled, cost_waiting_time):
+        self.cost_per_km_normal_time = cost_per_km_normal_time
+        self.cost_per_km_peak_time = cost_per_km_peak_time
+        self.cost_per_km_scheduled = cost_per_km_scheduled
+        self.cost_waiting_time = cost_waiting_time
+
+    def __repr__(self):
+        return '<Variable %r>' % self.cost_per_km_normal_time + self.cost_per_km_peak_time + self.cost_per_km_scheduled + self.cost_waiting_time

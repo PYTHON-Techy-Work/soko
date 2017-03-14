@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 from soko.user.models import User, Document
 from soko.transporter.models import Transporter, County, TransporterCurrentLocation, TransporterRatings
 from soko.products.models import Product, ProductCategory, ProductType, ProductSubType, ProductRatings, Cart, Purchase, \
-    ShoppingList, Delivery
+    ShoppingList, Delivery, Order
 from soko.locations.models import Locations
 from soko.loans.models import Loan
 from soko.database import db
@@ -116,8 +116,9 @@ def reg_user():
                       recipients=[data['email']])
         msg.body = "You have successfully registered to soko mkononi as a  " + data['category']
         msg.html = "<b>Hi</b> " + data[
-            'first_name'] + "<br/> <b>You have successfully registered to soko mkononi as a " + data[
+            'first_name'] + "<br/> <b>You have successfully registered to Soko Mkononi as a " + data[
                        'category'] + "</b>"
+        msg.html = "Your email address is" + data['email'] + " and your password is " + data['password']+"."
         mail.send(msg)
     except Exception as e:
         status = {'status': 'failure', 'message': str(e)}
@@ -343,7 +344,7 @@ def get_product_category():
     return jsonify(data=ret)
 
 
-# api for getting all the product types
+# api for getting the product type for a selected all the product category
 @blueprint.route('/get_product_types', methods=["GET"])
 def get_product_types():
     data = request.args
@@ -594,7 +595,7 @@ def add_to_cart():
     if data:
         user = User.query.filter_by(token=data["token"]).first()
         if user:
-            product = Product.query.filter_by(id=data["product"]).first();
+            product = Product.query.filter_by(id=data["product"]).first()
             cart = Cart(
                 user=user.id,
                 product_id=data['product'],
@@ -676,6 +677,7 @@ def purchase_cart():
             db.session.add(purchase)
             db.session.add(shopping_list)
             db.session.add(deliveries)
+
             product = Product.query.get(cart.product_id)
             product.quantity = int(product.quantity) - int(purchase.quantity)
             db.session.delete(cart)
@@ -972,6 +974,7 @@ def reset_password():
 @blueprint.route('/rate_product', methods=['POST'])
 def rate_product():
     data = request.json
+    print (data)
     if data:
         user = User.query.filter_by(token=data['token']).first()
         rate_product = ProductRatings(
@@ -1055,3 +1058,6 @@ def apply_loan():
         status = {"status": "success", "message": "Loan application successful"}
     db.session.close()
     return jsonify(status)
+
+
+# start trip api

@@ -15,7 +15,7 @@ class Loan(SurrogatePK, Model):
     name = Column(db.String(80), nullable=False)
     user_id = reference_col('users', nullable=True)
     created_on = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
-    due_on = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+    due_on = Column(db.DateTime, nullable=False)
     user = relationship('User', backref='loans')
     total = Column(db.Integer)
     paid = Column(db.Integer)

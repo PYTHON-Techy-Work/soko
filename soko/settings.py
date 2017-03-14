@@ -45,7 +45,7 @@ class DevConfig(Config):
         SQLALCHEMY_DATABASE_URI = 'postgresql://paul@localhost/soko_mkononi'
     else:
         SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:tracom123@10.16.0.231/soko_mkononi'  # TODO: Change me
-        
+
     DEBUG_TB_ENABLED = True
     ASSETS_DEBUG = True  # Don't bundle/minify static assets
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
