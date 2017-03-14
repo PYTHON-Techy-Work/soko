@@ -1060,4 +1060,8 @@ def apply_loan():
     return jsonify(status)
 
 
-# start trip api
+# accept trip
+@blueprint.route('/accept_trip', methods=["GET"])
+def accept_trip():
+    data = request.args
+    return jsonify(data)

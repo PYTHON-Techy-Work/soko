@@ -275,7 +275,7 @@ class Delivery(SurrogatePK, Model):
     product = relationship('Product', backref='deliveries')
     quantity = Column(db.Integer, nullable=False)
     transporter = Column(db.Integer, nullable=False)
-    status = Column(db.Enum('Accepted', 'Delivered', 'Pending', name='status'), nullable=False, default='Pending')
+    status = Column(db.Enum('Accepted', 'Delivered', 'Pending', name='delivery_status'), nullable=False, default='Pending')
     total = Column(db.Numeric(15, 2), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
@@ -307,7 +307,7 @@ class Order(SurrogatePK, Model):
     delivery_id = reference_col('deliveries', nullable=False)
     delivery = relationship('Delivery', backref='orders')
     transporter = Column(db.Integer, nullable=False)
-    status = Column(db.Enum('Accepted', 'Delivered', 'Pending', name='status'), nullable=False, default='Pending')
+    status = Column(db.Enum('Accepted', 'Delivered', 'Pending', name='order_status'), nullable=False, default='Pending')
     lat = Column(db.Numeric(9, 6), nullable=False)
     lng = Column(db.Numeric(9, 6), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)

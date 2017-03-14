@@ -44,7 +44,7 @@ class DevConfig(Config):
     if hostname == "paul-pro":
         SQLALCHEMY_DATABASE_URI = 'postgresql://paul@localhost/soko_mkononi'
     else:
-        SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:tracom123@10.16.0.231/soko_mkononi'  # TODO: Change me
+        SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:jamonjuguna@localhost/soko_mkononi'  # TODO: Change me
 
     DEBUG_TB_ENABLED = True
     ASSETS_DEBUG = True  # Don't bundle/minify static assets
