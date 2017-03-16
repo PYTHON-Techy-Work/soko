@@ -14,7 +14,6 @@ class Loan(SurrogatePK, Model):
     __tablename__ = 'loans'
     name = Column(db.String(80), nullable=False)
     user_id = reference_col('users', nullable=True)
-    created_on = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
     due_on = Column(db.DateTime, nullable=False)
     paid_on = Column(db.DateTime, nullable=False)
     user = relationship('User', backref='loans')
@@ -79,6 +78,7 @@ class Loan(SurrogatePK, Model):
             "id": self.user_id,
             "name": self.name,
             "due_on": self.due_on,
+            "paid_on": self.paid_on,
             "amount paid": self.paid,
             "total": float(self.total),
             "status": self.status,
