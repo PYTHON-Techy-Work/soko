@@ -1036,7 +1036,7 @@ def apply_loan():
     data = request.json
     user = User.query.filter_by(token=data['token']).first()
     # check whether the user has an existing loan
-    check_loan = Loan.query.filter_by(user_id=user.id).first()
+    check_loan = Loan.query.filter_by(user_id=user.id, status=2).first()
     if check_loan:
         status = {"status": "failure", "message": "Please clear your existing loan to get another loan"}
     else:
@@ -1046,7 +1046,7 @@ def apply_loan():
             due_on=data["due_on"],
             total=data["total"],
             paid=0,
-            status=0
+            status=2
         )
         db.session.add(loan)
         db.session.commit()
@@ -1070,6 +1070,7 @@ def pay_loan():
         get_loan.paid = 1
         get_loan.total = data["amount"]
         get_loan.paid_on = date
+        get_loan.status = 3
         db.session.commit()
         status = {"status": "success", "message": "Loan cleared"}
     except Exception as e:
