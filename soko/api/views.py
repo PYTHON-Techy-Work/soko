@@ -919,7 +919,6 @@ def get_categories():
     return jsonify(status)
 
 
-
 # generate random password for password reset api
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -1061,7 +1060,7 @@ def apply_loan():
 @blueprint.route('/pay_loan', methods=["POST"])
 def pay_loan():
     data = request.json
-    date = dt.datetime.utcnow
+    date = dt.datetime.now()
     print(data)
     user = User.query.filter_by(token=data['token']).first()
     # check whether the user has an existing loan
