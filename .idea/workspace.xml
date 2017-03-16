@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92ae03c2-6e34-4825-ab80-9dc3e813ec41" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/api/views.py" afterPath="$PROJECT_DIR$/soko/api/views.py" />
     </list>
     <ignored path="dashboard.iws" />
@@ -28,8 +29,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/soko/api/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="1066" column="60" lean-forward="false" selection-start-line="1066" selection-start-column="60" selection-end-line="1066" selection-end-column="60" />
+            <state relative-caret-position="426">
+              <caret line="1069" column="22" lean-forward="true" selection-start-line="1069" selection-start-column="22" selection-end-line="1069" selection-end-column="22" />
               <folding>
                 <element signature="e#0#109#0" expanded="true" />
               </folding>
@@ -804,6 +805,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-555">
           <caret line="9" column="37" lean-forward="false" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -923,8 +925,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/soko/api/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="1066" column="60" lean-forward="false" selection-start-line="1066" selection-start-column="60" selection-end-line="1066" selection-end-column="60" />
+        <state relative-caret-position="426">
+          <caret line="1069" column="22" lean-forward="true" selection-start-line="1069" selection-start-column="22" selection-end-line="1069" selection-end-column="22" />
           <folding>
             <element signature="e#0#109#0" expanded="true" />
           </folding>

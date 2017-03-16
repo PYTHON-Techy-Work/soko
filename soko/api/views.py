@@ -1035,9 +1035,7 @@ def get_loan():
 @blueprint.route('/apply_loan', methods=["POST"])
 def apply_loan():
     data = request.json
-    print(data)
     user = User.query.filter_by(token=data['token']).first()
-    print(user.id)
     # check whether the user has an existing loan
     check_loan = Loan.query.filter_by(user_id=user.id).first()
     if check_loan:
@@ -1064,11 +1062,13 @@ def apply_loan():
 def pay_loan():
     data = request.json
     date = dt.date
+    print(data)
     user = User.query.filter_by(token=data['token']).first()
     # check whether the user has an existing loan
     try:
         get_loan = Loan.query.filter_by(user_id=user.id).first()
-        get_loan.paid= 1
+        print(user.id)
+        get_loan.paid = 1
         get_loan.total = data["amount"]
         get_loan.paid_on = date
         db.session.commit()
