@@ -1066,8 +1066,8 @@ def pay_loan():
     date = dt.date
     user = User.query.filter_by(token=data['token']).first()
     # check whether the user has an existing loan
-    get_loan = Loan.query.filter_by(user_id=user.id).first()
     try:
+        get_loan = Loan.query.filter_by(user_id=user.id).first()
         get_loan.paid= 1
         get_loan.total = data["amount"]
         get_loan.paid_on = date
