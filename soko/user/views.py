@@ -30,6 +30,7 @@ def members():
 
     return render_template('users/members.html', users=users)
 
+
 @blueprint.route('/edit/<uid>', methods=["GET", "POST"])
 @login_required
 def edit_user(uid):
@@ -59,6 +60,7 @@ def edit_user(uid):
 
 def allowed_file(fn):
     return True #TODO
+
 
 @blueprint.route('/documents/upload', methods=["GET", "POST"])
 @login_required

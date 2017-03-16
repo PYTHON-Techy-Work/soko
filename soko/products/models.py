@@ -348,3 +348,92 @@ class Variable(SurrogatePK, Model):
 
     def __repr__(self):
         return '<Variable %r>' % self.cost_per_km_normal_time + self.cost_per_km_peak_time + self.cost_per_km_scheduled + self.cost_waiting_time
+
+
+class Earning(SurrogatePK, Model):
+    __tablename__ = 'earnings'
+    user_id = reference_col('users', nullable=False)
+    user = relationship('User', backref='earnings')
+    order_id = reference_col('orders', nullable=False)
+    order = relationship('Order', backref='earnings')
+    total = Column(db.Numeric(9, 6), nullable=False)
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+
+    def __init__(self, user_id, order_id, total):
+        self.user_id = user_id
+        self.order_id = order_id
+        self.total = total
+
+    # def get_order(self):
+    #     order = Order.query.filter_by(id=self.order_id).first()
+    #     return order
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user": self.user_id,
+            "order": self.order_id,
+            "status": self.status,
+            "date": self.created_at
+        }
+
+
+class Trip(SurrogatePK, Model):
+    __tablename__ = 'trips'
+    user_id = reference_col('users', nullable=False)
+    user = relationship('User', backref='trips')
+    order_id = reference_col('orders', nullable=False)
+    order = relationship('Order', backref='trips')
+    status = Column(db.Enum('Accepted', 'Rejected', 'Started', 'Finished','Pending',  name='trip_status'), nullable=False, default='Pending')
+    lat = Column(db.Numeric(9, 6), nullable=False)
+    lng = Column(db.Numeric(9, 6), nullable=False)
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+
+    def __init__(self, user_id, order_id, status, lat, lng):
+        self.user_id = user_id
+        self.order_id = order_id
+        self.status = status
+        self.lat = lat
+        self.lng = lng
+
+    # def get_order(self):
+    #     order = Order.query.filter_by(id=self.order_id).first()
+    #     return order
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user": self.user_id,
+            "order": self.order_id,
+            "status": self.status,
+            "latitude": self.lat,
+            "longitude": self.lng,
+            "date": self.created_at
+        }
+
+
+class Payment(SurrogatePK, Model):
+    __tablename__ = 'payments'
+    user_id = reference_col('users', nullable=False)
+    user = relationship('User', backref='payments')
+    order_id = reference_col('orders', nullable=False)
+    order = relationship('Order', backref='payments')
+    payment_method = Column(db.Enum('Cheque', 'Cash', 'M-pesa', 'Debit Card', 'Credit Card',  name='payment_method'), nullable=False, default='Cash')
+    amount = Column(db.Numeric(9, 6), nullable=False)
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+
+    def __init__(self, user_id, order_id, payment_method, amount):
+        self.user_id = user_id
+        self.order_id = order_id
+        self.payment_method = payment_method
+        self.amount = amount
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user": self.user_id,
+            "order": self.order_id,
+            "payment_method": self.payment_method,
+            "amount":self.amount,
+            "date": self.created_at
+        }

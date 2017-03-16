@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 from soko.user.models import User, Document
 from soko.transporter.models import Transporter, County, TransporterCurrentLocation, TransporterRatings
 from soko.products.models import Product, ProductCategory, ProductType, ProductSubType, ProductRatings, Cart, Purchase, \
-    ShoppingList, Delivery, Order
+    ShoppingList, Delivery, Order, Earning, Trip, Payment
 from soko.locations.models import Locations
 from soko.loans.models import Loan
 from soko.database import db
@@ -457,6 +457,19 @@ def get_products():
     return jsonify(data=ret)
 
 
+# api to get my products merchant
+@blueprint.route('/get_my_products', methods=["GET"])
+def get_my_products():
+    data = request.args
+    ret = []
+    if data:
+        user = User.query.filter_by(token=data["token"]).first()
+        if user:
+            for pt in Product.query.filter_by(user_id=user.id):
+                ret.append(pt.serialize())
+    return jsonify(data=ret)
+
+
 # api to edit products
 @csrf_protect.exempt
 @blueprint.route('/edit_products', methods=["POST"])
@@ -664,9 +677,20 @@ def purchase_cart():
                 product_id=cart.product_id,
                 quantity=cart.quantity
             )
-            deliveries = Delivery(
+            delivery = Delivery(
                 user_id=user.id,
                 product_id=cart.product_id,
+                transporter=transporter,
+                status=delivery_status,
+                total=cart.total,
+                quantity=cart.quantity
+            )
+            db.session.add(purchase)
+            db.session.add(shopping_list)
+            db.session.add(delivery)
+            order = Order(
+                user_id=user.id,
+                delivery_id=delivery.id,
                 transporter=transporter,
                 status=delivery_status,
                 total=cart.total,
@@ -674,10 +698,7 @@ def purchase_cart():
                 lng=data["lng"],
                 quantity=cart.quantity
             )
-            db.session.add(purchase)
-            db.session.add(shopping_list)
-            db.session.add(deliveries)
-
+            db.session.add(order)
             product = Product.query.get(cart.product_id)
             product.quantity = int(product.quantity) - int(purchase.quantity)
             db.session.delete(cart)
@@ -862,17 +883,17 @@ def available_orders():
     user = User.query.filter_by(token=data["token"]).first()
     if user:
         try:
-            for delivery in Delivery.query.filter_by(status=status):
-                lat2 = radians(delivery.lat)
-                lon2 = radians(delivery.lng)
+            for order in Order.query.filter_by(status=status):
+                lat2 = radians(order.lat)
+                lon2 = radians(order.lng)
                 dlon = lon2 - lon1
                 dlat = lat2 - lat1
                 a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
                 c = 2 * atan2(sqrt(a), sqrt(1 - a))
                 distance = R * c
                 if distance <= 5:
-                    ret.append(delivery)
-                status = {"status": "success", "message": distance}
+                    ret.append(order)
+                status = {"status": "success", "message": distance, "lat": order.lat, "lng": order.lng}
         except Exception as e:
             status = {"status": "failure", "message": str(e)}
     else:
@@ -883,7 +904,6 @@ def available_orders():
 # categories api
 @blueprint.route('/get_categories', methods=["GET"])
 def get_categories():
-    # data = request.args
     ret = []
     data = []
     products_categories = ProductCategory.query.all()
@@ -896,29 +916,6 @@ def get_categories():
         status = {"status": "failure", "message": "no records found"}
     return jsonify(status)
 
-
-# accept payments api
-@csrf_protect.exempt
-@blueprint.route('/accept_payments', methods=["POST"])
-def accept_payments():
-    data = request.json
-    return jsonify(data)
-
-
-# will use this api to simulate the mpesa response
-@blueprint.route('/current_oil_price', methods=['GET'])
-def oil_current_price():
-    # Get SOAP Service via suds
-    url = 'http://www.pttplc.com/webservice/pttinfo.asmx?WSDL'
-    client = SudsClient(url)
-    # Execute CurrentOilPrice method of SOAP
-    xml = client.service.CurrentOilPrice("EN")
-    # Convert XML to dict
-    res_dict = xmltodict.parse(xml)
-    result = {}
-    result['result'] = res_dict['PTT_DS']['DataAccess']
-    # Convert dict to JSON
-    return jsonify(**result)
 
 
 # generate random password for password reset api
@@ -998,21 +995,20 @@ def rate_product():
 @blueprint.route('/rate_transporter', methods=['POST'])
 def rate_transporter():
     data = request.json
-    if data:
+    try:
         user = User.query.filter_by(token=data['token']).first()
         rate_transporter = TransporterRatings(
             user_id=user.id,
             rating=data["rating"],
             review=data["review"]
         )
-        try:
-            db.session.add(rate_transporter)
-            db.session.commit()
-            status = {"status": "success", "message": "Transporter rated Successfully"}
-        except Exception as e:
-            status = {"status": "failure ", "message": str(e)}
-        db.session.close()
-        return jsonify(status)
+        db.session.add(rate_transporter)
+        db.session.commit()
+        status = {"status": "success", "message": "Transporter rated Successfully"}
+    except Exception as e:
+        status = {"status": "failure ", "message": str(e)}
+    db.session.close()
+    return jsonify(status)
 
 
 # loans api --get my loans
@@ -1060,8 +1056,180 @@ def apply_loan():
     return jsonify(status)
 
 
+# pay loan api
+@csrf_protect.exempt
+@blueprint.route('/pay_loan', methods=["POST"])
+def pay_loan():
+    data = request.json
+    print(data)
+    user = User.query.filter_by(token=data['token']).first()
+    print(user.id)
+    # check whether the user has an existing loan
+    check_loan = Loan.query.filter_by(user_id=user.id).first()
+    if check_loan:
+        status = {"status": "failure", "message": "Please clear your existing loan to get another loan"}
+    else:
+        loan = Loan(
+            name=user.first_name + " " + user.last_name,
+            user_id=user.id,
+            due_on=data["due_date"],
+            total=data["total"],
+            paid=0,
+            status=0
+        )
+        db.session.add(loan)
+        db.session.commit()
+        status = {"status": "success", "message": "Loan application successful"}
+    db.session.close()
+    return jsonify(status)
+
+
 # accept trip
 @blueprint.route('/accept_trip', methods=["GET"])
 def accept_trip():
     data = request.args
-    return jsonify(data)
+    status = 'Accepted'
+    try:
+        user = User.query.filter_by(token=data["token"]).first()
+        order = Order.query.filter_by(id=data["order_id"]).first()
+        trip = Trip(
+            user_id=user.id,
+            order_id=order.id,
+            status=status,
+            lat=order.lat,
+            lng=order.lng
+        )
+        db.session.add(trip)
+        status = {"status": "success","message": "Trip Accepted"}
+    except Exception as e:
+        status = {"status": "failure","message": str(e)}
+    return jsonify(status)
+
+
+# start trip
+@blueprint.route('/start_trip', methods=["POST"])
+def start_trip():
+    data = request.json
+    status = 'Started'
+    try:
+        user = User.query.filter_by(token=data["token"]).first()
+        order = Order.query.filter_by(id=data["order_id"]).first()
+        trip = Trip.query.filter_by(user_id=user.id,status='Accepted').first
+        trip.status = status
+        db.session.add(trip)
+        status = {"status": "success","message": "Trip Started"}
+    except Exception as e:
+        status = {"status": "failure","message": str(e)}
+    db.session.close()
+    return jsonify(status)
+
+
+# end trip
+@blueprint.route('/end_trip', methods=["POST"])
+def end_trip():
+    data = request.json
+    status = 'Started'
+    try:
+        user = User.query.filter_by(token=data["token"]).first()
+        order = Order.query.filter_by(id=data["order_id"]).first()
+        trip = Trip.query.filter_by(user_id=user.id,status='Accepted').first
+        trip.status = status
+        db.session.add(trip)
+        status = {"status": "success","message": "Trip Started"}
+    except Exception as e:
+        status = {"status": "failure","message": str(e)}
+    db.session.close()
+    return jsonify(status)
+
+
+# reject_trip
+@blueprint.route('/reject_trip', methods=["GET"])
+def reject_trip():
+    data = request.args
+    status = 'Rejected'
+    try:
+        user = User.query.filter_by(token=data["token"]).first()
+        order = Order.query.filter_by(id=data["order_id"]).first()
+        trip = Trip(
+            user_id=user.id,
+            order_id=order.id,
+            status=status,
+            lat=order.lat,
+            lng=order.lng
+        )
+        db.session.add(trip)
+        status = {"status": "success","message": "Trip rejected"}
+    except Exception as e:
+        status = {"status": "failure","message": str(e)}
+    db.session.close()
+    return jsonify(status)
+
+
+# new orders merchant
+@blueprint.route('/merchant_new_orders', methods=["GET"])
+def merchant_new_orders():
+    data = request.args
+    my_order = []
+    try:
+        user = User.query.filter_by(token=data["token"]).first()
+        product = Product.query.filter_by(user_id=user.id).first()
+        for delivery in Delivery.query.filter_by(product_id=product.id):
+            my_order.append(delivery.serialize())
+        status = {"status": "success", "message": my_order}
+    except Exception as e:
+        status = {"status": "failure", "message": str(e)}
+    db.session.close()
+    return jsonify(status)
+
+
+# earnings api transporter and farmer
+@blueprint.route('/my_earnings', methods=["GET"])
+def my_earnings_transporter():
+    data = request.args
+    my_earnings = []
+    try:
+        user = User.query.filter_by(token=data["token"]).first()
+        for earning in Earning.query.filter_by(user_id=user.id):
+            my_earnings.append(earning.serialize())
+        status = {"status": "success","message": my_earnings}
+    except Exception as e:
+        status = {"status": "failure","message": str(e)}
+    db.session.close()
+    return jsonify(status)
+
+
+# accept payments api
+@csrf_protect.exempt
+@blueprint.route('/accept_payments', methods=["POST"])
+def accept_payments():
+    data = request.json
+    payment_method = data["payment_method"]
+    try:
+        user = User.query.filter_by(token=data["token"]).first()
+        payment = Payment(
+            user_id=user.id,
+            order_id=data["order_id"],
+            payment_method=payment_method
+        )
+        db.session.add(payment)
+        status = {"status":"success","message":"Payment made successfully"}
+    except Exception as e:
+        status = {"status": "success", "message": str(e)}
+    db.session.close()
+    return jsonify(status)
+
+
+# will use this api to simulate the mpesa response
+@blueprint.route('/current_oil_price', methods=['GET'])
+def oil_current_price():
+    # Get SOAP Service via suds
+    url = 'http://www.pttplc.com/webservice/pttinfo.asmx?WSDL'
+    client = SudsClient(url)
+    # Execute CurrentOilPrice method of SOAP
+    xml = client.service.CurrentOilPrice("EN")
+    # Convert XML to dict
+    res_dict = xmltodict.parse(xml)
+    result = {}
+    result['result'] = res_dict['PTT_DS']['DataAccess']
+    # Convert dict to JSON
+    return jsonify(**result)
