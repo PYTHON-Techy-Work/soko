@@ -1061,7 +1061,7 @@ def apply_loan():
 @blueprint.route('/pay_loan', methods=["POST"])
 def pay_loan():
     data = request.json
-    date = dt.datetime
+    date = dt.datetime.utcnow
     print(data)
     user = User.query.filter_by(token=data['token']).first()
     # check whether the user has an existing loan
