@@ -1046,7 +1046,7 @@ def apply_loan():
         loan = Loan(
             name=user.first_name + " " + user.last_name,
             user_id=user.id,
-            due_on=data["due_date"],
+            due_on=data["due_on"],
             total=data["total"],
             paid=0,
             status=0
