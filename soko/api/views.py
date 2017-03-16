@@ -1,6 +1,7 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for, jsonify, make_response, json
 from flask_mail import Mail, Message
 
+
 from werkzeug.utils import secure_filename
 
 from soko.user.models import User, Document
@@ -23,6 +24,7 @@ import xmltodict
 import string
 import random
 import suds.client
+import datetime as dt
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -1061,25 +1063,18 @@ def apply_loan():
 @blueprint.route('/pay_loan', methods=["POST"])
 def pay_loan():
     data = request.json
-    print(data)
+    date = dt.date
     user = User.query.filter_by(token=data['token']).first()
-    print(user.id)
     # check whether the user has an existing loan
-    check_loan = Loan.query.filter_by(user_id=user.id).first()
-    if check_loan:
-        status = {"status": "failure", "message": "Please clear your existing loan to get another loan"}
-    else:
-        loan = Loan(
-            name=user.first_name + " " + user.last_name,
-            user_id=user.id,
-            due_on=data["due_date"],
-            total=data["total"],
-            paid=0,
-            status=0
-        )
-        db.session.add(loan)
+    get_loan = Loan.query.filter_by(user_id=user.id).first()
+    try:
+        get_loan.paid= 1
+        get_loan.total = data["amount"]
+        get_loan.paid_on = date
         db.session.commit()
-        status = {"status": "success", "message": "Loan application successful"}
+        status = {"status": "success", "message": "Loan cleared"}
+    except Exception as e:
+        status = {"status": "failure", "message": str(e)}
     db.session.close()
     return jsonify(status)
 
@@ -1116,7 +1111,7 @@ def start_trip():
         order = Order.query.filter_by(id=data["order_id"]).first()
         trip = Trip.query.filter_by(user_id=user.id,status='Accepted').first
         trip.status = status
-        db.session.add(trip)
+        db.session.commit()
         status = {"status": "success","message": "Trip Started"}
     except Exception as e:
         status = {"status": "failure","message": str(e)}
@@ -1128,13 +1123,13 @@ def start_trip():
 @blueprint.route('/end_trip', methods=["POST"])
 def end_trip():
     data = request.json
-    status = 'Started'
+    status = 'Finished'
     try:
         user = User.query.filter_by(token=data["token"]).first()
         order = Order.query.filter_by(id=data["order_id"]).first()
         trip = Trip.query.filter_by(user_id=user.id,status='Accepted').first
         trip.status = status
-        db.session.add(trip)
+        db.session.commit()
         status = {"status": "success","message": "Trip Started"}
     except Exception as e:
         status = {"status": "failure","message": str(e)}
@@ -1158,6 +1153,7 @@ def reject_trip():
             lng=order.lng
         )
         db.session.add(trip)
+        db.session.commit()
         status = {"status": "success","message": "Trip rejected"}
     except Exception as e:
         status = {"status": "failure","message": str(e)}
@@ -1212,6 +1208,7 @@ def accept_payments():
             payment_method=payment_method
         )
         db.session.add(payment)
+        db.session.commit()
         status = {"status":"success","message":"Payment made successfully"}
     except Exception as e:
         status = {"status": "success", "message": str(e)}

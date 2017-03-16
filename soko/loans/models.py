@@ -16,10 +16,12 @@ class Loan(SurrogatePK, Model):
     user_id = reference_col('users', nullable=True)
     created_on = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
     due_on = Column(db.DateTime, nullable=False)
+    paid_on = Column(db.DateTime, nullable=False)
     user = relationship('User', backref='loans')
     total = Column(db.Integer)
     paid = Column(db.Integer)
     status = Column(db.Integer)
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
     def get_status_name(self):
         # TODO: figure out the status
