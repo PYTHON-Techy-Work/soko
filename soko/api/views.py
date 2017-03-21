@@ -700,9 +700,10 @@ def purchase_cart():
                     lat=data["lat"],
                     lng=data["lng"]
                 )
-                db.session.add(delivery)
                 db.session.add(purchase)
                 db.session.add(shopping_list)
+                db.session.add(delivery)
+                db.session.add(order)
                 product = Product.query.get(cart.product_id)
                 product.quantity = int(product.quantity) - int(purchase.quantity)
                 db.session.delete(cart)
