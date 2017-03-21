@@ -691,6 +691,7 @@ def purchase_cart():
                     lng=data["lng"],
                     quantity=cart.quantity
                 )
+                db.session.add(delivery)
                 order = Order(
                     user_id=user.id,
                     delivery_id=delivery.id,
@@ -702,7 +703,6 @@ def purchase_cart():
                 )
                 db.session.add(purchase)
                 db.session.add(shopping_list)
-                db.session.add(delivery)
                 db.session.add(order)
                 product = Product.query.get(cart.product_id)
                 product.quantity = int(product.quantity) - int(purchase.quantity)
