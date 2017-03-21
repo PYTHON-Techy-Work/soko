@@ -312,7 +312,7 @@ class Order(SurrogatePK, Model):
     user = relationship('User', backref='orders')
     delivery_id = reference_col('deliveries', nullable=False)
     delivery = relationship('Delivery', backref='orders')
-    transporter = Column(db.Integer, nullable=False)
+    farmer = Column(db.Integer, nullable=False)
     status = Column(db.Enum('Accepted', 'Delivered', 'Pending', name='order_status'), nullable=False, default='Pending')
     lat = Column(db.Numeric(9, 9), nullable=False)
     lng = Column(db.Numeric(9, 9), nullable=False)

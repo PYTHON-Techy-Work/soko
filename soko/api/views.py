@@ -700,10 +700,12 @@ def purchase_cart():
                 db.session.delete(cart)
                 db.session.commit()
             for delivery in Delivery.query.filter_by(user_id=user.id):
+                for product in Product.query.filter_by(id=delivery.product_id):
+                    get_farmer = product.user_id
                 order = Order(
                     user_id=user.id,
                     delivery_id=delivery.id,
-                    transporter=transporter,
+                    farmer=get_farmer,
                     status=order_status,
                     total=delivery.total,
                     lat=delivery.lat,
@@ -884,7 +886,7 @@ def transporter_current_location():
 def available_orders():
     ret = []
     data = request.json
-    status = "Not Delivered"
+    status = "Pending"
     R = 6373.0
     lat1 = radians(float(data["lat"]))
     lon1 = radians(float(data["lng"]))
@@ -901,7 +903,7 @@ def available_orders():
                 distance = R * c
                 if distance <= 5:
                     ret.append(order)
-                status = {"status": "success", "message": distance, "lat": order.lat, "lng": order.lng}
+                status = {"status": "success", "message": distance, "lat": order.lat, "lng": order.lng, "orders": ret}
         except Exception as e:
             status = {"status": "failure", "message": str(e)}
     else:
