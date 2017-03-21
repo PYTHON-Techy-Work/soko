@@ -706,8 +706,10 @@ def purchase_cart():
                 product.quantity = int(product.quantity) - int(purchase.quantity)
                 db.session.delete(cart)
                 db.session.commit()
+            print("am here with success")
             status = {'status': 'success', 'message': 'Items successfully purchased!'}
         except Exception as e:
+            print("am not here with success")
             status = {"status": "failure", "message": str(e)}
     db.session.close()
     return jsonify(status)
