@@ -660,6 +660,7 @@ def remove_from_cart():
 def purchase_cart():
     data = request.json
     delivery_status = "Pending"
+    order_status = "Pending"
     transporter = 0
     if "token" not in request.json:
         status = {'status': 'failure', 'message': 'Error!'}
@@ -694,7 +695,7 @@ def purchase_cart():
                     user_id=user.id,
                     delivery_id=delivery.id,
                     transporter=transporter,
-                    status=delivery_status,
+                    status=order_status,
                     total=cart.total,
                     lat=data["lat"],
                     lng=data["lng"]
