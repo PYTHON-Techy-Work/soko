@@ -274,6 +274,8 @@ class Delivery(SurrogatePK, Model):
     product_id = reference_col('products', nullable=False)
     product = relationship('Product', backref='deliveries')
     quantity = Column(db.Integer, nullable=False)
+    purchase_date = Column(db.DateTime, nullable=False)
+    purchase_time = Column(db.DateTime, nullable=False)
     transporter = Column(db.Integer, nullable=False)
     status = Column(db.Enum('Accepted', 'Delivered', 'Pending', name='status_delivery'), nullable=False, default='Pending')
     lat = Column(db.Numeric(9, 6), nullable=False)
@@ -281,10 +283,12 @@ class Delivery(SurrogatePK, Model):
     total = Column(db.Numeric(15, 2), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, user_id, product_id, quantity, transporter, status, lat, lng, total):
+    def __init__(self, user_id, product_id, quantity, purchase_date, purchase_time, transporter, status, lat, lng, total):
         self.user_id = user_id
         self.product_id = product_id
         self.quantity = quantity
+        self.purchase_date = purchase_date
+        self.purchase_time = purchase_time
         self.transporter = transporter
         self.status = status
         self.lat = lat
@@ -297,6 +301,8 @@ class Delivery(SurrogatePK, Model):
             "user": self.user_id,
             "product": self.product.serialize(),
             "quantity": self.quantity,
+            "purchase_date": self.purchase_date,
+            "purchase_time": self.purchase_time,
             "transporter": self.transporter,
             "status": self.status,
             "lat": self.lat,
@@ -310,21 +316,20 @@ class Order(SurrogatePK, Model):
     __tablename__ = 'orders'
     user_id = reference_col('users', nullable=False)
     user = relationship('User', backref='orders')
-    delivery_id = reference_col('deliveries', nullable=False)
-    delivery = relationship('Delivery', backref='orders')
-    farmer = Column(db.Integer, nullable=False)
+    consumer = Column(db.String(120), nullable=True)
+    order_date = Column(db.DateTime, nullable=False)
+    order_time = Column(db.DateTime, nullable=False)
     status = Column(db.Enum('Accepted', 'Delivered', 'Pending', name='order_status'), nullable=False, default='Pending')
     lat = Column(db.Numeric(9, 9), nullable=False)
     lng = Column(db.Numeric(9, 9), nullable=False)
-    total = Column(db.Numeric(15, 2), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, user_id, delivery_id, transporter, status, total, lat, lng):
+    def __init__(self, user_id, consumer, order_date, order_time, status, lat, lng):
         self.user_id = user_id
-        self.delivery_id = delivery_id
-        self.transporter = transporter
+        self.consumer = consumer
+        self.order_date = order_date
+        self.order_time = order_time
         self.status = status
-        self.total = total
         self.lat = lat
         self.lng = lng
 
@@ -332,9 +337,10 @@ class Order(SurrogatePK, Model):
         return {
             "id": self.id,
             "user": self.user_id,
-            "transporter": self.transporter,
+            "consumer": self.consumer,
+            "order_date": self.order_date,
+            "order_time": self.order_time,
             "status": self.status,
-            "total": self.total,
             "lat": float(self.lat),
             "lng": float(self.lng),
             "date": self.created_at

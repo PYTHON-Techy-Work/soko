@@ -660,12 +660,15 @@ def remove_from_cart():
 def purchase_cart():
     data = request.json
     delivery_status = "Pending"
+    order_date = dt.date
+    order_time = dt.time
     order_status = "Pending"
     transporter = 0
     if "token" not in request.json:
         status = {'status': 'failure', 'message': 'Error!'}
     else:
         user = User.query.filter_by(token=data["token"]).first()
+        order_name = user.first_name + " " + user.last_name
         try:
             for cart in Cart.query.filter_by(user=user.id):
                 # todo: do some stuff with the cart
@@ -685,6 +688,8 @@ def purchase_cart():
                     user_id=user.id,
                     product_id=cart.product_id,
                     transporter=transporter,
+                    purchase_date=order_date,
+                    purchase_time=order_time,
                     status=delivery_status,
                     total=cart.total,
                     lat=data["lat"],
@@ -692,27 +697,24 @@ def purchase_cart():
                     quantity=cart.quantity
                 )
                 db.session.add(delivery)
-
+                print(delivery.id)
                 db.session.add(purchase)
                 db.session.add(shopping_list)
                 product = Product.query.get(cart.product_id)
                 product.quantity = int(product.quantity) - int(purchase.quantity)
                 db.session.delete(cart)
                 db.session.commit()
-            for delivery in Delivery.query.filter_by(user_id=user.id):
-                for product in Product.query.filter_by(id=delivery.product_id):
-                    get_farmer = product.user_id
-                order = Order(
-                    user_id=user.id,
-                    delivery_id=delivery.id,
-                    farmer=get_farmer,
-                    status=order_status,
-                    total=delivery.total,
-                    lat=delivery.lat,
-                    lng=delivery.lng
-                )
-                db.session.add(order)
-                db.session.commit()
+            order = Order(
+                user_id=user.id,
+                consumer=order_name,
+                order_date=order_date,
+                order_time=order_time,
+                status=order_status,
+                lat=data["lat"],
+                lng=data["lng"]
+            )
+            db.session.add(order)
+            db.session.commit()
             status = {'status': 'success', 'message': 'Items successfully purchased!'}
         except Exception as e:
             status = {"status": "failure", "message": str(e)}
@@ -903,7 +905,7 @@ def available_orders():
                 distance = R * c
                 if distance <= 5:
                     ret.append(order)
-                status = {"status": "success", "message": distance, "lat": order.lat, "lng": order.lng, "orders": ret}
+            status = {"status": "success", "message": distance, "orders": ret}
         except Exception as e:
             status = {"status": "failure", "message": str(e)}
     else:
@@ -1024,13 +1026,14 @@ def rate_transporter():
 @blueprint.route('/get_loan', methods=["GET"])
 def get_loan():
     data = request.args
+    loan_status = 2
     ret = []
     user = User.query.filter_by(token=data["token"]).first()
     print(user.id)
     if user:
-        loan = Loan.query.filter_by(user_id=user.id).first()
+        loan = Loan.query.filter_by(user_id=user.id, status=loan_status).first()
         loan_data = {"total": float(loan.total), "paid": float(loan.paid),
-                     "name": loan.name, "due_date": loan.due_on, "status":loan.status}
+                     "name": loan.name, "due_date": loan.due_on, "status": loan.status}
         status = {"status": "success", "message": loan_data}
     else:
         status = {"status": "failure", "message": "no records found"}
@@ -1177,7 +1180,7 @@ def merchant_new_orders():
     try:
         user = User.query.filter_by(token=data["token"]).first()
         product = Product.query.filter_by(user_id=user.id).first()
-        for delivery in Delivery.query.filter_by(product_id=product.id):
+        for delivery in Delivery.query.filter_by(product_id=product.id, status="Pending"):
             my_order.append(delivery.serialize())
         status = {"status": "success", "message": my_order}
     except Exception as e:
