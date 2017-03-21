@@ -663,51 +663,52 @@ def purchase_cart():
     transporter = 0
     if "token" not in request.json:
         status = {'status': 'failure', 'message': 'Error!'}
-    user = User.query.filter_by(token=data["token"]).first()
-    try:
-        for cart in Cart.query.filter_by(user=user.id):
-            # todo: do some stuff with the cart
-            # add to 'purchases' table or something
-            purchase = Purchase(
-                user=user.id,
-                product_id=cart.product_id,
-                quantity=cart.quantity,
-                total=cart.total
-            )
-            shopping_list = ShoppingList(
-                user_id=user.id,
-                product_id=cart.product_id,
-                quantity=cart.quantity
-            )
-            delivery = Delivery(
-                user_id=user.id,
-                product_id=cart.product_id,
-                transporter=transporter,
-                status=delivery_status,
-                total=cart.total,
-                quantity=cart.quantity
-            )
-            order = Order(
-                user_id=user.id,
-                delivery_id=delivery.id,
-                transporter=transporter,
-                status=delivery_status,
-                total=cart.total,
-                lat=data["lat"],
-                lng=data["lng"],
-                quantity=cart.quantity
-            )
-            db.session.add(purchase)
-            db.session.add(shopping_list)
-            db.session.add(delivery)
-            db.session.add(order)
-            product = Product.query.get(cart.product_id)
-            product.quantity = int(product.quantity) - int(purchase.quantity)
-            db.session.delete(cart)
-            db.session.commit()
-        status = {'status': 'success', 'message': 'Items successfully purchased!'}
-    except Exception as e:
-        status = {"status": "failure", "message": str(e)}
+    else:
+        user = User.query.filter_by(token=data["token"]).first()
+        try:
+            for cart in Cart.query.filter_by(user=user.id):
+                # todo: do some stuff with the cart
+                # add to 'purchases' table or something
+                purchase = Purchase(
+                    user=user.id,
+                    product_id=cart.product_id,
+                    quantity=cart.quantity,
+                    total=cart.total
+                )
+                shopping_list = ShoppingList(
+                    user_id=user.id,
+                    product_id=cart.product_id,
+                    quantity=cart.quantity
+                )
+                delivery = Delivery(
+                    user_id=user.id,
+                    product_id=cart.product_id,
+                    transporter=transporter,
+                    status=delivery_status,
+                    total=cart.total,
+                    quantity=cart.quantity
+                )
+                order = Order(
+                    user_id=user.id,
+                    delivery_id=delivery.id,
+                    transporter=transporter,
+                    status=delivery_status,
+                    total=cart.total,
+                    lat=data["lat"],
+                    lng=data["lng"],
+                    quantity=cart.quantity
+                )
+                db.session.add(purchase)
+                db.session.add(shopping_list)
+                db.session.add(delivery)
+                db.session.add(order)
+                product = Product.query.get(cart.product_id)
+                product.quantity = int(product.quantity) - int(purchase.quantity)
+                db.session.delete(cart)
+                db.session.commit()
+            status = {'status': 'success', 'message': 'Items successfully purchased!'}
+        except Exception as e:
+            status = {"status": "failure", "message": str(e)}
     db.session.close()
     return jsonify(status)
 
