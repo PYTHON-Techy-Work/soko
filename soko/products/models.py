@@ -282,7 +282,7 @@ class Delivery(SurrogatePK, Model):
     total = Column(db.Numeric(15, 2), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, user_id, product_id, quantity, purchase_date, purchase_time, transporter, status, lat, lng, total):
+    def __init__(self, user_id, product_id, quantity, purchase_date, transporter, status, lat, lng, total):
         self.user_id = user_id
         self.product_id = product_id
         self.quantity = quantity
