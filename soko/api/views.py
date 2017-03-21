@@ -697,7 +697,6 @@ def purchase_cart():
                     quantity=cart.quantity
                 )
                 db.session.add(delivery)
-                print(delivery.id)
                 db.session.add(purchase)
                 db.session.add(shopping_list)
                 product = Product.query.get(cart.product_id)
