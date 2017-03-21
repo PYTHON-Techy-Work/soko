@@ -276,15 +276,19 @@ class Delivery(SurrogatePK, Model):
     quantity = Column(db.Integer, nullable=False)
     transporter = Column(db.Integer, nullable=False)
     status = Column(db.Enum('Accepted', 'Delivered', 'Pending', name='delivery_status'), nullable=False, default='Pending')
+    lat = Column(db.Numeric(9, 6), nullable=False)
+    lng = Column(db.Numeric(9, 6), nullable=False)
     total = Column(db.Numeric(15, 2), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, user_id, product_id, quantity, transporter, status, total):
+    def __init__(self, user_id, product_id, quantity, transporter, status, lat, lng, total):
         self.user_id = user_id
         self.product_id = product_id
         self.quantity = quantity
         self.transporter = transporter
         self.status = status
+        self.lat = lat
+        self.lng = lng
         self.total = total
 
     def serialize(self):
@@ -295,6 +299,8 @@ class Delivery(SurrogatePK, Model):
             "quantity": self.quantity,
             "transporter": self.transporter,
             "status": self.status,
+            "lat": self.lat,
+            "lng": self.lng,
             "total": float(self.total),
             "date": self.created_at
         }
@@ -308,7 +314,7 @@ class Order(SurrogatePK, Model):
     delivery = relationship('Delivery', backref='orders')
     transporter = Column(db.Integer, nullable=False)
     status = Column(db.Enum('Accepted', 'Delivered', 'Pending', name='order_status'), nullable=False, default='Pending')
-    total = Column(db.Numeric(9, 6), nullable=False)
+    total = Column(db.Numeric(15, 2), nullable=False)
     lat = Column(db.Numeric(9, 6), nullable=False)
     lng = Column(db.Numeric(9, 6), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)

@@ -686,22 +686,13 @@ def purchase_cart():
                     transporter=transporter,
                     status=delivery_status,
                     total=cart.total,
-                    quantity=cart.quantity
-                )
-                db.session.add(delivery)
-                order = Order(
-                    user_id=user.id,
-                    delivery_id=delivery.id,
-                    transporter=transporter,
-                    status=delivery_status,
-                    total=cart.total,
                     lat=data["lat"],
                     lng=data["lng"],
                     quantity=cart.quantity
                 )
+                db.session.add(delivery)
                 db.session.add(purchase)
                 db.session.add(shopping_list)
-                db.session.add(order)
                 product = Product.query.get(cart.product_id)
                 product.quantity = int(product.quantity) - int(purchase.quantity)
                 db.session.delete(cart)
