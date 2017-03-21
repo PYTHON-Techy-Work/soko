@@ -697,8 +697,7 @@ def purchase_cart():
                     status=delivery_status,
                     total=cart.total,
                     lat=data["lat"],
-                    lng=data["lng"],
-                    quantity=cart.quantity
+                    lng=data["lng"]
                 )
                 db.session.add(delivery)
                 db.session.add(purchase)
