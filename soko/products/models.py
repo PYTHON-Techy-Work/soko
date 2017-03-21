@@ -308,15 +308,17 @@ class Order(SurrogatePK, Model):
     delivery = relationship('Delivery', backref='orders')
     transporter = Column(db.Integer, nullable=False)
     status = Column(db.Enum('Accepted', 'Delivered', 'Pending', name='order_status'), nullable=False, default='Pending')
+    total = Column(db.Numeric(9, 6), nullable=False)
     lat = Column(db.Numeric(9, 6), nullable=False)
     lng = Column(db.Numeric(9, 6), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, user_id, delivery_id, transporter, status, lat, lng):
+    def __init__(self, user_id, delivery_id, transporter, status, total, lat, lng):
         self.user_id = user_id
         self.delivery_id = delivery_id
         self.transporter = transporter
         self.status = status
+        self.total = total
         self.lat = lat
         self.lng = lng
 
@@ -326,6 +328,7 @@ class Order(SurrogatePK, Model):
             "user": self.user_id,
             "transporter": self.transporter,
             "status": self.status,
+            "total": self.total,
             "lat": float(self.lat),
             "lng": float(self.lng),
             "date": self.created_at
