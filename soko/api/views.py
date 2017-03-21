@@ -15,6 +15,7 @@ from soko.utils import flash_errors
 from soko.extensions import csrf_protect, bcrypt, mail, geolocator
 from math import sin, cos, atan2, sqrt, radians
 from suds.client import Client as SudsClient
+from datetime import datetime
 
 import os
 import base64
@@ -24,7 +25,6 @@ import xmltodict
 import string
 import random
 import suds.client
-import datetime as dt
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -660,7 +660,7 @@ def remove_from_cart():
 def purchase_cart():
     data = request.json
     delivery_status = "Pending"
-    order_date = dt.now()
+    order_date = datetime.now()
     order_status = "Pending"
     transporter = 0
     if "token" not in request.json:
@@ -1067,7 +1067,7 @@ def apply_loan():
 @blueprint.route('/pay_loan', methods=["POST"])
 def pay_loan():
     data = request.json
-    date = dt.datetime.now()
+    date = datetime.now()
     print(data)
     user = User.query.filter_by(token=data['token']).first()
     # check whether the user has an existing loan
