@@ -692,26 +692,27 @@ def purchase_cart():
                     quantity=cart.quantity
                 )
                 db.session.add(delivery)
+
+                db.session.add(purchase)
+                db.session.add(shopping_list)
+                product = Product.query.get(cart.product_id)
+                product.quantity = int(product.quantity) - int(purchase.quantity)
+                db.session.delete(cart)
+                db.session.commit()
+            for delivery in Delivery.query.filter_by(user_id=user.id):
                 order = Order(
                     user_id=user.id,
                     delivery_id=delivery.id,
                     transporter=transporter,
                     status=order_status,
-                    total=cart.total,
+                    total=delivery.total,
                     lat=data["lat"],
                     lng=data["lng"]
                 )
-                db.session.add(purchase)
-                db.session.add(shopping_list)
                 db.session.add(order)
-                product = Product.query.get(cart.product_id)
-                product.quantity = int(product.quantity) - int(purchase.quantity)
-                db.session.delete(cart)
                 db.session.commit()
-            print("am here with success")
             status = {'status': 'success', 'message': 'Items successfully purchased!'}
         except Exception as e:
-            print("am not here with success")
             status = {"status": "failure", "message": str(e)}
     db.session.close()
     return jsonify(status)
