@@ -275,7 +275,6 @@ class Delivery(SurrogatePK, Model):
     product = relationship('Product', backref='deliveries')
     quantity = Column(db.Integer, nullable=False)
     purchase_date = Column(db.DateTime, nullable=False)
-    purchase_time = Column(db.DateTime, nullable=False)
     transporter = Column(db.Integer, nullable=False)
     status = Column(db.Enum('Accepted', 'Delivered', 'Pending', name='status_delivery'), nullable=False, default='Pending')
     lat = Column(db.Numeric(9, 6), nullable=False)
@@ -288,7 +287,6 @@ class Delivery(SurrogatePK, Model):
         self.product_id = product_id
         self.quantity = quantity
         self.purchase_date = purchase_date
-        self.purchase_time = purchase_time
         self.transporter = transporter
         self.status = status
         self.lat = lat
@@ -302,7 +300,6 @@ class Delivery(SurrogatePK, Model):
             "product": self.product.serialize(),
             "quantity": self.quantity,
             "purchase_date": self.purchase_date,
-            "purchase_time": self.purchase_time,
             "transporter": self.transporter,
             "status": self.status,
             "lat": self.lat,
@@ -318,17 +315,15 @@ class Order(SurrogatePK, Model):
     user = relationship('User', backref='orders')
     consumer = Column(db.String(120), nullable=True)
     order_date = Column(db.DateTime, nullable=False)
-    order_time = Column(db.DateTime, nullable=False)
     status = Column(db.Enum('Accepted', 'Delivered', 'Pending', name='order_status'), nullable=False, default='Pending')
     lat = Column(db.Numeric(9, 9), nullable=False)
     lng = Column(db.Numeric(9, 9), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
-    def __init__(self, user_id, consumer, order_date, order_time, status, lat, lng):
+    def __init__(self, user_id, consumer, order_date, status, lat, lng):
         self.user_id = user_id
         self.consumer = consumer
         self.order_date = order_date
-        self.order_time = order_time
         self.status = status
         self.lat = lat
         self.lng = lng
@@ -339,7 +334,6 @@ class Order(SurrogatePK, Model):
             "user": self.user_id,
             "consumer": self.consumer,
             "order_date": self.order_date,
-            "order_time": self.order_time,
             "status": self.status,
             "lat": float(self.lat),
             "lng": float(self.lng),

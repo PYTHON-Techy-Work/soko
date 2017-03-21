@@ -660,8 +660,7 @@ def remove_from_cart():
 def purchase_cart():
     data = request.json
     delivery_status = "Pending"
-    order_date = dt.today()
-    order_time = dt.now()
+    order_date = dt.utcnow()
     order_status = "Pending"
     transporter = 0
     if "token" not in request.json:
@@ -689,7 +688,6 @@ def purchase_cart():
                     product_id=cart.product_id,
                     quantity=cart.quantity,
                     purchase_date=order_date,
-                    purchase_time=order_time,
                     transporter=transporter,
                     status=delivery_status,
                     lat=data["lat"],
@@ -707,7 +705,6 @@ def purchase_cart():
                 user_id=user.id,
                 consumer=order_name,
                 order_date=order_date,
-                order_time=order_time,
                 status=order_status,
                 lat=data["lat"],
                 lng=data["lng"]
