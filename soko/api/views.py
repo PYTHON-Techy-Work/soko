@@ -659,7 +659,6 @@ def remove_from_cart():
 @blueprint.route('/purchase_cart', methods=["POST"])
 def purchase_cart():
     data = request.json
-    print(data)
     delivery_status = "Not Delivered"
     transporter = 0
     if "token" not in request.json:
@@ -684,6 +683,16 @@ def purchase_cart():
                 delivery = Delivery(
                     user_id=user.id,
                     product_id=cart.product_id,
+                    transporter=transporter,
+                    status=delivery_status,
+                    total=cart.total,
+                    lat=data["lat"],
+                    lng=data["lng"],
+                    quantity=cart.quantity
+                )
+                order = Order(
+                    user_id=user.id,
+                    delivery_id=delivery.id,
                     transporter=transporter,
                     status=delivery_status,
                     total=cart.total,
