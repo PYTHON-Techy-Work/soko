@@ -900,7 +900,7 @@ def available_orders():
                 c = 2 * atan2(sqrt(a), sqrt(1 - a))
                 distance = R * c
                 if distance <= 5:
-                    ret.append(order)
+                    ret.append(order.serialize())
             status = {"status": "success", "message": distance, "orders": ret}
         except Exception as e:
             status = {"status": "failure", "message": str(e)}
