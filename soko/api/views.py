@@ -705,7 +705,7 @@ def purchase_cart():
             product.quantity = int(product.quantity) - int(purchase.quantity)
             db.session.delete(cart)
             db.session.commit()
-            status = {'status': 'success', 'message': 'Items successfully purchased!'}
+        status = {'status': 'success', 'message': 'Items successfully purchased!'}
     except Exception as e:
         status = {"status": "failure", "message": str(e)}
     db.session.close()
