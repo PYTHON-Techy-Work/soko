@@ -900,7 +900,9 @@ def available_orders():
             distance = R * c
             if distance <= 5:
                 ret.append(order.serialize())
-            status = {"status": "success", "message": distance, "orders": ret}
+                status = {"status": "success", "message": distance, "orders": ret}
+            else:
+                status = {"status": "failure", "message": "no available orders at this time"}
         except Exception as e:
             status = {"status": "failure", "message": str(e)}
     else:
@@ -1095,22 +1097,23 @@ def accept_trip():
     ret = []
     try:
         user = User.query.filter_by(token=data["token"]).first()
-        # order = Order.query.filter_by(id=data["order_id"]).first()
-        # order.status = status
-        # trip = Trip(
-        #     user_id=user.id,
-        #     order_id=order.id,
-        #     status=status,
-        #     lat=order.lat,
-        #     lng=order.lng
-        # )
-        # db.session.add(trip)
-        delivery = Delivery.query.filter_by(purchase_date=data["order_date"]).first()
-            # delivery.status = status
-            # delivery.transporter = user.id
-        ret.append(delivery.serialize())
+        order = Order.query.filter_by(id=data["order_id"]).first()
+        order.status = status
+        trip = Trip(
+            user_id=user.id,
+            order_id=order.id,
+            status=status,
+            lat=order.lat,
+            lng=order.lng
+        )
+        for delivery in Delivery.query.filter_by(purchase_date=data["order_date"], status=previous_status):
+            delivery.status = status
+            delivery.transporter = user.id
+            ret.append(delivery.serialize())
+        products = [ret]
+        db.session.add(trip)
         db.session.commit()
-        status = {"status": "success", "message": "Trip Accepted", "delivery": ret}
+        status = {"status": "success", "message": "Trip Accepted", "delivery": products}
     except Exception as e:
         status = {"status": "failure", "message": str(e)}
     db.session.close()
