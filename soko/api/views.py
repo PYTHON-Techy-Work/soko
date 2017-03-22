@@ -1106,7 +1106,7 @@ def accept_trip():
         #     lat=order.lat,
         #     lng=order.lng
         # )
-        for delivery in Delivery.query.all():
+        for delivery in Delivery.query.filter_by(status=previous_status, purchase_date=data["order_date"]):
         # delivery.status = status
         # delivery.transporter = user.id
             ret.append(delivery.serialize())
