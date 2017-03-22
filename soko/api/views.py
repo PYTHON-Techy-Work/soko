@@ -1104,6 +1104,7 @@ def accept_trip():
             lng=order.lng
         )
         db.session.add(trip)
+        db.session.commit()
         for d in Delivery.query.filter_by(status="Pending", purchase_date=data["order_date"], user_id=data["user"]):
             d.status = status
             d.transporter = user.id
