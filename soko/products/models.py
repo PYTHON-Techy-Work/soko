@@ -336,8 +336,7 @@ class Order(SurrogatePK, Model):
             "order_date": self.order_date,
             "status": self.status,
             "lat": float(self.lat),
-            "lng": float(self.lng),
-            "date": self.created_at
+            "lng": float(self.lng)
         }
 
 

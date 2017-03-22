@@ -1,7 +1,6 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for, jsonify, make_response, json
 from flask_mail import Mail, Message
 
-
 from werkzeug.utils import secure_filename
 
 from soko.user.models import User, Document
@@ -120,7 +119,7 @@ def reg_user():
         msg.html = "<b>Hi</b> " + data[
             'first_name'] + "<br/> <b>You have successfully registered to Soko Mkononi as a " + data[
                        'category'] + "</b>"
-        msg.html = "Your email address is" + data['email'] + " and your password is " + data['password']+"."
+        msg.html = "Your email address is" + data['email'] + " and your password is " + data['password'] + "."
         mail.send(msg)
     except Exception as e:
         status = {'status': 'failure', 'message': str(e)}
@@ -1087,13 +1086,20 @@ def pay_loan():
 
 
 # accept trip
-@blueprint.route('/accept_trip', methods=["GET"])
+@csrf_protect.exempt
+@blueprint.route('/accept_trip', methods=["POST"])
 def accept_trip():
-    data = request.args
+    data = request.json
     status = 'Accepted'
+    ret = []
     try:
         user = User.query.filter_by(token=data["token"]).first()
         order = Order.query.filter_by(id=data["order_id"]).first()
+        order.status = status
+        for d in Delivery.query.filter_by(status="Pending", order_date=data["order_date"], user_id=data["user_id"]):
+            ret.append(d.serialize())
+            d.status = status
+            d.transporter = user.id
         trip = Trip(
             user_id=user.id,
             order_id=order.id,
@@ -1102,13 +1108,15 @@ def accept_trip():
             lng=order.lng
         )
         db.session.add(trip)
-        status = {"status": "success","message": "Trip Accepted"}
+        status = {"status": "success", "message": "Trip Accepted", "delivery": ret}
     except Exception as e:
-        status = {"status": "failure","message": str(e)}
+        status = {"status": "failure", "message": str(e)}
+    db.session.close()
     return jsonify(status)
 
 
 # start trip
+@csrf_protect.exempt
 @blueprint.route('/start_trip', methods=["POST"])
 def start_trip():
     data = request.json
@@ -1116,12 +1124,12 @@ def start_trip():
     try:
         user = User.query.filter_by(token=data["token"]).first()
         order = Order.query.filter_by(id=data["order_id"]).first()
-        trip = Trip.query.filter_by(user_id=user.id,status='Accepted').first
+        trip = Trip.query.filter_by(user_id=user.id, status='Accepted').first
         trip.status = status
         db.session.commit()
-        status = {"status": "success","message": "Trip Started"}
+        status = {"status": "success", "message": "Trip Started"}
     except Exception as e:
-        status = {"status": "failure","message": str(e)}
+        status = {"status": "failure", "message": str(e)}
     db.session.close()
     return jsonify(status)
 
@@ -1134,12 +1142,12 @@ def end_trip():
     try:
         user = User.query.filter_by(token=data["token"]).first()
         order = Order.query.filter_by(id=data["order_id"]).first()
-        trip = Trip.query.filter_by(user_id=user.id,status='Accepted').first
+        trip = Trip.query.filter_by(user_id=user.id, status='Accepted').first
         trip.status = status
         db.session.commit()
-        status = {"status": "success","message": "Trip Started"}
+        status = {"status": "success", "message": "Trip Started"}
     except Exception as e:
-        status = {"status": "failure","message": str(e)}
+        status = {"status": "failure", "message": str(e)}
     db.session.close()
     return jsonify(status)
 
@@ -1161,9 +1169,9 @@ def reject_trip():
         )
         db.session.add(trip)
         db.session.commit()
-        status = {"status": "success","message": "Trip rejected"}
+        status = {"status": "success", "message": "Trip rejected"}
     except Exception as e:
-        status = {"status": "failure","message": str(e)}
+        status = {"status": "failure", "message": str(e)}
     db.session.close()
     return jsonify(status)
 
@@ -1172,11 +1180,12 @@ def reject_trip():
 @blueprint.route('/merchant_new_orders', methods=["GET"])
 def merchant_new_orders():
     data = request.args
+    status = "Pending"
     my_order = []
     try:
         user = User.query.filter_by(token=data["token"]).first()
         product = Product.query.filter_by(user_id=user.id).first()
-        for delivery in Delivery.query.filter_by(product_id=product.id, status="Pending"):
+        for delivery in Delivery.query.filter_by(product_id=product.id, status=status, order_date=data["order_date"]):
             my_order.append(delivery.serialize())
         status = {"status": "success", "message": my_order}
     except Exception as e:
@@ -1194,9 +1203,9 @@ def my_earnings_transporter():
         user = User.query.filter_by(token=data["token"]).first()
         for earning in Earning.query.filter_by(user_id=user.id):
             my_earnings.append(earning.serialize())
-        status = {"status": "success","message": my_earnings}
+        status = {"status": "success", "message": my_earnings}
     except Exception as e:
-        status = {"status": "failure","message": str(e)}
+        status = {"status": "failure", "message": str(e)}
     db.session.close()
     return jsonify(status)
 
@@ -1216,7 +1225,7 @@ def accept_payments():
         )
         db.session.add(payment)
         db.session.commit()
-        status = {"status":"success","message":"Payment made successfully"}
+        status = {"status": "success", "message": "Payment made successfully"}
     except Exception as e:
         status = {"status": "success", "message": str(e)}
     db.session.close()
