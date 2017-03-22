@@ -1107,12 +1107,12 @@ def accept_trip():
             lng=order.lng
         )
         for delivery in Delivery.query.filter_by(status=previous_status, user_id=data["user"]):
-            delivery.status = status
-            delivery.transporter = user.id
+        # delivery.status = status
+        # delivery.transporter = user.id
             ret.append(delivery.serialize())
         products = [ret]
-        db.session.add(trip)
-        db.session.commit()
+        # db.session.add(trip)
+        # db.session.commit()
         status = {"status": "success", "message": "Trip Accepted", "delivery": products}
     except Exception as e:
         status = {"status": "failure", "message": str(e)}
