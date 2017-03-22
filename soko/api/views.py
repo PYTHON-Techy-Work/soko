@@ -1106,7 +1106,7 @@ def accept_trip():
             lng=order.lng
         )
         db.session.add(trip)
-        for delivery in Delivery.query.filter_by(status=previous_status, purchase_date=data["order_date"], user_id=data["user"]):
+        for delivery in Delivery.query.filter_by(status=previous_status, purchase_date=data["order_date"]):
             delivery.status = status
             delivery.transporter = user.id
             ret.append(delivery.serialize())
