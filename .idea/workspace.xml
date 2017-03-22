@@ -28,8 +28,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/soko/api/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="1118" column="22" lean-forward="true" selection-start-line="1118" selection-start-column="22" selection-end-line="1118" selection-end-column="22" />
+            <state relative-caret-position="297">
+              <caret line="1112" column="8" lean-forward="false" selection-start-line="1112" selection-start-column="10" selection-end-line="1112" selection-end-column="26" />
               <folding>
                 <element signature="e#0#109#0" expanded="true" />
               </folding>
@@ -103,6 +103,7 @@
       <find>dt</find>
       <find>purchase</find>
       <find>available_orders</find>
+      <find>accept_trip</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -925,8 +926,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/soko/api/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="1118" column="22" lean-forward="true" selection-start-line="1118" selection-start-column="22" selection-end-line="1118" selection-end-column="22" />
+        <state relative-caret-position="297">
+          <caret line="1112" column="8" lean-forward="false" selection-start-line="1112" selection-start-column="10" selection-end-line="1112" selection-end-column="26" />
           <folding>
             <element signature="e#0#109#0" expanded="true" />
           </folding>
