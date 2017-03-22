@@ -1090,6 +1090,7 @@ def pay_loan():
 @blueprint.route('/accept_trip', methods=["POST"])
 def accept_trip():
     data = request.json
+    previous_status="Pending"
     status = 'Accepted'
     ret = []
     products = []
@@ -1105,7 +1106,11 @@ def accept_trip():
             lng=order.lng
         )
         db.session.add(trip)
-        for delivery in Delivery.query.filter_by(status="Pending", purchase_date=data["order_date"], user_id=data["user"]):
+        products_categories = ProductCategory.query.all()
+        for ls in products_categories:
+            ret.append(ls.serialize())
+        data.append(ret)
+        for delivery in Delivery.query.filter_by(status=previous_status, purchase_date=data["order_date"], user_id=data["user"]):
             delivery.status = status
             delivery.transporter = user.id
             ret.append(delivery.serialize())
