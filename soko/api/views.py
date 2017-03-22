@@ -1099,6 +1099,11 @@ def accept_trip():
         user = User.query.filter_by(token=data["token"]).first()
         order = Order.query.filter_by(id=data["order_id"]).first()
         order.status = status
+        for delivery in Delivery.query.filter_by(status=previous_status):
+            delivery.status = status
+            delivery.transporter = user.id
+            ret.append(delivery.serialize())
+        products = [ret]
         trip = Trip(
             user_id=user.id,
             order_id=order.id,
@@ -1106,11 +1111,6 @@ def accept_trip():
             lat=order.lat,
             lng=order.lng
         )
-        for delivery in Delivery.query.filter_by(status=previous_status):
-            delivery.status = status
-            delivery.transporter = user.id
-            ret.append(delivery.serialize())
-        products = [ret]
         db.session.add(trip)
         db.session.commit()
         status = {"status": "success", "message": "Trip Accepted", "delivery": products}
