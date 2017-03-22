@@ -890,16 +890,16 @@ def available_orders():
     user = User.query.filter_by(token=data["token"]).first()
     if user:
         try:
-            for order in Order.query.filter_by(status=status):
-                lat2 = radians(order.lat)
-                lon2 = radians(order.lng)
-                dlon = lon2 - lon1
-                dlat = lat2 - lat1
-                a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
-                c = 2 * atan2(sqrt(a), sqrt(1 - a))
-                distance = R * c
-                if distance <= 5:
-                    ret.append(order.serialize())
+            order = Order.query.filter_by(status=status).first()
+            lat2 = radians(order.lat)
+            lon2 = radians(order.lng)
+            dlon = lon2 - lon1
+            dlat = lat2 - lat1
+            a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
+            c = 2 * atan2(sqrt(a), sqrt(1 - a))
+            distance = R * c
+            if distance <= 5:
+                ret.append(order.serialize())
             status = {"status": "success", "message": distance, "orders": ret}
         except Exception as e:
             status = {"status": "failure", "message": str(e)}
