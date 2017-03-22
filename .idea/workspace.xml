@@ -28,8 +28,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/soko/api/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="567">
-              <caret line="1116" column="28" lean-forward="true" selection-start-line="1116" selection-start-column="28" selection-end-line="1116" selection-end-column="28" />
+            <state relative-caret-position="492">
+              <caret line="1111" column="43" lean-forward="false" selection-start-line="1111" selection-start-column="43" selection-end-line="1111" selection-end-column="43" />
               <folding>
                 <element signature="e#0#109#0" expanded="true" />
               </folding>
@@ -925,8 +925,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/soko/api/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="1116" column="28" lean-forward="true" selection-start-line="1116" selection-start-column="28" selection-end-line="1116" selection-end-column="28" />
+        <state relative-caret-position="492">
+          <caret line="1111" column="43" lean-forward="false" selection-start-line="1111" selection-start-column="43" selection-end-line="1111" selection-end-column="43" />
           <folding>
             <element signature="e#0#109#0" expanded="true" />
           </folding>
