@@ -1092,6 +1092,7 @@ def accept_trip():
     data = request.json
     status = 'Accepted'
     ret = []
+    products = []
     try:
         user = User.query.filter_by(token=data["token"]).first()
         order = Order.query.filter_by(id=data["order_id"]).first()
@@ -1108,8 +1109,9 @@ def accept_trip():
             delivery.status = status
             delivery.transporter = user.id
             ret.append(delivery.serialize())
+        products.append(ret)
         db.session.commit()
-        status = {"status": "success", "message": "Trip Accepted", "delivery": ret}
+        status = {"status": "success", "message": "Trip Accepted", "delivery": products}
     except Exception as e:
         status = {"status": "failure", "message": str(e)}
     db.session.close()
