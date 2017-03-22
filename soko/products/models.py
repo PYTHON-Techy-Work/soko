@@ -302,8 +302,8 @@ class Delivery(SurrogatePK, Model):
             "purchase_date": self.purchase_date,
             "transporter": self.transporter,
             "status": self.status,
-            "lat": self.lat,
-            "lng": self.lng,
+            "lat": float(self.lat),
+            "lng": float(self.lng),
             "total": float(self.total),
             "date": self.created_at
         }

@@ -1090,7 +1090,7 @@ def pay_loan():
 @blueprint.route('/accept_trip', methods=["POST"])
 def accept_trip():
     data = request.json
-    previous_status="Pending"
+    previous_status = "Pending"
     status = 'Accepted'
     ret = []
     products = []
