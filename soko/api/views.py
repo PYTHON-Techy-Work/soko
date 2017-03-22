@@ -1099,10 +1099,12 @@ def accept_trip():
         user = User.query.filter_by(token=data["token"]).first()
         order = Order.query.filter_by(id=data["order_id"]).first()
         order.status = status
-        for delivery in Delivery.query.filter_by(status=previous_status):
+        for delivery in Delivery.query.filter_by(status=previous_status, purchase_date=order.order_date):
             delivery.status = status
             delivery.transporter = user.id
-            ret.append(delivery.serialize())
+
+        for d in Delivery.query.filter_by(purchase_date=order.order_date):
+            ret.append(d.serialize())
         products = [ret]
         trip = Trip(
             user_id=user.id,
