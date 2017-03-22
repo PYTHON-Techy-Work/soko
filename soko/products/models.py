@@ -316,8 +316,8 @@ class Order(SurrogatePK, Model):
     consumer = Column(db.String(120), nullable=True)
     order_date = Column(db.DateTime, nullable=False)
     status = Column(db.Enum('Accepted', 'Delivered', 'Pending', name='order_status'), nullable=False, default='Pending')
-    lat = Column(db.Numeric(9, 9), nullable=False)
-    lng = Column(db.Numeric(9, 9), nullable=False)
+    lat = Column(db.Numeric(9, 6), nullable=False)
+    lng = Column(db.Numeric(9, 6), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
     def __init__(self, user_id, consumer, order_date, status, lat, lng):
