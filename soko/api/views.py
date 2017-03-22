@@ -1096,16 +1096,16 @@ def accept_trip():
     status = 'Accepted'
     ret = []
     try:
-        user = User.query.filter_by(token=data["token"]).first()
-        order = Order.query.filter_by(id=data["order_id"]).first()
-        order.status = status
-        trip = Trip(
-            user_id=user.id,
-            order_id=order.id,
-            status=status,
-            lat=order.lat,
-            lng=order.lng
-        )
+        # user = User.query.filter_by(token=data["token"]).first()
+        # order = Order.query.filter_by(id=data["order_id"]).first()
+        # order.status = status
+        # trip = Trip(
+        #     user_id=user.id,
+        #     order_id=order.id,
+        #     status=status,
+        #     lat=order.lat,
+        #     lng=order.lng
+        # )
         for delivery in Delivery.query.filter_by(status=previous_status, user_id=data["user"]):
         # delivery.status = status
         # delivery.transporter = user.id

@@ -29,7 +29,7 @@
         <entry file="file://$PROJECT_DIR$/soko/api/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="126">
-              <caret line="1098" column="0" lean-forward="false" selection-start-line="1098" selection-start-column="0" selection-end-line="1107" selection-end-column="9" />
+              <caret line="1098" column="0" lean-forward="false" selection-start-line="1098" selection-start-column="0" selection-end-line="1107" selection-end-column="11" />
               <folding>
                 <element signature="e#0#109#0" expanded="true" />
               </folding>
@@ -927,7 +927,7 @@
     <entry file="file://$PROJECT_DIR$/soko/api/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
-          <caret line="1098" column="0" lean-forward="false" selection-start-line="1098" selection-start-column="0" selection-end-line="1107" selection-end-column="9" />
+          <caret line="1098" column="0" lean-forward="false" selection-start-line="1098" selection-start-column="0" selection-end-line="1107" selection-end-column="11" />
           <folding>
             <element signature="e#0#109#0" expanded="true" />
           </folding>
