@@ -1096,10 +1096,6 @@ def accept_trip():
         user = User.query.filter_by(token=data["token"]).first()
         order = Order.query.filter_by(id=data["order_id"]).first()
         order.status = status
-        for d in Delivery.query.filter_by(status="Pending", purchase_date=data["order_date"], user_id=data["user"]):
-            d.status = status
-            d.transporter = user.id
-            ret.append(d.serialize())
         trip = Trip(
             user_id=user.id,
             order_id=order.id,
@@ -1108,6 +1104,10 @@ def accept_trip():
             lng=order.lng
         )
         db.session.add(trip)
+        for d in Delivery.query.filter_by(status="Pending", purchase_date=data["order_date"], user_id=data["user"]):
+            d.status = status
+            d.transporter = user.id
+            ret.append(d.serialize())
         status = {"status": "success", "message": "Trip Accepted", "delivery": ret}
     except Exception as e:
         status = {"status": "failure", "message": str(e)}
