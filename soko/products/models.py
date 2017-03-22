@@ -127,6 +127,7 @@ class Product(SurrogatePK, Model):
             "name": self.name,
             "photo": self.photo,
             "seller": self.get_user(),
+            "location":self.get_user_location(),
             "description": self.description,
             "quantity": self.quantity,
             "farmer": self.user_id,
@@ -147,6 +148,14 @@ class Product(SurrogatePK, Model):
             return user.first_name
         else:
             return user.business_name
+
+    def get_user_location(self):
+        from soko.user.models import User
+        from flask import jsonify
+        user = User.query.filter_by(id=self.user_id).first()
+        status={"lat":user.lat, "lng":user.lng}
+        return jsonify(status)
+
 
 
 class ProductRatings(SurrogatePK, Model):

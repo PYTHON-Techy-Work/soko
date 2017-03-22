@@ -67,6 +67,8 @@ def reg_user():
         business_name = ""
         business_branch = ""
         user_type = ""
+        lat = ""
+        lng = ""
     elif "Farmer" in data["category"]:
         active = False
         if "Business" in data["user_type"]:
@@ -75,12 +77,16 @@ def reg_user():
             business_name = data['business_name']
             business_branch = data['business_branch']
             user_type = data['user_type']
+            lat = data['lat']
+            lng = data['lng']
         else:
             first_name = data['first_name']
             last_name = data['last_name']
             business_name = ""
             business_branch = ""
             user_type = ""
+            lat = data['lat']
+            lng = data['lng']
     else:
         active = True
         first_name = data['first_name']
@@ -88,6 +94,8 @@ def reg_user():
         business_name = ""
         business_branch = ""
         user_type = ""
+        lat = ""
+        lng = ""
 
     is_admin = False
     token = ''
@@ -106,7 +114,9 @@ def reg_user():
         active=active,
         token=token,
         category=data['category'],
-        region=region.name
+        region=region.name,
+        lat=lat,
+        lng=lng
     )
     try:
         db.session.add(user)
