@@ -457,16 +457,15 @@ def add_products():
 # api to get all the products
 @blueprint.route('/get_products', methods=["GET"])
 def get_products():
-    data = request.args
+    # data = request.args
     ret = []
-    products = []
-    if data:
-        user = User.query.filter_by(token=data["token"]).first()
-        if user:
-            products = Product.query.all()
-            for pt in products:
-                ret.append(pt.serialize())
-    return jsonify(products=ret)
+    # if data:
+    # user = User.query.filter_by(token=data["token"]).first()
+    # if user:
+    products = Product.query.all()
+    for pt in products:
+        ret.append(pt.serialize())
+    return jsonify(ret)
 
 
 # api to get my products merchant

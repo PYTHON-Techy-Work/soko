@@ -25,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/soko/api/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-260">
-              <caret line="482" column="30" lean-forward="false" selection-start-line="482" selection-start-column="30" selection-end-line="482" selection-end-column="30" />
+            <state relative-caret-position="385">
+              <caret line="468" column="0" lean-forward="true" selection-start-line="468" selection-start-column="0" selection-end-line="468" selection-end-column="0" />
               <folding>
                 <element signature="e#0#109#0" expanded="true" />
               </folding>
@@ -40,7 +40,7 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/soko/products/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1950">
+            <state relative-caret-position="555">
               <caret line="135" column="38" lean-forward="false" selection-start-line="135" selection-start-column="38" selection-end-line="135" selection-end-column="38" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
@@ -71,11 +71,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/soko/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="46" column="66" lean-forward="false" selection-start-line="46" selection-start-column="66" selection-end-line="46" selection-end-column="66" />
+            <state relative-caret-position="392">
+              <caret line="46" column="66" lean-forward="false" selection-start-line="46" selection-start-column="57" selection-end-line="46" selection-end-column="66" />
               <folding>
                 <element signature="e#57#66#0" expanded="true" />
               </folding>
@@ -108,13 +108,13 @@
       <find>print</find>
       <find>login</find>
       <find>products</find>
-      <find>get_products</find>
       <find>purchase_cart</find>
       <find>dt</find>
       <find>purchase</find>
       <find>available_orders</find>
       <find>accept_trip</find>
       <find>jsonify</find>
+      <find>get_products</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -152,10 +152,10 @@
         <option value="$PROJECT_DIR$/soko/user/views.py" />
         <option value="$PROJECT_DIR$/soko/templates/public/login.html" />
         <option value="$PROJECT_DIR$/soko/loans/models.py" />
-        <option value="$PROJECT_DIR$/soko/settings.py" />
         <option value="$PROJECT_DIR$/soko/products/models.py" />
         <option value="$PROJECT_DIR$/soko/user/models.py" />
         <option value="$PROJECT_DIR$/soko/api/views.py" />
+        <option value="$PROJECT_DIR$/soko/settings.py" />
       </list>
     </option>
   </component>
@@ -908,26 +908,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/soko/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="46" column="66" lean-forward="false" selection-start-line="46" selection-start-column="66" selection-end-line="46" selection-end-column="66" />
-          <folding>
-            <element signature="e#57#66#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/soko/products/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1950">
-          <caret line="135" column="38" lean-forward="false" selection-start-line="135" selection-start-column="38" selection-end-line="135" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/soko/user/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
@@ -936,12 +916,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/soko/products/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="135" column="38" lean-forward="false" selection-start-line="135" selection-start-column="38" selection-end-line="135" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/soko/api/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-260">
-          <caret line="482" column="30" lean-forward="false" selection-start-line="482" selection-start-column="30" selection-end-line="482" selection-end-column="30" />
+        <state relative-caret-position="385">
+          <caret line="468" column="0" lean-forward="true" selection-start-line="468" selection-start-column="0" selection-end-line="468" selection-end-column="0" />
           <folding>
             <element signature="e#0#109#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soko/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="46" column="66" lean-forward="false" selection-start-line="46" selection-start-column="57" selection-end-line="46" selection-end-column="66" />
+          <folding>
+            <element signature="e#57#66#0" expanded="true" />
           </folding>
         </state>
       </provider>
