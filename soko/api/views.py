@@ -121,7 +121,6 @@ def reg_user():
     try:
         db.session.add(user)
         db.session.commit()
-        status = {'status': 'success', 'message': 'user registered successfully'}
         msg = Message("Welcome To Soko Mkononi",
                       sender="soko@tracom.co.ke",
                       recipients=[data['email']])
@@ -131,6 +130,7 @@ def reg_user():
                        'category'] + "</b>"
         msg.html = "Your email address is" + data['email'] + " and your password is " + data['password'] + "."
         mail.send(msg)
+        status = {'status': 'success', 'message': 'user registered successfully'}
     except Exception as e:
         status = {'status': 'failure', 'message': str(e)}
     db.session.close()
