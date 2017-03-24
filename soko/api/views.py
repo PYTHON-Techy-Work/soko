@@ -342,7 +342,7 @@ def get_product_categories():
     product_categories = ProductCategory.query.all()
     for pt in product_categories:
         ret.append(pt.serialize())
-    return jsonify(ret)
+    return jsonify(data=ret)
 
 
 # api for getting all the product category
@@ -459,13 +459,14 @@ def add_products():
 def get_products():
     data = request.args
     ret = []
+    products = []
     if data:
         user = User.query.filter_by(token=data["token"]).first()
         if user:
             products = Product.query.all()
             for pt in products:
                 ret.append(pt.serialize())
-    return jsonify(data=ret)
+    return jsonify(products=ret)
 
 
 # api to get my products merchant
@@ -473,12 +474,13 @@ def get_products():
 def get_my_products():
     data = request.args
     ret = []
+    my_products = []
     if data:
         user = User.query.filter_by(token=data["token"]).first()
         if user:
             for pt in Product.query.filter_by(user_id=user.id):
                 ret.append(pt.serialize())
-    return jsonify(data=ret)
+    return jsonify(my_products=ret)
 
 
 # api to edit products
