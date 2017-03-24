@@ -342,7 +342,7 @@ def get_product_categories():
     product_categories = ProductCategory.query.all()
     for pt in product_categories:
         ret.append(pt.serialize())
-    return jsonify(data=ret)
+    return jsonify(ret)
 
 
 # api for getting all the product category
