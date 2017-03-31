@@ -153,13 +153,13 @@ class Product(SurrogatePK, Model):
     def get_user_latitude(self):
         from soko.user.models import User
         user = User.query.filter_by(id=self.user_id).first()
-        lat = user.lat
+        lat = str(float(user.lat))
         return lat
 
     def get_user_longitude(self):
         from soko.user.models import User
         user = User.query.filter_by(id=self.user_id).first()
-        lng = user.lng
+        lng = str(float(user.lng))
         return lng
 
 
