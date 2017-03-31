@@ -159,7 +159,7 @@ class Product(SurrogatePK, Model):
     def get_user_longitude(self):
         from soko.user.models import User
         user = User.query.filter_by(id=self.user_id).first()
-        lng = float(user.lng)
+        lng = user.lng
         return lng
 
 
