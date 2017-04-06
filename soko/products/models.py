@@ -1,6 +1,7 @@
 from flask import url_for
 import datetime as dt
 import decimal
+from decimal import Decimal as D
 import os
 
 from soko.database import Column, Model, SurrogatePK, db, reference_col, relationship
@@ -127,8 +128,7 @@ class Product(SurrogatePK, Model):
             "name": self.name,
             "photo": self.photo,
             "seller": self.get_user(),
-            "lat": self.get_user_latitude(),
-            "lng": self.get_user_longitude(),
+            "location": self.get_location(),
             "description": self.description,
             "quantity": self.quantity,
             "farmer": self.user_id,
@@ -150,17 +150,12 @@ class Product(SurrogatePK, Model):
         else:
             return user.business_name
 
-    def get_user_latitude(self):
+    def get_location(self):
+        from flask import jsonify
         from soko.user.models import User
         user = User.query.filter_by(id=self.user_id).first()
-        lat = float(decimal(user.lat))
-        return lat
-
-    def get_user_longitude(self):
-        from soko.user.models import User
-        user = User.query.filter_by(id=self.user_id).first()
-        lng = float(decimal(user.lng))
-        return lng
+        location ={"lat": user.lat, "lng": user.lng}
+        return jsonify(location)
 
 
 class ProductRatings(SurrogatePK, Model):
