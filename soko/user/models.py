@@ -47,8 +47,8 @@ class User(UserMixin, SurrogatePK, Model):
     photo = Column(db.String(300), nullable=True)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
     region = Column(db.String(80), nullable=True)
-    lat = Column(db.db.String(80), nullable=True)
-    lng = Column(db.db.String(80), nullable=True)
+    lat = Column(db.String(80), nullable=True)
+    lng = Column(db.String(80), nullable=True)
 
     def __init__(self, email, password=None, **kwargs):
         """Create instance."""
