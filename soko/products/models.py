@@ -107,10 +107,12 @@ class Product(SurrogatePK, Model):
     price = Column(db.Numeric(15, 2), nullable=False)
     quantity = Column(db.Integer, nullable=False)
     photo = Column(db.String(500), nullable=False)
+    lat = Column(db.Numeric(9, 6), nullable=False)
+    lng = Column(db.Numeric(9, 6), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
     def __init__(self, name,product_category_id, product_type_id, product_sub_type_id, description, packaging, price, quantity, photo,
-                 user_id):
+                 user_id, lat, lng):
         self.name = name
         self.product_category_id = product_category_id
         self.product_type_id = product_type_id
@@ -121,6 +123,8 @@ class Product(SurrogatePK, Model):
         self.quantity = quantity
         self.photo = photo
         self.user_id = user_id
+        self.lat = lat
+        self.lng = lng
 
     def serialize(self):
         return {
@@ -128,7 +132,8 @@ class Product(SurrogatePK, Model):
             "name": self.name,
             "photo": self.photo,
             "seller": self.get_user(),
-            "location": self.get_location(),
+            "lat": self.lat,
+            "lng": self.lng,
             "description": self.description,
             "quantity": self.quantity,
             "farmer": self.user_id,
@@ -150,12 +155,6 @@ class Product(SurrogatePK, Model):
         else:
             return user.business_name
 
-    def get_location(self):
-        from flask import jsonify
-        from soko.user.models import User
-        user = User.query.filter_by(id=self.user_id).first()
-        location ={"lat": user.lat, "lng": user.lng}
-        return jsonify(location)
 
 
 class ProductRatings(SurrogatePK, Model):

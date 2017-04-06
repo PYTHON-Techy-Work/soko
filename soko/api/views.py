@@ -442,7 +442,9 @@ def add_products():
             price=data['price'],
             quantity=data['quantity'],
             photo=product_name.photo,
-            user_id=user.id
+            user_id=user.id,
+            lat=user.lat,
+            lng=user.lng
         )
         try:
             db.session.add(product)
