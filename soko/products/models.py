@@ -154,7 +154,7 @@ class Product(SurrogatePK, Model):
         from flask import jsonify
         from soko.user.models import User
         user = User.query.filter_by(id=self.user_id).first()
-        location ={"lat": float(user.lat), "lng": float(user.lng)}
+        location ={"lat": D(user.lat), "lng": D(user.lng)}
         return jsonify(location)
 
 
