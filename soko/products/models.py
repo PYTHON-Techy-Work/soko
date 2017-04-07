@@ -107,8 +107,8 @@ class Product(SurrogatePK, Model):
     price = Column(db.Numeric(15, 2), nullable=False)
     quantity = Column(db.Integer, nullable=False)
     photo = Column(db.String(500), nullable=False)
-    lat = Column(db.Numeric(9, 6), nullable=False)
-    lng = Column(db.Numeric(9, 6), nullable=False)
+    lat = Column(db.Numeric(9, 6), nullable=True)
+    lng = Column(db.Numeric(9, 6), nullable=True)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
     def __init__(self, name,product_category_id, product_type_id, product_sub_type_id, description, packaging, price, quantity, photo,
