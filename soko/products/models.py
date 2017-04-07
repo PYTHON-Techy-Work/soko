@@ -136,6 +136,7 @@ class Product(SurrogatePK, Model):
             "lng": self.lng,
             "description": self.description,
             "quantity": self.quantity,
+            "packaging": self.packaging,
             "farmer": self.user_id,
             "product_type": self.product_type_id,
             "product_sub_type": self.product_sub_type_id,

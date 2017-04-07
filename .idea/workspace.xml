@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92ae03c2-6e34-4825-ab80-9dc3e813ec41" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soko/products/models.py" afterPath="$PROJECT_DIR$/soko/products/models.py" />
     </list>
     <ignored path="dashboard.iws" />
@@ -41,8 +40,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/soko/products/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="110" column="48" lean-forward="false" selection-start-line="110" selection-start-column="48" selection-end-line="110" selection-end-column="48" />
+            <state relative-caret-position="279">
+              <caret line="138" column="25" lean-forward="false" selection-start-line="138" selection-start-column="25" selection-end-line="138" selection-end-column="25" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -955,8 +954,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/soko/products/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="110" column="48" lean-forward="false" selection-start-line="110" selection-start-column="48" selection-end-line="110" selection-end-column="48" />
+        <state relative-caret-position="279">
+          <caret line="138" column="25" lean-forward="false" selection-start-line="138" selection-start-column="25" selection-end-line="138" selection-end-column="25" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
