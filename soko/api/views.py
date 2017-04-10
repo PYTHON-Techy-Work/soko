@@ -496,6 +496,7 @@ def edit_products():
         product = Product.query.get(data["id"])
         product.price = data["price"]
         product.quantity = data["quantity"]
+        product.packaging = data["packaging"]
         db.session.commit()
         status = {'status': 'success', 'message': "product updated"}
     else:
@@ -505,13 +506,13 @@ def edit_products():
 
 
 # delete a product
-@blueprint.route('/delete_product', methods=["GET"])
+@blueprint.route('/delete_product', methods=["POST"])
 def delete_product():
-    data = request.args
+    data = request.json
     if data:
         user = User.query.filter_by(token=data["token"]).first()
         try:
-            product = Product.query.filter(Product.user == user.id)
+            product = Product.query.filter_by(id=data["id"]).first()
             product.delete()
             status = {'status': 'success', 'message': 'product deleted'}
         except Exception as e:
@@ -633,6 +634,34 @@ def add_to_cart():
                 db.session.commit()
                 status = {'status': 'success', 'message': str(data['quantity']) + ' items added to cart'}
 
+            except Exception as e:
+                status = {'status': 'failure', 'message': 'problem adding product to cart'}
+            db.session.close()
+        else:
+            status = {'status': 'failure', 'message': 'Error!'}
+    else:
+        status = {'status': 'failure', 'message': 'Error!'}
+    return jsonify(status)
+
+
+# edit cart
+@blueprint.route('/edit_cart', methods=["GET"])
+def edit_cart():
+    data = request.json
+    if data:
+        user = User.query.filter_by(token=data["token"]).first()
+        if user:
+            product = Product.query.filter_by(id=data["product"]).first()
+            cart = Cart(
+                user=user.id,
+                product_id=data['product'],
+                quantity=data['quantity'],
+                total=data['quantity'] * product.price
+            )
+            try:
+                db.session.add(cart)
+                db.session.commit()
+                status = {'status': 'success', 'message': str(data['quantity']) + ' items added to cart'}
             except Exception as e:
                 status = {'status': 'failure', 'message': 'problem adding product to cart'}
             db.session.close()
@@ -1161,10 +1190,10 @@ def end_trip():
     try:
         user = User.query.filter_by(token=data["token"]).first()
         order = Order.query.filter_by(id=data["order_id"]).first()
-        trip = Trip.query.filter_by(user_id=user.id, status='Accepted').first
+        trip = Trip.query.filter_by(user_id=user.id, status='Started').first
         trip.status = status
         db.session.commit()
-        status = {"status": "success", "message": "Trip Started"}
+        status = {"status": "success", "message": "Trip Ended"}
     except Exception as e:
         status = {"status": "failure", "message": str(e)}
     db.session.close()
@@ -1189,6 +1218,24 @@ def reject_trip():
         db.session.add(trip)
         db.session.commit()
         status = {"status": "success", "message": "Trip rejected"}
+    except Exception as e:
+        status = {"status": "failure", "message": str(e)}
+    db.session.close()
+    return jsonify(status)
+
+
+# cancel_trip
+@blueprint.route('/cancel_trip', methods=["POST"])
+def cancel_trip():
+    data = request.json
+    status = 'Cancel'
+    try:
+        user = User.query.filter_by(token=data["token"]).first()
+        trip = Trip.query.filter_by(status=data["Accepted"]).first()
+        trip.status = status
+        db.session.add(trip)
+        db.session.commit()
+        status = {"status": "success", "message": "Trip has been canceled"}
     except Exception as e:
         status = {"status": "failure", "message": str(e)}
     db.session.close()
