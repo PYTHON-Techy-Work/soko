@@ -1231,7 +1231,7 @@ def cancel_trip():
     status = 'Cancel'
     try:
         user = User.query.filter_by(token=data["token"]).first()
-        trip = Trip.query.filter_by(status=data["Accepted"]).first()
+        trip = Trip.query.filter_by(status=data["Accepted"],user_id=user.id).first()
         trip.status = status
         db.session.add(trip)
         db.session.commit()
