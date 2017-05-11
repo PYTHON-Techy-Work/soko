@@ -401,7 +401,7 @@ class Trip(SurrogatePK, Model):
     user = relationship('User', backref='trips')
     order_id = reference_col('orders', nullable=False)
     order = relationship('Order', backref='trips')
-    status = Column(db.Enum('Accepted', 'Rejected', 'Started', 'Finished','Pending',  name='trip_status'), nullable=False, default='Pending')
+    status = Column(db.Enum('Accepted', 'Rejected', 'Canceled', 'Started', 'Finished','Pending',  name='trip_status'), nullable=False, default='Pending')
     lat = Column(db.Numeric(9, 6), nullable=False)
     lng = Column(db.Numeric(9, 6), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)

@@ -1186,12 +1186,13 @@ def start_trip():
 @blueprint.route('/end_trip', methods=["POST"])
 def end_trip():
     data = request.json
-    status = 'Finished'
+    status = 'Started'
     try:
         user = User.query.filter_by(token=data["token"]).first()
         order = Order.query.filter_by(id=data["order_id"]).first()
-        trip = Trip.query.filter_by(user_id=user.id, status='Started').first
-        trip.status = status
+        order.status = status
+        trip = Trip.query.filter_by(user_id=user.id, status=status).first
+        trip.status = data["status"]
         db.session.commit()
         status = {"status": "success", "message": "Trip Ended"}
     except Exception as e:
@@ -1228,12 +1229,14 @@ def reject_trip():
 @blueprint.route('/cancel_trip', methods=["POST"])
 def cancel_trip():
     data = request.json
-    status = 'Cancel'
+    trip_status = 'Cancel'
+    order_status = 'Pending'
     try:
         user = User.query.filter_by(token=data["token"]).first()
-        trip = Trip.query.filter_by(status=data["Accepted"],user_id=user.id).first()
-        trip.status = status
-        db.session.add(trip)
+        trip = Trip.query.filter_by(status=data["status"],user_id=user.id).first()
+        order = Order.query.filter_by(id=data["order_id"]).first()
+        order.status = order_status
+        trip.status = trip_status
         db.session.commit()
         status = {"status": "success", "message": "Trip has been canceled"}
     except Exception as e:

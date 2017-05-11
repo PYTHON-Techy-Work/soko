@@ -22,6 +22,7 @@ def load_user(user_id):
 def index():
     return redirect("/products")
 
+
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     """Home page."""
