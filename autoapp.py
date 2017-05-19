@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-"""Create an application instance."""
 import flask.helpers
 
 import soko.app
