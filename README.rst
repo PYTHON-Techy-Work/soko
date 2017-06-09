@@ -24,7 +24,6 @@ environment variables ::
 Then run the following commands to bootstrap your environment ::
 
     git clone https://github.com/bieh/soko
-    cd soko
     pip install -r requirements/dev.txt
     bower install
     flask run
