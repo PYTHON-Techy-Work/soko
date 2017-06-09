@@ -132,8 +132,8 @@ class Product(SurrogatePK, Model):
             "name": self.name,
             "photo": self.photo,
             "seller": self.get_user(),
-            "lat": self.lat,
-            "lng": self.lng,
+            "lat": float(self.lat),
+            "lng": float(self.lng),
             "description": self.description,
             "quantity": self.quantity,
             "packaging": self.packaging,
@@ -155,7 +155,6 @@ class Product(SurrogatePK, Model):
             return user.first_name
         else:
             return user.business_name
-
 
 
 class ProductRatings(SurrogatePK, Model):
