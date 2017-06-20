@@ -54,8 +54,6 @@ class RegisterForm(Form):
         return True
 
 
-
-
 class UpdateForm(Form):
     """Register form."""
 

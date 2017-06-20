@@ -58,6 +58,7 @@ def edit_user(uid):
         flash_errors(form)
     return render_template('users/profile.html', form=form, user=user)
 
+
 def allowed_file(fn):
     return True #TODO
 
@@ -86,6 +87,7 @@ def upload_document():
 
     return redirect("/users/documents/upload")
 
+
 @blueprint.route('/documents/get/<fid>/<fname>', methods=["GET"])
 @login_required
 def download_document(fid, fname):
@@ -93,13 +95,11 @@ def download_document(fid, fname):
     return send_file(doc.filename)
 
 
-
 @blueprint.route('/documents', methods=["GET"])
 @login_required
 def view_documents():
     if request.method == "GET":
         return render_template('users/documents.html', documents=Document.query.filter_by(user=current_user))
-
 
 
 @blueprint.route('/documents/admin', methods=["GET"])
