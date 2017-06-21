@@ -1254,7 +1254,7 @@ def merchant_new_orders():
     try:
         user = User.query.filter_by(token=data["token"]).first()
         product = Product.query.filter_by(user_id=user.id).first()
-        for delivery in Delivery.query.filter_by(product_id=product.id, status=status, order_date=data["order_date"]):
+        for delivery in Delivery.query.filter_by(product_id=product.id, status=status, purchase_date=data["order_date"]):
             my_order.append(delivery.serialize())
         status = {"status": "success", "message": my_order}
     except Exception as e:
