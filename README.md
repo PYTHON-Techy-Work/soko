@@ -1,8 +1,8 @@
 ===============================
-Soko Mkononi
+Soko
 ===============================
 
-Dashboard for Soko Mkononi
+An e-commerce applications with a dashborad for the vendors and the customers. It is developed using python flask and postgresql
 
 
 Quickstart
